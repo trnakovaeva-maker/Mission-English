@@ -168,7 +168,6 @@
             display: block;
         }
         
-        /* NEW: Navigation bar styles */
         .nav-bar {
             display: flex;
             gap: 10px;
@@ -505,15 +504,9 @@
                 </div>
                 
                 <div class="mode-btn" data-mode="3">
-                    <span class="difficulty-badge medium">HARD</span>
-                    <h3>Mode 3: First Letter</h3>
+                    <span class="difficulty-badge hard">HARD</span>
+                    <h3>Mode 3: First Letter Only</h3>
                     <p>Only the first letter is shown. Full recall needed.</p>
-                </div>
-                
-                <div class="mode-btn" data-mode="4">
-                    <span class="difficulty-badge hard">EXPERT</span>
-                    <h3>Mode 4: No Hints</h3>
-                    <p>No hints at all. Real-world application test.</p>
                 </div>
             </div>
             
@@ -1236,7 +1229,7 @@
             
             content.appendChild(card);
             
-            // Render based on mode
+            // Render based on mode (1, 2, or 3 only)
             switch(selectedMode) {
                 case 1:
                     renderMode1(question, content);
@@ -1246,9 +1239,6 @@
                     break;
                 case 3:
                     renderMode3(question, content);
-                    break;
-                case 4:
-                    renderMode4(question, content);
                     break;
             }
         }
@@ -1281,11 +1271,6 @@
             // First letter only
             const hint = question.advanced[0] + '_'.repeat(question.advanced.length - 1);
             renderTypingMode(question, container, hint);
-        }
-        
-        function renderMode4(question, container) {
-            // No hints
-            renderTypingMode(question, container, null);
         }
         
         function renderTypingMode(question, container, hint) {
@@ -1362,16 +1347,27 @@
             const userAnswer = input.value.trim().toLowerCase();
             const correctAnswer = question.advanced.toLowerCase();
             
-            const isCorrect = userAnswer === correctAnswer;
+            // NEW: Check both base form and with -s/-es for verbs
+            const isCorrect = userAnswer === correctAnswer || 
+                              userAnswer === correctAnswer + 's' ||
+                              userAnswer === correctAnswer + 'es' ||
+                              (correctAnswer.endsWith('s') && userAnswer === correctAnswer.slice(0, -1)) ||
+                              (correctAnswer.endsWith('es') && userAnswer === correctAnswer.slice(0, -2));
             
             input.disabled = true;
             input.classList.add(isCorrect ? 'correct' : 'incorrect');
             
             if (isCorrect) {
                 correctAnswers++;
+                // Show what they typed if different from base form
+                if (userAnswer !== correctAnswer) {
+                    showFeedback(true, question, false, userAnswer);
+                } else {
+                    showFeedback(true, question);
+                }
+            } else {
+                showFeedback(false, question);
             }
-            
-            showFeedback(isCorrect, question);
         }
         
         function revealAnswer(question) {
@@ -1382,7 +1378,7 @@
             showFeedback(false, question, true);
         }
         
-        function showFeedback(isCorrect, question, revealed = false) {
+        function showFeedback(isCorrect, question, revealed = false, userAnswer = null) {
             const container = document.getElementById('questionContent');
             
             const feedback = document.createElement('div');
@@ -1395,10 +1391,18 @@
                     <small>No points awarded for revealed answers.</small>
                 `;
             } else if (isCorrect) {
-                feedback.innerHTML = `
-                    <strong>✓ Correct!</strong><br>
-                    <span class="correct-answer">${question.advanced}</span> is the right word.
-                `;
+                if (userAnswer && userAnswer !== question.advanced) {
+                    feedback.innerHTML = `
+                        <strong>✓ Correct!</strong><br>
+                        You wrote "<span class="correct-answer">${userAnswer}</span>" which is accepted.<br>
+                        Base form: <span class="correct-answer">${question.advanced}</span>
+                    `;
+                } else {
+                    feedback.innerHTML = `
+                        <strong>✓ Correct!</strong><br>
+                        <span class="correct-answer">${question.advanced}</span> is the right word.
+                    `;
+                }
             } else {
                 feedback.innerHTML = `
                     <strong>✗ Not quite.</strong><br>
@@ -1479,10 +1483,8 @@
         }
         
         function generateSmartOptions(question) {
-            // NEW: Use subcategory for better options
+            // Use subcategory for better options
             const subcategory = question.subcategory || question.category;
-            
-            // Try to get options from DIFFERENT subcategories in same main category
             const mainCategory = question.category;
             
             // Get words from same main category but DIFFERENT subcategories
@@ -1495,11 +1497,9 @@
             let wrongOptions = [];
             
             if (differentSubcats.length >= 3) {
-                // Shuffle and take 3 from different subcategories
                 const shuffled = shuffleArray(differentSubcats);
                 wrongOptions = shuffled.slice(0, 3).map(item => item.advanced);
             } else {
-                // Fallback: mix from same subcat and different main categories
                 const sameSubcat = VOCAB_DATA.filter(item =>
                     item.subcategory === subcategory && 
                     item.advanced !== question.advanced
@@ -1513,7 +1513,6 @@
                 wrongOptions = pool.slice(0, 3).map(item => item.advanced);
             }
             
-            // Add correct answer and shuffle
             const allOptions = [...wrongOptions, question.advanced];
             return shuffleArray(allOptions);
         }
