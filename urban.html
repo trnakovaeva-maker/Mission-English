@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Urban Life & Housing - STANAG Debate Practice</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy-dark: #0d1b2a;
+            --navy: #1b263b;
+            --blue: #415a77;
+            --blue-light: #778da9;
+            --silver: #e0e1dd;
+            --white: #ffffff;
+            --accent: #e63946;
+            --accent-hover: #d62828;
+            --success: #06d6a0;
+            --warning: #ffd60a;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+            color: var(--silver);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container { max-width: 1100px; margin: 0 auto; }
+        
+        .back-home {
+            display: inline-block;
+            padding: 12px 24px;
+            background: var(--blue);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-home:hover {
+            background: var(--blue-light);
+            transform: translateY(-2px);
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px 30px;
+            margin-bottom: 40px;
+            border-bottom: 3px solid var(--blue);
+        }
+        
+        h1 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--white);
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            color: var(--blue-light);
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+        
+        .section.active { display: block; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .card {
+            background: rgba(27, 38, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--blue);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card h2 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.8rem;
+            margin-bottom: 24px;
+            color: var(--white);
+        }
+        
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 16px;
+            color: var(--blue-light);
+            font-weight: 600;
+        }
+        
+        .topic-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .topic-item {
+            background: rgba(65, 90, 119, 0.2);
+            border: 2px solid var(--blue);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .topic-item:hover {
+            border-color: var(--accent);
+            background: rgba(230, 57, 70, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .topic-item h3 {
+            color: var(--white);
+            margin-bottom: 0;
+            font-size: 1.1rem;
+        }
+        
+        .topic-display {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+            padding: 40px;
+            border-radius: 12px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .topic-text {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.4;
+            margin-bottom: 30px;
+        }
+        
+        .toggle-arguments-btn {
+            margin: 20px 0;
+            padding: 12px 24px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            color: var(--white);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-arguments-btn:hover {
+            background: rgba(0, 0, 0, 0.5);
+            border-color: var(--white);
+        }
+        
+        .perspectives {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+            text-align: left;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        
+        .perspectives.visible { max-height: 1000px; }
+        
+        .perspective-card {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .perspective-card h4 {
+            color: var(--white);
+            font-size: 1rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .perspective-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .perspective-card li {
+            padding: 8px 0;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .perspective-card li:last-child { border-bottom: none; }
+        .perspective-card li::before {
+            content: '→';
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .btn {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: var(--white);
+            margin: 10px 5px;
+        }
+        
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: var(--blue);
+            color: var(--white);
+            margin: 10px 5px;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--blue-light);
+            transform: translateY(-2px);
+        }
+        
+        .vocab-matching {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .vocab-column h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+        
+        .vocab-item {
+            background: rgba(65, 90, 119, 0.3);
+            border: 2px solid var(--blue);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .vocab-number {
+            background: var(--blue);
+            color: var(--white);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        .vocab-item:hover {
+            border-color: var(--accent);
+            background: rgba(230, 57, 70, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .vocab-item.selected {
+            border-color: var(--warning);
+            background: rgba(255, 214, 10, 0.2);
+        }
+        
+        .vocab-item.matched {
+            border-color: var(--success);
+            background: rgba(6, 214, 160, 0.2);
+            cursor: default;
+            opacity: 0.7;
+        }
+        
+        .vocab-item.matched:hover {
+            transform: none;
+        }
+        
+        .speaker-btn {
+            background: none;
+            border: none;
+            color: var(--blue-light);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 5px;
+            margin-left: 8px;
+            transition: all 0.2s ease;
+            border-radius: 4px;
+        }
+        
+        .speaker-btn:hover {
+            color: var(--accent);
+            background: rgba(230, 57, 70, 0.1);
+        }
+        
+        .speaker-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .speaker-btn.speaking {
+            color: var(--accent);
+            animation: pulse 0.5s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .vocab-feedback {
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .vocab-feedback.success {
+            background: rgba(6, 214, 160, 0.2);
+            border: 2px solid var(--success);
+            color: var(--success);
+        }
+        
+        .vocab-feedback.error {
+            background: rgba(230, 57, 70, 0.2);
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+        
+        .argument-builder {
+            background: rgba(27, 38, 59, 0.4);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+        
+        .peel-section {
+            margin-bottom: 25px;
+        }
+        
+        .peel-section label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--blue-light);
+            font-size: 1.1rem;
+        }
+        
+        .peel-section textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--blue);
+            border-radius: 8px;
+            background: rgba(13, 27, 42, 0.6);
+            color: var(--silver);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .peel-section textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        
+        .complete-argument {
+            background: rgba(6, 214, 160, 0.1);
+            border: 2px solid var(--success);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .complete-argument h4 {
+            color: var(--success);
+            margin-bottom: 12px;
+        }
+        
+        .complete-argument p {
+            line-height: 1.8;
+            color: var(--white);
+        }
+        
+        .examples-display {
+            margin-top: 30px;
+        }
+        
+        .example-box {
+            background: rgba(65, 90, 119, 0.2);
+            border: 2px solid var(--blue);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .example-box h4 {
+            color: var(--blue-light);
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+        
+        .example-box p {
+            line-height: 1.8;
+            color: var(--silver);
+        }
+        
+        .hidden { display: none !important; }
+        
+        @media (max-width: 768px) {
+            .perspectives {
+                grid-template-columns: 1fr;
+            }
+            
+            .vocab-matching {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .topic-text {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-home">← Back to Home</a>
+        
+        <header>
+            <h1>Urban Life & Housing</h1>
+            <p class="subtitle">STANAG Level 3 Debate Practice</p>
+        </header>
+        
+        <!-- Topic Selection Section -->
+        <section id="topicSelection" class="section active">
+            <div class="card">
+                <h2>Select a Topic</h2>
+                <ul class="topic-list" id="topicList"></ul>
+            </div>
+        </section>
+        
+        <!-- Topic Display Section -->
+        <section id="topicDisplay" class="section">
+            <div class="card">
+                <div class="topic-display">
+                    <div class="topic-text" id="topicText"></div>
+                    <button class="toggle-arguments-btn" onclick="toggleArguments()">
+                        <span id="toggleText">Show Arguments</span>
+                    </button>
+                    <div class="perspectives" id="perspectivesContainer">
+                        <div class="perspective-card">
+                            <h4>Arguments FOR</h4>
+                            <ul id="forArguments"></ul>
+                        </div>
+                        <div class="perspective-card">
+                            <h4>Arguments AGAINST</h4>
+                            <ul id="againstArguments"></ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="btn btn-primary" onclick="goToVocab()">Practice Vocabulary</button>
+                    <button class="btn btn-primary" onclick="goDirectToArgumentBuilder()">Build an Argument</button>
+                    <button class="btn btn-secondary" onclick="backToTopics()">Back to Topics</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Vocabulary Practice Section -->
+        <section id="vocabularyPractice" class="section">
+            <div class="card">
+                <h2>Vocabulary Practice</h2>
+                <h3 id="vocabTopicTitle" style="color: var(--blue-light); margin-bottom: 30px;"></h3>
+                
+                <p style="text-align: center; margin-bottom: 20px; color: var(--blue-light);">
+                    Match each term with its correct definition
+                </p>
+                
+                <div class="vocab-matching">
+                    <div class="vocab-column">
+                        <h3>Terms</h3>
+                        <div id="vocabTerms"></div>
+                    </div>
+                    <div class="vocab-column">
+                        <h3>Definitions</h3>
+                        <div id="vocabDefinitions"></div>
+                    </div>
+                </div>
+                
+                <div id="vocabFeedback"></div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="btn btn-primary" onclick="goToArgumentBuilder()">Build an Argument</button>
+                    <button class="btn btn-secondary" onclick="resetVocab()">Reset</button>
+                    <button class="btn btn-secondary" onclick="backToTopic()">Back to Topic</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Argument Builder Section -->
+        <section id="argumentBuilder" class="section">
+            <div class="card">
+                <h2>Argument Builder (PEEL Method)</h2>
+                <h3 id="argTopicTitle" style="color: var(--blue-light); margin-bottom: 30px;"></h3>
+                
+                <div class="argument-builder">
+                    <div class="peel-section">
+                        <label>P - Point (Make your main argument)</label>
+                        <textarea id="point" placeholder="State your main point clearly..."></textarea>
+                    </div>
+                    
+                    <div class="peel-section">
+                        <label>E - Evidence (Provide supporting evidence)</label>
+                        <textarea id="evidence" placeholder="Give facts, statistics, or examples..."></textarea>
+                    </div>
+                    
+                    <div class="peel-section">
+                        <label>E - Explain (Explain how the evidence supports your point)</label>
+                        <textarea id="explain" placeholder="Explain the connection between your evidence and point..."></textarea>
+                    </div>
+                    
+                    <div class="peel-section">
+                        <label>L - Link (Link back to the topic)</label>
+                        <textarea id="link" placeholder="Connect back to the main debate statement..."></textarea>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button class="btn btn-primary" onclick="viewComplete()">View Complete Argument</button>
+                        <button class="btn btn-secondary" onclick="clearArgument()">Clear</button>
+                    </div>
+                </div>
+                
+                <div id="completeArgument" class="complete-argument hidden">
+                    <h4>Your Complete Argument:</h4>
+                    <p id="completeText"></p>
+                </div>
+                
+                <div style="text-align: center; margin: 30px 0;">
+                    <button class="btn btn-secondary" onclick="toggleExamples()">
+                        <span id="exampleBtnText">Show Examples</span>
+                    </button>
+                </div>
+                
+                <div id="examplesDisplay" class="examples-display hidden">
+                    <div class="example-box">
+                        <h4>Example Argument FOR:</h4>
+                        <p id="exampleFor"></p>
+                    </div>
+                    <div class="example-box">
+                        <h4>Example Argument AGAINST:</h4>
+                        <p id="exampleAgainst"></p>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="btn btn-secondary" onclick="backToVocab()">Back to Vocabulary</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const topics = [
+            {
+                        "topic": "Living in cities provides a better quality of life than rural areas.",
+                        "for": [
+                                    "Cities offer superior access to employment, education, healthcare, and cultural opportunities that rural areas cannot provide.",
+                                    "Urban infrastructure like public transport, diverse shops, and entertainment creates convenience and options impossible in isolated rural locations.",
+                                    "Cities attract diverse populations, creating vibrant multicultural environments with intellectual stimulation and social opportunities."
+                        ],
+                        "against": [
+                                    "Rural living provides space, nature, clean air, and peace that cities lack, contributing to better physical and mental health.",
+                                    "City life creates stress through noise, crowds, high costs, and crime that damage wellbeing despite material advantages.",
+                                    "Rural communities offer stronger social connections, safety, and slower pace that many prefer over urban anonymity and pressure."
+                        ],
+                        "vocabulary": [
+                                    {
+                                                "term": "quality of life",
+                                                "definition": "overall living conditions and level of satisfaction"
+                                    },
+                                    {
+                                                "term": "urban infrastructure",
+                                                "definition": "systems and services supporting city functioning"
+                                    },
+                                    {
+                                                "term": "diverse populations",
+                                                "definition": "people from many different backgrounds and cultures"
+                                    },
+                                    {
+                                                "term": "intellectual stimulation",
+                                                "definition": "mental engagement and opportunities to learn"
+                                    },
+                                    {
+                                                "term": "rural communities",
+                                                "definition": "groups of people living in countryside areas"
+                                    },
+                                    {
+                                                "term": "urban anonymity",
+                                                "definition": "being unknown and unnoticed in city crowds"
+                                    }
+                        ],
+                        "exampleFor": "Living in cities definitely provides better quality of life than rural areas. Cities offer unmatched access to employment opportunities, educational institutions, specialized healthcare, and cultural amenities like museums, theaters, and concerts. Urban infrastructure provides convenience through public transport, diverse shops, and services within walking distance. Cities also attract diverse populations creating vibrant multicultural environments with constant intellectual stimulation and social opportunities. Young people especially benefit from cities' dynamic energy and possibilities. While rural areas may offer scenery, they lack the opportunities and resources essential for modern life. Access to career advancement, quality education, and cultural experiences makes cities clearly superior for quality of life despite some drawbacks like higher costs and crowding.",
+                        "exampleAgainst": "Living in cities does not provide better quality of life than rural areas. Rural living offers space, connection with nature, clean air, and peaceful environments that cities cannot provide. These factors contribute enormously to physical and mental health, which ultimately matters more than access to museums. City life creates constant stress through noise pollution, crowding, traffic, high costs, and crime that damage wellbeing despite material advantages. Rural communities offer stronger social connections where people know neighbors and help each other, compared to urban anonymity where people are isolated despite crowds. Many people prefer rural areas' slower pace and natural beauty over urban pressure and concrete. Quality of life depends on personal values, and for those who prioritize peace, community, and nature, rural living is clearly superior."
+            },
+            {
+                        "topic": "Cities should ban cars from historic centers completely.",
+                        "for": [
+                                    "Eliminating cars preserves historic architecture damaged by vibration and pollution while making centers pleasant pedestrian spaces.",
+                                    "Car-free zones increase tourism and local business as visitors enjoy walking and spending time in attractive car-free environments.",
+                                    "Public health improves dramatically through reduced air pollution, noise, and accidents in areas where people live and gather."
+                        ],
+                        "against": [
+                                    "Complete car bans hurt elderly people, those with disabilities, and residents who need vehicle access for daily life.",
+                                    "Local businesses suffer when customers cannot conveniently reach shops and restaurants, particularly for heavy purchases.",
+                                    "Partial restrictions achieve pollution reduction without the extreme disruption that complete bans create for residents and workers."
+                        ],
+                        "vocabulary": [
+                                    {
+                                                "term": "historic centers",
+                                                "definition": "old central areas of cities with important buildings and heritage"
+                                    },
+                                    {
+                                                "term": "vibration",
+                                                "definition": "shaking movement caused by traffic that damages structures"
+                                    },
+                                    {
+                                                "term": "pedestrian spaces",
+                                                "definition": "areas designed for people walking rather than vehicles"
+                                    },
+                                    {
+                                                "term": "car-free zones",
+                                                "definition": "areas where vehicles are prohibited"
+                                    },
+                                    {
+                                                "term": "mobility",
+                                                "definition": "ability to move and travel"
+                                    },
+                                    {
+                                                "term": "partial restrictions",
+                                                "definition": "limited rules that control but do not completely prohibit"
+                                    }
+                        ],
+                        "exampleFor": "Cities should ban cars from historic centers completely. Vehicle traffic damages irreplaceable historic architecture through vibration, pollution, and accidents. Eliminating cars preserves these precious cultural assets while transforming crowded, noisy streets into pleasant pedestrian spaces. Car-free historic centers attract significantly more tourism and benefit local businesses as visitors linger in attractive car-free environments rather than rushing past in vehicles. European cities with car-free zones like Florence and Dubrovnik demonstrate enormous success with increased tourism and improved resident quality of life. Public health also improves dramatically through reduced air pollution, noise, and traffic accidents. While car bans require adjustment, alternative access through peripheral parking, public transport, and limited delivery times accommodates genuine needs. The benefits clearly justify complete car elimination from historic centers.",
+                        "exampleAgainst": "Cities should not ban cars from historic centers completely. Such bans hurt elderly people, those with disabilities, and residents who need vehicle access for daily life activities. Not everyone can walk long distances or carry shopping. Moreover, complete car bans harm local businesses when customers cannot conveniently reach shops and restaurants, particularly for purchases like furniture or groceries. Many historic center shops and restaurants depend on vehicle access for supplies and customers. While reducing traffic makes sense, complete bans go too far. Partial restrictions like limited traffic zones, congestion charges, or time-based access achieve pollution reduction and pedestrian benefits without extreme disruption. Historic centers should remain living neighborhoods, not outdoor museums. Practical compromises respecting residents' and businesses' needs work better than absolute car bans."
+            },
+            {
+                        "topic": "The government should guarantee affordable housing for all citizens.",
+                        "for": [
+                                    "Housing is a fundamental human right, and government must ensure everyone has safe, affordable shelter regardless of income.",
+                                    "Market forces alone fail to provide affordable housing, creating homelessness and severe hardship that government intervention must address.",
+                                    "Guaranteed housing improves public health, reduces crime, and enables people to work and contribute to society rather than struggling with housing insecurity."
+                        ],
+                        "against": [
+                                    "Government housing programs create expensive bureaucracy and often result in poor quality housing and deteriorating neighborhoods.",
+                                    "Market solutions with reduced regulations would increase housing supply naturally, making intervention unnecessary and inefficient.",
+                                    "Guaranteed housing removes incentives to work and succeed, creating dependence on government while burdening taxpayers supporting others."
+                        ],
+                        "vocabulary": [
+                                    {
+                                                "term": "fundamental human right",
+                                                "definition": "basic necessity that everyone should have guaranteed"
+                                    },
+                                    {
+                                                "term": "affordable housing",
+                                                "definition": "homes that do not consume excessive portion of household income"
+                                    },
+                                    {
+                                                "term": "market forces",
+                                                "definition": "economic factors of supply and demand"
+                                    },
+                                    {
+                                                "term": "government intervention",
+                                                "definition": "state action to influence economic or social conditions"
+                                    },
+                                    {
+                                                "term": "housing insecurity",
+                                                "definition": "unstable or uncertain living situation"
+                                    },
+                                    {
+                                                "term": "bureaucracy",
+                                                "definition": "complex administrative system with many rules"
+                                    }
+                        ],
+                        "exampleFor": "The government should guarantee affordable housing for all citizens. Housing represents a fundamental human right essential for human dignity and wellbeing. Market forces alone demonstrably fail to provide affordable housing, creating homelessness, overcrowding, and housing poverty that harm millions. Government must intervene to ensure everyone has safe, affordable shelter regardless of income. Guaranteed housing programs improve public health by ending homelessness, reduce crime associated with housing instability, and enable people to work productively rather than desperately seeking shelter. Countries with strong social housing like Austria demonstrate that government programs can provide quality affordable housing efficiently. While such programs require public investment, the social benefits and prevention of human suffering justify this expenditure. Housing security is too important to leave to market speculation.",
+                        "exampleAgainst": "The government should not guarantee affordable housing for all citizens. Government housing programs historically create expensive, inefficient bureaucracy producing poor quality housing and deteriorating neighborhoods. Market solutions with reduced building regulations would increase housing supply naturally through private construction, making costly government programs unnecessary. Guaranteed housing also removes incentives to work and succeed, creating dependence on government support rather than self-sufficiency. Such programs place enormous burden on taxpayers who must support others' housing. While some housing assistance for truly disadvantaged people makes sense, guaranteeing housing for all citizens is economically unsustainable and unfair to those working to pay their own housing. Private market with targeted assistance for the neediest represents a better approach than universal government guarantees."
+            },
+            {
+                        "topic": "Czech cities should restrict short-term rentals (Airbnb) in residential areas to protect local housing availability",
+                        "for": [
+                                    "Converting apartments to tourist rentals reduces housing for local residents and drives up rent prices",
+                                    "Short-term rentals bring noise, parties, and disturbances that disrupt residential neighborhoods",
+                                    "Tourism housing removes units from long-term market where Czech families desperately need them"
+                        ],
+                        "against": [
+                                    "Property owners should decide how to use their own property without government interference",
+                                    "Short-term rentals bring tourism income to Czech cities and allow homeowners to supplement income",
+                                    "Problem is housing construction shortage, not how existing housing is used"
+                        ],
+                        "vocabulary": [
+                                    {
+                                                "term": "short-term rental",
+                                                "definition": "accommodation rented for brief periods, usually to tourists"
+                                    },
+                                    {
+                                                "term": "residential area",
+                                                "definition": "neighborhood where people live permanently"
+                                    },
+                                    {
+                                                "term": "housing availability",
+                                                "definition": "amount of homes accessible for people to live in"
+                                    },
+                                    {
+                                                "term": "property rights",
+                                                "definition": "legal ability to control and use what one owns"
+                                    },
+                                    {
+                                                "term": "long-term market",
+                                                "definition": "housing rented for extended periods to permanent residents"
+                                    },
+                                    {
+                                                "term": "supplement income",
+                                                "definition": "to add extra money to regular earnings"
+                                    }
+                        ],
+                        "exampleFor": "Czech cities should restrict short-term rentals in residential areas. Cities like Prague, Brno, and Český Krumlov face housing crises where local residents cannot afford apartments because owners convert them to tourist rentals earning more money. This transforms residential neighborhoods into hotel districts, destroying community character and pushing families away from city centers. Furthermore, short-term tourists create noise, parties, and disturbances that permanent neighbors must tolerate constantly. Czech families struggle finding affordable housing while thousands of apartments serve tourists rather than residents. Cities like Barcelona and Amsterdam successfully restricted short-term rentals, demonstrating that protecting resident housing is possible. While owners claim property rights, those rights don't include destroying neighborhoods and creating housing shortages for profit. Czech cities must prioritize housing availability for citizens over tourism accommodation. Reasonable restrictions allowing occasional rental while preventing wholesale conversion to tourist housing would balance property rights with community needs.",
+                        "exampleAgainst": "I oppose restricting short-term rentals in Czech cities. Property owners should control their own property without government interference dictating how they use it. Short-term rentals allow homeowners to supplement income, particularly retirees and families needing extra money. Furthermore, tourism brings significant economic benefits to Czech cities through visitor spending supporting local businesses, restaurants, and cultural attractions. The real housing problem is insufficient construction of new housing, not how existing apartments are used. Restricting short-term rentals won't magically create affordable housing—it simply reduces property values and owner income without solving underlying supply issues. Moreover, many short-term rentals occupy properties that wouldn't suit long-term residential use—historic buildings requiring maintenance that only tourism income supports, or seasonal properties in tourist areas. Rather than restricting property rights, cities should focus on building more housing, streamlining construction permits, and addressing actual supply constraints causing high prices."
+            },
+            {
+                        "topic": "Czech cities should require all new buildings to match historic architectural styles rather than allowing modern designs",
+                        "for": [
+                                    "Historic architecture creates distinctive Czech identity that modern generic buildings destroy",
+                                    "Tourists and residents appreciate beautiful traditional architecture more than concrete and glass boxes",
+                                    "New buildings should respect and complement existing historical context rather than clashing with it"
+                        ],
+                        "against": [
+                                    "Architecture should reflect contemporary era rather than copying past styles inauthentically",
+                                    "Modern buildings meet current needs for energy efficiency and functionality that historic styles cannot provide",
+                                    "Forcing historical imitation prevents architectural innovation and creates fake Disney-like cities"
+                        ],
+                        "vocabulary": [
+                                    {
+                                                "term": "architectural style",
+                                                "definition": "characteristic design and appearance of buildings"
+                                    },
+                                    {
+                                                "term": "historic preservation",
+                                                "definition": "protecting and maintaining old buildings and design"
+                                    },
+                                    {
+                                                "term": "contemporary",
+                                                "definition": "belonging to present time; modern"
+                                    },
+                                    {
+                                                "term": "authentic",
+                                                "definition": "genuine and real, not imitation"
+                                    },
+                                    {
+                                                "term": "energy efficiency",
+                                                "definition": "using less energy to provide same services"
+                                    },
+                                    {
+                                                "term": "architectural innovation",
+                                                "definition": "new and creative building design ideas"
+                                    }
+                        ],
+                        "exampleFor": "Czech cities should require new buildings to match historic architectural styles. Czech Republic possesses beautiful distinctive architecture—Baroque churches, Art Nouveau buildings, Gothic structures—that creates national identity and attracts tourists worldwide. Modern glass and concrete boxes destroy this architectural heritage by creating jarring contrasts with historical surroundings. New buildings in historic districts should complement existing architecture through similar materials, proportions, and design elements even if not exact copies. Cities like Paris and Florence successfully maintain architectural harmony through design requirements, demonstrating that protecting visual character is both possible and valuable. Furthermore, residents and tourists appreciate beautiful traditional architecture far more than generic modern buildings indistinguishable from those anywhere else. Architecture contributes to quality of life and civic pride. Allowing developers to construct whatever maximizes profit at expense of city character represents short-sighted thinking. Requiring new buildings to respect historical context preserves Czech cities' unique beauty for future generations.",
+                        "exampleAgainst": "I oppose requiring new buildings to match historic styles. Architecture should honestly reflect its contemporary era rather than creating fake historical imitations. Great cities like Prague developed through centuries of buildings representing their own times—Gothic, Renaissance, Baroque, Art Nouveau—each era adding its contribution. Forcing modern buildings to imitate past styles produces inauthentic Disney-like environments rather than genuine historical districts. Furthermore, modern architecture meets current needs for energy efficiency, accessibility, and functionality that historic styles cannot provide. Contemporary materials and designs achieve better insulation, natural lighting, and environmental sustainability. Requiring historical imitation also prevents architectural innovation and creative expression, reducing architecture to copying rather than advancing. Some modern buildings become beloved landmarks—Prague's Dancing House initially faced criticism but now represents important contemporary Czech architecture. Rather than mandating historical copies, cities should require quality design sensitive to surroundings while allowing contemporary architectural expression."
+            }
+];
+
+        let currentTopicIndex = 0;
+        let argumentsVisible = false;
+        let currentVocabSet = [];
+        let selectedTerm = null;
+        let selectedDef = null;
+        let matchedPairs = [];
+
+        window.onload = function() {
+            const topicList = document.getElementById('topicList');
+            topics.forEach((topic, index) => {
+                const li = document.createElement('li');
+                li.className = 'topic-item';
+                li.innerHTML = `<h3>Topic ${index + 45}: ${topic.topic}</h3>`;
+                li.onclick = () => selectTopic(index);
+                topicList.appendChild(li);
+            });
+        };
+
+        function selectTopic(index) {
+            currentTopicIndex = index;
+            const topic = topics[index];
+            
+            document.getElementById('topicText').textContent = topic.topic;
+            
+            const forList = document.getElementById('forArguments');
+            const againstList = document.getElementById('againstArguments');
+            
+            forList.innerHTML = '';
+            againstList.innerHTML = '';
+            
+            topic.for.forEach(arg => {
+                const li = document.createElement('li');
+                li.textContent = arg;
+                forList.appendChild(li);
+            });
+            
+            topic.against.forEach(arg => {
+                const li = document.createElement('li');
+                li.textContent = arg;
+                againstList.appendChild(li);
+            });
+            
+            argumentsVisible = false;
+            document.getElementById('perspectivesContainer').classList.remove('visible');
+            document.getElementById('toggleText').textContent = 'Show Arguments';
+            
+            document.getElementById('topicSelection').classList.remove('active');
+            document.getElementById('topicDisplay').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function toggleArguments() {
+            argumentsVisible = !argumentsVisible;
+            const container = document.getElementById('perspectivesContainer');
+            const toggleText = document.getElementById('toggleText');
+            
+            if (argumentsVisible) {
+                container.classList.add('visible');
+                toggleText.textContent = 'Hide Arguments';
+            } else {
+                container.classList.remove('visible');
+                toggleText.textContent = 'Show Arguments';
+            }
+        }
+
+
+        function goDirectToArgumentBuilder() {
+            const topic = topics[currentTopicIndex];
+            document.getElementById('argTopicTitle').textContent = topic.topic;
+            document.getElementById('exampleFor').textContent = topic.exampleFor;
+            document.getElementById('exampleAgainst').textContent = topic.exampleAgainst;
+            
+            document.getElementById('topicDisplay').classList.remove('active');
+            document.getElementById('argumentBuilder').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function backToTopics() {
+            document.getElementById('topicDisplay').classList.remove('active');
+            document.getElementById('topicSelection').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function goToVocab() {
+            const topic = topics[currentTopicIndex];
+            document.getElementById('vocabTopicTitle').textContent = topic.topic;
+            
+            initVocabGame();
+            
+            document.getElementById('topicDisplay').classList.remove('active');
+            document.getElementById('vocabularyPractice').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function backToTopic() {
+            document.getElementById('vocabularyPractice').classList.remove('active');
+            document.getElementById('topicDisplay').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function speakText(text, button) {
+            // Cancel any ongoing speech
+            window.speechSynthesis.cancel();
+            
+            // Create new speech utterance
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.rate = 0.9; // Slightly slower for clarity
+            utterance.pitch = 1;
+            utterance.volume = 1;
+            
+            // Add speaking class for visual feedback
+            button.classList.add('speaking');
+            
+            // Remove speaking class when done
+            utterance.onend = () => {
+                button.classList.remove('speaking');
+            };
+            
+            // Speak the text
+            window.speechSynthesis.speak(utterance);
+        }
+
+                function initVocabGame() {
+            matchedPairs = [];
+            selectedTerm = null;
+            selectedDef = null;
+            
+            currentVocabSet = topics[currentTopicIndex].vocabulary;
+            
+            const termsContainer = document.getElementById('vocabTerms');
+            const defsContainer = document.getElementById('vocabDefinitions');
+            
+            termsContainer.innerHTML = '';
+            defsContainer.innerHTML = '';
+            
+            const shuffledDefs = [...currentVocabSet].sort(() => Math.random() - 0.5);
+            
+            currentVocabSet.forEach((pair, index) => {
+                const termDiv = document.createElement('div');
+                termDiv.className = 'vocab-item';
+                termDiv.dataset.index = index;
+                
+                // Create speaker button
+                const speakerBtn = document.createElement('button');
+                speakerBtn.className = 'speaker-btn';
+                speakerBtn.innerHTML = '🔊';
+                speakerBtn.title = 'Listen to pronunciation';
+                speakerBtn.onclick = (e) => {
+                    e.stopPropagation(); // Prevent selecting the term
+                    speakText(pair.term, speakerBtn);
+                };
+                
+                termDiv.innerHTML = `<div class="vocab-number">${index + 1}</div><div>${pair.term}</div>`;
+                termDiv.appendChild(speakerBtn);
+                termDiv.onclick = () => selectVocabTerm(index);
+                termsContainer.appendChild(termDiv);
+            });
+            
+            shuffledDefs.forEach((pair, index) => {
+                const defDiv = document.createElement('div');
+                defDiv.className = 'vocab-item';
+                defDiv.dataset.term = pair.term;
+                
+                // Create speaker button for definition
+                const speakerBtn = document.createElement('button');
+                speakerBtn.className = 'speaker-btn';
+                speakerBtn.innerHTML = '🔊';
+                speakerBtn.title = 'Listen to definition';
+                speakerBtn.onclick = (e) => {
+                    e.stopPropagation(); // Prevent selecting the definition
+                    speakText(pair.definition, speakerBtn);
+                };
+                
+                defDiv.innerHTML = `<div class="vocab-number">${String.fromCharCode(65 + index)}</div><div>${pair.definition}</div>`;
+                defDiv.appendChild(speakerBtn);
+                defDiv.onclick = () => selectVocabDef(pair.term, defDiv);
+                defsContainer.appendChild(defDiv);
+            });
+            
+            document.getElementById('vocabFeedback').innerHTML = '';
+        }
+
+        function selectVocabTerm(index) {
+            if (matchedPairs.includes(index)) return;
+            
+            document.querySelectorAll('#vocabTerms .vocab-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            const termDiv = document.querySelector(`#vocabTerms .vocab-item[data-index="${index}"]`);
+            termDiv.classList.add('selected');
+            selectedTerm = index;
+            
+            if (selectedDef !== null) {
+                checkVocabMatch();
+            }
+        }
+
+        function selectVocabDef(term, element) {
+            if ([...element.classList].includes('matched')) return;
+            
+            document.querySelectorAll('#vocabDefinitions .vocab-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            element.classList.add('selected');
+            selectedDef = { term, element };
+            
+            if (selectedTerm !== null) {
+                checkVocabMatch();
+            }
+        }
+
+        function checkVocabMatch() {
+            const selectedTermObj = currentVocabSet[selectedTerm];
+            
+            if (selectedTermObj.term === selectedDef.term) {
+                const termDiv = document.querySelector(`#vocabTerms .vocab-item[data-index="${selectedTerm}"]`);
+                termDiv.classList.add('matched');
+                termDiv.classList.remove('selected');
+                selectedDef.element.classList.add('matched');
+                selectedDef.element.classList.remove('selected');
+                
+                matchedPairs.push(selectedTerm);
+                
+                const feedback = document.getElementById('vocabFeedback');
+                feedback.className = 'vocab-feedback success';
+                feedback.textContent = '✓ Correct match!';
+                
+                if (matchedPairs.length === currentVocabSet.length) {
+                    setTimeout(() => {
+                        feedback.textContent = '🎉 Excellent! All vocabulary matched correctly!';
+                    }, 500);
+                }
+            } else {
+                const feedback = document.getElementById('vocabFeedback');
+                feedback.className = 'vocab-feedback error';
+                feedback.textContent = '✗ Not a match. Try again!';
+                
+                setTimeout(() => {
+                    document.querySelectorAll('.vocab-item.selected').forEach(item => {
+                        item.classList.remove('selected');
+                    });
+                    feedback.innerHTML = '';
+                }, 1500);
+            }
+            
+            selectedTerm = null;
+            selectedDef = null;
+        }
+
+        function resetVocab() {
+            initVocabGame();
+        }
+
+        function goToArgumentBuilder() {
+            const topic = topics[currentTopicIndex];
+            document.getElementById('argTopicTitle').textContent = topic.topic;
+            document.getElementById('exampleFor').textContent = topic.exampleFor;
+            document.getElementById('exampleAgainst').textContent = topic.exampleAgainst;
+            
+            document.getElementById('vocabularyPractice').classList.remove('active');
+            document.getElementById('topicDisplay').classList.remove('active');
+            document.getElementById('argumentBuilder').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function backToVocab() {
+            document.getElementById('argumentBuilder').classList.remove('active');
+            document.getElementById('vocabularyPractice').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function viewComplete() {
+            const point = document.getElementById('point').value;
+            const evidence = document.getElementById('evidence').value;
+            const explain = document.getElementById('explain').value;
+            const link = document.getElementById('link').value;
+            
+            if (!point || !evidence || !explain || !link) {
+                alert('Please fill in all sections!');
+                return;
+            }
+            
+            const complete = `${point} ${evidence} ${explain} ${link}`;
+            document.getElementById('completeText').textContent = complete;
+            document.getElementById('completeArgument').classList.remove('hidden');
+        }
+
+        function clearArgument() {
+            document.getElementById('point').value = '';
+            document.getElementById('evidence').value = '';
+            document.getElementById('explain').value = '';
+            document.getElementById('link').value = '';
+            document.getElementById('completeArgument').classList.add('hidden');
+            document.getElementById('examplesDisplay').classList.add('hidden');
+            document.getElementById('exampleBtnText').textContent = 'Show Examples';
+        }
+
+        function toggleExamples() {
+            const display = document.getElementById('examplesDisplay');
+            const btn = document.getElementById('exampleBtnText');
+            
+            if (display.classList.contains('hidden')) {
+                display.classList.remove('hidden');
+                btn.textContent = 'Hide Examples';
+            } else {
+                display.classList.add('hidden');
+                btn.textContent = 'Show Examples';
+            }
+        }
+
+        // Auto-open topic from URL hash (for random topic generator)
+        window.addEventListener('load', function() {
+            const hash = window.location.hash;
+            if (hash && hash.startsWith('#topic-')) {
+                const topicIndex = parseInt(hash.replace('#topic-', ''));
+                if (!isNaN(topicIndex) && topicIndex >= 0 && topicIndex < topics.length) {
+                    selectTopic(topicIndex);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

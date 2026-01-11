@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>General Professional Communication - Sentence Transformation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy-dark: #0d1b2a;
+            --navy: #1b263b;
+            --blue: #415a77;
+            --blue-light: #778da9;
+            --silver: #e0e1dd;
+            --white: #ffffff;
+            --accent: #e63946;
+            --success: #06d6a0;
+            --warning: #ffd60a;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+            color: var(--silver);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container { max-width: 900px; margin: 0 auto; }
+        
+        .back-home {
+            display: inline-block;
+            padding: 12px 24px;
+            background: var(--blue);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-home:hover {
+            background: var(--blue-light);
+            transform: translateY(-2px);
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px 30px;
+            margin-bottom: 40px;
+            border-bottom: 3px solid var(--blue);
+        }
+        
+        h1 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--white);
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            color: var(--blue-light);
+            margin-bottom: 20px;
+        }
+        
+        .progress {
+            background: rgba(65, 90, 119, 0.3);
+            padding: 15px 25px;
+            border-radius: 8px;
+            display: inline-block;
+            font-weight: 600;
+        }
+        
+        .exercise-card {
+            background: rgba(27, 38, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--blue);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .section-label {
+            color: var(--blue-light);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        
+        .basic-sentence {
+            background: rgba(65, 90, 119, 0.2);
+            border-left: 4px solid var(--blue);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .hints-box {
+            background: rgba(255, 214, 10, 0.1);
+            border: 2px solid var(--warning);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .hints-box h3 {
+            color: var(--warning);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .hint-progress {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .progress-dots {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .dot.revealed {
+            background: var(--warning);
+        }
+        
+        .hint-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: none;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        .hint-item.visible {
+            display: block;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hint-label {
+            color: var(--warning);
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        
+        .hint-text {
+            color: var(--white);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        .hint-suggestion {
+            color: var(--success);
+            font-style: italic;
+            margin-top: 5px;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            margin: 5px;
+        }
+        
+        .btn-hint {
+            background: var(--warning);
+            color: var(--navy-dark);
+        }
+        
+        .btn-hint:hover {
+            background: #ffed4e;
+            transform: translateY(-2px);
+        }
+        
+        .btn-hint:disabled {
+            background: rgba(255, 214, 10, 0.3);
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background: #d62828;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: var(--blue);
+            color: var(--white);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--blue-light);
+        }
+        
+        .writing-area {
+            margin: 30px 0;
+        }
+        
+        .writing-area label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--white);
+            font-size: 1.1rem;
+        }
+        
+        .writing-area textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            border: 2px solid var(--blue);
+            border-radius: 8px;
+            background: rgba(13, 27, 42, 0.6);
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            line-height: 1.8;
+            resize: vertical;
+        }
+        
+        .writing-area textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        
+        .examples-section {
+            margin-top: 30px;
+        }
+        
+        .example-box {
+            background: rgba(6, 214, 160, 0.1);
+            border: 2px solid var(--success);
+            border-radius: 8px;
+            padding: 25px;
+            margin: 15px 0;
+            display: none;
+        }
+        
+        .example-box.visible {
+            display: block;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        .example-header {
+            color: var(--success);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+        
+        .example-text {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .example-explanation {
+            color: var(--blue-light);
+            font-size: 0.95rem;
+            margin: 8px 0;
+        }
+        
+        .example-explanation strong {
+            color: var(--success);
+        }
+        
+        .button-group {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .comparison-grid {
+            display: none;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .comparison-grid.visible {
+            display: grid;
+        }
+        
+        .comparison-item {
+            background: rgba(6, 214, 160, 0.05);
+            border-left: 4px solid var(--success);
+            padding: 15px;
+            border-radius: 8px;
+        }
+        
+        .comparison-item h4 {
+            color: var(--success);
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+        
+        .comparison-item p {
+            color: var(--white);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .exercise-card { padding: 25px; }
+            .btn { padding: 10px 20px; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-home">← Back to Topics</a>
+        
+        <header>
+            <h1>General Professional Communication</h1>
+            <p class="subtitle">Sentence Transformation Practice - STANAG Level 3</p>
+            <div class="progress">
+                Exercise <span id="currentEx">1</span> of <span id="totalEx">10</span>
+            </div>
+        </header>
+        
+        <div class="exercise-card">
+            <div class="section-label">Basic Sentence (A2-B1 Level)</div>
+            <div class="basic-sentence" id="basicSentence"></div>
+            
+            <div class="hints-box">
+                <h3>Hints & Guidance</h3>
+                <p style="margin-bottom: 15px; color: var(--blue-light);">
+                    Click to reveal hints one at a time. Try with fewer hints first to challenge yourself!
+                </p>
+                
+                <div class="hint-progress">
+                    <span>Hints Revealed: <strong><span id="hintCount">0</span> of 4</strong></span>
+                    <div class="progress-dots" id="progressDots">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+                
+                <div id="hintsContainer"></div>
+                
+                <div class="button-group">
+                    <button class="btn btn-hint" onclick="showNextHint()" id="nextHintBtn">Show Next Hint</button>
+                    <button class="btn btn-secondary" onclick="showAllHints()" id="showAllBtn">Show All Hints</button>
+                    <button class="btn btn-secondary" onclick="resetHints()">Reset Hints</button>
+                </div>
+            </div>
+            
+            <div class="writing-area">
+                <label for="userAnswer">Your B2+ Version:</label>
+                <textarea id="userAnswer" placeholder="Write your upgraded sentence here..."></textarea>
+            </div>
+            
+            <div class="examples-section">
+                <h3 style="color: var(--success); margin-bottom: 20px;">Example B2+ Versions</h3>
+                <p style="color: var(--blue-light); margin-bottom: 20px;">
+                    Click to see different approaches. All are correct - choose the style that suits your context!
+                </p>
+                
+                <div class="button-group" id="exampleButtons"></div>
+                
+                <div id="examplesContainer"></div>
+                
+                <div class="comparison-grid" id="comparisonGrid"></div>
+            </div>
+            
+            <div class="button-group" style="margin-top: 40px;">
+                <button class="btn btn-secondary" onclick="previousExercise()" id="prevBtn">← Previous</button>
+                <button class="btn btn-primary" onclick="nextExercise()" id="nextBtn">Next →</button>
+                <button class="btn btn-secondary" onclick="backToTopics()">Back to Topics</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const exercises = [{"id": 1, "basic": "The meeting was good. We talked about important things.", "hints": [{"type": "structure", "label": "General Structure", "text": "Use formal meeting assessment structure", "suggestion": "Structure: \"The meeting proved [assessment], as [what was accomplished]\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"was good\" with formal assessment terminology", "suggestion": "Consider: \"proved highly productive\", \"was extremely beneficial\", \"proved successful\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"talked about important things\" with formal discussion language", "suggestion": "Consider: \"addressed critical operational issues\", \"discussed key strategic matters\", \"covered essential topics\""}, {"type": "formality", "label": "Additional Formality", "text": "Add specific outcomes or decisions", "suggestion": "Consider: \"reached consensus on\", \"established action items\", \"made key decisions\""}], "examples": [{"version": 1, "title": "Productive meeting assessment", "text": "The meeting proved highly productive, as participants addressed several critical operational issues and reached consensus on key action items.", "why": "Professional assessment with specific outcomes achieved", "bestFor": "Meeting summaries, after-action reports, official correspondence"}, {"version": 2, "title": "Strategic focus", "text": "The conference was extremely beneficial, covering essential strategic matters and establishing clear priorities for the upcoming quarter.", "why": "Emphasizes strategic nature and forward planning", "bestFor": "Executive summaries, leadership updates, planning documents"}]}, {"id": 2, "basic": "We need to finish the project by Friday. Time is running out.", "hints": [{"type": "structure", "label": "General Structure", "text": "Use formal urgency structure", "suggestion": "Structure emphasizing both deadline and urgency: \"Given the approaching deadline...\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"need to finish\" with formal completion language", "suggestion": "Consider: \"must complete\", \"are required to finalize\", \"need to conclude\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"Time is running out\" with formal urgency terminology", "suggestion": "Consider: \"the deadline approaches rapidly\", \"time constraints are pressing\", \"immediate action is required\""}, {"type": "formality", "label": "Additional Formality", "text": "Add consequence or action required", "suggestion": "Consider: \"requiring focused effort\", \"necessitating immediate attention\", \"demands priority action\""}], "examples": [{"version": 1, "title": "Urgency emphasis", "text": "We must complete the project by Friday, as the deadline approaches rapidly and immediate focused effort is required.", "why": "Clear deadline with urgency and action requirement", "bestFor": "Project communications, deadline reminders, priority task assignments"}, {"version": 2, "title": "Action-driven", "text": "Given the Friday deadline and pressing time constraints, project completion necessitates immediate priority attention from all team members.", "why": "Emphasizes collective action needed", "bestFor": "Team communications, urgent project updates"}]}, {"id": 3, "basic": "Everyone should come to the briefing on time. Punctuality is important.", "hints": [{"type": "structure", "label": "General Structure", "text": "Use formal expectation or requirement structure", "suggestion": "Structure: \"Punctuality is expected/required for...\" or \"Personnel are expected to...\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"should come on time\" with formal attendance requirement", "suggestion": "Consider: \"are expected to attend punctually\", \"must arrive promptly\", \"are required to be present at the scheduled time\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"Punctuality is important\" with formal timeliness language", "suggestion": "Consider: \"Timeliness is essential\", \"Prompt attendance is required\", \"Punctuality demonstrates professionalism\""}, {"type": "formality", "label": "Additional Formality", "text": "Add reason or consequence", "suggestion": "Consider: \"to ensure effective use of time\", \"out of respect for colleagues\", \"for efficient operations\""}], "examples": [{"version": 1, "title": "Professional expectation", "text": "All personnel are expected to attend the briefing punctually, as timeliness demonstrates professionalism and ensures effective use of limited time.", "why": "Clear expectation with professionalism link", "bestFor": "Meeting announcements, attendance policies, professional standards"}, {"version": 2, "title": "Operational requirement", "text": "Prompt attendance at the scheduled briefing is required for efficient operations and out of respect for colleagues' time.", "why": "Emphasizes both operational and respect considerations", "bestFor": "Formal announcements, operational directives, time management guidance"}]}, {"id": 4, "basic": "Please send me the report when you finish it. I need it for my presentation.", "hints": [{"type": "structure", "label": "General Structure", "text": "Use polite formal request structure with clear purpose", "suggestion": "Structure: \"Could you please...when complete, as...\" or \"I would appreciate...\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"send me the report when you finish\" with formal submission language", "suggestion": "Consider: \"Could you please submit the report upon completion\", \"I would appreciate receiving the completed report\", \"Please forward the finalized report\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"I need it for my presentation\" with formal purpose statement", "suggestion": "Consider: \"as it is required for my presentation\", \"which is essential for my briefing\", \"needed for the upcoming presentation\""}, {"type": "formality", "label": "Additional Formality", "text": "Add timeframe politely", "suggestion": "Consider: \"at your earliest convenience\", \"by [specific date]\", \"before the briefing\""}], "examples": [{"version": 1, "title": "Polite professional request", "text": "Could you please submit the completed report at your earliest convenience, as it is required for my presentation to senior leadership.", "why": "Polite request with clear purpose and context", "bestFor": "Collegial requests, interdepartmental communications, routine correspondence"}, {"version": 2, "title": "Time-specific request", "text": "I would appreciate receiving the finalized report by Thursday, as this material is essential for Friday's strategic briefing.", "why": "Specific deadline with clear justification", "bestFor": "Time-sensitive requests, formal task assignments"}]}, {"id": 5, "basic": "The new policy starts next month. Make sure everyone knows about it.", "hints": [{"type": "structure", "label": "General Structure", "text": "Use formal policy implementation and communication structure", "suggestion": "Structure: \"The policy becomes effective [date]. Ensure all personnel are informed...\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"starts next month\" with formal implementation terminology", "suggestion": "Consider: \"becomes effective next month\", \"will be implemented beginning [date]\", \"takes effect on [date]\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"Make sure everyone knows\" with formal dissemination language", "suggestion": "Consider: \"Ensure all personnel are informed\", \"Please disseminate to all staff\", \"Communicate this change to all team members\""}, {"type": "formality", "label": "Additional Formality", "text": "Add compliance or training requirement", "suggestion": "Consider: \"compliance is mandatory\", \"familiarization is required\", \"training will be conducted\""}], "examples": [{"version": 1, "title": "Formal policy notification", "text": "The new policy becomes effective on 1 March. Please ensure all personnel are informed and understand that compliance is mandatory.", "why": "Clear effective date with dissemination and compliance requirements", "bestFor": "Policy announcements, directive implementation, organizational changes"}, {"version": 2, "title": "Implementation focus", "text": "The updated policy will be implemented beginning next month. Supervisors must disseminate this information and ensure subordinate familiarization before implementation.", "why": "Assigns specific responsibility for communication and preparation", "bestFor": "Chain of command communications, policy rollouts"}]}, {"id": 6, "basic": "Your work on the project was excellent. Thank you for your hard work.", "hints": [{"type": "structure", "label": "General Structure", "text": "Use formal recognition structure", "suggestion": "Structure: \"Your contributions to X were Y. I appreciate...\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"work was excellent\" with formal recognition language", "suggestion": "Consider: \"contributions were outstanding\", \"performance was exemplary\", \"efforts were exceptional\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"Thank you for your hard work\" with formal appreciation", "suggestion": "Consider: \"I appreciate your dedication and professionalism\", \"Your commitment is commendable\", \"I am grateful for your diligence\""}, {"type": "formality", "label": "Additional Formality", "text": "Add specific achievement or impact", "suggestion": "Consider: \"which exceeded expectations\", \"contributing significantly to success\", \"ensuring timely completion\""}], "examples": [{"version": 1, "title": "Formal recognition", "text": "Your contributions to the project were outstanding and exceeded expectations. I sincerely appreciate your dedication, professionalism, and attention to detail.", "why": "Specific praise with multiple recognized qualities", "bestFor": "Performance recognition, thank you letters, commendations"}, {"version": 2, "title": "Impact-focused appreciation", "text": "Your exceptional efforts on this project contributed significantly to its success. Your commitment and diligence are truly commendable.", "why": "Links individual effort to project outcome", "bestFor": "Project completion recognition, team appreciation, awards nominations"}]}, {"id": 7, "basic": "We have a problem with the schedule. Some tasks are taking longer than expected.", "hints": [{"type": "structure", "label": "General Structure", "text": "Use formal problem statement with cause", "suggestion": "Structure: \"We are experiencing [issue] due to/because [cause]\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"have a problem with\" with formal issue identification", "suggestion": "Consider: \"are experiencing schedule challenges\", \"have encountered timeline difficulties\", \"face scheduling complications\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"taking longer than expected\" with formal delay terminology", "suggestion": "Consider: \"requiring more time than projected\", \"exceeding estimated duration\", \"experiencing delays\""}, {"type": "formality", "label": "Additional Formality", "text": "Add impact or proposed solution", "suggestion": "Consider: \"affecting overall timeline\", \"requiring schedule adjustment\", \"necessitating revised milestones\""}], "examples": [{"version": 1, "title": "Problem with solution orientation", "text": "We are experiencing schedule challenges, as several tasks are requiring more time than initially projected. This necessitates a revised timeline and adjusted milestones.", "why": "Clear problem identification with forward-looking solution approach", "bestFor": "Project updates, status reports, problem notifications"}, {"version": 2, "title": "Impact-focused notification", "text": "The project faces scheduling complications because certain activities are exceeding estimated duration, which may affect the overall completion timeline.", "why": "Emphasizes potential impact and causation", "bestFor": "Risk assessments, stakeholder communications, management updates"}]}, {"id": 8, "basic": "I will be away next week. Contact Smith if you need help.", "hints": [{"type": "structure", "label": "General Structure", "text": "Use formal absence notification with coverage arrangement", "suggestion": "Structure: \"I will be absent [dates]. In my absence, please contact...\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"will be away\" with formal absence terminology", "suggestion": "Consider: \"will be absent\", \"will be unavailable\", \"will be on leave\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"Contact Smith if you need help\" with formal coverage language", "suggestion": "Consider: \"In my absence, please contact [Name] for assistance\", \"[Name] will provide coverage\", \"Direct inquiries to [Name]\""}, {"type": "formality", "label": "Additional Formality", "text": "Add specific dates and contact information", "suggestion": "Consider: \"from [date] to [date]\", \"contact information provided below\", \"for urgent matters\""}], "examples": [{"version": 1, "title": "Formal absence notification", "text": "I will be absent from 10-14 March. In my absence, please contact Sergeant Smith for assistance with operational matters or urgent issues.", "why": "Clear dates with specific coverage arrangement and scope", "bestFor": "Out-of-office notifications, absence announcements, team communications"}, {"version": 2, "title": "Coverage delegation", "text": "I will be unavailable next week. Sergeant Smith will provide full coverage during this period. Please direct all inquiries to him at extension 5234.", "why": "Emphasizes complete coverage with contact information", "bestFor": "Formal leave notifications, responsibility transfers"}]}, {"id": 9, "basic": "Let's schedule a meeting to discuss the issue. When are you free?", "hints": [{"type": "structure", "label": "General Structure", "text": "Use formal meeting request structure", "suggestion": "Structure: \"I would like to schedule... Could you please advise...\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"Let's schedule a meeting\" with formal meeting request", "suggestion": "Consider: \"I would like to arrange a meeting\", \"I propose we schedule a discussion\", \"I request a meeting\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"When are you free?\" with formal availability inquiry", "suggestion": "Consider: \"Could you please advise your availability?\", \"Please indicate convenient times\", \"When would be suitable for you?\""}, {"type": "formality", "label": "Additional Formality", "text": "Add purpose specificity or timeframe", "suggestion": "Consider: \"to address this matter\", \"at your earliest convenience\", \"this week if possible\""}], "examples": [{"version": 1, "title": "Formal meeting request", "text": "I would like to arrange a meeting to discuss this matter in detail. Could you please advise your availability for later this week?", "why": "Professional request with clear purpose and suggested timeframe", "bestFor": "Meeting requests to superiors, formal scheduling, important discussions"}, {"version": 2, "title": "Collaborative scheduling", "text": "I propose we schedule a meeting to address these concerns. Please indicate times that would be convenient for you over the next few days.", "why": "Collaborative tone with specific timeframe", "bestFor": "Peer communications, project team scheduling"}]}, {"id": 10, "basic": "The equipment inspection is tomorrow. Please make sure everything is ready.", "hints": [{"type": "structure", "label": "General Structure", "text": "Use formal inspection notification with preparation directive", "suggestion": "Structure: \"The [event] is scheduled for [time]. Please ensure...\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"is tomorrow\" with formal scheduling terminology", "suggestion": "Consider: \"is scheduled for tomorrow\", \"will take place on [date]\", \"will be conducted tomorrow\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"make sure everything is ready\" with formal preparation language", "suggestion": "Consider: \"ensure all equipment is properly prepared\", \"verify readiness of all items\", \"confirm all systems are in order\""}, {"type": "formality", "label": "Additional Formality", "text": "Add specific time and standards", "suggestion": "Consider: \"at 0900 hours\", \"according to prescribed standards\", \"in full compliance with regulations\""}], "examples": [{"version": 1, "title": "Formal inspection notification", "text": "The equipment inspection is scheduled for tomorrow at 0900 hours. Please ensure all items are properly prepared and meet prescribed standards.", "why": "Clear scheduling with specific preparation requirements and standards reference", "bestFor": "Inspection notifications, readiness directives, formal announcements"}, {"version": 2, "title": "Compliance-focused directive", "text": "Equipment inspection will be conducted tomorrow morning. Verify that all systems are in order and in full compliance with applicable regulations.", "why": "Emphasizes verification responsibility and regulatory compliance", "bestFor": "Pre-inspection directives, compliance reminders, quality assurance notifications"}]}];
+        let currentExerciseIndex = 0;
+        let currentHintIndex = 0;
+
+        function loadExercise(index) {
+            const exercise = exercises[index];
+            currentExerciseIndex = index;
+            currentHintIndex = 0;
+            
+            // Update exercise number
+            document.getElementById('currentEx').textContent = index + 1;
+            document.getElementById('totalEx').textContent = exercises.length;
+            
+            // Load basic sentence
+            document.getElementById('basicSentence').textContent = exercise.basic;
+            
+            // Clear and load hints
+            const hintsContainer = document.getElementById('hintsContainer');
+            hintsContainer.innerHTML = '';
+            exercise.hints.forEach((hint, i) => {
+                const hintDiv = document.createElement('div');
+                hintDiv.className = 'hint-item';
+                hintDiv.id = `hint${i}`;
+                hintDiv.innerHTML = `
+                    <div class="hint-label">🔵 Hint ${i + 1} - ${hint.label}:</div>
+                    <div class="hint-text">
+                        ${hint.text}
+                        <div class="hint-suggestion">${hint.suggestion}</div>
+                    </div>
+                `;
+                hintsContainer.appendChild(hintDiv);
+            });
+            
+            // Reset hint progress
+            resetHints();
+            
+            // Clear and load examples
+            const exampleButtons = document.getElementById('exampleButtons');
+            const examplesContainer = document.getElementById('examplesContainer');
+            const comparisonGrid = document.getElementById('comparisonGrid');
+            
+            exampleButtons.innerHTML = '';
+            examplesContainer.innerHTML = '';
+            comparisonGrid.innerHTML = '';
+            
+            exercise.examples.forEach((example, i) => {
+                // Create button
+                const btn = document.createElement('button');
+                btn.className = 'btn btn-primary';
+                btn.textContent = `Show Example ${example.version}`;
+                btn.onclick = () => showExample(i);
+                exampleButtons.appendChild(btn);
+                
+                // Create example box
+                const exampleBox = document.createElement('div');
+                exampleBox.className = 'example-box';
+                exampleBox.id = `example${i}`;
+                exampleBox.innerHTML = `
+                    <div class="example-header">Version ${example.version} - ${example.title}</div>
+                    <div class="example-text">${example.text}</div>
+                    <div class="example-explanation">
+                        <strong>Why this works:</strong> ${example.why}
+                    </div>
+                    <div class="example-explanation">
+                        <strong>Best for:</strong> ${example.bestFor}
+                    </div>
+                `;
+                examplesContainer.appendChild(exampleBox);
+                
+                // Create comparison item
+                const compItem = document.createElement('div');
+                compItem.className = 'comparison-item';
+                compItem.innerHTML = `
+                    <h4>Example ${example.version}: ${example.title}</h4>
+                    <p>${example.text}</p>
+                `;
+                comparisonGrid.appendChild(compItem);
+            });
+            
+            // Add compare button if more than 1 example
+            if (exercise.examples.length > 1) {
+                const compareBtn = document.createElement('button');
+                compareBtn.className = 'btn btn-secondary';
+                compareBtn.textContent = 'Compare All Examples';
+                compareBtn.onclick = compareAll;
+                exampleButtons.appendChild(compareBtn);
+            }
+            
+            // Clear user answer
+            document.getElementById('userAnswer').value = '';
+            
+            // Update navigation buttons
+            document.getElementById('prevBtn').disabled = index === 0;
+            document.getElementById('nextBtn').disabled = index === exercises.length - 1;
+            
+            window.scrollTo(0, 0);
+        }
+
+        function showNextHint() {
+            const exercise = exercises[currentExerciseIndex];
+            if (currentHintIndex < exercise.hints.length) {
+                document.getElementById(`hint${currentHintIndex}`).classList.add('visible');
+                const dots = document.getElementById('progressDots').children;
+                dots[currentHintIndex].classList.add('revealed');
+                currentHintIndex++;
+                document.getElementById('hintCount').textContent = currentHintIndex;
+                
+                if (currentHintIndex === exercise.hints.length) {
+                    document.getElementById('nextHintBtn').disabled = true;
+                    document.getElementById('nextHintBtn').textContent = 'All Hints Revealed';
+                }
+            }
+        }
+
+        function showAllHints() {
+            const exercise = exercises[currentExerciseIndex];
+            for (let i = 0; i < exercise.hints.length; i++) {
+                document.getElementById(`hint${i}`).classList.add('visible');
+                const dots = document.getElementById('progressDots').children;
+                dots[i].classList.add('revealed');
+            }
+            currentHintIndex = exercise.hints.length;
+            document.getElementById('hintCount').textContent = currentHintIndex;
+            document.getElementById('nextHintBtn').disabled = true;
+            document.getElementById('nextHintBtn').textContent = 'All Hints Revealed';
+        }
+
+        function resetHints() {
+            const exercise = exercises[currentExerciseIndex];
+            for (let i = 0; i < exercise.hints.length; i++) {
+                const hintElement = document.getElementById(`hint${i}`);
+                if (hintElement) {
+                    hintElement.classList.remove('visible');
+                }
+            }
+            const dots = document.getElementById('progressDots').children;
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].classList.remove('revealed');
+            }
+            currentHintIndex = 0;
+            document.getElementById('hintCount').textContent = '0';
+            document.getElementById('nextHintBtn').disabled = false;
+            document.getElementById('nextHintBtn').textContent = 'Show Next Hint';
+        }
+
+        function showExample(index) {
+            // Hide all examples and comparison
+            const examples = document.querySelectorAll('.example-box');
+            examples.forEach(ex => ex.classList.remove('visible'));
+            document.getElementById('comparisonGrid').classList.remove('visible');
+            
+            // Show selected example
+            document.getElementById(`example${index}`).classList.add('visible');
+            document.getElementById(`example${index}`).scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function compareAll() {
+            // Hide individual examples
+            const examples = document.querySelectorAll('.example-box');
+            examples.forEach(ex => ex.classList.remove('visible'));
+            
+            // Show comparison
+            document.getElementById('comparisonGrid').classList.add('visible');
+            document.getElementById('comparisonGrid').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function nextExercise() {
+            if (currentExerciseIndex < exercises.length - 1) {
+                loadExercise(currentExerciseIndex + 1);
+            }
+        }
+
+        function previousExercise() {
+            if (currentExerciseIndex > 0) {
+                loadExercise(currentExerciseIndex - 1);
+            }
+        }
+
+        function backToTopics() {
+            window.location.href = 'index.html';
+        }
+
+        // Load first exercise on page load
+        window.onload = function() {
+            loadExercise(0);
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STANAG Level 3 Debate Practice</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy-dark: #0d1b2a;
+            --navy: #1b263b;
+            --blue: #415a77;
+            --blue-light: #778da9;
+            --silver: #e0e1dd;
+            --white: #ffffff;
+            --accent: #e63946;
+            --accent-hover: #d62828;
+            --success: #06d6a0;
+            --warning: #ffd60a;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+            color: var(--silver);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .back-home {
+            display: inline-block;
+            padding: 12px 24px;
+            background: var(--blue);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-home:hover {
+            background: var(--blue-light);
+            transform: translateY(-2px);
+        }
+        
+        header {
+            text-align: center;
+            padding: 50px 20px 40px;
+            margin-bottom: 50px;
+            border-bottom: 3px solid var(--blue);
+        }
+        
+        h1 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--white);
+            letter-spacing: -0.5px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--blue-light);
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+        
+        .description {
+            font-size: 1rem;
+            color: var(--silver);
+            max-width: 800px;
+            margin: 20px auto 0;
+            line-height: 1.8;
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .category-card {
+            background: rgba(27, 38, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--blue);
+            border-radius: 12px;
+            padding: 35px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .category-card:hover {
+            border-color: var(--accent);
+            background: rgba(230, 57, 70, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(230, 57, 70, 0.3);
+        }
+        
+        .category-icon {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .category-title {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 15px;
+        }
+        
+        .category-count {
+            font-size: 0.9rem;
+            color: var(--blue-light);
+            font-weight: 600;
+        }
+        
+        .random-button-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .random-button {
+            display: inline-block;
+            padding: 18px 40px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.4);
+        }
+        
+        .random-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(230, 57, 70, 0.6);
+        }
+        
+        .random-button:active {
+            transform: translateY(-1px);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-home">← Back to Home</a>
+        
+        <header>
+            <h1>STANAG Level 3 Debate Practice</h1>
+            <p class="subtitle">Choose a Topic Category</p>
+            <p class="description">
+                Select a category below to practice debate topics. Each topic includes balanced FOR and AGAINST arguments, key vocabulary, and example paragraphs at B2 level.
+            </p>
+        </header>
+        
+        <div class="random-button-container">
+            <button class="random-button" onclick="getRandomTopic()">🎲 Give Me a Random Topic</button>
+        </div>
+        
+        <div class="categories-grid">
+            <a href="military.html" class="category-card">
+                <div class="category-icon">🎖️</div>
+                <h2 class="category-title">Military Life & Career</h2>
+                <p class="category-count">6 topics</p>
+            </a>
+            
+            <a href="nato.html" class="category-card">
+                <div class="category-icon">🌐</div>
+                <h2 class="category-title">NATO & International Operations</h2>
+                <p class="category-count">6 topics</p>
+            </a>
+            
+            <a href="technology.html" class="category-card">
+                <div class="category-icon">💻</div>
+                <h2 class="category-title">Technology & Modern Warfare</h2>
+                <p class="category-count">6 topics</p>
+            </a>
+            
+            <a href="education.html" class="category-card">
+                <div class="category-icon">📚</div>
+                <h2 class="category-title">Education & Learning</h2>
+                <p class="category-count">7 topics</p>
+            </a>
+            
+            <a href="work.html" class="category-card">
+                <div class="category-icon">💼</div>
+                <h2 class="category-title">Work & Career</h2>
+                <p class="category-count">7 topics</p>
+            </a>
+            
+            <a href="health.html" class="category-card">
+                <div class="category-icon">🏥</div>
+                <h2 class="category-title">Health & Lifestyle</h2>
+                <p class="category-count">6 topics</p>
+            </a>
+            
+            <a href="environment.html" class="category-card">
+                <div class="category-icon">🌱</div>
+                <h2 class="category-title">Environment & Transportation</h2>
+                <p class="category-count">6 topics</p>
+            </a>
+            
+            <a href="family.html" class="category-card">
+                <div class="category-icon">👨‍👩‍👧‍👦</div>
+                <h2 class="category-title">Family & Social Issues</h2>
+                <p class="category-count">5 topics</p>
+            </a>
+            
+            <a href="urban.html" class="category-card">
+                <div class="category-icon">🏙️</div>
+                <h2 class="category-title">Urban Life & Housing</h2>
+                <p class="category-count">5 topics</p>
+            </a>
+            
+            <a href="media.html" class="category-card">
+                <div class="category-icon">📺</div>
+                <h2 class="category-title">Media & Culture</h2>
+                <p class="category-count">4 topics</p>
+            </a>
+            
+            <a href="consumer.html" class="category-card">
+                <div class="category-icon">🛒</div>
+                <h2 class="category-title">Consumer & Economics</h2>
+                <p class="category-count">6 topics</p>
+            </a>
+            
+            <a href="travel.html" class="category-card">
+                <div class="category-icon">✈️</div>
+                <h2 class="category-title">Travel & Tourism</h2>
+                <p class="category-count">4 topics</p>
+            </a>
+        </div>
+    </div>
+    
+    <script>
+        // All categories with their files and topic counts
+        const categories = [
+            { file: 'military.html', topics: 6 },
+            { file: 'nato.html', topics: 6 },
+            { file: 'technology.html', topics: 6 },
+            { file: 'education.html', topics: 7 },
+            { file: 'work.html', topics: 7 },
+            { file: 'health.html', topics: 6 },
+            { file: 'environment.html', topics: 6 },
+            { file: 'family.html', topics: 5 },
+            { file: 'urban.html', topics: 5 },
+            { file: 'media.html', topics: 4 },
+            { file: 'consumer.html', topics: 6 },
+            { file: 'travel.html', topics: 4 }
+        ];
+        
+        function getRandomTopic() {
+            // Pick a random category
+            const randomCategory = categories[Math.floor(Math.random() * categories.length)];
+            
+            // Pick a random topic number within that category (0-indexed)
+            const randomTopicIndex = Math.floor(Math.random() * randomCategory.topics);
+            
+            // Navigate to that category page with the topic index in the URL
+            window.location.href = `${randomCategory.file}#topic-${randomTopicIndex}`;
+        }
+    </script>
+</body>
+</html>

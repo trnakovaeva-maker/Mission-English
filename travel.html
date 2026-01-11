@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel & Tourism - STANAG Debate Practice</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy-dark: #0d1b2a;
+            --navy: #1b263b;
+            --blue: #415a77;
+            --blue-light: #778da9;
+            --silver: #e0e1dd;
+            --white: #ffffff;
+            --accent: #e63946;
+            --accent-hover: #d62828;
+            --success: #06d6a0;
+            --warning: #ffd60a;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+            color: var(--silver);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container { max-width: 1100px; margin: 0 auto; }
+        
+        .back-home {
+            display: inline-block;
+            padding: 12px 24px;
+            background: var(--blue);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-home:hover {
+            background: var(--blue-light);
+            transform: translateY(-2px);
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px 30px;
+            margin-bottom: 40px;
+            border-bottom: 3px solid var(--blue);
+        }
+        
+        h1 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--white);
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            color: var(--blue-light);
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+        
+        .section.active { display: block; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .card {
+            background: rgba(27, 38, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--blue);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card h2 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.8rem;
+            margin-bottom: 24px;
+            color: var(--white);
+        }
+        
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 16px;
+            color: var(--blue-light);
+            font-weight: 600;
+        }
+        
+        .topic-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .topic-item {
+            background: rgba(65, 90, 119, 0.2);
+            border: 2px solid var(--blue);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .topic-item:hover {
+            border-color: var(--accent);
+            background: rgba(230, 57, 70, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .topic-item h3 {
+            color: var(--white);
+            margin-bottom: 0;
+            font-size: 1.1rem;
+        }
+        
+        .topic-display {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+            padding: 40px;
+            border-radius: 12px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .topic-text {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.4;
+            margin-bottom: 30px;
+        }
+        
+        .toggle-arguments-btn {
+            margin: 20px 0;
+            padding: 12px 24px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            color: var(--white);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-arguments-btn:hover {
+            background: rgba(0, 0, 0, 0.5);
+            border-color: var(--white);
+        }
+        
+        .perspectives {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+            text-align: left;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        
+        .perspectives.visible { max-height: 1000px; }
+        
+        .perspective-card {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .perspective-card h4 {
+            color: var(--white);
+            font-size: 1rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .perspective-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .perspective-card li {
+            padding: 8px 0;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .perspective-card li:last-child { border-bottom: none; }
+        .perspective-card li::before {
+            content: '→';
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .btn {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: var(--white);
+            margin: 10px 5px;
+        }
+        
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: var(--blue);
+            color: var(--white);
+            margin: 10px 5px;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--blue-light);
+            transform: translateY(-2px);
+        }
+        
+        .vocab-matching {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .vocab-column h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+        
+        .vocab-item {
+            background: rgba(65, 90, 119, 0.3);
+            border: 2px solid var(--blue);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .vocab-number {
+            background: var(--blue);
+            color: var(--white);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        .vocab-item:hover {
+            border-color: var(--accent);
+            background: rgba(230, 57, 70, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .vocab-item.selected {
+            border-color: var(--warning);
+            background: rgba(255, 214, 10, 0.2);
+        }
+        
+        .vocab-item.matched {
+            border-color: var(--success);
+            background: rgba(6, 214, 160, 0.2);
+            cursor: default;
+            opacity: 0.7;
+        }
+        
+        .vocab-item.matched:hover {
+            transform: none;
+        }
+        
+        .speaker-btn {
+            background: none;
+            border: none;
+            color: var(--blue-light);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 5px;
+            margin-left: 8px;
+            transition: all 0.2s ease;
+            border-radius: 4px;
+        }
+        
+        .speaker-btn:hover {
+            color: var(--accent);
+            background: rgba(230, 57, 70, 0.1);
+        }
+        
+        .speaker-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .speaker-btn.speaking {
+            color: var(--accent);
+            animation: pulse 0.5s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .vocab-feedback {
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .vocab-feedback.success {
+            background: rgba(6, 214, 160, 0.2);
+            border: 2px solid var(--success);
+            color: var(--success);
+        }
+        
+        .vocab-feedback.error {
+            background: rgba(230, 57, 70, 0.2);
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+        
+        .argument-builder {
+            background: rgba(27, 38, 59, 0.4);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+        
+        .peel-section {
+            margin-bottom: 25px;
+        }
+        
+        .peel-section label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--blue-light);
+            font-size: 1.1rem;
+        }
+        
+        .peel-section textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--blue);
+            border-radius: 8px;
+            background: rgba(13, 27, 42, 0.6);
+            color: var(--silver);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .peel-section textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        
+        .complete-argument {
+            background: rgba(6, 214, 160, 0.1);
+            border: 2px solid var(--success);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .complete-argument h4 {
+            color: var(--success);
+            margin-bottom: 12px;
+        }
+        
+        .complete-argument p {
+            line-height: 1.8;
+            color: var(--white);
+        }
+        
+        .examples-display {
+            margin-top: 30px;
+        }
+        
+        .example-box {
+            background: rgba(65, 90, 119, 0.2);
+            border: 2px solid var(--blue);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .example-box h4 {
+            color: var(--blue-light);
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+        
+        .example-box p {
+            line-height: 1.8;
+            color: var(--silver);
+        }
+        
+        .hidden { display: none !important; }
+        
+        @media (max-width: 768px) {
+            .perspectives {
+                grid-template-columns: 1fr;
+            }
+            
+            .vocab-matching {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .topic-text {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-home">← Back to Home</a>
+        
+        <header>
+            <h1>Travel & Tourism</h1>
+            <p class="subtitle">STANAG Level 3 Debate Practice</p>
+        </header>
+        
+        <!-- Topic Selection Section -->
+        <section id="topicSelection" class="section active">
+            <div class="card">
+                <h2>Select a Topic</h2>
+                <ul class="topic-list" id="topicList"></ul>
+            </div>
+        </section>
+        
+        <!-- Topic Display Section -->
+        <section id="topicDisplay" class="section">
+            <div class="card">
+                <div class="topic-display">
+                    <div class="topic-text" id="topicText"></div>
+                    <button class="toggle-arguments-btn" onclick="toggleArguments()">
+                        <span id="toggleText">Show Arguments</span>
+                    </button>
+                    <div class="perspectives" id="perspectivesContainer">
+                        <div class="perspective-card">
+                            <h4>Arguments FOR</h4>
+                            <ul id="forArguments"></ul>
+                        </div>
+                        <div class="perspective-card">
+                            <h4>Arguments AGAINST</h4>
+                            <ul id="againstArguments"></ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="btn btn-primary" onclick="goToVocab()">Practice Vocabulary</button>
+                    <button class="btn btn-primary" onclick="goDirectToArgumentBuilder()">Build an Argument</button>
+                    <button class="btn btn-secondary" onclick="backToTopics()">Back to Topics</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Vocabulary Practice Section -->
+        <section id="vocabularyPractice" class="section">
+            <div class="card">
+                <h2>Vocabulary Practice</h2>
+                <h3 id="vocabTopicTitle" style="color: var(--blue-light); margin-bottom: 30px;"></h3>
+                
+                <p style="text-align: center; margin-bottom: 20px; color: var(--blue-light);">
+                    Match each term with its correct definition
+                </p>
+                
+                <div class="vocab-matching">
+                    <div class="vocab-column">
+                        <h3>Terms</h3>
+                        <div id="vocabTerms"></div>
+                    </div>
+                    <div class="vocab-column">
+                        <h3>Definitions</h3>
+                        <div id="vocabDefinitions"></div>
+                    </div>
+                </div>
+                
+                <div id="vocabFeedback"></div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="btn btn-primary" onclick="goToArgumentBuilder()">Build an Argument</button>
+                    <button class="btn btn-secondary" onclick="resetVocab()">Reset</button>
+                    <button class="btn btn-secondary" onclick="backToTopic()">Back to Topic</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Argument Builder Section -->
+        <section id="argumentBuilder" class="section">
+            <div class="card">
+                <h2>Argument Builder (PEEL Method)</h2>
+                <h3 id="argTopicTitle" style="color: var(--blue-light); margin-bottom: 30px;"></h3>
+                
+                <div class="argument-builder">
+                    <div class="peel-section">
+                        <label>P - Point (Make your main argument)</label>
+                        <textarea id="point" placeholder="State your main point clearly..."></textarea>
+                    </div>
+                    
+                    <div class="peel-section">
+                        <label>E - Evidence (Provide supporting evidence)</label>
+                        <textarea id="evidence" placeholder="Give facts, statistics, or examples..."></textarea>
+                    </div>
+                    
+                    <div class="peel-section">
+                        <label>E - Explain (Explain how the evidence supports your point)</label>
+                        <textarea id="explain" placeholder="Explain the connection between your evidence and point..."></textarea>
+                    </div>
+                    
+                    <div class="peel-section">
+                        <label>L - Link (Link back to the topic)</label>
+                        <textarea id="link" placeholder="Connect back to the main debate statement..."></textarea>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button class="btn btn-primary" onclick="viewComplete()">View Complete Argument</button>
+                        <button class="btn btn-secondary" onclick="clearArgument()">Clear</button>
+                    </div>
+                </div>
+                
+                <div id="completeArgument" class="complete-argument hidden">
+                    <h4>Your Complete Argument:</h4>
+                    <p id="completeText"></p>
+                </div>
+                
+                <div style="text-align: center; margin: 30px 0;">
+                    <button class="btn btn-secondary" onclick="toggleExamples()">
+                        <span id="exampleBtnText">Show Examples</span>
+                    </button>
+                </div>
+                
+                <div id="examplesDisplay" class="examples-display hidden">
+                    <div class="example-box">
+                        <h4>Example Argument FOR:</h4>
+                        <p id="exampleFor"></p>
+                    </div>
+                    <div class="example-box">
+                        <h4>Example Argument AGAINST:</h4>
+                        <p id="exampleAgainst"></p>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="btn btn-secondary" onclick="backToVocab()">Back to Vocabulary</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const topics = [
+            {
+                        "topic": "Mass tourism does more harm than good to local communities.",
+                        "for": [
+                                    "Tourism overcrowding damages historical sites, degrades natural environments, and makes destinations unlivable for residents.",
+                                    "Economic benefits go to international corporations while local communities face inflation, displacement, and cultural commercialization.",
+                                    "Tourist behavior and demands transform authentic local culture into staged performances, destroying genuine traditions."
+                        ],
+                        "against": [
+                                    "Tourism provides essential income for developing regions, creating jobs and funding infrastructure that benefits both visitors and residents.",
+                                    "Cultural exchange through tourism promotes understanding between people and preserves traditions by creating economic value for cultural practices.",
+                                    "Problems result from poor management rather than tourism itself - sustainable tourism policies can maximize benefits while minimizing harm."
+                        ],
+                        "vocabulary": [
+                                    {
+                                                "term": "mass tourism",
+                                                "definition": "large-scale travel of many people to popular destinations"
+                                    },
+                                    {
+                                                "term": "overcrowding",
+                                                "definition": "too many people in one place causing problems"
+                                    },
+                                    {
+                                                "term": "displacement",
+                                                "definition": "forced moving of residents from their homes"
+                                    },
+                                    {
+                                                "term": "cultural commercialization",
+                                                "definition": "turning traditions into products for profit"
+                                    },
+                                    {
+                                                "term": "authentic",
+                                                "definition": "genuine and not fake or staged"
+                                    },
+                                    {
+                                                "term": "sustainable tourism",
+                                                "definition": "travel managed to minimize negative impacts"
+                                    }
+                        ],
+                        "exampleFor": "Mass tourism does more harm than good to local communities. Popular destinations like Venice, Barcelona, and Thai beaches suffer from overcrowding that damages historical sites, degrades natural environments, and makes cities unlivable for residents. While tourism brings money, these benefits go primarily to international hotel chains and tour operators while local communities face housing inflation, displacement, and loss of traditional ways of life. Moreover, tourist demands transform authentic local culture into staged performances - traditional ceremonies become commercialized shows, local crafts become cheap souvenirs, and neighborhoods become theme parks. Residents in tourist-heavy areas report decreased quality of life and loss of community character. While some tourism can be positive, mass tourism at current scale clearly causes more harm than benefit to local communities.",
+                        "exampleAgainst": "Mass tourism does not do more harm than good to local communities. Tourism provides essential income for many regions, particularly developing areas where employment options are limited. Jobs in hotels, restaurants, and tours support millions of families worldwide. Tourism also funds infrastructure improvements - airports, roads, utilities - that benefit both visitors and residents. Furthermore, cultural exchange through tourism promotes international understanding and preserves traditions by creating economic value for cultural practices that might otherwise disappear. Problems like overcrowding and commercialization result from poor management rather than tourism itself. Sustainable tourism policies like visitor limits, local ownership requirements, and environmental protections can maximize benefits while minimizing harm. Properly managed tourism significantly benefits local communities through income, infrastructure, and cultural preservation."
+            },
+            {
+                        "topic": "Traveling abroad is essential for personal development.",
+                        "for": [
+                                    "International travel exposes people to different cultures, worldviews, and ways of living that challenge assumptions and broaden perspectives.",
+                                    "Navigating foreign environments develops independence, problem-solving, adaptability, and confidence that benefit all life areas.",
+                                    "Direct experience of other cultures creates empathy and understanding that cannot be achieved through books or media alone."
+                        ],
+                        "against": [
+                                    "Personal development depends on reflection and learning, which can occur through reading, education, and local experiences without expensive foreign travel.",
+                                    "Many travelers engage in superficial tourism without meaningful cultural engagement, gaining little personal growth from their trips.",
+                                    "Claiming foreign travel is \"essential\" reflects privilege and excludes billions who cannot afford such experiences from personal development."
+                        ],
+                        "vocabulary": [
+                                    {
+                                                "term": "personal development",
+                                                "definition": "growth in maturity, character, and capabilities"
+                                    },
+                                    {
+                                                "term": "worldviews",
+                                                "definition": "comprehensive perspectives on life and society"
+                                    },
+                                    {
+                                                "term": "challenge assumptions",
+                                                "definition": "question beliefs one previously accepted without thinking"
+                                    },
+                                    {
+                                                "term": "adaptability",
+                                                "definition": "ability to adjust to new situations and conditions"
+                                    },
+                                    {
+                                                "term": "superficial tourism",
+                                                "definition": "shallow travel without deep engagement"
+                                    },
+                                    {
+                                                "term": "reflects privilege",
+                                                "definition": "shows advantages not available to everyone"
+                                    }
+                        ],
+                        "exampleFor": "Traveling abroad is essential for personal development. International travel exposes people to different cultures, languages, and ways of living that fundamentally challenge assumptions and broaden perspectives in ways impossible without direct experience. Navigating foreign environments - dealing with language barriers, different customs, unexpected situations - develops independence, problem-solving abilities, adaptability, and confidence that transfer to all life areas. Moreover, direct experience of how other people live creates empathy and understanding that cannot be achieved through books or media. Someone who has lived with host families abroad, struggled to communicate in foreign languages, and experienced being an outsider develops different consciousness than those who never leave home. While expensive, international travel represents irreplaceable personal education.",
+                        "exampleAgainst": "Traveling abroad is not essential for personal development. Personal growth depends on reflection, learning, and challenging oneself - all possible through reading, education, diverse local friendships, and community involvement without expensive foreign travel. Many travelers engage in superficial tourism, staying in resort bubbles or checking off tourist sites without meaningful cultural engagement, gaining little personal development from such trips. Moreover, claiming foreign travel is \"essential\" reflects enormous privilege and implicitly excludes billions who cannot afford such experiences from personal development. This is offensive and false. People can develop wisdom, empathy, and broad perspectives through many paths. While international travel can be valuable, it is not essential. Personal development depends on attitude and effort rather than passport stamps."
+            },
+            {
+                        "topic": "Independent travel is better than organized tours.",
+                        "for": [
+                                    "Independent travel offers freedom to follow personal interests, change plans spontaneously, and create unique experiences impossible on rigid tour schedules.",
+                                    "Traveling independently forces interaction with locals and genuine cultural immersion rather than tourist-bubble experiences of organized tours.",
+                                    "Self-planning and navigating foreign environments develops skills and confidence that relying on tour guides cannot provide."
+                        ],
+                        "against": [
+                                    "Organized tours provide efficiency, expertise, and access to sites that independent travelers would miss or struggle to arrange.",
+                                    "Tours offer safety and convenience particularly for families, elderly travelers, or destinations where language and logistics are challenging.",
+                                    "Professional guides provide historical context and cultural insights that enhance understanding beyond what independent travelers typically gain."
+                        ],
+                        "vocabulary": [
+                                    {
+                                                "term": "spontaneously",
+                                                "definition": "happening suddenly based on feeling without planning"
+                                    },
+                                    {
+                                                "term": "rigid schedules",
+                                                "definition": "fixed timetables that cannot be changed"
+                                    },
+                                    {
+                                                "term": "cultural immersion",
+                                                "definition": "deep involvement in local society and customs"
+                                    },
+                                    {
+                                                "term": "tourist-bubble",
+                                                "definition": "artificial environment separate from real local life"
+                                    },
+                                    {
+                                                "term": "expertise",
+                                                "definition": "specialized knowledge and skill in a subject"
+                                    },
+                                    {
+                                                "term": "logistics",
+                                                "definition": "practical arrangements and organization"
+                                    }
+                        ],
+                        "exampleFor": "Independent travel is definitely better than organized tours. Independent travel offers precious freedom to follow personal interests, change plans spontaneously based on discoveries, and create unique experiences impossible on rigid tour schedules. Traveling independently also forces genuine interaction with locals and authentic cultural immersion rather than the tourist-bubble experiences of organized tours where travelers see only what guides show them. Moreover, navigating foreign environments independently - reading maps, dealing with transportation, finding accommodations - develops valuable skills, confidence, and problem-solving abilities that relying on tour guides cannot provide. Independent travel may be more challenging, but this challenge itself creates growth and authentic experiences. Organized tours may be convenient, but they fundamentally limit freedom and authentic cultural engagement.",
+                        "exampleAgainst": "Independent travel is not better than organized tours. Organized tours provide efficiency, expert knowledge, and access to sites that independent travelers would miss or struggle to arrange. Professional guides share historical context, cultural insights, and local knowledge that enhance understanding far beyond what independent travelers typically gain from guidebooks. Tours also offer safety and convenience, particularly for families with children, elderly travelers, or destinations where language barriers and logistics are challenging. Moreover, organized tours handle exhausting details like transportation and reservations, allowing travelers to focus on enjoying experiences rather than stressful planning. While independent travel suits some personalities, organized tours are not inferior - they represent different valid approaches serving different needs. Many travelers benefit most from combining both methods depending on destination and circumstances."
+            },
+            {
+                        "topic": "Space exploration is a waste of money that should be spent on earthly problems",
+                        "for": [
+                                    "Billions spent on space missions could solve hunger, poverty, and disease affecting millions on Earth",
+                                    "Space exploration benefits only scientific elite while ordinary people gain nothing practical",
+                                    "Earth faces climate crisis and social problems requiring immediate investment before considering space"
+                        ],
+                        "against": [
+                                    "Space exploration drives technological innovation that improves everyday life on Earth",
+                                    "Understanding our planet and universe is fundamental human drive worth pursuing",
+                                    "Space resources and knowledge may eventually solve Earth's problems in ways we cannot yet imagine"
+                        ],
+                        "vocabulary": [
+                                    {
+                                                "term": "space exploration",
+                                                "definition": "investigating and traveling beyond Earth into space"
+                                    },
+                                    {
+                                                "term": "earthly problems",
+                                                "definition": "challenges and difficulties facing people on Earth"
+                                    },
+                                    {
+                                                "term": "scientific elite",
+                                                "definition": "small group of highly educated scientists"
+                                    },
+                                    {
+                                                "term": "technological innovation",
+                                                "definition": "new inventions and methods developed through research"
+                                    },
+                                    {
+                                                "term": "fundamental drive",
+                                                "definition": "basic human desire or motivation"
+                                    },
+                                    {
+                                                "term": "space resources",
+                                                "definition": "materials and energy available beyond Earth"
+                                    }
+                        ],
+                        "exampleFor": "Space exploration is wasteful spending when Earth faces urgent problems. NASA's budget alone exceeds 20 billion dollars annually—money that could feed millions, provide clean water, cure diseases, or address climate change. Space missions benefit only small scientific elite while ordinary people struggling with poverty, hunger, and lack of healthcare see no practical improvements from Mars rovers or moon landings. Furthermore, Earth faces existential climate crisis requiring immediate massive investment. Spending billions launching rockets and satellites while planet burns represents absurd priorities. Space exploration produces some scientific knowledge, but this knowledge doesn't help unemployed workers, sick children, or families without housing. Before considering space exploration, humanity should solve fundamental problems here—ensuring everyone has food, shelter, clean water, and healthcare. Only after addressing Earth's urgent needs should we consider spending money on expensive projects exploring distant planets that offer no practical benefits to suffering populations.",
+                        "exampleAgainst": "Space exploration is valuable investment, not wasteful spending. Space programs drive technological innovation that improves everyday life—satellite communications, weather forecasting, GPS navigation, medical imaging, and countless materials and technologies developed for space that now benefit everyone on Earth. Furthermore, understanding our planet through space observation is essential for addressing climate change and environmental problems. Satellites monitor deforestation, ocean health, and atmospheric changes enabling informed environmental policy. Moreover, exploration represents fundamental human drive to understand our universe and place within it—this curiosity has driven civilization's greatest achievements. Space resources may eventually provide solutions to Earth's problems through asteroid mining, solar power satellites, or planetary knowledge we cannot yet imagine. Additionally, space budgets represent tiny fractions of government spending—eliminating space programs wouldn't solve social problems but would sacrifice long-term benefits for short-term thinking. Humanity can pursue both space exploration and earthly problem-solving; they're not mutually exclusive priorities."
+            }
+];
+
+        let currentTopicIndex = 0;
+        let argumentsVisible = false;
+        let currentVocabSet = [];
+        let selectedTerm = null;
+        let selectedDef = null;
+        let matchedPairs = [];
+
+        window.onload = function() {
+            const topicList = document.getElementById('topicList');
+            topics.forEach((topic, index) => {
+                const li = document.createElement('li');
+                li.className = 'topic-item';
+                li.innerHTML = `<h3>Topic ${index + 57}: ${topic.topic}</h3>`;
+                li.onclick = () => selectTopic(index);
+                topicList.appendChild(li);
+            });
+        };
+
+        function selectTopic(index) {
+            currentTopicIndex = index;
+            const topic = topics[index];
+            
+            document.getElementById('topicText').textContent = topic.topic;
+            
+            const forList = document.getElementById('forArguments');
+            const againstList = document.getElementById('againstArguments');
+            
+            forList.innerHTML = '';
+            againstList.innerHTML = '';
+            
+            topic.for.forEach(arg => {
+                const li = document.createElement('li');
+                li.textContent = arg;
+                forList.appendChild(li);
+            });
+            
+            topic.against.forEach(arg => {
+                const li = document.createElement('li');
+                li.textContent = arg;
+                againstList.appendChild(li);
+            });
+            
+            argumentsVisible = false;
+            document.getElementById('perspectivesContainer').classList.remove('visible');
+            document.getElementById('toggleText').textContent = 'Show Arguments';
+            
+            document.getElementById('topicSelection').classList.remove('active');
+            document.getElementById('topicDisplay').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function toggleArguments() {
+            argumentsVisible = !argumentsVisible;
+            const container = document.getElementById('perspectivesContainer');
+            const toggleText = document.getElementById('toggleText');
+            
+            if (argumentsVisible) {
+                container.classList.add('visible');
+                toggleText.textContent = 'Hide Arguments';
+            } else {
+                container.classList.remove('visible');
+                toggleText.textContent = 'Show Arguments';
+            }
+        }
+
+
+        function goDirectToArgumentBuilder() {
+            const topic = topics[currentTopicIndex];
+            document.getElementById('argTopicTitle').textContent = topic.topic;
+            document.getElementById('exampleFor').textContent = topic.exampleFor;
+            document.getElementById('exampleAgainst').textContent = topic.exampleAgainst;
+            
+            document.getElementById('topicDisplay').classList.remove('active');
+            document.getElementById('argumentBuilder').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function backToTopics() {
+            document.getElementById('topicDisplay').classList.remove('active');
+            document.getElementById('topicSelection').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function goToVocab() {
+            const topic = topics[currentTopicIndex];
+            document.getElementById('vocabTopicTitle').textContent = topic.topic;
+            
+            initVocabGame();
+            
+            document.getElementById('topicDisplay').classList.remove('active');
+            document.getElementById('vocabularyPractice').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function backToTopic() {
+            document.getElementById('vocabularyPractice').classList.remove('active');
+            document.getElementById('topicDisplay').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function speakText(text, button) {
+            // Cancel any ongoing speech
+            window.speechSynthesis.cancel();
+            
+            // Create new speech utterance
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.rate = 0.9; // Slightly slower for clarity
+            utterance.pitch = 1;
+            utterance.volume = 1;
+            
+            // Add speaking class for visual feedback
+            button.classList.add('speaking');
+            
+            // Remove speaking class when done
+            utterance.onend = () => {
+                button.classList.remove('speaking');
+            };
+            
+            // Speak the text
+            window.speechSynthesis.speak(utterance);
+        }
+
+                function initVocabGame() {
+            matchedPairs = [];
+            selectedTerm = null;
+            selectedDef = null;
+            
+            currentVocabSet = topics[currentTopicIndex].vocabulary;
+            
+            const termsContainer = document.getElementById('vocabTerms');
+            const defsContainer = document.getElementById('vocabDefinitions');
+            
+            termsContainer.innerHTML = '';
+            defsContainer.innerHTML = '';
+            
+            const shuffledDefs = [...currentVocabSet].sort(() => Math.random() - 0.5);
+            
+            currentVocabSet.forEach((pair, index) => {
+                const termDiv = document.createElement('div');
+                termDiv.className = 'vocab-item';
+                termDiv.dataset.index = index;
+                
+                // Create speaker button
+                const speakerBtn = document.createElement('button');
+                speakerBtn.className = 'speaker-btn';
+                speakerBtn.innerHTML = '🔊';
+                speakerBtn.title = 'Listen to pronunciation';
+                speakerBtn.onclick = (e) => {
+                    e.stopPropagation(); // Prevent selecting the term
+                    speakText(pair.term, speakerBtn);
+                };
+                
+                termDiv.innerHTML = `<div class="vocab-number">${index + 1}</div><div>${pair.term}</div>`;
+                termDiv.appendChild(speakerBtn);
+                termDiv.onclick = () => selectVocabTerm(index);
+                termsContainer.appendChild(termDiv);
+            });
+            
+            shuffledDefs.forEach((pair, index) => {
+                const defDiv = document.createElement('div');
+                defDiv.className = 'vocab-item';
+                defDiv.dataset.term = pair.term;
+                
+                // Create speaker button for definition
+                const speakerBtn = document.createElement('button');
+                speakerBtn.className = 'speaker-btn';
+                speakerBtn.innerHTML = '🔊';
+                speakerBtn.title = 'Listen to definition';
+                speakerBtn.onclick = (e) => {
+                    e.stopPropagation(); // Prevent selecting the definition
+                    speakText(pair.definition, speakerBtn);
+                };
+                
+                defDiv.innerHTML = `<div class="vocab-number">${String.fromCharCode(65 + index)}</div><div>${pair.definition}</div>`;
+                defDiv.appendChild(speakerBtn);
+                defDiv.onclick = () => selectVocabDef(pair.term, defDiv);
+                defsContainer.appendChild(defDiv);
+            });
+            
+            document.getElementById('vocabFeedback').innerHTML = '';
+        }
+
+        function selectVocabTerm(index) {
+            if (matchedPairs.includes(index)) return;
+            
+            document.querySelectorAll('#vocabTerms .vocab-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            const termDiv = document.querySelector(`#vocabTerms .vocab-item[data-index="${index}"]`);
+            termDiv.classList.add('selected');
+            selectedTerm = index;
+            
+            if (selectedDef !== null) {
+                checkVocabMatch();
+            }
+        }
+
+        function selectVocabDef(term, element) {
+            if ([...element.classList].includes('matched')) return;
+            
+            document.querySelectorAll('#vocabDefinitions .vocab-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            element.classList.add('selected');
+            selectedDef = { term, element };
+            
+            if (selectedTerm !== null) {
+                checkVocabMatch();
+            }
+        }
+
+        function checkVocabMatch() {
+            const selectedTermObj = currentVocabSet[selectedTerm];
+            
+            if (selectedTermObj.term === selectedDef.term) {
+                const termDiv = document.querySelector(`#vocabTerms .vocab-item[data-index="${selectedTerm}"]`);
+                termDiv.classList.add('matched');
+                termDiv.classList.remove('selected');
+                selectedDef.element.classList.add('matched');
+                selectedDef.element.classList.remove('selected');
+                
+                matchedPairs.push(selectedTerm);
+                
+                const feedback = document.getElementById('vocabFeedback');
+                feedback.className = 'vocab-feedback success';
+                feedback.textContent = '✓ Correct match!';
+                
+                if (matchedPairs.length === currentVocabSet.length) {
+                    setTimeout(() => {
+                        feedback.textContent = '🎉 Excellent! All vocabulary matched correctly!';
+                    }, 500);
+                }
+            } else {
+                const feedback = document.getElementById('vocabFeedback');
+                feedback.className = 'vocab-feedback error';
+                feedback.textContent = '✗ Not a match. Try again!';
+                
+                setTimeout(() => {
+                    document.querySelectorAll('.vocab-item.selected').forEach(item => {
+                        item.classList.remove('selected');
+                    });
+                    feedback.innerHTML = '';
+                }, 1500);
+            }
+            
+            selectedTerm = null;
+            selectedDef = null;
+        }
+
+        function resetVocab() {
+            initVocabGame();
+        }
+
+        function goToArgumentBuilder() {
+            const topic = topics[currentTopicIndex];
+            document.getElementById('argTopicTitle').textContent = topic.topic;
+            document.getElementById('exampleFor').textContent = topic.exampleFor;
+            document.getElementById('exampleAgainst').textContent = topic.exampleAgainst;
+            
+            document.getElementById('vocabularyPractice').classList.remove('active');
+            document.getElementById('topicDisplay').classList.remove('active');
+            document.getElementById('argumentBuilder').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function backToVocab() {
+            document.getElementById('argumentBuilder').classList.remove('active');
+            document.getElementById('vocabularyPractice').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function viewComplete() {
+            const point = document.getElementById('point').value;
+            const evidence = document.getElementById('evidence').value;
+            const explain = document.getElementById('explain').value;
+            const link = document.getElementById('link').value;
+            
+            if (!point || !evidence || !explain || !link) {
+                alert('Please fill in all sections!');
+                return;
+            }
+            
+            const complete = `${point} ${evidence} ${explain} ${link}`;
+            document.getElementById('completeText').textContent = complete;
+            document.getElementById('completeArgument').classList.remove('hidden');
+        }
+
+        function clearArgument() {
+            document.getElementById('point').value = '';
+            document.getElementById('evidence').value = '';
+            document.getElementById('explain').value = '';
+            document.getElementById('link').value = '';
+            document.getElementById('completeArgument').classList.add('hidden');
+            document.getElementById('examplesDisplay').classList.add('hidden');
+            document.getElementById('exampleBtnText').textContent = 'Show Examples';
+        }
+
+        function toggleExamples() {
+            const display = document.getElementById('examplesDisplay');
+            const btn = document.getElementById('exampleBtnText');
+            
+            if (display.classList.contains('hidden')) {
+                display.classList.remove('hidden');
+                btn.textContent = 'Hide Examples';
+            } else {
+                display.classList.add('hidden');
+                btn.textContent = 'Show Examples';
+            }
+        }
+
+        // Auto-open topic from URL hash (for random topic generator)
+        window.addEventListener('load', function() {
+            const hash = window.location.hash;
+            if (hash && hash.startsWith('#topic-')) {
+                const topicIndex = parseInt(hash.replace('#topic-', ''));
+                if (!isNaN(topicIndex) && topicIndex >= 0 && topicIndex < topics.length) {
+                    selectTopic(topicIndex);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
