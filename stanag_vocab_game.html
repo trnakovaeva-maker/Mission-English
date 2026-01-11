@@ -168,6 +168,31 @@
             display: block;
         }
         
+        /* NEW: Navigation bar styles */
+        .nav-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .nav-btn {
+            padding: 10px 20px;
+            background: #f5f5f5;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 0.95em;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .nav-btn:hover {
+            background: #e0e0e0;
+            border-color: #2a5298;
+        }
+        
         .progress-bar {
             width: 100%;
             height: 8px;
@@ -261,7 +286,7 @@
             transition: all 0.3s;
         }
         
-        .option-btn:hover {
+        .option-btn:hover:not(:disabled) {
             border-color: #2a5298;
             background: #f0f7ff;
         }
@@ -449,6 +474,10 @@
             .stats {
                 flex-direction: column;
             }
+            
+            .nav-bar {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -464,32 +493,26 @@
             
             <div class="modes-grid">
                 <div class="mode-btn" data-mode="1">
-                    <span class="difficulty-badge easy">LEARNING</span>
-                    <h3>Mode 1: Learning</h3>
-                    <p>See the advanced word with examples. Build familiarity.</p>
-                </div>
-                
-                <div class="mode-btn" data-mode="2">
                     <span class="difficulty-badge easy">EASY</span>
-                    <h3>Mode 2: Matching</h3>
+                    <h3>Mode 1: Matching</h3>
                     <p>Choose from 4 options. Learn to distinguish similar words.</p>
                 </div>
                 
-                <div class="mode-btn" data-mode="3">
+                <div class="mode-btn" data-mode="2">
                     <span class="difficulty-badge medium">MEDIUM</span>
-                    <h3>Mode 3: Generous Hints</h3>
+                    <h3>Mode 2: Generous Hints</h3>
                     <p>Type the word with first 3 letters + last letter shown.</p>
                 </div>
                 
-                <div class="mode-btn" data-mode="4">
+                <div class="mode-btn" data-mode="3">
                     <span class="difficulty-badge medium">HARD</span>
-                    <h3>Mode 4: First Letter</h3>
+                    <h3>Mode 3: First Letter</h3>
                     <p>Only the first letter is shown. Full recall needed.</p>
                 </div>
                 
-                <div class="mode-btn" data-mode="5">
+                <div class="mode-btn" data-mode="4">
                     <span class="difficulty-badge hard">EXPERT</span>
-                    <h3>Mode 5: No Hints</h3>
+                    <h3>Mode 4: No Hints</h3>
                     <p>No hints at all. Real-world application test.</p>
                 </div>
             </div>
@@ -529,536 +552,573 @@
     </div>
     
     <script>
-        // Vocabulary data will be embedded here
-        
         const VOCAB_DATA = [
         {
                 "category": "IMPORTANCE & SIGNIFICANCE",
                 "basic": "important",
                 "advanced": "crucial",
-                "example": "Effective communication is IMPORTANT for mission success."
+                "example": "Effective communication is IMPORTANT for mission success.",
+                "subcategory": "Importance: Critical Level"
         },
         {
                 "category": "IMPORTANCE & SIGNIFICANCE",
                 "basic": "very important",
                 "advanced": "essential",
-                "example": "Equipment maintenance is VERY IMPORTANT for operations."
+                "example": "Equipment maintenance is VERY IMPORTANT for operations.",
+                "subcategory": "Importance: Absolutely Necessary"
         },
         {
                 "category": "IMPORTANCE & SIGNIFICANCE",
                 "basic": "most important",
                 "advanced": "paramount",
-                "example": "Safety is the MOST IMPORTANT thing in military operations."
+                "example": "Safety is the MOST IMPORTANT thing in military operations.",
+                "subcategory": "Importance: Most Important"
         },
         {
                 "category": "IMPORTANCE & SIGNIFICANCE",
                 "basic": "very necessary",
                 "advanced": "vital",
-                "example": "Intelligence is VERY NECESSARY for mission planning."
+                "example": "Intelligence is VERY NECESSARY for mission planning.",
+                "subcategory": "Importance: Critical Level"
         },
         {
                 "category": "IMPORTANCE & SIGNIFICANCE",
                 "basic": "key / central",
                 "advanced": "pivotal",
-                "example": "The commander's decision was KEY to success."
+                "example": "The commander's decision was KEY to success.",
+                "subcategory": "Importance: Key/Central"
         },
         {
                 "category": "IMPORTANCE & SIGNIFICANCE",
                 "basic": "extremely important",
                 "advanced": "critical",
-                "example": "It is EXTREMELY IMPORTANT that personnel follow protocols."
+                "example": "It is EXTREMELY IMPORTANT that personnel follow protocols.",
+                "subcategory": "Importance: Critical Level"
         },
         {
                 "category": "IMPORTANCE & SIGNIFICANCE",
                 "basic": "very important / must",
                 "advanced": "imperative",
-                "example": "It is VERY IMPORTANT that reinforcements arrive on time."
+                "example": "It is VERY IMPORTANT that reinforcements arrive on time.",
+                "subcategory": "Importance: Absolutely Necessary"
         },
         {
                 "category": "IMPORTANCE & SIGNIFICANCE",
                 "basic": "absolutely necessary",
                 "advanced": "indispensable",
-                "example": "Leadership is ABSOLUTELY NECESSARY for unit cohesion."
+                "example": "Leadership is ABSOLUTELY NECESSARY for unit cohesion.",
+                "subcategory": "Importance: Absolutely Necessary"
         },
         {
                 "category": "IMPORTANCE & SIGNIFICANCE",
                 "basic": "main",
                 "advanced": "primary",
-                "example": "The MAIN goal is to secure the perimeter."
+                "example": "The MAIN goal is to secure the perimeter.",
+                "subcategory": "Importance: Main/First"
         },
         {
                 "category": "IMPORTANCE & SIGNIFICANCE",
                 "basic": "most important",
                 "advanced": "principal",
-                "example": "The MOST IMPORTANT concern is civilian safety."
+                "example": "The MOST IMPORTANT concern is civilian safety.",
+                "subcategory": "Importance: Main/First"
         },
         {
                 "category": "IMPORTANCE & SIGNIFICANCE",
                 "basic": "main / most common",
                 "advanced": "predominant",
-                "example": "English is the MAIN language in NATO operations."
+                "example": "English is the MAIN language in NATO operations.",
+                "subcategory": "Importance: Main/First"
         },
         {
                 "category": "DESCRIBING EFFECTS & IMPACT",
                 "basic": "big",
                 "advanced": "substantial",
-                "example": "The budget increase was BIG."
+                "example": "The budget increase was BIG.",
+                "subcategory": "Effects: Size/Amount"
         },
         {
                 "category": "DESCRIBING EFFECTS & IMPACT",
                 "basic": "big / important",
                 "advanced": "significant",
-                "example": "The training showed BIG improvement in performance."
+                "example": "The training showed BIG improvement in performance.",
+                "subcategory": "Effects: Size/Amount"
         },
         {
                 "category": "DESCRIBING EFFECTS & IMPACT",
                 "basic": "a lot of / big",
                 "advanced": "considerable",
-                "example": "There was A LOT OF debate about the new policy."
+                "example": "There was A LOT OF debate about the new policy.",
+                "subcategory": "Effects: Size/Amount"
         },
         {
                 "category": "DESCRIBING EFFECTS & IMPACT",
                 "basic": "good / helpful",
                 "advanced": "beneficial",
-                "example": "The new training program has been GOOD."
+                "example": "The new training program has been GOOD.",
+                "subcategory": "Effects: Positive"
         },
         {
                 "category": "DESCRIBING EFFECTS & IMPACT",
                 "basic": "good / helpful",
                 "advanced": "advantageous",
-                "example": "The high ground is GOOD for our position."
+                "example": "The high ground is GOOD for our position.",
+                "subcategory": "Effects: Positive"
         },
         {
                 "category": "DESCRIBING EFFECTS & IMPACT",
                 "basic": "good / positive",
                 "advanced": "favorable",
-                "example": "Weather is GOOD for the operation."
+                "example": "Weather is GOOD for the operation.",
+                "subcategory": "Effects: Positive"
         },
         {
                 "category": "DESCRIBING EFFECTS & IMPACT",
                 "basic": "helpful / useful",
                 "advanced": "constructive",
-                "example": "HELPFUL feedback improves performance."
+                "example": "HELPFUL feedback improves performance.",
+                "subcategory": "Effects: Positive"
         },
         {
                 "category": "DESCRIBING EFFECTS & IMPACT",
                 "basic": "bad / harmful",
                 "advanced": "detrimental",
-                "example": "Poor maintenance is BAD for equipment."
+                "example": "Poor maintenance is BAD for equipment.",
+                "subcategory": "Effects: Negative"
         },
         {
                 "category": "DESCRIBING EFFECTS & IMPACT",
                 "basic": "bad / negative",
                 "advanced": "adverse",
-                "example": "BAD weather delayed the mission."
+                "example": "BAD weather delayed the mission.",
+                "subcategory": "Effects: Negative"
         },
         {
                 "category": "DESCRIBING EFFECTS & IMPACT",
                 "basic": "bad / negative",
                 "advanced": "unfavorable",
-                "example": "The terrain is BAD for movement."
+                "example": "The terrain is BAD for movement.",
+                "subcategory": "Effects: Negative"
         },
         {
                 "category": "DESCRIBING EFFECTS & IMPACT",
                 "basic": "bad (opposite effect)",
                 "advanced": "counterproductive",
-                "example": "Too many rules can be BAD for morale."
+                "example": "Too many rules can be BAD for morale.",
+                "subcategory": "Effects: Negative"
         },
         {
                 "category": "DESCRIBING EFFECTS & IMPACT",
                 "basic": "useful / helpful",
                 "advanced": "valuable",
-                "example": "Your experience is USEFUL to the team."
+                "example": "Your experience is USEFUL to the team.",
+                "subcategory": "Effects: Positive"
         },
         {
                 "category": "DESCRIBING EFFECTS & IMPACT",
                 "basic": "very helpful / key",
                 "advanced": "instrumental",
-                "example": "Intelligence was VERY HELPFUL for success."
+                "example": "Intelligence was VERY HELPFUL for success.",
+                "subcategory": "Effects: Positive"
         },
         {
                 "category": "DESCRIBING EFFECTS & IMPACT",
                 "basic": "successful / working",
                 "advanced": "effective",
-                "example": "The training was very SUCCESSFUL."
+                "example": "The training was very SUCCESSFUL.",
+                "subcategory": "Effects: Success"
         },
         {
                 "category": "DESCRIBING EFFECTS & IMPACT",
                 "basic": "successful / useful",
                 "advanced": "productive",
-                "example": "It was a USEFUL meeting."
+                "example": "It was a USEFUL meeting.",
+                "subcategory": "Effects: Success"
         },
         {
                 "category": "DESCRIBING EFFECTS & IMPACT",
                 "basic": "successful / good",
                 "advanced": "fruitful",
-                "example": "Talks were SUCCESSFUL."
+                "example": "Talks were SUCCESSFUL.",
+                "subcategory": "Effects: Success"
         },
         {
                 "category": "DESCRIBING CHANGE & DEVELOPMENT",
                 "basic": "make as good as possible",
                 "advanced": "optimize",
-                "example": "We need to MAKE AS GOOD AS POSSIBLE our resources."
+                "example": "We need to MAKE AS GOOD AS POSSIBLE our resources.",
+                "subcategory": "Change: Improve"
         },
         {
                 "category": "DESCRIBING CHANGE & DEVELOPMENT",
                 "basic": "get worse",
                 "advanced": "deteriorate",
-                "example": "Equipment will GET WORSE without maintenance."
+                "example": "Equipment will GET WORSE without maintenance.",
+                "subcategory": "Change: Get Worse"
         },
         {
                 "category": "DESCRIBING CHANGE & DEVELOPMENT",
                 "basic": "make worse",
                 "advanced": "exacerbate",
-                "example": "Budget cuts will MAKE WORSE existing problems."
+                "example": "Budget cuts will MAKE WORSE existing problems.",
+                "subcategory": "Change: Get Worse"
         },
         {
                 "category": "DESCRIBING CHANGE & DEVELOPMENT",
                 "basic": "make weaker / damage",
                 "advanced": "undermine",
-                "example": "Poor morale can DAMAGE effectiveness."
+                "example": "Poor morale can DAMAGE effectiveness.",
+                "subcategory": "Change: Weaken"
         },
         {
                 "category": "DESCRIBING CHANGE & DEVELOPMENT",
                 "basic": "get bigger / grow",
                 "advanced": "expand",
-                "example": "The mission will GET BIGGER."
+                "example": "The mission will GET BIGGER.",
+                "subcategory": "Change: Increase"
         },
         {
                 "category": "DESCRIBING CHANGE & DEVELOPMENT",
                 "basic": "increase / get bigger",
                 "advanced": "escalate",
-                "example": "Tensions continue to INCREASE."
+                "example": "Tensions continue to INCREASE.",
+                "subcategory": "Change: Increase"
         },
         {
                 "category": "DESCRIBING CHANGE & DEVELOPMENT",
                 "basic": "get stronger / increase",
                 "advanced": "intensify",
-                "example": "Training will GET STRONGER next month."
+                "example": "Training will GET STRONGER next month.",
+                "subcategory": "Change: Increase"
         },
         {
                 "category": "DESCRIBING CHANGE & DEVELOPMENT",
                 "basic": "go down / decrease",
                 "advanced": "decline",
-                "example": "Numbers have GONE DOWN."
+                "example": "Numbers have GONE DOWN.",
+                "subcategory": "Change: Decrease"
         },
         {
                 "category": "DESCRIBING CHANGE & DEVELOPMENT",
                 "basic": "get smaller / decrease",
                 "advanced": "diminish",
-                "example": "Resources are GETTING SMALLER."
+                "example": "Resources are GETTING SMALLER.",
+                "subcategory": "Change: Decrease"
         },
         {
                 "category": "DESCRIBING CHANGE & DEVELOPMENT",
                 "basic": "go down / get less",
                 "advanced": "decrease",
-                "example": "Incidents have GONE DOWN significantly."
-        },
-        {
-                "category": "EXPRESSING OPINIONS & ARGUMENTS",
-                "basic": "I think / I believe",
-                "advanced": "i maintain",
-                "example": "I BELIEVE that training is essential."
-        },
-        {
-                "category": "EXPRESSING OPINIONS & ARGUMENTS",
-                "basic": "I think / I say",
-                "advanced": "i assert",
-                "example": "I SAY that changes are necessary."
+                "example": "Incidents have GONE DOWN significantly.",
+                "subcategory": "Change: Decrease"
         },
         {
                 "category": "EXPRESSING OPINIONS & ARGUMENTS",
                 "basic": "show / prove",
                 "advanced": "demonstrate",
-                "example": "Results SHOW the program works."
+                "example": "Results SHOW the program works.",
+                "subcategory": "Opinions: Show/Prove"
         },
         {
                 "category": "EXPRESSING OPINIONS & ARGUMENTS",
                 "basic": "show / explain with example",
                 "advanced": "illustrate",
-                "example": "This case SHOWS the importance of planning."
+                "example": "This case SHOWS the importance of planning.",
+                "subcategory": "Opinions: Show/Prove"
         },
         {
                 "category": "EXPRESSING OPINIONS & ARGUMENTS",
                 "basic": "be a good example of",
                 "advanced": "exemplify",
-                "example": "His actions ARE A GOOD EXAMPLE OF leadership."
+                "example": "His actions ARE A GOOD EXAMPLE OF leadership.",
+                "subcategory": "Opinions: Show/Prove"
         },
         {
                 "category": "EXPRESSING OPINIONS & ARGUMENTS",
                 "basic": "show / point to",
                 "advanced": "indicate",
-                "example": "Data SHOW a need for reform."
+                "example": "Data SHOW a need for reform.",
+                "subcategory": "Opinions: Suggest"
         },
         {
                 "category": "EXPRESSING OPINIONS & ARGUMENTS",
                 "basic": "show / hint",
                 "advanced": "suggest",
-                "example": "Evidence SHOWS we need improvement."
+                "example": "Evidence SHOWS we need improvement.",
+                "subcategory": "Opinions: Suggest"
         },
         {
                 "category": "EXPRESSING OPINIONS & ARGUMENTS",
                 "basic": "hint / suggest",
                 "advanced": "imply",
-                "example": "Statistics HINT AT a concerning trend."
-        },
-        {
-                "category": "EXPRESSING OPINIONS & ARGUMENTS",
-                "basic": "because of",
-                "advanced": "due to",
-                "example": "The delay was BECAUSE OF weather."
-        },
-        {
-                "category": "EXPRESSING OPINIONS & ARGUMENTS",
-                "basic": "because of",
-                "advanced": "owing to",
-                "example": "BECAUSE OF budget cuts, training was reduced."
+                "example": "Statistics HINT AT a concerning trend.",
+                "subcategory": "Opinions: Suggest"
         },
         {
                 "category": "EXPRESSING OPINIONS & ARGUMENTS",
                 "basic": "so / as a result",
                 "advanced": "consequently",
-                "example": "Resources decreased; SO priorities changed."
+                "example": "Resources decreased; SO priorities changed.",
+                "subcategory": "Transitions: Result"
         },
         {
                 "category": "DESCRIBING PROBLEMS & SOLUTIONS",
                 "basic": "problem / thing blocking",
                 "advanced": "obstacle",
-                "example": "Lack of funding is A PROBLEM."
+                "example": "Lack of funding is A PROBLEM.",
+                "subcategory": "Problems: Issue Type"
         },
         {
                 "category": "DESCRIBING PROBLEMS & SOLUTIONS",
                 "basic": "problem / thing slowing down",
                 "advanced": "impediment",
-                "example": "Too much paperwork is A PROBLEM for efficiency."
+                "example": "Too much paperwork is A PROBLEM for efficiency.",
+                "subcategory": "Problems: Issue Type"
         },
         {
                 "category": "DESCRIBING PROBLEMS & SOLUTIONS",
                 "basic": "problem",
                 "advanced": "issue",
-                "example": "We must deal with this PROBLEM immediately."
+                "example": "We must deal with this PROBLEM immediately.",
+                "subcategory": "Problems: Issue Type"
         },
         {
                 "category": "DESCRIBING PROBLEMS & SOLUTIONS",
                 "basic": "deal with / solve",
                 "advanced": "address",
-                "example": "We need to DEAL WITH equipment shortages."
+                "example": "We need to DEAL WITH equipment shortages.",
+                "subcategory": "Solutions: Fix"
         },
         {
                 "category": "DESCRIBING PROBLEMS & SOLUTIONS",
                 "basic": "solve / fix",
                 "advanced": "resolve",
-                "example": "We must SOLVE this conflict quickly."
+                "example": "We must SOLVE this conflict quickly.",
+                "subcategory": "Solutions: Fix"
         },
         {
                 "category": "DESCRIBING PROBLEMS & SOLUTIONS",
                 "basic": "fix / correct",
                 "advanced": "rectify",
-                "example": "Steps were taken to FIX the error."
+                "example": "Steps were taken to FIX the error.",
+                "subcategory": "Solutions: Fix"
         },
         {
                 "category": "DESCRIBING PROBLEMS & SOLUTIONS",
                 "basic": "fix / solve",
                 "advanced": "remedy",
-                "example": "New policies will FIX the situation."
+                "example": "New policies will FIX the situation.",
+                "subcategory": "Solutions: Fix"
         },
         {
                 "category": "DESCRIBING PROBLEMS & SOLUTIONS",
                 "basic": "difficult / hard",
                 "advanced": "challenging",
-                "example": "The mission was DIFFICULT."
+                "example": "The mission was DIFFICULT.",
+                "subcategory": "Difficulty: Hard"
         },
         {
                 "category": "DESCRIBING PROBLEMS & SOLUTIONS",
                 "basic": "difficult / needs effort",
                 "advanced": "demanding",
-                "example": "The training is DIFFICULT."
+                "example": "The training is DIFFICULT.",
+                "subcategory": "Difficulty: Hard"
         },
         {
                 "category": "DESCRIBING PROBLEMS & SOLUTIONS",
                 "basic": "easy to understand",
                 "advanced": "straightforward",
-                "example": "The procedure is EASY TO UNDERSTAND."
+                "example": "The procedure is EASY TO UNDERSTAND.",
+                "subcategory": "Difficulty: Easy"
         },
         {
                 "category": "DESCRIBING PROBLEMS & SOLUTIONS",
                 "basic": "not complicated / simple",
                 "advanced": "uncomplicated",
-                "example": "The task is NOT COMPLICATED."
+                "example": "The task is NOT COMPLICATED.",
+                "subcategory": "Difficulty: Easy"
         },
         {
                 "category": "DESCRIBING PROBLEMS & SOLUTIONS",
                 "basic": "able to be handled / doable",
                 "advanced": "manageable",
-                "example": "The workload is OK / DOABLE."
+                "example": "The workload is OK / DOABLE.",
+                "subcategory": "Difficulty: Easy"
         },
         {
                 "category": "NECESSITY & OBLIGATION",
                 "basic": "need",
                 "advanced": "require",
-                "example": "This task NEEDS special training."
-        },
-        {
-                "category": "NECESSITY & OBLIGATION",
-                "basic": "absolutely necessary",
-                "advanced": "essential",
-                "example": "It is ABSOLUTELY NECESSARY to follow protocols."
+                "example": "This task NEEDS special training.",
+                "subcategory": "Necessity: Need"
         },
         {
                 "category": "NECESSITY & OBLIGATION",
                 "basic": "required for everyone",
                 "advanced": "mandatory",
-                "example": "Safety training is REQUIRED FOR EVERYONE."
+                "example": "Safety training is REQUIRED FOR EVERYONE.",
+                "subcategory": "Necessity: Required"
         },
         {
                 "category": "NECESSITY & OBLIGATION",
                 "basic": "it's a good idea / recommended",
                 "advanced": "advisable",
-                "example": "It's A GOOD IDEA to do regular checks."
+                "example": "It's A GOOD IDEA to do regular checks.",
+                "subcategory": "Necessity: Recommended"
         },
         {
                 "category": "NECESSITY & OBLIGATION",
                 "basic": "suggested / recommended",
                 "advanced": "recommended",
-                "example": "It's SUGGESTED that units prepare well."
+                "example": "It's SUGGESTED that units prepare well.",
+                "subcategory": "Necessity: Recommended"
         },
         {
                 "category": "NECESSITY & OBLIGATION",
                 "basic": "required / must",
                 "advanced": "obliged",
-                "example": "Officers MUST report incidents."
+                "example": "Officers MUST report incidents.",
+                "subcategory": "Necessity: Required"
         },
         {
                 "category": "FORMAL TRANSITIONS & CONNECTORS",
                 "basic": "also / in addition",
                 "advanced": "furthermore",
-                "example": "Budget increased. ALSO, personnel expanded."
+                "example": "Budget increased. ALSO, personnel expanded.",
+                "subcategory": "Transitions: Addition"
         },
         {
                 "category": "FORMAL TRANSITIONS & CONNECTORS",
                 "basic": "also / in addition",
                 "advanced": "moreover",
-                "example": "It's cheap; ALSO, it's efficient."
+                "example": "It's cheap; ALSO, it's efficient.",
+                "subcategory": "Transitions: Addition"
         },
         {
                 "category": "FORMAL TRANSITIONS & CONNECTORS",
                 "basic": "also / in addition",
                 "advanced": "additionally",
-                "example": "ALSO, we need to think about logistics."
+                "example": "ALSO, we need to think about logistics.",
+                "subcategory": "Transitions: Addition"
         },
         {
                 "category": "FORMAL TRANSITIONS & CONNECTORS",
                 "basic": "but / even so",
                 "advanced": "nevertheless",
-                "example": "Problems were big; BUT we succeeded."
+                "example": "Problems were big; BUT we succeeded.",
+                "subcategory": "Transitions: Contrast"
         },
         {
                 "category": "FORMAL TRANSITIONS & CONNECTORS",
                 "basic": "on the other hand",
                 "advanced": "conversely",
-                "example": "Some units grew; ON THE OTHER HAND, others got smaller."
+                "example": "Some units grew; ON THE OTHER HAND, others got smaller.",
+                "subcategory": "Transitions: Contrast"
         },
         {
                 "category": "FORMAL TRANSITIONS & CONNECTORS",
                 "basic": "so / for this reason",
                 "advanced": "therefore",
-                "example": "Funds are limited; SO priorities must be set."
-        },
-        {
-                "category": "FORMAL TRANSITIONS & CONNECTORS",
-                "basic": "so / as a result",
-                "advanced": "consequently",
-                "example": "Demand grew; SO production increased."
+                "example": "Funds are limited; SO priorities must be set.",
+                "subcategory": "Transitions: Result"
         },
         {
                 "category": "FORMAL TRANSITIONS & CONNECTORS",
                 "basic": "so / therefore",
                 "advanced": "thus",
-                "example": "Equipment failed; SO the mission was delayed."
+                "example": "Equipment failed; SO the mission was delayed.",
+                "subcategory": "Transitions: Result"
         },
         {
                 "category": "FORMAL TRANSITIONS & CONNECTORS",
                 "basic": "in the right way / properly",
                 "advanced": "accordingly",
-                "example": "Plans changed; we adjusted IN THE RIGHT WAY."
+                "example": "Plans changed; we adjusted IN THE RIGHT WAY.",
+                "subcategory": "Transitions: Result"
         },
         {
                 "category": "FORMAL TRANSITIONS & CONNECTORS",
                 "basic": "in the end / finally",
                 "advanced": "ultimately",
-                "example": "IN THE END, leadership decides success."
+                "example": "IN THE END, leadership decides success.",
+                "subcategory": "Transitions: Conclusion"
         },
         {
                 "category": "FORMAL TRANSITIONS & CONNECTORS",
                 "basic": "in the end / finally",
                 "advanced": "eventually",
-                "example": "IN THE END, agreement was reached."
+                "example": "IN THE END, agreement was reached.",
+                "subcategory": "Transitions: Conclusion"
         },
         {
                 "category": "MILITARY & PROFESSIONAL CONTEXTS",
                 "basic": "goal / aim",
                 "advanced": "objective",
-                "example": "The GOAL is to create security."
+                "example": "The GOAL is to create security.",
+                "subcategory": "Military: Goals"
         },
         {
                 "category": "MILITARY & PROFESSIONAL CONTEXTS",
                 "basic": "task / job",
                 "advanced": "mission",
-                "example": "The TASK is to deliver aid."
-        },
-        {
-                "category": "MILITARY & PROFESSIONAL CONTEXTS",
-                "basic": "long-term goal",
-                "advanced": "strategic aim",
-                "example": "The LONG-TERM GOAL is regional stability."
+                "example": "The TASK is to deliver aid.",
+                "subcategory": "Military: Goals"
         },
         {
                 "category": "MILITARY & PROFESSIONAL CONTEXTS",
                 "basic": "carry out / do",
                 "advanced": "execute",
-                "example": "Forces will CARRY OUT the operation at dawn."
+                "example": "Forces will CARRY OUT the operation at dawn.",
+                "subcategory": "Military: Actions"
         },
         {
                 "category": "MILITARY & PROFESSIONAL CONTEXTS",
                 "basic": "carry out / do",
                 "advanced": "conduct",
-                "example": "The unit will DO training exercises."
+                "example": "The unit will DO training exercises.",
+                "subcategory": "Military: Actions"
         },
         {
                 "category": "MILITARY & PROFESSIONAL CONTEXTS",
                 "basic": "make sure / guarantee",
                 "advanced": "ensure",
-                "example": "Commanders must MAKE SURE of safety."
+                "example": "Commanders must MAKE SURE of safety.",
+                "subcategory": "Military: Verification"
         },
         {
                 "category": "MILITARY & PROFESSIONAL CONTEXTS",
                 "basic": "check / confirm",
                 "advanced": "verify",
-                "example": "Please CHECK all equipment works."
+                "example": "Please CHECK all equipment works.",
+                "subcategory": "Military: Verification"
         },
         {
                 "category": "MILITARY & PROFESSIONAL CONTEXTS",
                 "basic": "find out for certain",
                 "advanced": "ascertain",
-                "example": "We need to FIND OUT the enemy's position."
+                "example": "We need to FIND OUT the enemy's position.",
+                "subcategory": "Military: Verification"
         },
         {
                 "category": "MILITARY & PROFESSIONAL CONTEXTS",
                 "basic": "ability / power to do",
                 "advanced": "capability",
-                "example": "The unit showed combat ABILITY."
+                "example": "The unit showed combat ABILITY.",
+                "subcategory": "Military: Skills"
         },
         {
                 "category": "MILITARY & PROFESSIONAL CONTEXTS",
                 "basic": "ability to hold / maximum",
                 "advanced": "capacity",
-                "example": "The facility increased its MAXIMUM."
+                "example": "The facility increased its MAXIMUM.",
+                "subcategory": "Military: Skills"
         },
         {
                 "category": "MILITARY & PROFESSIONAL CONTEXTS",
                 "basic": "high skill / expertise",
                 "advanced": "proficiency",
-                "example": "Soldiers showed HIGH SKILL in shooting."
+                "example": "Soldiers showed HIGH SKILL in shooting.",
+                "subcategory": "Military: Skills"
         }
 ];
         
@@ -1130,6 +1190,20 @@
             showQuestion();
         }
         
+        function goBackToMenu() {
+            if (confirm('Are you sure you want to go back to the menu? Your progress will be lost.')) {
+                location.reload();
+            }
+        }
+        
+        function restartQuiz() {
+            if (confirm('Restart the quiz? Your current progress will be lost.')) {
+                currentQuestionIndex = 0;
+                correctAnswers = 0;
+                showQuestion();
+            }
+        }
+        
         function showQuestion() {
             if (currentQuestionIndex >= currentQuestions.length) {
                 showResults();
@@ -1141,6 +1215,15 @@
             
             const content = document.getElementById('questionContent');
             content.innerHTML = '';
+            
+            // Add navigation bar
+            const navBar = document.createElement('div');
+            navBar.className = 'nav-bar';
+            navBar.innerHTML = `
+                <button class="nav-btn" onclick="goBackToMenu()">← Back to Menu</button>
+                <button class="nav-btn" onclick="restartQuiz()">↻ Restart Quiz</button>
+            `;
+            content.appendChild(navBar);
             
             // Create question card
             const card = document.createElement('div');
@@ -1167,38 +1250,12 @@
                 case 4:
                     renderMode4(question, content);
                     break;
-                case 5:
-                    renderMode5(question, content);
-                    break;
             }
         }
         
         function renderMode1(question, container) {
-            // Learning mode - show the word
-            const hintArea = document.createElement('div');
-            hintArea.className = 'hint-area';
-            hintArea.innerHTML = `
-                <div class="hint-text">
-                    <strong>Advanced word:</strong> ${question.advanced}<br>
-                    <small>Replace "${question.basic.toUpperCase()}" with "${question.advanced}"</small>
-                </div>
-            `;
-            container.appendChild(hintArea);
-            
-            const nextBtn = document.createElement('button');
-            nextBtn.className = 'next-btn';
-            nextBtn.textContent = 'Next Word →';
-            nextBtn.addEventListener('click', () => {
-                currentQuestionIndex++;
-                correctAnswers++; // Count as correct in learning mode
-                showQuestion();
-            });
-            container.appendChild(nextBtn);
-        }
-        
-        function renderMode2(question, container) {
-            // Matching mode - multiple choice
-            const options = generateOptions(question);
+            // Matching mode - multiple choice with smart options
+            const options = generateSmartOptions(question);
             
             const optionsGrid = document.createElement('div');
             optionsGrid.className = 'options-grid';
@@ -1214,19 +1271,19 @@
             container.appendChild(optionsGrid);
         }
         
-        function renderMode3(question, container) {
+        function renderMode2(question, container) {
             // Generous hints mode
             const hint = generateGenerousHint(question.advanced);
             renderTypingMode(question, container, hint);
         }
         
-        function renderMode4(question, container) {
+        function renderMode3(question, container) {
             // First letter only
             const hint = question.advanced[0] + '_'.repeat(question.advanced.length - 1);
             renderTypingMode(question, container, hint);
         }
         
-        function renderMode5(question, container) {
+        function renderMode4(question, container) {
             // No hints
             renderTypingMode(question, container, null);
         }
@@ -1390,7 +1447,10 @@
                     </p>
                     
                     <button class="restart-btn" onclick="location.reload()">
-                        Train Again
+                        Back to Menu
+                    </button>
+                    <button class="restart-btn" onclick="restartQuiz()" style="background: #4caf50; margin-left: 15px;">
+                        Try Again
                     </button>
                 </div>
             `;
@@ -1418,16 +1478,40 @@
             return sentence.replace(/([A-Z][A-Z ]+)/g, '<span class="basic-word">$1</span>');
         }
         
-        function generateOptions(question) {
-            // Get other words from same category
-            const sameCategory = VOCAB_DATA.filter(item => 
-                item.category === question.category && 
+        function generateSmartOptions(question) {
+            // NEW: Use subcategory for better options
+            const subcategory = question.subcategory || question.category;
+            
+            // Try to get options from DIFFERENT subcategories in same main category
+            const mainCategory = question.category;
+            
+            // Get words from same main category but DIFFERENT subcategories
+            const differentSubcats = VOCAB_DATA.filter(item => 
+                item.category === mainCategory && 
+                item.subcategory !== subcategory &&
                 item.advanced !== question.advanced
             );
             
-            // Shuffle and take 3
-            const shuffled = shuffleArray(sameCategory);
-            const wrongOptions = shuffled.slice(0, 3).map(item => item.advanced);
+            let wrongOptions = [];
+            
+            if (differentSubcats.length >= 3) {
+                // Shuffle and take 3 from different subcategories
+                const shuffled = shuffleArray(differentSubcats);
+                wrongOptions = shuffled.slice(0, 3).map(item => item.advanced);
+            } else {
+                // Fallback: mix from same subcat and different main categories
+                const sameSubcat = VOCAB_DATA.filter(item =>
+                    item.subcategory === subcategory && 
+                    item.advanced !== question.advanced
+                );
+                
+                const otherCategories = VOCAB_DATA.filter(item =>
+                    item.category !== mainCategory
+                );
+                
+                const pool = shuffleArray([...sameSubcat, ...otherCategories]);
+                wrongOptions = pool.slice(0, 3).map(item => item.advanced);
+            }
             
             // Add correct answer and shuffle
             const allOptions = [...wrongOptions, question.advanced];
@@ -1457,6 +1541,7 @@
         
         // Start the app
         init();
+
     </script>
 </body>
 </html>
