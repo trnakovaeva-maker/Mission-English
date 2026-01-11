@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STANAG Level 3 Practice - Czech Armed Forces</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy-dark: #0d1b2a;
+            --navy: #1b263b;
+            --blue: #415a77;
+            --blue-light: #778da9;
+            --silver: #e0e1dd;
+            --white: #ffffff;
+            --accent: #e63946;
+            --accent-hover: #d62828;
+            --success: #06d6a0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+            color: var(--silver);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container { max-width: 1400px; margin: 0 auto; }
+        
+        header {
+            text-align: center;
+            padding: 80px 20px 60px;
+            margin-bottom: 60px;
+        }
+        
+        h1 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--white);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--blue-light);
+            margin-bottom: 15px;
+        }
+        
+        .description {
+            font-size: 1.1rem;
+            color: var(--silver);
+            max-width: 900px;
+            margin: 30px auto;
+            line-height: 1.8;
+        }
+        
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 40px;
+            margin: 60px 0;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .module-card {
+            background: rgba(27, 38, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border: 3px solid var(--blue);
+            border-radius: 16px;
+            padding: 50px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--silver);
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent), var(--success));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .module-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .module-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(230, 57, 70, 0.3);
+        }
+        
+        .module-icon {
+            font-size: 4rem;
+            margin-bottom: 25px;
+            display: block;
+        }
+        
+        .module-card h2 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2rem;
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+        
+        .module-card p {
+            font-size: 1.1rem;
+            color: var(--blue-light);
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+        
+        .module-features {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        
+        .module-features li {
+            padding: 8px 0;
+            color: var(--silver);
+            font-size: 0.95rem;
+        }
+        
+        .module-features li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            background: var(--success);
+            color: var(--navy-dark);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-top: 15px;
+        }
+        
+        .status-badge.coming-soon {
+            background: var(--blue-light);
+            color: var(--white);
+        }
+        
+        .info-section {
+            background: rgba(27, 38, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--blue);
+            border-radius: 16px;
+            padding: 50px;
+            margin: 80px 0;
+        }
+        
+        .info-section h3 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2rem;
+            color: var(--white);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .feature {
+            background: rgba(65, 90, 119, 0.2);
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 4px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateX(5px);
+            border-left-color: var(--success);
+        }
+        
+        .feature h4 {
+            color: var(--white);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .feature p {
+            color: var(--silver);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 50px 20px;
+            margin-top: 80px;
+            border-top: 2px solid var(--blue);
+            color: var(--blue-light);
+        }
+        
+        footer p {
+            margin: 10px 0;
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .subtitle { font-size: 1.2rem; }
+            .modules-grid {
+                grid-template-columns: 1fr;
+            }
+            .module-card {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>STANAG Level 3 Practice</h1>
+            <p class="subtitle">Professional English for Czech Armed Forces</p>
+            <p class="description">
+                Comprehensive practice materials designed to help military personnel achieve 
+                STANAG Level 3 (B2) proficiency in professional English communication. 
+                Develop the skills needed for international operations, professional correspondence, 
+                and effective communication in multinational environments.
+            </p>
+        </header>
+        
+        <div class="modules-grid">
+            <a href="debate/index.html" class="module-card">
+                <span class="module-icon">💬</span>
+                <h2>Debate Practice</h2>
+                <p>Master persuasive argumentation and structured debate on military, social, and contemporary topics.</p>
+                <ul class="module-features">
+                    <li>59 debate topics across 12 categories</li>
+                    <li>Balanced FOR/AGAINST arguments</li>
+                    <li>Interactive vocabulary practice with audio</li>
+                    <li>PEEL method argument builder</li>
+                    <li>B2-level example paragraphs</li>
+                </ul>
+                <span class="status-badge">ACTIVE</span>
+            </a>
+            
+            <a href="sentence-upgrade/index.html" class="module-card">
+                <span class="module-icon">📝</span>
+                <h2>Sentence Transformation</h2>
+                <p>Transform basic sentences into advanced B2+ professional English with guided practice.</p>
+                <ul class="module-features">
+                    <li>65 transformation exercises</li>
+                    <li>6 professional topics including letter writing</li>
+                    <li>Specific hints and guidance</li>
+                    <li>Compare with model answers</li>
+                    <li>Key improvements explained</li>
+                </ul>
+                <span class="status-badge">ACTIVE</span>
+            </a>
+        </div>
+        
+        <div class="info-section">
+            <h3>Why STANAG Level 3?</h3>
+            <div class="features-grid">
+                <div class="feature">
+                    <h4>NATO Standard</h4>
+                    <p>STANAG Level 3 represents professional working proficiency required for effective participation in multinational operations and NATO activities.</p>
+                </div>
+                <div class="feature">
+                    <h4>Career Advancement</h4>
+                    <p>Achieving B2 proficiency opens opportunities for international assignments, specialized training, and leadership positions in multinational contexts.</p>
+                </div>
+                <div class="feature">
+                    <h4>Professional Communication</h4>
+                    <p>Level 3 ensures you can communicate clearly in professional situations, understand complex texts, and express ideas effectively in English.</p>
+                </div>
+                <div class="feature">
+                    <h4>Practical Skills</h4>
+                    <p>These materials focus on real-world military and professional scenarios you'll encounter in international operations and cooperation.</p>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p><strong>STANAG Level 3 Practice</strong></p>
+            <p>Professional English Practice for Czech Armed Forces Personnel</p>
+            <p style="margin-top: 20px; font-size: 0.9rem;">Developed for STANAG 6001 Level 3 (B2) exam preparation</p>
+        </footer>
+    </div>
+</body>
+</html>
