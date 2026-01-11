@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentence Transformation Practice - STANAG Level 3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy-dark: #0d1b2a;
+            --navy: #1b263b;
+            --blue: #415a77;
+            --blue-light: #778da9;
+            --silver: #e0e1dd;
+            --white: #ffffff;
+            --accent: #e63946;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+            color: var(--silver);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container { max-width: 1200px; margin: 0 auto; }
+        
+        .back-home {
+            display: inline-block;
+            padding: 12px 24px;
+            background: var(--blue);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-home:hover {
+            background: var(--blue-light);
+            transform: translateY(-2px);
+        }
+        
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            margin-bottom: 50px;
+        }
+        
+        h1 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--blue-light);
+            margin-bottom: 30px;
+        }
+        
+        .intro {
+            max-width: 800px;
+            margin: 0 auto 20px;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+        
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .topic-card {
+            background: rgba(27, 38, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--blue);
+            border-radius: 12px;
+            padding: 35px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .topic-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(230, 57, 70, 0.3);
+        }
+        
+        .topic-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .topic-title {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 15px;
+        }
+        
+        .topic-description {
+            color: var(--blue-light);
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .exercise-count {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .topics-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-home">← Back to Home</a>
+        
+        <header>
+            <h1>Sentence Transformation Practice</h1>
+            <p class="subtitle">Upgrade Your Writing from A2-B1 to B2+ Level</p>
+            <div class="intro">
+                <p>Practice transforming basic sentences into professional B2+ level writing. Each exercise includes progressive hints, multiple example answers, and guidance on when to use different formal styles.</p>
+            </div>
+        </header>
+        
+        <div class="topics-grid">
+            <a href="military.html" class="topic-card">
+                <span class="topic-icon">🎖️</span>
+                <h2 class="topic-title">Military Operations</h2>
+                <p class="topic-description">Training, missions, equipment checks, patrols, deployment, and operational readiness</p>
+                <p class="exercise-count">10 exercises</p>
+            </a>
+            
+            <a href="technology.html" class="topic-card">
+                <span class="topic-icon">⚙️</span>
+                <h2 class="topic-title">Technology & Equipment</h2>
+                <p class="topic-description">Systems, drones, communications, digital tools, cyber security, and technical capabilities</p>
+                <p class="exercise-count">10 exercises</p>
+            </a>
+            
+            <a href="leadership.html" class="topic-card">
+                <span class="topic-icon">👥</span>
+                <h2 class="topic-title">Leadership & Training</h2>
+                <p class="topic-description">Decision-making, mentorship, communication, feedback, delegation, and professional development</p>
+                <p class="exercise-count">10 exercises</p>
+            </a>
+            
+            <a href="international.html" class="topic-card">
+                <span class="topic-icon">🌍</span>
+                <h2 class="topic-title">International Relations</h2>
+                <p class="topic-description">NATO, peacekeeping, diplomacy, cultural awareness, humanitarian missions, and cooperation</p>
+                <p class="exercise-count">10 exercises</p>
+            </a>
+            
+            <a href="general.html" class="topic-card">
+                <span class="topic-icon">💼</span>
+                <h2 class="topic-title">General Professional Communication</h2>
+                <p class="topic-description">Meetings, deadlines, requests, recognition, problem reporting, and workplace communication</p>
+                <p class="exercise-count">10 exercises</p>
+            </a>
+            
+            <a href="letters.html" class="topic-card">
+                <span class="topic-icon">✉️</span>
+                <h2 class="topic-title">Formal Letter Writing</h2>
+                <p class="topic-description">All 15 STANAG exam letter tasks: requests, complaints, apologies, reports, and official correspondence</p>
+                <p class="exercise-count">15 exercises ⭐ EXAM FOCUS</p>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
