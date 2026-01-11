@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NATO & International Operations - STANAG Debate Practice</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy-dark: #0d1b2a;
+            --navy: #1b263b;
+            --blue: #415a77;
+            --blue-light: #778da9;
+            --silver: #e0e1dd;
+            --white: #ffffff;
+            --accent: #e63946;
+            --accent-hover: #d62828;
+            --success: #06d6a0;
+            --warning: #ffd60a;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+            color: var(--silver);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container { max-width: 1100px; margin: 0 auto; }
+        
+        .back-home {
+            display: inline-block;
+            padding: 12px 24px;
+            background: var(--blue);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-home:hover {
+            background: var(--blue-light);
+            transform: translateY(-2px);
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px 30px;
+            margin-bottom: 40px;
+            border-bottom: 3px solid var(--blue);
+        }
+        
+        h1 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--white);
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            color: var(--blue-light);
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+        
+        .section.active { display: block; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .card {
+            background: rgba(27, 38, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--blue);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card h2 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.8rem;
+            margin-bottom: 24px;
+            color: var(--white);
+        }
+        
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 16px;
+            color: var(--blue-light);
+            font-weight: 600;
+        }
+        
+        .topic-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .topic-item {
+            background: rgba(65, 90, 119, 0.2);
+            border: 2px solid var(--blue);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .topic-item:hover {
+            border-color: var(--accent);
+            background: rgba(230, 57, 70, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .topic-item h3 {
+            color: var(--white);
+            margin-bottom: 0;
+            font-size: 1.1rem;
+        }
+        
+        .topic-display {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+            padding: 40px;
+            border-radius: 12px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .topic-text {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.4;
+            margin-bottom: 30px;
+        }
+        
+        .toggle-arguments-btn {
+            margin: 20px 0;
+            padding: 12px 24px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            color: var(--white);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-arguments-btn:hover {
+            background: rgba(0, 0, 0, 0.5);
+            border-color: var(--white);
+        }
+        
+        .perspectives {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+            text-align: left;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        
+        .perspectives.visible { max-height: 1000px; }
+        
+        .perspective-card {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .perspective-card h4 {
+            color: var(--white);
+            font-size: 1rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .perspective-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .perspective-card li {
+            padding: 8px 0;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .perspective-card li:last-child { border-bottom: none; }
+        .perspective-card li::before {
+            content: '→';
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .btn {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(230, 57, 70, 0.4);
+        }
+        
+        .btn-secondary {
+            background: var(--blue);
+            color: var(--white);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--blue-light);
+            transform: translateY(-2px);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .hidden { display: none !important; }
+        .back-btn { margin-bottom: 20px; }
+        
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 24px;
+        }
+        
+        .vocab-column h4 {
+            color: var(--blue-light);
+            margin-bottom: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+        }
+        
+        .vocab-item {
+            background: rgba(65, 90, 119, 0.2);
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .vocab-item:hover {
+            background: rgba(65, 90, 119, 0.3);
+            border-color: var(--blue-light);
+        }
+        
+        .vocab-item.selected {
+            border-color: var(--warning);
+            background: rgba(255, 214, 10, 0.2);
+        }
+        
+        .vocab-item.matched {
+            border-color: var(--success);
+            background: rgba(6, 214, 160, 0.2);
+            cursor: default;
+        }
+        
+        .vocab-number {
+            background: var(--blue);
+            color: var(--white);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+            font-size: 0.9rem;
+        }
+        
+        .speaker-btn {
+            background: none;
+            border: none;
+            color: var(--blue-light);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 5px;
+            margin-left: 8px;
+            transition: all 0.2s ease;
+            border-radius: 4px;
+        }
+        
+        .speaker-btn:hover {
+            color: var(--accent);
+            background: rgba(230, 57, 70, 0.1);
+        }
+        
+        .speaker-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .speaker-btn.speaking {
+            color: var(--accent);
+            animation: pulse 0.5s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .vocab-feedback {
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 20px;
+        }
+        
+        .vocab-feedback.success {
+            background: rgba(6, 214, 160, 0.2);
+            border: 2px solid var(--success);
+            color: var(--success);
+        }
+        
+        .vocab-feedback.error {
+            background: rgba(230, 57, 70, 0.2);
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 14px;
+            background: rgba(65, 90, 119, 0.3);
+            border: 2px solid var(--blue);
+            border-radius: 8px;
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        
+        .peel-section {
+            background: rgba(65, 90, 119, 0.2);
+            border-left: 4px solid var(--accent);
+            padding: 24px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        
+        .peel-section h4 {
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .peel-section p {
+            color: var(--blue-light);
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+        }
+        
+        .info-note {
+            background: rgba(65, 90, 119, 0.3);
+            border-left: 4px solid var(--warning);
+            padding: 16px;
+            margin-bottom: 24px;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+        
+        .examples {
+            margin-top: 40px;
+            display: grid;
+            gap: 25px;
+        }
+        
+        .example-box {
+            background: rgba(6, 214, 160, 0.1);
+            border: 2px solid var(--success);
+            border-radius: 8px;
+            padding: 24px;
+        }
+        
+        .example-box h4 {
+            color: var(--success);
+            font-size: 1.2rem;
+            margin-bottom: 16px;
+        }
+        
+        .example-box p {
+            line-height: 1.8;
+            font-size: 1rem;
+            color: var(--silver);
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .perspectives { grid-template-columns: 1fr; }
+            .vocab-grid { grid-template-columns: 1fr; }
+            .card { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-home">← Back to All Categories</a>
+        
+        <header>
+            <h1>🛡️ NATO & International Operations</h1>
+            <p class="subtitle">STANAG Level 3 (B2) Debate Topics</p>
+        </header>
+
+        <div id="topicSelection" class="section active">
+            <div class="card">
+                <h2>Select a Topic</h2>
+                <ul class="topic-list">
+                    <li class="topic-item" onclick="selectTopic(0)">
+                        <h3>Topic 4: NATO Expansion</h3>
+                    </li>
+                    <li class="topic-item" onclick="selectTopic(1)">
+                        <h3>Topic 5: National vs. International Defense Focus</h3>
+                    </li>
+                    <li class="topic-item" onclick="selectTopic(2)">
+                        <h3>Topic 6: European Defense Autonomy</h3>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="topicDisplay" class="section">
+            <button class="btn btn-secondary back-btn" onclick="backToTopics()">← Back to Topics</button>
+            
+            <div class="topic-display">
+                <div class="topic-text" id="topicText"></div>
+                
+                <button class="toggle-arguments-btn" onclick="toggleArguments()">
+                    <span id="toggleText">Show Arguments</span> ▼
+                </button>
+                
+                <div class="perspectives" id="perspectivesContainer">
+                    <div class="perspective-card">
+                        <h4>💭 Arguments FOR</h4>
+                        <ul id="argFor"></ul>
+                    </div>
+                    <div class="perspective-card">
+                        <h4>💭 Arguments AGAINST</h4>
+                        <ul id="argAgainst"></ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="goToVocab()">Practice Vocabulary</button>
+                <button class="btn btn-primary" onclick="goToArgumentBuilder()">Build Your Argument</button>
+            </div>
+        </div>
+
+        <div id="vocabularyPractice" class="section">
+            <button class="btn btn-secondary back-btn" onclick="backToTopic()">← Back to Topic</button>
+            
+            <div class="card">
+                <h2>Vocabulary Practice</h2>
+                <h3 id="vocabTopicTitle"></h3>
+                <p style="color: var(--blue-light); margin-bottom: 24px;">Match the terms with their definitions.</p>
+                
+                <div class="vocab-grid">
+                    <div class="vocab-column">
+                        <h4>Terms</h4>
+                        <div id="vocabTerms"></div>
+                    </div>
+                    <div class="vocab-column">
+                        <h4>Definitions</h4>
+                        <div id="vocabDefinitions"></div>
+                    </div>
+                </div>
+                
+                <div id="vocabFeedback"></div>
+                
+                <div class="btn-group">
+                    <button class="btn btn-secondary" onclick="resetVocab()">Reset</button>
+                    <button class="btn btn-primary" onclick="goToArgumentBuilder()">Continue to Argument Builder →</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="argumentBuilder" class="section">
+            <button class="btn btn-secondary back-btn" onclick="backToVocab()">← Back to Vocabulary</button>
+            
+            <div class="card">
+                <h2>Build Your Argument</h2>
+                <h3 id="argTopicTitle"></h3>
+                
+                <div class="info-note">
+                    <strong>💡 About Evidence:</strong> You don't need exact statistics. Use phrases like "studies suggest," "research indicates," or "it is generally accepted that."
+                </div>
+                
+                <div class="peel-section">
+                    <h4>P - Point</h4>
+                    <p>State your main argument clearly</p>
+                    <textarea id="point" placeholder="I believe that..."></textarea>
+                </div>
+                
+                <div class="peel-section">
+                    <h4>E - Evidence</h4>
+                    <p>Provide facts, examples, or reasoning</p>
+                    <textarea id="evidence" placeholder="For example... / Studies show..."></textarea>
+                </div>
+                
+                <div class="peel-section">
+                    <h4>E - Explain</h4>
+                    <p>Explain how your evidence supports your point</p>
+                    <textarea id="explain" placeholder="This shows that... / This means..."></textarea>
+                </div>
+                
+                <div class="peel-section">
+                    <h4>L - Link</h4>
+                    <p>Link back to the topic</p>
+                    <textarea id="link" placeholder="Therefore... / In conclusion..."></textarea>
+                </div>
+                
+                <div class="btn-group">
+                    <button class="btn btn-secondary" onclick="clearArgument()">Clear All</button>
+                    <button class="btn btn-primary" onclick="viewComplete()">View Complete Argument</button>
+                    <button class="btn btn-primary" onclick="toggleExamples()">
+                        <span id="exampleBtnText">Show Examples</span>
+                    </button>
+                </div>
+                
+                <div id="completeArgument" class="hidden">
+                    <div class="example-box" style="border-color: var(--accent); background: rgba(230, 57, 70, 0.1);">
+                        <h4 style="color: var(--accent);">Your Complete Argument:</h4>
+                        <p id="completeText"></p>
+                    </div>
+                </div>
+                
+                <div id="examplesDisplay" class="examples hidden">
+                    <div class="example-box">
+                        <h4>Example FOR Position (B2 Level):</h4>
+                        <p id="exampleFor"></p>
+                    </div>
+                    <div class="example-box">
+                        <h4>Example AGAINST Position (B2 Level):</h4>
+                        <p id="exampleAgainst"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const topics = [
+            {
+                        "topic": "Further NATO expansion enhances European security",
+                        "for": [
+                                    "Expansion extends stability to new regions",
+                                    "Larger alliance deters potential adversaries",
+                                    "Sovereign nations have right to choose security arrangements"
+                        ],
+                        "against": [
+                                    "Expansion provokes Russia unnecessarily",
+                                    "Extended commitments dilute alliance strength",
+                                    "Some candidate countries lack sufficient capabilities"
+                        ],
+                        "vocabulary": [
+                                    {
+                                                "term": "collective defense",
+                                                "definition": "mutual protection agreement among allies"
+                                    },
+                                    {
+                                                "term": "Article 5",
+                                                "definition": "NATO treaty clause declaring attack on one is attack on all"
+                                    },
+                                    {
+                                                "term": "deterrence",
+                                                "definition": "prevention of action through fear of consequences"
+                                    },
+                                    {
+                                                "term": "sovereignty",
+                                                "definition": "supreme authority of a state over its territory"
+                                    },
+                                    {
+                                                "term": "enlargement",
+                                                "definition": "process of expanding alliance membership"
+                                    },
+                                    {
+                                                "term": "geopolitical",
+                                                "definition": "relating to politics influenced by geography"
+                                    },
+                                    {
+                                                "term": "adversary",
+                                                "definition": "opponent or enemy in conflict"
+                                    },
+                                    {
+                                                "term": "dilute",
+                                                "definition": "to weaken or reduce the strength of something"
+                                    }
+                        ],
+                        "exampleFor": "I firmly believe NATO expansion enhances European security. The expansion to include Finland and Sweden demonstrates this—both countries concluded NATO membership provides security neutrality cannot guarantee. When democratic nations join NATO, they gain protection while contributing capabilities to collective defense. Furthermore, expansion extends stability to previously unstable regions. The argument that expansion 'provokes' Russia is misguided—sovereign nations have the right to choose their security arrangements. History shows NATO expansion has been successful; former Warsaw Pact countries that joined have become stable democracies. Therefore, when countries meet NATO's standards and wish to join, the alliance should welcome them.",
+                        "exampleAgainst": "I believe further NATO expansion creates more problems than it solves. While expansion may benefit individual countries, it weakens the alliance by extending collective defense commitments without proportional capability increases. Each expansion dilutes the alliance's ability to respond effectively. Moreover, continued eastward expansion unnecessarily provokes Russia, increasing tensions. We must acknowledge geopolitical realities—Russia views NATO expansion toward its borders as existential threat. The situation in Ukraine partially resulted from NATO's intention to include Ukraine. Rather than endless expansion, European security would benefit from strengthening existing NATO capabilities and exploring alternative security arrangements."
+            },
+            {
+                        "topic": "Czech forces should primarily focus on national defense rather than international deployments",
+                        "for": [
+                                    "Territorial defense is primary military duty",
+                                    "Limited resources should focus on direct threats",
+                                    "Russian aggression requires European defense focus"
+                        ],
+                        "against": [
+                                    "NATO membership requires contributing to collective security",
+                                    "International deployments provide valuable experience",
+                                    "Forward defense prevents threats reaching home"
+                        ],
+                        "vocabulary": [
+                                    {
+                                                "term": "expeditionary operations",
+                                                "definition": "military missions conducted away from home territory"
+                                    },
+                                    {
+                                                "term": "territorial defense",
+                                                "definition": "protection of national borders and homeland"
+                                    },
+                                    {
+                                                "term": "force projection",
+                                                "definition": "ability to deploy military power beyond borders"
+                                    },
+                                    {
+                                                "term": "interoperability",
+                                                "definition": "capability to operate effectively with allied forces"
+                                    },
+                                    {
+                                                "term": "alliance commitments",
+                                                "definition": "obligations under mutual defense agreements"
+                                    },
+                                    {
+                                                "term": "lessons learned",
+                                                "definition": "insights gained from operational experience"
+                                    },
+                                    {
+                                                "term": "prioritize",
+                                                "definition": "to treat as more important than other things"
+                                    },
+                                    {
+                                                "term": "paramount",
+                                                "definition": "more important than anything else; supreme"
+                                    },
+                                    {
+                                                "term": "flank",
+                                                "definition": "the side of a military formation or defensive position"
+                                    },
+                                    {
+                                                "term": "disperse",
+                                                "definition": "to spread over a wide area; scatter"
+                                    }
+                        ],
+                        "exampleFor": "Given the current security environment, I believe Czech forces should prioritize national defense. Russia's invasion of Ukraine demonstrates that territorial defense remains paramount. The Czech Republic has limited military resources, and these should focus on defending our borders and NATO's eastern flank rather than dispersing to distant theaters. While I recognize alliance obligations, we can fulfill these through contributions supporting European defense rather than expeditionary missions with questionable value. Keeping forces focused on territorial defense ensures higher readiness for actual threats to Czech security. The lessons from international deployments don't outweigh the need for forces trained specifically for defending Czech territory.",
+                        "exampleAgainst": "I disagree with limiting Czech forces to national defense alone. As NATO members, we benefit from collective defense—if attacked, we expect allies to help. Therefore, we have obligation to contribute beyond our borders. International deployments provide invaluable benefits improving our national defense capability. Czech soldiers gain operational experience in challenging environments impossible to replicate through exercises. They develop interoperability skills working alongside allies, essential if we need to operate in coalition defending our territory. Contributing to international missions enhances Czech Republic's standing in NATO and gives us greater voice in alliance decisions. Refusing participation would undermine the collective security we depend on."
+            },
+            {
+                        "topic": "European nations should develop independent defense capabilities separate from NATO",
+                        "for": [
+                                    "Europe needs strategic autonomy from America",
+                                    "American political changes create uncertainty",
+                                    "Europe has unique security interests"
+                        ],
+                        "against": [
+                                    "European autonomy would weaken NATO",
+                                    "Parallel capabilities waste resources",
+                                    "Europe lacks America's technological advantage"
+                        ],
+                        "vocabulary": [
+                                    {
+                                                "term": "strategic autonomy",
+                                                "definition": "ability to act independently in security matters"
+                                    },
+                                    {
+                                                "term": "transatlantic alliance",
+                                                "definition": "partnership between North America and Europe"
+                                    },
+                                    {
+                                                "term": "burden sharing",
+                                                "definition": "distribution of defense costs among allies"
+                                    },
+                                    {
+                                                "term": "defense integration",
+                                                "definition": "combining military capabilities and planning"
+                                    },
+                                    {
+                                                "term": "force projection",
+                                                "definition": "ability to deploy and sustain forces abroad"
+                                    },
+                                    {
+                                                "term": "defense industry",
+                                                "definition": "sector producing military equipment and technology"
+                                    },
+                                    {
+                                                "term": "align with",
+                                                "definition": "to be in agreement or cooperation with"
+                                    },
+                                    {
+                                                "term": "engage",
+                                                "definition": "to participate or become involved in"
+                                    },
+                                    {
+                                                "term": "abandon",
+                                                "definition": "to give up completely; to leave behind"
+                                    },
+                                    {
+                                                "term": "pursue",
+                                                "definition": "to follow or work toward a goal"
+                                    },
+                                    {
+                                                "term": "undermine",
+                                                "definition": "to weaken or damage gradually"
+                                    },
+                                    {
+                                                "term": "diverge",
+                                                "definition": "to develop in different directions; to differ"
+                                    }
+                        ],
+                        "exampleFor": "I support developing greater European defense autonomy, though not complete NATO separation. Europe cannot indefinitely depend on American military protection, especially given growing American focus on Asia-Pacific and recurring questions about commitment. Trump administration's NATO skepticism demonstrated European security cannot rely on assumptions about permanent American engagement. Furthermore, Europe has distinct strategic interests that don't always align with American priorities. Developing independent European capabilities would give flexibility to protect our interests when America chooses not to engage. This doesn't mean abandoning NATO, but building European capability to act independently when necessary. While requiring investment, it's essential for genuine European sovereignty.",
+                        "exampleAgainst": "I believe pursuing European defense autonomy would be strategically foolish and practically impossible. The transatlantic alliance has provided unprecedented security and prosperity for 75 years—we should strengthen it, not undermine it. European nations lack resources, technology, and political unity to match what NATO provides through American partnership. Attempting autonomous European forces would duplicate capabilities inefficiently, wasting resources that could strengthen NATO instead. The idea that European and American strategic interests fundamentally diverge is exaggerated. Russia's invasion proved NATO's vital importance; Europe's response depended heavily on American support. Rather than pursuing illusory autonomy, European nations should fulfill existing NATO commitments and work within the alliance framework."
+            },
+            {
+                        "topic": "UN peacekeeping missions are ineffective and should be reformed or abolished",
+                        "for": [
+                                    "UN peacekeepers lack mandate and resources to prevent violence effectively",
+                                    "Many missions become permanent with no clear exit strategy or success criteria",
+                                    "Peacekeepers sometimes commit abuses without accountability"
+                        ],
+                        "against": [
+                                    "Peacekeeping operations prevent conflicts from escalating into wider wars",
+                                    "Missions provide neutral presence that hostile parties will accept",
+                                    "Success stories like Namibia and Cambodia demonstrate peacekeeping works"
+                        ],
+                        "vocabulary": [
+                                    {
+                                                "term": "peacekeeping",
+                                                "definition": "deployment of international forces to maintain peace and security"
+                                    },
+                                    {
+                                                "term": "mandate",
+                                                "definition": "official authorization to carry out specific tasks"
+                                    },
+                                    {
+                                                "term": "neutral presence",
+                                                "definition": "impartial force not favoring any side in conflict"
+                                    },
+                                    {
+                                                "term": "escalate",
+                                                "definition": "to increase in intensity or seriousness"
+                                    },
+                                    {
+                                                "term": "accountability",
+                                                "definition": "responsibility to answer for actions and decisions"
+                                    },
+                                    {
+                                                "term": "exit strategy",
+                                                "definition": "plan for ending involvement and withdrawing forces"
+                                    }
+                        ],
+                        "exampleFor": "I believe UN peacekeeping missions have proven largely ineffective and require fundamental reform or abolition. Peacekeepers repeatedly fail to prevent violence they are deployed to stop. Rwanda in 1994 and Srebrenica in 1995 stand as terrible examples where UN forces watched genocides unfold without intervening. Peacekeepers often lack proper mandate, equipment, or rules of engagement to actually protect civilians. Furthermore, many missions become permanent fixtures without achieving peace—UN forces have been in Cyprus since 1964 with no resolution. Additionally, peacekeeping scandals involving sexual abuse and exploitation damage UN credibility. The Czech Republic contributes personnel and funding to these missions, yet evidence suggests the system fundamentally doesn't work. Rather than continuing failed approaches, the international community should develop new mechanisms for conflict resolution.",
+                        "exampleAgainst": "I disagree with dismissing UN peacekeeping as ineffective. While some missions face challenges, peacekeeping has achieved significant successes that prevent suffering and save lives. Countries like Namibia, Cambodia, and Mozambique transitioned from war to peace with UN assistance. Peacekeeping operations stop local conflicts from escalating into regional wars that could threaten global security. The neutral UN presence allows hostile parties to negotiate who would reject intervention by powerful nations with their own interests. Critics focus on failures while ignoring the many conflicts prevented from worsening. Problems with specific missions indicate need for improvement, not abolition. Strengthening peacekeeping mandates, improving training, and ensuring accountability would address weaknesses while maintaining this valuable tool for international peace and security."
+            },
+            {
+                        "topic": "The NATO 2% defense spending target should be increased to 3%",
+                        "for": [
+                                    "Current threats from Russia and China require increased defense investment",
+                                    "European militaries are severely underfunded and need modernization",
+                                    "Higher spending demonstrates serious commitment to collective defense"
+                        ],
+                        "against": [
+                                    "Many NATO countries struggle to reach even 2% target currently",
+                                    "Increased spending diverts resources from healthcare, education, and infrastructure",
+                                    "Better coordination and efficiency more important than simply spending more"
+                        ],
+                        "vocabulary": [
+                                    {
+                                                "term": "defense spending",
+                                                "definition": "government expenditure on military forces and equipment"
+                                    },
+                                    {
+                                                "term": "GDP",
+                                                "definition": "Gross Domestic Product; total value of goods and services produced"
+                                    },
+                                    {
+                                                "term": "modernization",
+                                                "definition": "updating equipment and capabilities with newer technology"
+                                    },
+                                    {
+                                                "term": "collective defense",
+                                                "definition": "mutual protection agreement among alliance members"
+                                    },
+                                    {
+                                                "term": "capability gap",
+                                                "definition": "difference between current and required military capacity"
+                                    },
+                                    {
+                                                "term": "fiscal burden",
+                                                "definition": "financial cost or strain on government budget"
+                                    }
+                        ],
+                        "exampleFor": "I strongly believe NATO should increase its defense spending target from 2% to 3% of GDP. The security environment has deteriorated dramatically since the 2% target was established. Russia's invasion of Ukraine demonstrated that European militaries lack sufficient forces, ammunition, and capabilities to defend themselves without massive American support. China's military expansion threatens the Indo-Pacific, requiring the United States to focus resources there rather than Europe. European NATO members must take responsibility for their own defense by significantly increasing investment. Many European militaries cannot sustain operations for more than days or weeks due to inadequate funding. The 2% target proved insufficient—most countries failed to meet even that modest goal. Raising the target to 3% would signal serious commitment and provide resources necessary for credible deterrence and defense.",
+                        "exampleAgainst": "I oppose increasing NATO's defense spending target to 3% of GDP. Most NATO members still fail to reach the current 2% target, so raising it to 3% seems unrealistic and counterproductive. Many European countries face economic challenges and aging populations requiring investment in healthcare, pensions, and infrastructure. Forcing governments to spend 3% on defense would require massive cuts to social programs or huge tax increases that citizens would resist. Furthermore, the problem isn't just spending levels but how money is spent. European nations duplicate capabilities inefficiently rather than coordinating procurement. Better integration, shared resources, and eliminating waste would improve defense more effectively than simply demanding higher spending. We should focus on meeting existing commitments and spending smartly before increasing targets."
+            },
+            {
+                        "topic": "Private military contractors should be prohibited from combat operations",
+                        "for": [
+                                    "Combat operations are state responsibility that should not be outsourced to profit-seeking companies",
+                                    "Contractors operate outside military justice system and lack proper accountability",
+                                    "Using contractors allows governments to hide true costs and casualties of war"
+                        ],
+                        "against": [
+                                    "Contractors provide specialized skills and flexibility that regular militaries lack",
+                                    "Frees up regular forces for combat roles while contractors handle support functions",
+                                    "Market competition makes contractor services more cost-effective than expanding military"
+                        ],
+                        "vocabulary": [
+                                    {
+                                                "term": "military contractor",
+                                                "definition": "private company providing military-related services for profit"
+                                    },
+                                    {
+                                                "term": "outsource",
+                                                "definition": "to hire external organizations to perform functions"
+                                    },
+                                    {
+                                                "term": "accountability",
+                                                "definition": "obligation to answer for actions and accept responsibility"
+                                    },
+                                    {
+                                                "term": "rules of engagement",
+                                                "definition": "directives defining when and how force may be used"
+                                    },
+                                    {
+                                                "term": "oversight",
+                                                "definition": "supervision and monitoring of activities"
+                                    },
+                                    {
+                                                "term": "casualty",
+                                                "definition": "person killed or injured in war or accident"
+                                    }
+                        ],
+                        "exampleFor": "I firmly believe private military contractors should be prohibited from combat operations. The use of force is fundamental state responsibility that should never be outsourced to profit-seeking companies. Contractors like Blackwater in Iraq committed serious violations without facing proper accountability because they operated outside military justice systems. When contractors die, governments don't report them as military casualties, allowing politicians to hide the true human cost of conflicts from citizens. Furthermore, contractors prioritize profit over mission success and moral conduct. Unlike soldiers bound by military codes and training, contractors may take unnecessary risks or use excessive force. Democratic societies should not allow private companies to wage war on their behalf. Combat operations require the discipline, accountability, and ethical standards that only properly regulated military forces can provide.",
+                        "exampleAgainst": "I disagree with prohibiting contractors from combat operations. Modern militaries require diverse specialized skills that would be impossible to maintain in regular forces. Contractors provide expertise in areas like logistics, security, intelligence analysis, and technical support more efficiently than expanding military personnel. This flexibility allows regular forces to focus on core combat roles while contractors handle support functions. Many contractors are former military personnel bringing valuable experience. Furthermore, in operations like protecting diplomatic facilities or training foreign forces, contractors often perform better than deploying regular troops. Market competition makes contractor services cost-effective compared to maintaining large standing armies. Rather than blanket prohibition, we need better regulation, oversight, and clear rules of engagement for contractors. Used properly, contractors enhance military capabilities while reducing burden on regular forces."
+            }
+];
+
+        let currentTopicIndex = null;
+        let currentVocabSet = [];
+        let matchedPairs = [];
+        let selectedTerm = null;
+        let selectedDef = null;
+        let argumentsVisible = false;
+
+        function selectTopic(index) {
+            currentTopicIndex = index;
+            const topic = topics[index];
+            
+            document.getElementById('topicText').textContent = topic.topic;
+            
+            const forList = document.getElementById('argFor');
+            const againstList = document.getElementById('argAgainst');
+            forList.innerHTML = '';
+            againstList.innerHTML = '';
+            
+            topic.for.forEach(arg => {
+                const li = document.createElement('li');
+                li.textContent = arg;
+                forList.appendChild(li);
+            });
+            
+            topic.against.forEach(arg => {
+                const li = document.createElement('li');
+                li.textContent = arg;
+                againstList.appendChild(li);
+            });
+            
+            argumentsVisible = false;
+            document.getElementById('perspectivesContainer').classList.remove('visible');
+            document.getElementById('toggleText').textContent = 'Show Arguments';
+            
+            document.getElementById('topicSelection').classList.remove('active');
+            document.getElementById('topicDisplay').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function toggleArguments() {
+            argumentsVisible = !argumentsVisible;
+            const container = document.getElementById('perspectivesContainer');
+            const toggleText = document.getElementById('toggleText');
+            
+            if (argumentsVisible) {
+                container.classList.add('visible');
+                toggleText.textContent = 'Hide Arguments';
+            } else {
+                container.classList.remove('visible');
+                toggleText.textContent = 'Show Arguments';
+            }
+        }
+
+
+        function goDirectToArgumentBuilder() {
+            const topic = topics[currentTopicIndex];
+            document.getElementById('argTopicTitle').textContent = topic.topic;
+            document.getElementById('exampleFor').textContent = topic.exampleFor;
+            document.getElementById('exampleAgainst').textContent = topic.exampleAgainst;
+            
+            document.getElementById('topicDisplay').classList.remove('active');
+            document.getElementById('argumentBuilder').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function backToTopics() {
+            document.getElementById('topicDisplay').classList.remove('active');
+            document.getElementById('topicSelection').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function goToVocab() {
+            const topic = topics[currentTopicIndex];
+            document.getElementById('vocabTopicTitle').textContent = topic.topic;
+            
+            initVocabGame();
+            
+            document.getElementById('topicDisplay').classList.remove('active');
+            document.getElementById('vocabularyPractice').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function backToTopic() {
+            document.getElementById('vocabularyPractice').classList.remove('active');
+            document.getElementById('topicDisplay').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function speakText(text, button) {
+            // Cancel any ongoing speech
+            window.speechSynthesis.cancel();
+            
+            // Create new speech utterance
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.rate = 0.9; // Slightly slower for clarity
+            utterance.pitch = 1;
+            utterance.volume = 1;
+            
+            // Add speaking class for visual feedback
+            button.classList.add('speaking');
+            
+            // Remove speaking class when done
+            utterance.onend = () => {
+                button.classList.remove('speaking');
+            };
+            
+            // Speak the text
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function initVocabGame() {
+            matchedPairs = [];
+            selectedTerm = null;
+            selectedDef = null;
+            
+            currentVocabSet = topics[currentTopicIndex].vocabulary;
+            
+            const termsContainer = document.getElementById('vocabTerms');
+            const defsContainer = document.getElementById('vocabDefinitions');
+            
+            termsContainer.innerHTML = '';
+            defsContainer.innerHTML = '';
+            
+            const shuffledDefs = [...currentVocabSet].sort(() => Math.random() - 0.5);
+            
+                        currentVocabSet.forEach((pair, index) => {
+                const termDiv = document.createElement('div');
+                termDiv.className = 'vocab-item';
+                termDiv.dataset.index = index;
+                
+                // Create speaker button
+                const speakerBtn = document.createElement('button');
+                speakerBtn.className = 'speaker-btn';
+                speakerBtn.innerHTML = '🔊';
+                speakerBtn.title = 'Listen to pronunciation';
+                speakerBtn.onclick = (e) => {
+                    e.stopPropagation(); // Prevent selecting the term
+                    speakText(pair.term, speakerBtn);
+                };
+                
+                termDiv.innerHTML = `<div class="vocab-number">${index + 1}</div><div>${pair.term}</div>`;
+                termDiv.appendChild(speakerBtn);
+                termDiv.onclick = () => selectVocabTerm(index);
+                termsContainer.appendChild(termDiv);
+            });
+            
+                        shuffledDefs.forEach((pair, index) => {
+                const defDiv = document.createElement('div');
+                defDiv.className = 'vocab-item';
+                defDiv.dataset.term = pair.term;
+                
+                // Create speaker button for definition
+                const speakerBtn = document.createElement('button');
+                speakerBtn.className = 'speaker-btn';
+                speakerBtn.innerHTML = '🔊';
+                speakerBtn.title = 'Listen to definition';
+                speakerBtn.onclick = (e) => {
+                    e.stopPropagation(); // Prevent selecting the definition
+                    speakText(pair.definition, speakerBtn);
+                };
+                
+                defDiv.innerHTML = `<div class="vocab-number">${String.fromCharCode(65 + index)}</div><div>${pair.definition}</div>`;
+                defDiv.appendChild(speakerBtn);
+                defDiv.onclick = () => selectVocabDef(pair.term, defDiv);
+                defsContainer.appendChild(defDiv);
+            });
+            
+            document.getElementById('vocabFeedback').innerHTML = '';
+        }
+
+        function selectVocabTerm(index) {
+            if (matchedPairs.includes(index)) return;
+            
+            document.querySelectorAll('#vocabTerms .vocab-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            const termDiv = document.querySelector(`#vocabTerms .vocab-item[data-index="${index}"]`);
+            termDiv.classList.add('selected');
+            selectedTerm = index;
+            
+            if (selectedDef !== null) {
+                checkVocabMatch();
+            }
+        }
+
+        function selectVocabDef(term, element) {
+            if ([...element.classList].includes('matched')) return;
+            
+            document.querySelectorAll('#vocabDefinitions .vocab-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            element.classList.add('selected');
+            selectedDef = { term, element };
+            
+            if (selectedTerm !== null) {
+                checkVocabMatch();
+            }
+        }
+
+        function checkVocabMatch() {
+            const selectedTermObj = currentVocabSet[selectedTerm];
+            
+            if (selectedTermObj.term === selectedDef.term) {
+                const termDiv = document.querySelector(`#vocabTerms .vocab-item[data-index="${selectedTerm}"]`);
+                termDiv.classList.add('matched');
+                termDiv.classList.remove('selected');
+                selectedDef.element.classList.add('matched');
+                selectedDef.element.classList.remove('selected');
+                
+                matchedPairs.push(selectedTerm);
+                
+                const feedback = document.getElementById('vocabFeedback');
+                feedback.className = 'vocab-feedback success';
+                feedback.textContent = '✓ Correct match!';
+                
+                if (matchedPairs.length === currentVocabSet.length) {
+                    setTimeout(() => {
+                        feedback.textContent = '🎉 Excellent! All vocabulary matched correctly!';
+                    }, 500);
+                }
+            } else {
+                const feedback = document.getElementById('vocabFeedback');
+                feedback.className = 'vocab-feedback error';
+                feedback.textContent = '✗ Not a match. Try again!';
+                
+                setTimeout(() => {
+                    document.querySelectorAll('.vocab-item.selected').forEach(item => {
+                        item.classList.remove('selected');
+                    });
+                    feedback.innerHTML = '';
+                }, 1500);
+            }
+            
+            selectedTerm = null;
+            selectedDef = null;
+        }
+
+        function resetVocab() {
+            initVocabGame();
+        }
+
+        function goToArgumentBuilder() {
+            const topic = topics[currentTopicIndex];
+            document.getElementById('argTopicTitle').textContent = topic.topic;
+            document.getElementById('exampleFor').textContent = topic.exampleFor;
+            document.getElementById('exampleAgainst').textContent = topic.exampleAgainst;
+            
+            document.getElementById('vocabularyPractice').classList.remove('active');
+            document.getElementById('topicDisplay').classList.remove('active');
+            document.getElementById('argumentBuilder').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function backToVocab() {
+            document.getElementById('argumentBuilder').classList.remove('active');
+            document.getElementById('vocabularyPractice').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function viewComplete() {
+            const point = document.getElementById('point').value;
+            const evidence = document.getElementById('evidence').value;
+            const explain = document.getElementById('explain').value;
+            const link = document.getElementById('link').value;
+            
+            if (!point || !evidence || !explain || !link) {
+                alert('Please fill in all sections!');
+                return;
+            }
+            
+            const complete = `${point} ${evidence} ${explain} ${link}`;
+            document.getElementById('completeText').textContent = complete;
+            document.getElementById('completeArgument').classList.remove('hidden');
+        }
+
+        function clearArgument() {
+            document.getElementById('point').value = '';
+            document.getElementById('evidence').value = '';
+            document.getElementById('explain').value = '';
+            document.getElementById('link').value = '';
+            document.getElementById('completeArgument').classList.add('hidden');
+            document.getElementById('examplesDisplay').classList.add('hidden');
+            document.getElementById('exampleBtnText').textContent = 'Show Examples';
+        }
+
+        function toggleExamples() {
+            const display = document.getElementById('examplesDisplay');
+            const btn = document.getElementById('exampleBtnText');
+            
+            if (display.classList.contains('hidden')) {
+                display.classList.remove('hidden');
+                btn.textContent = 'Hide Examples';
+            } else {
+                display.classList.add('hidden');
+                btn.textContent = 'Show Examples';
+            }
+        }
+
+        // Auto-open topic from URL hash (for random topic generator)
+        window.addEventListener('load', function() {
+            const hash = window.location.hash;
+            if (hash && hash.startsWith('#topic-')) {
+                const topicIndex = parseInt(hash.replace('#topic-', ''));
+                if (!isNaN(topicIndex) && topicIndex >= 0 && topicIndex < topics.length) {
+                    selectTopic(topicIndex);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

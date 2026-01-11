@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Environment & Transportation - STANAG Debate Practice</title>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy-dark: #0d1b2a;
+            --navy: #1b263b;
+            --blue: #415a77;
+            --blue-light: #778da9;
+            --silver: #e0e1dd;
+            --white: #ffffff;
+            --accent: #e63946;
+            --accent-hover: #d62828;
+            --success: #06d6a0;
+            --warning: #ffd60a;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+            color: var(--silver);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container { max-width: 1100px; margin: 0 auto; }
+        
+        .back-home {
+            display: inline-block;
+            padding: 12px 24px;
+            background: var(--blue);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-home:hover {
+            background: var(--blue-light);
+            transform: translateY(-2px);
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px 30px;
+            margin-bottom: 40px;
+            border-bottom: 3px solid var(--blue);
+        }
+        
+        h1 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--white);
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            color: var(--blue-light);
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+        
+        .section.active { display: block; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .card {
+            background: rgba(27, 38, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--blue);
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card h2 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.8rem;
+            margin-bottom: 24px;
+            color: var(--white);
+        }
+        
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 16px;
+            color: var(--blue-light);
+            font-weight: 600;
+        }
+        
+        .topic-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .topic-item {
+            background: rgba(65, 90, 119, 0.2);
+            border: 2px solid var(--blue);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .topic-item:hover {
+            border-color: var(--accent);
+            background: rgba(230, 57, 70, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .topic-item h3 {
+            color: var(--white);
+            margin-bottom: 0;
+            font-size: 1.1rem;
+        }
+        
+        .topic-display {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+            padding: 40px;
+            border-radius: 12px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .topic-text {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.4;
+            margin-bottom: 30px;
+        }
+        
+        .toggle-arguments-btn {
+            margin: 20px 0;
+            padding: 12px 24px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            color: var(--white);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-arguments-btn:hover {
+            background: rgba(0, 0, 0, 0.5);
+            border-color: var(--white);
+        }
+        
+        .perspectives {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+            text-align: left;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        
+        .perspectives.visible { max-height: 1000px; }
+        
+        .perspective-card {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .perspective-card h4 {
+            color: var(--white);
+            font-size: 1rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .perspective-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .perspective-card li {
+            padding: 8px 0;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .perspective-card li:last-child { border-bottom: none; }
+        .perspective-card li::before {
+            content: '→';
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .btn {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: var(--white);
+            margin: 10px 5px;
+        }
+        
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: var(--blue);
+            color: var(--white);
+            margin: 10px 5px;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--blue-light);
+            transform: translateY(-2px);
+        }
+        
+        .vocab-matching {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .vocab-column h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+        
+        .vocab-item {
+            background: rgba(65, 90, 119, 0.3);
+            border: 2px solid var(--blue);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .vocab-number {
+            background: var(--blue);
+            color: var(--white);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        .vocab-item:hover {
+            border-color: var(--accent);
+            background: rgba(230, 57, 70, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .vocab-item.selected {
+            border-color: var(--warning);
+            background: rgba(255, 214, 10, 0.2);
+        }
+        
+        .vocab-item.matched {
+            border-color: var(--success);
+            background: rgba(6, 214, 160, 0.2);
+            cursor: default;
+            opacity: 0.7;
+        }
+        
+        .vocab-item.matched:hover {
+            transform: none;
+        }
+        
+        .speaker-btn {
+            background: none;
+            border: none;
+            color: var(--blue-light);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 5px;
+            margin-left: 8px;
+            transition: all 0.2s ease;
+            border-radius: 4px;
+        }
+        
+        .speaker-btn:hover {
+            color: var(--accent);
+            background: rgba(230, 57, 70, 0.1);
+        }
+        
+        .speaker-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .speaker-btn.speaking {
+            color: var(--accent);
+            animation: pulse 0.5s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .vocab-feedback {
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .vocab-feedback.success {
+            background: rgba(6, 214, 160, 0.2);
+            border: 2px solid var(--success);
+            color: var(--success);
+        }
+        
+        .vocab-feedback.error {
+            background: rgba(230, 57, 70, 0.2);
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+        
+        .argument-builder {
+            background: rgba(27, 38, 59, 0.4);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+        
+        .peel-section {
+            margin-bottom: 25px;
+        }
+        
+        .peel-section label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--blue-light);
+            font-size: 1.1rem;
+        }
+        
+        .peel-section textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--blue);
+            border-radius: 8px;
+            background: rgba(13, 27, 42, 0.6);
+            color: var(--silver);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .peel-section textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        
+        .complete-argument {
+            background: rgba(6, 214, 160, 0.1);
+            border: 2px solid var(--success);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .complete-argument h4 {
+            color: var(--success);
+            margin-bottom: 12px;
+        }
+        
+        .complete-argument p {
+            line-height: 1.8;
+            color: var(--white);
+        }
+        
+        .examples-display {
+            margin-top: 30px;
+        }
+        
+        .example-box {
+            background: rgba(65, 90, 119, 0.2);
+            border: 2px solid var(--blue);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .example-box h4 {
+            color: var(--blue-light);
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+        
+        .example-box p {
+            line-height: 1.8;
+            color: var(--silver);
+        }
+        
+        .hidden { display: none !important; }
+        
+        @media (max-width: 768px) {
+            .perspectives {
+                grid-template-columns: 1fr;
+            }
+            
+            .vocab-matching {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .topic-text {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-home">← Back to Home</a>
+        
+        <header>
+            <h1>Environment & Transportation</h1>
+            <p class="subtitle">STANAG Level 3 Debate Practice</p>
+        </header>
+        
+        <!-- Topic Selection Section -->
+        <section id="topicSelection" class="section active">
+            <div class="card">
+                <h2>Select a Topic</h2>
+                <ul class="topic-list" id="topicList"></ul>
+            </div>
+        </section>
+        
+        <!-- Topic Display Section -->
+        <section id="topicDisplay" class="section">
+            <div class="card">
+                <div class="topic-display">
+                    <div class="topic-text" id="topicText"></div>
+                    <button class="toggle-arguments-btn" onclick="toggleArguments()">
+                        <span id="toggleText">Show Arguments</span>
+                    </button>
+                    <div class="perspectives" id="perspectivesContainer">
+                        <div class="perspective-card">
+                            <h4>Arguments FOR</h4>
+                            <ul id="forArguments"></ul>
+                        </div>
+                        <div class="perspective-card">
+                            <h4>Arguments AGAINST</h4>
+                            <ul id="againstArguments"></ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="btn btn-primary" onclick="goToVocab()">Practice Vocabulary</button>
+                    <button class="btn btn-primary" onclick="goDirectToArgumentBuilder()">Build an Argument</button>
+                    <button class="btn btn-secondary" onclick="backToTopics()">Back to Topics</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Vocabulary Practice Section -->
+        <section id="vocabularyPractice" class="section">
+            <div class="card">
+                <h2>Vocabulary Practice</h2>
+                <h3 id="vocabTopicTitle" style="color: var(--blue-light); margin-bottom: 30px;"></h3>
+                
+                <p style="text-align: center; margin-bottom: 20px; color: var(--blue-light);">
+                    Match each term with its correct definition
+                </p>
+                
+                <div class="vocab-matching">
+                    <div class="vocab-column">
+                        <h3>Terms</h3>
+                        <div id="vocabTerms"></div>
+                    </div>
+                    <div class="vocab-column">
+                        <h3>Definitions</h3>
+                        <div id="vocabDefinitions"></div>
+                    </div>
+                </div>
+                
+                <div id="vocabFeedback"></div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="btn btn-primary" onclick="goToArgumentBuilder()">Build an Argument</button>
+                    <button class="btn btn-secondary" onclick="resetVocab()">Reset</button>
+                    <button class="btn btn-secondary" onclick="backToTopic()">Back to Topic</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Argument Builder Section -->
+        <section id="argumentBuilder" class="section">
+            <div class="card">
+                <h2>Argument Builder (PEEL Method)</h2>
+                <h3 id="argTopicTitle" style="color: var(--blue-light); margin-bottom: 30px;"></h3>
+                
+                <div class="argument-builder">
+                    <div class="peel-section">
+                        <label>P - Point (Make your main argument)</label>
+                        <textarea id="point" placeholder="State your main point clearly..."></textarea>
+                    </div>
+                    
+                    <div class="peel-section">
+                        <label>E - Evidence (Provide supporting evidence)</label>
+                        <textarea id="evidence" placeholder="Give facts, statistics, or examples..."></textarea>
+                    </div>
+                    
+                    <div class="peel-section">
+                        <label>E - Explain (Explain how the evidence supports your point)</label>
+                        <textarea id="explain" placeholder="Explain the connection between your evidence and point..."></textarea>
+                    </div>
+                    
+                    <div class="peel-section">
+                        <label>L - Link (Link back to the topic)</label>
+                        <textarea id="link" placeholder="Connect back to the main debate statement..."></textarea>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button class="btn btn-primary" onclick="viewComplete()">View Complete Argument</button>
+                        <button class="btn btn-secondary" onclick="clearArgument()">Clear</button>
+                    </div>
+                </div>
+                
+                <div id="completeArgument" class="complete-argument hidden">
+                    <h4>Your Complete Argument:</h4>
+                    <p id="completeText"></p>
+                </div>
+                
+                <div style="text-align: center; margin: 30px 0;">
+                    <button class="btn btn-secondary" onclick="toggleExamples()">
+                        <span id="exampleBtnText">Show Examples</span>
+                    </button>
+                </div>
+                
+                <div id="examplesDisplay" class="examples-display hidden">
+                    <div class="example-box">
+                        <h4>Example Argument FOR:</h4>
+                        <p id="exampleFor"></p>
+                    </div>
+                    <div class="example-box">
+                        <h4>Example Argument AGAINST:</h4>
+                        <p id="exampleAgainst"></p>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="btn btn-secondary" onclick="backToVocab()">Back to Vocabulary</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const topics = [
+            {
+                        "topic": "Private car ownership should be discouraged in cities.",
+                        "for": [
+                                    "Cars create severe pollution, traffic congestion, and noise that damage urban quality of life and public health.",
+                                    "Reducing cars frees valuable urban space currently wasted on parking for parks, housing, and pedestrian areas.",
+                                    "Better public transportation and cycling infrastructure provide more efficient urban mobility than individual cars."
+                        ],
+                        "against": [
+                                    "Cars provide essential flexibility and convenience that public transport cannot match, especially for families and people with mobility limitations.",
+                                    "Many workers require cars to reach suburban workplaces not served by public transport or to transport equipment and materials.",
+                                    "Penalizing car ownership disproportionately harms lower-income residents who cannot afford convenient urban housing near transport hubs."
+                        ],
+                        "vocabulary": [
+                                    {
+                                                "term": "traffic congestion",
+                                                "definition": "excessive crowding of vehicles causing slow movement"
+                                    },
+                                    {
+                                                "term": "urban quality of life",
+                                                "definition": "overall living conditions and satisfaction in cities"
+                                    },
+                                    {
+                                                "term": "pedestrian areas",
+                                                "definition": "zones designed for people walking rather than vehicles"
+                                    },
+                                    {
+                                                "term": "urban mobility",
+                                                "definition": "ability to move around within a city"
+                                    },
+                                    {
+                                                "term": "mobility limitations",
+                                                "definition": "physical difficulties that restrict movement"
+                                    },
+                                    {
+                                                "term": "transport hubs",
+                                                "definition": "central locations where different transportation systems connect"
+                                    }
+                        ],
+                        "exampleFor": "Private car ownership should be discouraged in cities. Cars create severe environmental and health problems through air pollution and greenhouse gas emissions that particularly harm city dwellers. Traffic congestion wastes enormous time and reduces urban quality of life, while the noise from constant traffic creates stress and sleep disruption. Additionally, the vast space devoted to parking and roads could be transformed into parks, housing, or pedestrian zones that make cities more liveable. Modern cities with excellent public transport, cycling infrastructure, and car-sharing services prove that efficient urban mobility does not require personal car ownership. Cities like Amsterdam and Copenhagen demonstrate that discouraging cars through parking fees, restricted zones, and better alternatives creates healthier, more pleasant urban environments. Therefore, cities should actively discourage private cars through policy measures and infrastructure investment.",
+                        "exampleAgainst": "Private car ownership should not be discouraged in cities. Cars provide essential flexibility and convenience that public transport cannot replicate. Parents need cars to transport children and shopping, elderly people require cars due to mobility limitations, and workers need cars to reach suburban employment centers not served by public transport. Public transport cannot accommodate everyone's schedules and routes, particularly for shift workers or those with irregular hours. Moreover, penalizing car ownership disproportionately harms lower-income residents who live in affordable peripheral areas precisely because they lack good public transport. While reducing unnecessary car use makes sense, many people genuinely need personal vehicles for practical reasons. Cities should improve public transport and cycling while respecting that cars remain necessary for many residents' daily lives."
+            },
+            {
+                        "topic": "Nuclear power is essential for meeting climate goals.",
+                        "for": [
+                                    "Nuclear power provides reliable baseload electricity without carbon emissions, making it essential for replacing fossil fuel plants.",
+                                    "Renewable energy requires backup power for when sun and wind are unavailable - nuclear provides this stable backup better than fossil fuels.",
+                                    "Modern nuclear technology is significantly safer than past generations, and the risks are far less than the catastrophic consequences of climate change."
+                        ],
+                        "against": [
+                                    "Nuclear waste remains dangerous for thousands of years with no safe permanent disposal solution yet developed.",
+                                    "Nuclear plant construction is extremely expensive and slow, making renewable energy with battery storage more practical and cost-effective.",
+                                    "Accident risks, however small, create unacceptable consequences as demonstrated by Chernobyl and Fukushima disasters."
+                        ],
+                        "vocabulary": [
+                                    {
+                                                "term": "baseload electricity",
+                                                "definition": "minimum constant power supply needed to meet basic demand"
+                                    },
+                                    {
+                                                "term": "carbon emissions",
+                                                "definition": "carbon dioxide released into atmosphere through burning fuels"
+                                    },
+                                    {
+                                                "term": "renewable energy",
+                                                "definition": "power from sources that naturally replenish like sun and wind"
+                                    },
+                                    {
+                                                "term": "nuclear waste",
+                                                "definition": "radioactive material left over from nuclear power generation"
+                                    },
+                                    {
+                                                "term": "permanent disposal",
+                                                "definition": "long-term safe storage solution for hazardous materials"
+                                    },
+                                    {
+                                                "term": "battery storage",
+                                                "definition": "technology for storing electrical energy for later use"
+                                    }
+                        ],
+                        "exampleFor": "Nuclear power is essential for meeting climate goals. Nuclear plants generate enormous amounts of electricity without any carbon emissions, making them crucial for replacing fossil fuel power stations. Unlike solar and wind energy, nuclear provides reliable baseload power that operates continuously regardless of weather conditions. This stability is essential because renewable energy cannot yet provide consistent power - solar stops at night and wind varies unpredictably. While renewable energy should expand dramatically, it requires backup power sources, and nuclear provides this backup far better than continuing to use fossil fuels. Modern nuclear technology has also become significantly safer than older reactors, with multiple redundant safety systems. Given the catastrophic consequences of climate change, nuclear power's risks are far more acceptable than continued reliance on carbon-emitting alternatives. Therefore, nuclear energy must be part of any realistic climate solution.",
+                        "exampleAgainst": "Nuclear power is not essential for meeting climate goals. The fundamental problem of nuclear waste disposal remains unsolved - radioactive waste stays dangerous for thousands of years, and no country has developed truly safe permanent storage. We cannot justify creating such hazards for future generations. Additionally, nuclear plants are extraordinarily expensive and slow to build, typically taking 10-15 years and costing billions more than projected. In that same time and money, far more renewable capacity with battery storage could be deployed. Modern battery technology is rapidly improving, making renewable energy increasingly viable for baseload power without nuclear risks. Furthermore, while nuclear accidents may be rare, their consequences are catastrophic and long-lasting, as Chernobyl and Fukushima demonstrated. Climate goals can be achieved through renewable energy, efficiency improvements, and demand management without nuclear power's unsolved problems."
+            },
+            {
+                        "topic": "Environmental protection should take priority over economic growth.",
+                        "for": [
+                                    "Environmental degradation threatens human survival through climate change, resource depletion, and ecosystem collapse - economic growth means nothing if the planet becomes uninhabitable.",
+                                    "Short-term economic thinking causes long-term environmental damage that costs far more to repair than preventing it would have cost initially.",
+                                    "Sustainable environmental policies actually create economic opportunities through green technology, clean energy, and conservation jobs."
+                        ],
+                        "against": [
+                                    "Economic growth lifts people from poverty and provides resources for education, healthcare, and quality of life improvements that environmental regulations would prevent.",
+                                    "Developing countries need economic growth to meet basic needs - demanding they prioritize environment over development is unjust and unrealistic.",
+                                    "Environmental protection and economic growth are not opposites - innovation and efficient resource use enable both simultaneously."
+                        ],
+                        "vocabulary": [
+                                    {
+                                                "term": "environmental degradation",
+                                                "definition": "damage and deterioration of the natural environment"
+                                    },
+                                    {
+                                                "term": "resource depletion",
+                                                "definition": "exhaustion of natural materials like forests, minerals, and water"
+                                    },
+                                    {
+                                                "term": "ecosystem collapse",
+                                                "definition": "complete breakdown of natural systems supporting life"
+                                    },
+                                    {
+                                                "term": "sustainable",
+                                                "definition": "able to continue indefinitely without depleting resources"
+                                    },
+                                    {
+                                                "term": "green technology",
+                                                "definition": "environmentally friendly innovations and products"
+                                    },
+                                    {
+                                                "term": "efficient resource use",
+                                                "definition": "minimizing waste and maximizing value from natural materials"
+                                    }
+                        ],
+                        "exampleFor": "Environmental protection should absolutely take priority over economic growth. The fundamental reality is that environmental degradation threatens human survival itself through climate change, biodiversity loss, and resource exhaustion. Economic growth has no meaning if the planet becomes uninhabitable. Moreover, the short-term economic thinking that sacrifices environment for profit creates catastrophic long-term costs - cleaning up pollution, dealing with climate disasters, and losing ecosystem services costs far more than prevention. Additionally, environmental protection actually creates economic opportunities through green technology development, renewable energy industries, and conservation employment. The false choice between environment and economy protects only the profits of polluting industries. Sustainable practices that prioritize environmental health represent the only path to genuine long-term prosperity. Therefore, environmental protection must take clear precedence over short-sighted economic growth.",
+                        "exampleAgainst": "Environmental protection should not take priority over economic growth. Economic development lifts billions from poverty, providing access to education, healthcare, clean water, and adequate nutrition that environmental regulations would prevent or delay. Telling developing countries they must sacrifice growth to protect the environment is fundamentally unjust when wealthy nations achieved prosperity through industrialization. Moreover, economic growth provides the resources needed for environmental protection - poor countries lack money for clean technology or conservation. Additionally, framing environment versus economy as an either/or choice is false. Innovation, efficiency, and smart regulation enable both environmental protection and economic development simultaneously. Economic growth drives technological advances that reduce pollution and improve resource efficiency. Rather than prioritizing one over the other, policy should pursue both environmental sustainability and economic prosperity through balanced, realistic approaches."
+            },
+            {
+                        "topic": "Air travel should be significantly more expensive to reduce carbon emissions.",
+                        "for": [
+                                    "Aviation contributes massively to climate change, and higher prices would reduce unnecessary flying while funding cleaner alternatives.",
+                                    "Cheap flights enable excessive tourism that damages destinations and creates unnecessary emissions for entertainment rather than essential travel.",
+                                    "Higher costs would fairly reflect aviation's true environmental impact and incentivize development of lower-emission alternatives."
+                        ],
+                        "against": [
+                                    "Expensive flights would prevent ordinary people from traveling internationally, making overseas experiences a privilege only for the wealthy.",
+                                    "Air travel enables essential business connections, family relationships, and cultural exchange that benefit society beyond their carbon cost.",
+                                    "Punishing consumers through high prices is unfair when airlines and governments should invest in sustainable aviation technology instead."
+                        ],
+                        "vocabulary": [
+                                    {
+                                                "term": "aviation",
+                                                "definition": "the operation and business of aircraft and air travel"
+                                    },
+                                    {
+                                                "term": "unnecessary flying",
+                                                "definition": "air travel for non-essential purposes"
+                                    },
+                                    {
+                                                "term": "excessive tourism",
+                                                "definition": "too much tourist travel causing environmental or cultural damage"
+                                    },
+                                    {
+                                                "term": "environmental impact",
+                                                "definition": "effect of human activities on nature and climate"
+                                    },
+                                    {
+                                                "term": "sustainable aviation",
+                                                "definition": "aircraft technology with reduced environmental harm"
+                                    },
+                                    {
+                                                "term": "cultural exchange",
+                                                "definition": "sharing of ideas and experiences between different societies"
+                                    }
+                        ],
+                        "exampleFor": "Air travel should be significantly more expensive to reduce carbon emissions. Aviation represents one of the fastest-growing sources of greenhouse gases, with a single transatlantic flight producing more emissions than an average person's annual car use. Higher ticket prices would reduce frivolous flying - weekend city breaks and unnecessary business trips that video conferencing could replace. The revenue from higher prices could fund development of sustainable aviation fuels and electric aircraft technology. Currently, aviation enjoys unfair advantages like no fuel taxes that hide its true environmental cost. Making flights expensive would fairly reflect this impact and encourage people to consider alternatives like trains for shorter distances or to take fewer but longer trips. While international travel has value, the climate crisis requires that this value be balanced against environmental costs through realistic pricing.",
+                        "exampleAgainst": "Air travel should not be significantly more expensive. Higher prices would effectively prevent ordinary working families from international travel, making overseas experiences a privilege exclusive to wealthy people. This is fundamentally unjust. Air travel enables essential connections - business opportunities, family relationships across countries, educational exchanges, and cultural understanding that benefit society. Moreover, punishing individual consumers through expensive tickets is unfair when airlines and governments should instead invest in sustainable aviation technology like electric aircraft and synthetic fuels. Innovation, not prohibition through pricing, represents the proper solution. Additionally, aviation employs millions globally, and dramatically reducing air travel would destroy these livelihoods. Rather than making flights unaffordable, policy should focus on developing cleaner aircraft technology while maintaining access to international travel for all economic classes."
+            },
+            {
+                        "topic": "Electric cars are not significantly better for the environment than modern combustion engines",
+                        "for": [
+                                    "Battery production requires massive mining of rare earth metals causing severe environmental damage",
+                                    "Electricity charging electric cars often comes from coal and fossil fuel power plants, simply moving pollution elsewhere",
+                                    "Battery disposal creates toxic waste problems and recycling remains inadequate"
+                        ],
+                        "against": [
+                                    "Electric cars produce zero direct emissions, dramatically improving air quality in cities",
+                                    "As renewable energy grows, electric vehicle environmental benefits increase while combustion engines remain polluting",
+                                    "Total lifecycle emissions of electric vehicles are lower than combustion engines even accounting for battery production"
+                        ],
+                        "vocabulary": [
+                                    {
+                                                "term": "combustion engine",
+                                                "definition": "motor that burns fuel to create power"
+                                    },
+                                    {
+                                                "term": "rare earth metals",
+                                                "definition": "special elements used in batteries and electronics"
+                                    },
+                                    {
+                                                "term": "lifecycle emissions",
+                                                "definition": "total pollution from production, use, and disposal"
+                                    },
+                                    {
+                                                "term": "renewable energy",
+                                                "definition": "power from sources like solar and wind that don't deplete"
+                                    },
+                                    {
+                                                "term": "air quality",
+                                                "definition": "measure of how clean and healthy the air is"
+                                    },
+                                    {
+                                                "term": "toxic waste",
+                                                "definition": "dangerous materials harmful to environment and health"
+                                    }
+                        ],
+                        "exampleFor": "Electric cars are not significantly better for the environment than modern combustion engines. Battery production requires massive mining operations extracting lithium, cobalt, and rare earth metals that cause severe environmental destruction, water pollution, and human rights abuses in developing countries. Furthermore, electricity charging these vehicles often comes from coal and natural gas power plants, meaning electric cars simply move pollution from tailpipes to distant smokestacks rather than eliminating it. Modern diesel and gasoline engines have become remarkably efficient and clean through technological improvements. Additionally, battery disposal creates enormous toxic waste problems that society hasn't solved—recycling remains expensive and inadequate. Manufacturing batteries produces such high emissions that electric vehicles must drive many thousands of kilometers before environmental benefits exceed combustion vehicles. While electric cars may eventually become environmentally superior, current technology and energy infrastructure mean they're not the environmental solution manufacturers claim.",
+                        "exampleAgainst": "Electric cars are significantly better for the environment than combustion engines. They produce zero direct emissions, dramatically improving air quality in cities where millions suffer from respiratory problems caused by vehicle pollution. While battery production does have environmental costs, multiple studies demonstrate that total lifecycle emissions of electric vehicles remain substantially lower than combustion engines even accounting for manufacturing and electricity generation. Moreover, as renewable energy sources like solar and wind power grow, electric vehicles become increasingly clean, while combustion engines will always pollute. Battery technology continues improving, with better recycling methods and more sustainable mining practices developing rapidly. Furthermore, electric motors are far more efficient than combustion engines, wasting less energy as heat. The transition to electric vehicles represents essential progress toward sustainable transportation. Criticisms of their environmental impact ignore both current benefits and future improvements as technology and energy systems evolve toward cleaner sources."
+            },
+            {
+                        "topic": "Popular tourist destinations should limit visitor numbers to protect the environment",
+                        "for": [
+                                    "Mass tourism destroys fragile ecosystems, historical sites, and natural beauty that attract visitors originally",
+                                    "Local communities suffer from overcrowding, pollution, and destruction of quality of life when tourism exceeds capacity",
+                                    "Limiting visitors preserves destinations for future generations and improves experience for tourists who do visit"
+                        ],
+                        "against": [
+                                    "Tourism provides essential income for local economies and communities that depend on visitor spending",
+                                    "Limiting access is discriminatory, restricting travel to wealthy people who can afford limited expensive slots",
+                                    "Better management and infrastructure investment can handle more visitors without environmental damage"
+                        ],
+                        "vocabulary": [
+                                    {
+                                                "term": "tourist destination",
+                                                "definition": "place that attracts many visitors"
+                                    },
+                                    {
+                                                "term": "fragile ecosystems",
+                                                "definition": "natural environments easily damaged by human activity"
+                                    },
+                                    {
+                                                "term": "mass tourism",
+                                                "definition": "very large numbers of tourists visiting same locations"
+                                    },
+                                    {
+                                                "term": "capacity",
+                                                "definition": "maximum number of people or things that can be accommodated"
+                                    },
+                                    {
+                                                "term": "sustainable",
+                                                "definition": "able to continue without depleting resources or causing harm"
+                                    },
+                                    {
+                                                "term": "discriminatory",
+                                                "definition": "unfairly treating some people differently than others"
+                                    }
+                        ],
+                        "exampleFor": "Popular tourist destinations should limit visitor numbers to protect the environment and local communities. Locations like Venice, Barcelona, and Český Krumlov face massive overcrowding destroying the very qualities that made them attractive. Thousands of daily tourists damage historical architecture, create enormous waste, pollute air and water, and overwhelm local infrastructure. Residents flee neighborhoods transformed into tourist theme parks, destroying authentic community life. Natural sites suffer even worse—hiking trails erode, wildlife disappears, and fragile ecosystems collapse under visitor pressure. Limiting daily visitors preserves destinations for future generations while improving experience for tourists who do visit. UNESCO World Heritage sites weren't designated so millions could Instagram the same spots, but to protect cultural and natural treasures. Some destinations have successfully implemented visitor limits, demonstrating that sustainable tourism protecting both environment and quality of life is possible and necessary.",
+                        "exampleAgainst": "I oppose limiting visitor numbers at popular tourist destinations. Tourism provides essential income for local communities, supporting jobs, businesses, and cultural preservation through entrance fees and visitor spending. Many regions depend economically on tourism and cannot afford reduced visitor numbers. Furthermore, limiting access is inherently discriminatory—it transforms travel into privilege for wealthy people who can afford limited expensive slots while excluding middle-class families. Everyone should have opportunities to experience world cultural and natural heritage, not just economic elites. Moreover, environmental damage results from poor management rather than visitor numbers themselves. Better infrastructure, improved waste management, and visitor education can accommodate more tourists sustainably without restrictions. Some destinations have successfully handled growing tourism through smart investment and planning. Rather than limiting access, we should focus on managing tourism better, spreading visitors across wider areas and times, and investing tourism revenue in protecting the sites that generate it."
+            }
+];
+
+        let currentTopicIndex = 0;
+        let argumentsVisible = false;
+        let currentVocabSet = [];
+        let selectedTerm = null;
+        let selectedDef = null;
+        let matchedPairs = [];
+
+        window.onload = function() {
+            const topicList = document.getElementById('topicList');
+            topics.forEach((topic, index) => {
+                const li = document.createElement('li');
+                li.className = 'topic-item';
+                li.innerHTML = `<h3>Topic ${index + 37}: ${topic.topic}</h3>`;
+                li.onclick = () => selectTopic(index);
+                topicList.appendChild(li);
+            });
+        };
+
+        function selectTopic(index) {
+            currentTopicIndex = index;
+            const topic = topics[index];
+            
+            document.getElementById('topicText').textContent = topic.topic;
+            
+            const forList = document.getElementById('forArguments');
+            const againstList = document.getElementById('againstArguments');
+            
+            forList.innerHTML = '';
+            againstList.innerHTML = '';
+            
+            topic.for.forEach(arg => {
+                const li = document.createElement('li');
+                li.textContent = arg;
+                forList.appendChild(li);
+            });
+            
+            topic.against.forEach(arg => {
+                const li = document.createElement('li');
+                li.textContent = arg;
+                againstList.appendChild(li);
+            });
+            
+            argumentsVisible = false;
+            document.getElementById('perspectivesContainer').classList.remove('visible');
+            document.getElementById('toggleText').textContent = 'Show Arguments';
+            
+            document.getElementById('topicSelection').classList.remove('active');
+            document.getElementById('topicDisplay').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function toggleArguments() {
+            argumentsVisible = !argumentsVisible;
+            const container = document.getElementById('perspectivesContainer');
+            const toggleText = document.getElementById('toggleText');
+            
+            if (argumentsVisible) {
+                container.classList.add('visible');
+                toggleText.textContent = 'Hide Arguments';
+            } else {
+                container.classList.remove('visible');
+                toggleText.textContent = 'Show Arguments';
+            }
+        }
+
+
+        function goDirectToArgumentBuilder() {
+            const topic = topics[currentTopicIndex];
+            document.getElementById('argTopicTitle').textContent = topic.topic;
+            document.getElementById('exampleFor').textContent = topic.exampleFor;
+            document.getElementById('exampleAgainst').textContent = topic.exampleAgainst;
+            
+            document.getElementById('topicDisplay').classList.remove('active');
+            document.getElementById('argumentBuilder').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function backToTopics() {
+            document.getElementById('topicDisplay').classList.remove('active');
+            document.getElementById('topicSelection').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function goToVocab() {
+            const topic = topics[currentTopicIndex];
+            document.getElementById('vocabTopicTitle').textContent = topic.topic;
+            
+            initVocabGame();
+            
+            document.getElementById('topicDisplay').classList.remove('active');
+            document.getElementById('vocabularyPractice').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function backToTopic() {
+            document.getElementById('vocabularyPractice').classList.remove('active');
+            document.getElementById('topicDisplay').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function speakText(text, button) {
+            // Cancel any ongoing speech
+            window.speechSynthesis.cancel();
+            
+            // Create new speech utterance
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.rate = 0.9; // Slightly slower for clarity
+            utterance.pitch = 1;
+            utterance.volume = 1;
+            
+            // Add speaking class for visual feedback
+            button.classList.add('speaking');
+            
+            // Remove speaking class when done
+            utterance.onend = () => {
+                button.classList.remove('speaking');
+            };
+            
+            // Speak the text
+            window.speechSynthesis.speak(utterance);
+        }
+
+                function initVocabGame() {
+            matchedPairs = [];
+            selectedTerm = null;
+            selectedDef = null;
+            
+            currentVocabSet = topics[currentTopicIndex].vocabulary;
+            
+            const termsContainer = document.getElementById('vocabTerms');
+            const defsContainer = document.getElementById('vocabDefinitions');
+            
+            termsContainer.innerHTML = '';
+            defsContainer.innerHTML = '';
+            
+            const shuffledDefs = [...currentVocabSet].sort(() => Math.random() - 0.5);
+            
+            currentVocabSet.forEach((pair, index) => {
+                const termDiv = document.createElement('div');
+                termDiv.className = 'vocab-item';
+                termDiv.dataset.index = index;
+                
+                // Create speaker button
+                const speakerBtn = document.createElement('button');
+                speakerBtn.className = 'speaker-btn';
+                speakerBtn.innerHTML = '🔊';
+                speakerBtn.title = 'Listen to pronunciation';
+                speakerBtn.onclick = (e) => {
+                    e.stopPropagation(); // Prevent selecting the term
+                    speakText(pair.term, speakerBtn);
+                };
+                
+                termDiv.innerHTML = `<div class="vocab-number">${index + 1}</div><div>${pair.term}</div>`;
+                termDiv.appendChild(speakerBtn);
+                termDiv.onclick = () => selectVocabTerm(index);
+                termsContainer.appendChild(termDiv);
+            });
+            
+            shuffledDefs.forEach((pair, index) => {
+                const defDiv = document.createElement('div');
+                defDiv.className = 'vocab-item';
+                defDiv.dataset.term = pair.term;
+                
+                // Create speaker button for definition
+                const speakerBtn = document.createElement('button');
+                speakerBtn.className = 'speaker-btn';
+                speakerBtn.innerHTML = '🔊';
+                speakerBtn.title = 'Listen to definition';
+                speakerBtn.onclick = (e) => {
+                    e.stopPropagation(); // Prevent selecting the definition
+                    speakText(pair.definition, speakerBtn);
+                };
+                
+                defDiv.innerHTML = `<div class="vocab-number">${String.fromCharCode(65 + index)}</div><div>${pair.definition}</div>`;
+                defDiv.appendChild(speakerBtn);
+                defDiv.onclick = () => selectVocabDef(pair.term, defDiv);
+                defsContainer.appendChild(defDiv);
+            });
+            
+            document.getElementById('vocabFeedback').innerHTML = '';
+        }
+
+        function selectVocabTerm(index) {
+            if (matchedPairs.includes(index)) return;
+            
+            document.querySelectorAll('#vocabTerms .vocab-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            const termDiv = document.querySelector(`#vocabTerms .vocab-item[data-index="${index}"]`);
+            termDiv.classList.add('selected');
+            selectedTerm = index;
+            
+            if (selectedDef !== null) {
+                checkVocabMatch();
+            }
+        }
+
+        function selectVocabDef(term, element) {
+            if ([...element.classList].includes('matched')) return;
+            
+            document.querySelectorAll('#vocabDefinitions .vocab-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            element.classList.add('selected');
+            selectedDef = { term, element };
+            
+            if (selectedTerm !== null) {
+                checkVocabMatch();
+            }
+        }
+
+        function checkVocabMatch() {
+            const selectedTermObj = currentVocabSet[selectedTerm];
+            
+            if (selectedTermObj.term === selectedDef.term) {
+                const termDiv = document.querySelector(`#vocabTerms .vocab-item[data-index="${selectedTerm}"]`);
+                termDiv.classList.add('matched');
+                termDiv.classList.remove('selected');
+                selectedDef.element.classList.add('matched');
+                selectedDef.element.classList.remove('selected');
+                
+                matchedPairs.push(selectedTerm);
+                
+                const feedback = document.getElementById('vocabFeedback');
+                feedback.className = 'vocab-feedback success';
+                feedback.textContent = '✓ Correct match!';
+                
+                if (matchedPairs.length === currentVocabSet.length) {
+                    setTimeout(() => {
+                        feedback.textContent = '🎉 Excellent! All vocabulary matched correctly!';
+                    }, 500);
+                }
+            } else {
+                const feedback = document.getElementById('vocabFeedback');
+                feedback.className = 'vocab-feedback error';
+                feedback.textContent = '✗ Not a match. Try again!';
+                
+                setTimeout(() => {
+                    document.querySelectorAll('.vocab-item.selected').forEach(item => {
+                        item.classList.remove('selected');
+                    });
+                    feedback.innerHTML = '';
+                }, 1500);
+            }
+            
+            selectedTerm = null;
+            selectedDef = null;
+        }
+
+        function resetVocab() {
+            initVocabGame();
+        }
+
+        function goToArgumentBuilder() {
+            const topic = topics[currentTopicIndex];
+            document.getElementById('argTopicTitle').textContent = topic.topic;
+            document.getElementById('exampleFor').textContent = topic.exampleFor;
+            document.getElementById('exampleAgainst').textContent = topic.exampleAgainst;
+            
+            document.getElementById('vocabularyPractice').classList.remove('active');
+            document.getElementById('topicDisplay').classList.remove('active');
+            document.getElementById('argumentBuilder').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function backToVocab() {
+            document.getElementById('argumentBuilder').classList.remove('active');
+            document.getElementById('vocabularyPractice').classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function viewComplete() {
+            const point = document.getElementById('point').value;
+            const evidence = document.getElementById('evidence').value;
+            const explain = document.getElementById('explain').value;
+            const link = document.getElementById('link').value;
+            
+            if (!point || !evidence || !explain || !link) {
+                alert('Please fill in all sections!');
+                return;
+            }
+            
+            const complete = `${point} ${evidence} ${explain} ${link}`;
+            document.getElementById('completeText').textContent = complete;
+            document.getElementById('completeArgument').classList.remove('hidden');
+        }
+
+        function clearArgument() {
+            document.getElementById('point').value = '';
+            document.getElementById('evidence').value = '';
+            document.getElementById('explain').value = '';
+            document.getElementById('link').value = '';
+            document.getElementById('completeArgument').classList.add('hidden');
+            document.getElementById('examplesDisplay').classList.add('hidden');
+            document.getElementById('exampleBtnText').textContent = 'Show Examples';
+        }
+
+        function toggleExamples() {
+            const display = document.getElementById('examplesDisplay');
+            const btn = document.getElementById('exampleBtnText');
+            
+            if (display.classList.contains('hidden')) {
+                display.classList.remove('hidden');
+                btn.textContent = 'Hide Examples';
+            } else {
+                display.classList.add('hidden');
+                btn.textContent = 'Show Examples';
+            }
+        }
+
+        // Auto-open topic from URL hash (for random topic generator)
+        window.addEventListener('load', function() {
+            const hash = window.location.hash;
+            if (hash && hash.startsWith('#topic-')) {
+                const topicIndex = parseInt(hash.replace('#topic-', ''));
+                if (!isNaN(topicIndex) && topicIndex >= 0 && topicIndex < topics.length) {
+                    selectTopic(topicIndex);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
