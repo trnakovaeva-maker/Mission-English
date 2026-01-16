@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STANAG Level 3 Debate Practice</title>
+    <title>STANAG Level 3 Practice - Mission English</title>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -37,23 +37,6 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-        }
-        
-        .back-home {
-            display: inline-block;
-            padding: 12px 24px;
-            background: var(--blue);
-            color: var(--white);
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            margin-bottom: 30px;
-            transition: all 0.3s ease;
-        }
-        
-        .back-home:hover {
-            background: var(--blue-light);
-            transform: translateY(-2px);
         }
         
         header {
@@ -115,51 +98,41 @@
         }
         
         .category-icon {
-            font-size: 3.5rem;
+            font-size: 3rem;
             margin-bottom: 20px;
         }
         
-        .category-title {
+        .category-card h2 {
             font-family: 'Libre Baskerville', serif;
-            font-size: 1.4rem;
-            font-weight: 700;
+            font-size: 1.5rem;
             color: var(--white);
             margin-bottom: 15px;
         }
         
-        .category-count {
-            font-size: 0.9rem;
+        .category-card p {
             color: var(--blue-light);
-            font-weight: 600;
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
         
-        .random-button-container {
-            text-align: center;
-            margin: 40px 0;
-        }
-        
-        .random-button {
+        .topic-count {
             display: inline-block;
-            padding: 18px 40px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+            background: var(--accent);
             color: var(--white);
-            text-decoration: none;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.4);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 15px;
         }
         
-        .random-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 25px rgba(230, 57, 70, 0.6);
-        }
-        
-        .random-button:active {
-            transform: translateY(-1px);
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+            border-top: 1px solid var(--blue);
+            color: var(--blue-light);
+            font-size: 0.9rem;
         }
         
         @media (max-width: 768px) {
@@ -175,122 +148,109 @@
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-home">← Back to Home</a>
-        
         <header>
             <h1>STANAG Level 3 Debate Practice</h1>
-            <p class="subtitle">Choose a Topic Category</p>
+            <p class="subtitle">Complete Debate Topics for Military English Education | B2 Proficiency</p>
             <p class="description">
-                Select a category below to practice debate topics. Each topic includes balanced FOR and AGAINST arguments, key vocabulary, and example paragraphs at B2 level.
+                Practice your debate skills with 50 comprehensive topics across 12 categories. 
+                Each topic includes arguments FOR and AGAINST, key vocabulary with definitions, 
+                B2-level example paragraphs, and interactive exercises.
+            </p>
+            <p style="background: rgba(255, 214, 10, 0.15); border-left: 4px solid #ffd60a; padding: 12px 20px; margin-top: 20px; border-radius: 6px; font-size: 0.95rem;">
+                <strong>🔊 Audio Note:</strong> For vocabulary pronunciation, please ensure your browser language is set to English.
             </p>
         </header>
-        
-        <div class="random-button-container">
-            <button class="random-button" onclick="getRandomTopic()">🎲 Give Me a Random Topic</button>
-        </div>
-        
+
         <div class="categories-grid">
             <a href="military.html" class="category-card">
-                <div class="category-icon">🎖️</div>
-                <h2 class="category-title">Military Life & Career</h2>
-                <p class="category-count">6 topics</p>
+                <div class="category-icon">⚔️</div>
+                <h2>Military Life & Career</h2>
+                <p>Explore debates about professional vs. conscript forces, work-life balance, and career specialization</p>
+                <span class="topic-count">3 Topics</span>
             </a>
-            
+
             <a href="nato.html" class="category-card">
-                <div class="category-icon">🌐</div>
-                <h2 class="category-title">NATO & International Operations</h2>
-                <p class="category-count">6 topics</p>
+                <div class="category-icon">🛡️</div>
+                <h2>NATO & International Operations</h2>
+                <p>Discuss NATO expansion, defense priorities, and European strategic autonomy</p>
+                <span class="topic-count">3 Topics</span>
             </a>
-            
+
             <a href="technology.html" class="category-card">
                 <div class="category-icon">💻</div>
-                <h2 class="category-title">Technology & Modern Warfare</h2>
-                <p class="category-count">6 topics</p>
+                <h2>Technology & Modern Warfare</h2>
+                <p>Debate the role of advanced technology, autonomous weapons, and social media in military</p>
+                <span class="topic-count">3 Topics</span>
             </a>
-            
+
             <a href="education.html" class="category-card">
                 <div class="category-icon">📚</div>
-                <h2 class="category-title">Education & Learning</h2>
-                <p class="category-count">7 topics</p>
+                <h2>Education & Learning</h2>
+                <p>Discuss university degrees, online learning, language education, and grading systems</p>
+                <span class="topic-count">4 Topics</span>
             </a>
-            
+
             <a href="work.html" class="category-card">
                 <div class="category-icon">💼</div>
-                <h2 class="category-title">Work & Career</h2>
-                <p class="category-count">7 topics</p>
+                <h2>Work & Career</h2>
+                <p>Explore remote work, career changes, retirement age, and salary transparency</p>
+                <span class="topic-count">4 Topics</span>
             </a>
-            
+
             <a href="health.html" class="category-card">
                 <div class="category-icon">🏥</div>
-                <h2 class="category-title">Health & Lifestyle</h2>
-                <p class="category-count">6 topics</p>
+                <h2>Health & Lifestyle</h2>
+                <p>Debate healthcare systems, healthy lifestyle incentives, physical education, and alternative medicine</p>
+                <span class="topic-count">4 Topics</span>
             </a>
-            
+
             <a href="environment.html" class="category-card">
-                <div class="category-icon">🌱</div>
-                <h2 class="category-title">Environment & Transportation</h2>
-                <p class="category-count">6 topics</p>
+                <div class="category-icon">🌍</div>
+                <h2>Environment & Transportation</h2>
+                <p>Discuss car ownership, nuclear energy, environmental protection, and air travel</p>
+                <span class="topic-count">4 Topics</span>
             </a>
-            
+
             <a href="family.html" class="category-card">
                 <div class="category-icon">👨‍👩‍👧‍👦</div>
-                <h2 class="category-title">Family & Social Issues</h2>
-                <p class="category-count">5 topics</p>
+                <h2>Family & Social Issues</h2>
+                <p>Explore parental leave, multigenerational living, pet ownership, and marriage</p>
+                <span class="topic-count">4 Topics</span>
             </a>
-            
+
             <a href="urban.html" class="category-card">
                 <div class="category-icon">🏙️</div>
-                <h2 class="category-title">Urban Life & Housing</h2>
-                <p class="category-count">5 topics</p>
+                <h2>Urban Life & Housing</h2>
+                <p>Debate city vs. rural living, car-free zones, housing policy, and smart cities</p>
+                <span class="topic-count">4 Topics</span>
             </a>
-            
+
             <a href="media.html" class="category-card">
-                <div class="category-icon">📺</div>
-                <h2 class="category-title">Media & Culture</h2>
-                <p class="category-count">4 topics</p>
+                <div class="category-icon">📰</div>
+                <h2>Media & Culture</h2>
+                <p>Discuss news media trustworthiness, cultural preservation, streaming services, and reading</p>
+                <span class="topic-count">4 Topics</span>
             </a>
-            
+
             <a href="consumer.html" class="category-card">
                 <div class="category-icon">🛒</div>
-                <h2 class="category-title">Consumer & Economics</h2>
-                <p class="category-count">6 topics</p>
+                <h2>Consumer & Economics</h2>
+                <p>Explore consumerism, online shopping, tipping culture, and quality vs. price</p>
+                <span class="topic-count">4 Topics</span>
             </a>
-            
+
             <a href="travel.html" class="category-card">
                 <div class="category-icon">✈️</div>
-                <h2 class="category-title">Travel & Tourism</h2>
-                <p class="category-count">4 topics</p>
+                <h2>Travel & Tourism</h2>
+                <p>Debate mass tourism impact, travel for personal development, and travel styles</p>
+                <span class="topic-count">3 Topics</span>
             </a>
         </div>
+
+        <footer>
+            <p><strong>50 Complete Debate Topics</strong> | STANAG Level 3 (B2) | Czech Armed Forces English Education</p>
+            <p style="margin-top: 10px;">Each topic includes arguments, vocabulary practice, and B2-level examples</p>
+        </footer>
     </div>
-    
-    <script>
-        // All categories with their files and topic counts
-        const categories = [
-            { file: 'military.html', topics: 6 },
-            { file: 'nato.html', topics: 6 },
-            { file: 'technology.html', topics: 6 },
-            { file: 'education.html', topics: 7 },
-            { file: 'work.html', topics: 7 },
-            { file: 'health.html', topics: 6 },
-            { file: 'environment.html', topics: 6 },
-            { file: 'family.html', topics: 5 },
-            { file: 'urban.html', topics: 5 },
-            { file: 'media.html', topics: 4 },
-            { file: 'consumer.html', topics: 6 },
-            { file: 'travel.html', topics: 4 }
-        ];
-        
-        function getRandomTopic() {
-            // Pick a random category
-            const randomCategory = categories[Math.floor(Math.random() * categories.length)];
-            
-            // Pick a random topic number within that category (0-indexed)
-            const randomTopicIndex = Math.floor(Math.random() * randomCategory.topics);
-            
-            // Navigate to that category page with the topic index in the URL
-            window.location.href = `${randomCategory.file}#topic-${randomTopicIndex}`;
-        }
-    </script>
 </body>
 </html>
