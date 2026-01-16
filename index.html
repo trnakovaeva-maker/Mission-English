@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STANAG Level 3 Debate Practice</title>
+    <title>STANAG Level 3 Practice - Mission English</title>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -15,15 +15,9 @@
             --white: #ffffff;
             --accent: #e63946;
             --accent-hover: #d62828;
-            --success: #06d6a0;
-            --warning: #ffd60a;
         }
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: 'Inter', sans-serif;
@@ -34,14 +28,11 @@
             padding: 20px;
         }
         
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+        .container { max-width: 1200px; margin: 0 auto; }
         
         header {
             text-align: center;
-            padding: 50px 20px 40px;
+            padding: 60px 20px 40px;
             margin-bottom: 50px;
             border-bottom: 3px solid var(--blue);
         }
@@ -56,33 +47,33 @@
         }
         
         .subtitle {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: var(--blue-light);
             font-weight: 400;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
         
         .description {
-            font-size: 1rem;
+            font-size: 1.05rem;
             color: var(--silver);
             max-width: 800px;
-            margin: 20px auto 0;
+            margin: 0 auto;
             line-height: 1.8;
         }
         
-        .categories-grid {
+        .modules-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
         }
         
-        .category-card {
+        .module-card {
             background: rgba(27, 38, 59, 0.6);
             backdrop-filter: blur(10px);
-            border: 2px solid var(--blue);
-            border-radius: 12px;
-            padding: 35px;
+            border: 3px solid var(--blue);
+            border-radius: 16px;
+            padding: 50px;
             text-align: center;
             transition: all 0.3s ease;
             cursor: pointer;
@@ -90,167 +81,84 @@
             display: block;
         }
         
-        .category-card:hover {
+        .module-card:hover {
             border-color: var(--accent);
             background: rgba(230, 57, 70, 0.1);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(230, 57, 70, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(230, 57, 70, 0.4);
         }
         
-        .category-icon {
-            font-size: 3rem;
+        .module-icon {
+            font-size: 5rem;
+            margin-bottom: 30px;
+        }
+        
+        .module-title {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--white);
             margin-bottom: 20px;
         }
         
-        .category-card h2 {
-            font-family: 'Libre Baskerville', serif;
-            font-size: 1.5rem;
-            color: var(--white);
+        .module-description {
+            font-size: 1.05rem;
+            color: var(--blue-light);
+            line-height: 1.6;
             margin-bottom: 15px;
         }
         
-        .category-card p {
-            color: var(--blue-light);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-        
-        .topic-count {
-            display: inline-block;
-            background: var(--accent);
-            color: var(--white);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-top: 15px;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            margin-top: 60px;
-            border-top: 1px solid var(--blue);
-            color: var(--blue-light);
-            font-size: 0.9rem;
+        .module-count {
+            font-size: 1rem;
+            color: var(--accent);
+            font-weight: 700;
+            margin-top: 20px;
         }
         
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            .categories-grid {
-                grid-template-columns: 1fr;
-            }
+            h1 { font-size: 2.5rem; }
+            .modules-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>STANAG Level 3 Debate Practice</h1>
-            <p class="subtitle">Complete Debate Topics for Military English Education | B2 Proficiency</p>
+            <h1>Mission English</h1>
+            <p class="subtitle">STANAG Level 3 Practice</p>
             <p class="description">
-                Practice your debate skills with dozens of comprehensive topics across 12 categories. 
-                Each topic includes arguments FOR and AGAINST, key vocabulary with definitions, 
-                B2-level example paragraphs, and interactive exercises.
-            </p>
-            <p style="background: rgba(255, 214, 10, 0.15); border-left: 4px solid #ffd60a; padding: 12px 20px; margin-top: 20px; border-radius: 6px; font-size: 0.95rem;">
-                <strong>🔊 Audio Note:</strong> For vocabulary pronunciation, please ensure your browser language is set to English.
+                Professional English training for Czech Armed Forces. Choose between debate practice, sentence transformation exercises, or vocabulary training to improve your B2-level communication skills.
             </p>
         </header>
-
-        <div class="categories-grid">
-            <a href="military.html" class="category-card">
-                <div class="category-icon">⚔️</div>
-                <h2>Military Life & Career</h2>
-                <p>Explore debates about professional vs. conscript forces, work-life balance, and career specialization</p>
-                <span class="topic-count">3 Topics</span>
+        
+        <div class="modules-grid">
+            <a href="debate/" class="module-card">
+                <div class="module-icon">💬</div>
+                <h2 class="module-title">Debate Practice</h2>
+                <p class="module-description">
+                    Practice structured debates on 71 topics across 12 categories. Each topic includes FOR/AGAINST arguments, vocabulary, and example paragraphs at B2 level.
+                </p>
+                <p class="module-count">71 debate topics</p>
             </a>
-
-            <a href="nato.html" class="category-card">
-                <div class="category-icon">🛡️</div>
-                <h2>NATO & International Operations</h2>
-                <p>Discuss NATO expansion, defense priorities, and European strategic autonomy</p>
-                <span class="topic-count">3 Topics</span>
+            
+            <a href="sentence-upgrade/" class="module-card">
+                <div class="module-icon">✍️</div>
+                <h2 class="module-title">Sentence Transformation</h2>
+                <p class="module-description">
+                    Upgrade basic sentences to professional B2+ writing. Progressive hints, multiple examples, and guidance on formal communication styles.
+                </p>
+                <p class="module-count">65 transformation exercises</p>
             </a>
-
-            <a href="technology.html" class="category-card">
-                <div class="category-icon">💻</div>
-                <h2>Technology & Modern Warfare</h2>
-                <p>Debate the role of advanced technology, autonomous weapons, and social media in military</p>
-                <span class="topic-count">3 Topics</span>
-            </a>
-
-            <a href="education.html" class="category-card">
-                <div class="category-icon">📚</div>
-                <h2>Education & Learning</h2>
-                <p>Discuss university degrees, online learning, language education, and grading systems</p>
-                <span class="topic-count">4 Topics</span>
-            </a>
-
-            <a href="work.html" class="category-card">
-                <div class="category-icon">💼</div>
-                <h2>Work & Career</h2>
-                <p>Explore remote work, career changes, retirement age, and salary transparency</p>
-                <span class="topic-count">4 Topics</span>
-            </a>
-
-            <a href="health.html" class="category-card">
-                <div class="category-icon">🏥</div>
-                <h2>Health & Lifestyle</h2>
-                <p>Debate healthcare systems, healthy lifestyle incentives, physical education, and alternative medicine</p>
-                <span class="topic-count">4 Topics</span>
-            </a>
-
-            <a href="environment.html" class="category-card">
-                <div class="category-icon">🌍</div>
-                <h2>Environment & Transportation</h2>
-                <p>Discuss car ownership, nuclear energy, environmental protection, and air travel</p>
-                <span class="topic-count">4 Topics</span>
-            </a>
-
-            <a href="family.html" class="category-card">
-                <div class="category-icon">👨‍👩‍👧‍👦</div>
-                <h2>Family & Social Issues</h2>
-                <p>Explore parental leave, multigenerational living, pet ownership, and marriage</p>
-                <span class="topic-count">4 Topics</span>
-            </a>
-
-            <a href="urban.html" class="category-card">
-                <div class="category-icon">🏙️</div>
-                <h2>Urban Life & Housing</h2>
-                <p>Debate city vs. rural living, car-free zones, housing policy, and smart cities</p>
-                <span class="topic-count">4 Topics</span>
-            </a>
-
-            <a href="media.html" class="category-card">
-                <div class="category-icon">📰</div>
-                <h2>Media & Culture</h2>
-                <p>Discuss news media trustworthiness, cultural preservation, streaming services, and reading</p>
-                <span class="topic-count">4 Topics</span>
-            </a>
-
-            <a href="consumer.html" class="category-card">
-                <div class="category-icon">🛒</div>
-                <h2>Consumer & Economics</h2>
-                <p>Explore consumerism, online shopping, tipping culture, and quality vs. price</p>
-                <span class="topic-count">4 Topics</span>
-            </a>
-
-            <a href="travel.html" class="category-card">
-                <div class="category-icon">✈️</div>
-                <h2>Travel & Tourism</h2>
-                <p>Debate mass tourism impact, travel for personal development, and travel styles</p>
-                <span class="topic-count">3 Topics</span>
+            
+            <a href="stanag_vocab_game.html" class="module-card">
+                <div class="module-icon">🎯</div>
+                <h2 class="module-title">Vocabulary Training</h2>
+                <p class="module-description">
+                    Master advanced vocabulary with 3 progressive difficulty modes. Practice 79 carefully selected words including problem-related terms (controversial, thorny, pressing) for professional military English.
+                </p>
+                <p class="module-count">79 vocabulary items • 3 game modes</p>
             </a>
         </div>
-
-        <footer>
-            <p><strong>Comprehensive Debate Topics</strong> | STANAG Level 3 (B2) | Czech Armed Forces English Education</p>
-            <p style="margin-top: 10px;">Each topic includes arguments, vocabulary practice, and B2-level examples</p>
-        </footer>
     </div>
 </body>
 </html>
