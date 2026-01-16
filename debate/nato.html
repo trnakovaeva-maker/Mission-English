@@ -315,37 +315,6 @@
             font-size: 0.9rem;
         }
         
-        .speaker-btn {
-            background: none;
-            border: none;
-            color: var(--blue-light);
-            cursor: pointer;
-            font-size: 1.2rem;
-            padding: 5px;
-            margin-left: 8px;
-            transition: all 0.2s ease;
-            border-radius: 4px;
-        }
-        
-        .speaker-btn:hover {
-            color: var(--accent);
-            background: rgba(230, 57, 70, 0.1);
-        }
-        
-        .speaker-btn:active {
-            transform: scale(0.95);
-        }
-        
-        .speaker-btn.speaking {
-            color: var(--accent);
-            animation: pulse 0.5s ease-in-out infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        
         .vocab-feedback {
             padding: 20px;
             border-radius: 8px;
@@ -468,7 +437,7 @@
 
         <div id="topicSelection" class="section active">
             <div class="card">
-                <h2>Select a Topic</h2>
+                <h2>Select a Topic (6 Topics)</h2>
                 <ul class="topic-list">
                     <li class="topic-item" onclick="selectTopic(0)">
                         <h3>Topic 4: NATO Expansion</h3>
@@ -478,6 +447,15 @@
                     </li>
                     <li class="topic-item" onclick="selectTopic(2)">
                         <h3>Topic 6: European Defense Autonomy</h3>
+                    </li>
+                    <li class="topic-item" onclick="selectTopic(3)">
+                        <h3>Topic 13: Defense Spending Requirements</h3>
+                    </li>
+                    <li class="topic-item" onclick="selectTopic(4)">
+                        <h3>Topic 14: Humanitarian Military Intervention</h3>
+                    </li>
+                    <li class="topic-item" onclick="selectTopic(5)">
+                        <h3>Topic 15: UN Peacekeeping Operations</h3>
                     </li>
                 </ul>
             </div>
@@ -606,300 +584,144 @@
     <script>
         const topics = [
             {
-                        "topic": "Further NATO expansion enhances European security",
-                        "for": [
-                                    "Expansion extends stability to new regions",
-                                    "Larger alliance deters potential adversaries",
-                                    "Sovereign nations have right to choose security arrangements"
-                        ],
-                        "against": [
-                                    "Expansion provokes Russia unnecessarily",
-                                    "Extended commitments dilute alliance strength",
-                                    "Some candidate countries lack sufficient capabilities"
-                        ],
-                        "vocabulary": [
-                                    {
-                                                "term": "collective defense",
-                                                "definition": "mutual protection agreement among allies"
-                                    },
-                                    {
-                                                "term": "Article 5",
-                                                "definition": "NATO treaty clause declaring attack on one is attack on all"
-                                    },
-                                    {
-                                                "term": "deterrence",
-                                                "definition": "prevention of action through fear of consequences"
-                                    },
-                                    {
-                                                "term": "sovereignty",
-                                                "definition": "supreme authority of a state over its territory"
-                                    },
-                                    {
-                                                "term": "enlargement",
-                                                "definition": "process of expanding alliance membership"
-                                    },
-                                    {
-                                                "term": "geopolitical",
-                                                "definition": "relating to politics influenced by geography"
-                                    },
-                                    {
-                                                "term": "adversary",
-                                                "definition": "opponent or enemy in conflict"
-                                    },
-                                    {
-                                                "term": "dilute",
-                                                "definition": "to weaken or reduce the strength of something"
-                                    }
-                        ],
-                        "exampleFor": "I firmly believe NATO expansion enhances European security. The expansion to include Finland and Sweden demonstrates this—both countries concluded NATO membership provides security neutrality cannot guarantee. When democratic nations join NATO, they gain protection while contributing capabilities to collective defense. Furthermore, expansion extends stability to previously unstable regions. The argument that expansion 'provokes' Russia is misguided—sovereign nations have the right to choose their security arrangements. History shows NATO expansion has been successful; former Warsaw Pact countries that joined have become stable democracies. Therefore, when countries meet NATO's standards and wish to join, the alliance should welcome them.",
-                        "exampleAgainst": "I believe further NATO expansion creates more problems than it solves. While expansion may benefit individual countries, it weakens the alliance by extending collective defense commitments without proportional capability increases. Each expansion dilutes the alliance's ability to respond effectively. Moreover, continued eastward expansion unnecessarily provokes Russia, increasing tensions. We must acknowledge geopolitical realities—Russia views NATO expansion toward its borders as existential threat. The situation in Ukraine partially resulted from NATO's intention to include Ukraine. Rather than endless expansion, European security would benefit from strengthening existing NATO capabilities and exploring alternative security arrangements."
+                topic: "Further NATO expansion enhances European security",
+                for: [
+                    "Expansion extends stability to new regions",
+                    "Larger alliance deters potential adversaries",
+                    "Sovereign nations have right to choose security arrangements"
+                ],
+                against: [
+                    "Expansion provokes Russia unnecessarily",
+                    "Extended commitments dilute alliance strength",
+                    "Some candidate countries lack sufficient capabilities"
+                ],
+                vocabulary: [
+                    { term: "collective defense", definition: "mutual protection agreement among allies" },
+                    { term: "Article 5", definition: "NATO treaty clause declaring attack on one is attack on all" },
+                    { term: "deterrence", definition: "prevention of action through fear of consequences" },
+                    { term: "sovereignty", definition: "supreme authority of a state over its territory" },
+                    { term: "enlargement", definition: "process of expanding alliance membership" },
+                    { term: "geopolitical", definition: "relating to politics influenced by geography" }
+                ],
+                exampleFor: "I firmly believe NATO expansion enhances European security. The expansion to include Finland and Sweden demonstrates this—both countries concluded NATO membership provides security neutrality cannot guarantee. When democratic nations join NATO, they gain protection while contributing capabilities to collective defense. Furthermore, expansion extends stability to previously unstable regions. The argument that expansion 'provokes' Russia is misguided—sovereign nations have the right to choose their security arrangements. History shows NATO expansion has been successful; former Warsaw Pact countries that joined have become stable democracies. Therefore, when countries meet NATO's standards and wish to join, the alliance should welcome them.",
+                exampleAgainst: "I believe further NATO expansion creates more problems than it solves. While expansion may benefit individual countries, it weakens the alliance by extending collective defense commitments without proportional capability increases. Each expansion dilutes the alliance's ability to respond effectively. Moreover, continued eastward expansion unnecessarily provokes Russia, increasing tensions. We must acknowledge geopolitical realities—Russia views NATO expansion toward its borders as existential threat. The situation in Ukraine partially resulted from NATO's intention to include Ukraine. Rather than endless expansion, European security would benefit from strengthening existing NATO capabilities and exploring alternative security arrangements."
             },
             {
-                        "topic": "Czech forces should primarily focus on national defense rather than international deployments",
-                        "for": [
-                                    "Territorial defense is primary military duty",
-                                    "Limited resources should focus on direct threats",
-                                    "Russian aggression requires European defense focus"
-                        ],
-                        "against": [
-                                    "NATO membership requires contributing to collective security",
-                                    "International deployments provide valuable experience",
-                                    "Forward defense prevents threats reaching home"
-                        ],
-                        "vocabulary": [
-                                    {
-                                                "term": "expeditionary operations",
-                                                "definition": "military missions conducted away from home territory"
-                                    },
-                                    {
-                                                "term": "territorial defense",
-                                                "definition": "protection of national borders and homeland"
-                                    },
-                                    {
-                                                "term": "force projection",
-                                                "definition": "ability to deploy military power beyond borders"
-                                    },
-                                    {
-                                                "term": "interoperability",
-                                                "definition": "capability to operate effectively with allied forces"
-                                    },
-                                    {
-                                                "term": "alliance commitments",
-                                                "definition": "obligations under mutual defense agreements"
-                                    },
-                                    {
-                                                "term": "lessons learned",
-                                                "definition": "insights gained from operational experience"
-                                    },
-                                    {
-                                                "term": "prioritize",
-                                                "definition": "to treat as more important than other things"
-                                    },
-                                    {
-                                                "term": "paramount",
-                                                "definition": "more important than anything else; supreme"
-                                    },
-                                    {
-                                                "term": "flank",
-                                                "definition": "the side of a military formation or defensive position"
-                                    },
-                                    {
-                                                "term": "disperse",
-                                                "definition": "to spread over a wide area; scatter"
-                                    }
-                        ],
-                        "exampleFor": "Given the current security environment, I believe Czech forces should prioritize national defense. Russia's invasion of Ukraine demonstrates that territorial defense remains paramount. The Czech Republic has limited military resources, and these should focus on defending our borders and NATO's eastern flank rather than dispersing to distant theaters. While I recognize alliance obligations, we can fulfill these through contributions supporting European defense rather than expeditionary missions with questionable value. Keeping forces focused on territorial defense ensures higher readiness for actual threats to Czech security. The lessons from international deployments don't outweigh the need for forces trained specifically for defending Czech territory.",
-                        "exampleAgainst": "I disagree with limiting Czech forces to national defense alone. As NATO members, we benefit from collective defense—if attacked, we expect allies to help. Therefore, we have obligation to contribute beyond our borders. International deployments provide invaluable benefits improving our national defense capability. Czech soldiers gain operational experience in challenging environments impossible to replicate through exercises. They develop interoperability skills working alongside allies, essential if we need to operate in coalition defending our territory. Contributing to international missions enhances Czech Republic's standing in NATO and gives us greater voice in alliance decisions. Refusing participation would undermine the collective security we depend on."
+                topic: "Czech forces should primarily focus on national defense rather than international deployments",
+                for: [
+                    "Territorial defense is primary military duty",
+                    "Limited resources should focus on direct threats",
+                    "Russian aggression requires European defense focus"
+                ],
+                against: [
+                    "NATO membership requires contributing to collective security",
+                    "International deployments provide valuable experience",
+                    "Forward defense prevents threats reaching home"
+                ],
+                vocabulary: [
+                    { term: "expeditionary operations", definition: "military missions conducted away from home territory" },
+                    { term: "territorial defense", definition: "protection of national borders and homeland" },
+                    { term: "force projection", definition: "ability to deploy military power beyond borders" },
+                    { term: "interoperability", definition: "capability to operate effectively with allied forces" },
+                    { term: "alliance commitments", definition: "obligations under mutual defense agreements" },
+                    { term: "lessons learned", definition: "insights gained from operational experience" }
+                ],
+                exampleFor: "Given the current security environment, I believe Czech forces should prioritize national defense. Russia's invasion of Ukraine demonstrates that territorial defense remains paramount. The Czech Republic has limited military resources, and these should focus on defending our borders and NATO's eastern flank rather than dispersing to distant theaters. While I recognize alliance obligations, we can fulfill these through contributions supporting European defense rather than expeditionary missions with questionable value. Keeping forces focused on territorial defense ensures higher readiness for actual threats to Czech security. The lessons from international deployments don't outweigh the need for forces trained specifically for defending Czech territory.",
+                exampleAgainst: "I disagree with limiting Czech forces to national defense alone. As NATO members, we benefit from collective defense—if attacked, we expect allies to help. Therefore, we have obligation to contribute beyond our borders. International deployments provide invaluable benefits improving our national defense capability. Czech soldiers gain operational experience in challenging environments impossible to replicate through exercises. They develop interoperability skills working alongside allies, essential if we need to operate in coalition defending our territory. Contributing to international missions enhances Czech Republic's standing in NATO and gives us greater voice in alliance decisions. Refusing participation would undermine the collective security we depend on."
             },
             {
-                        "topic": "European nations should develop independent defense capabilities separate from NATO",
-                        "for": [
-                                    "Europe needs strategic autonomy from America",
-                                    "American political changes create uncertainty",
-                                    "Europe has unique security interests"
-                        ],
-                        "against": [
-                                    "European autonomy would weaken NATO",
-                                    "Parallel capabilities waste resources",
-                                    "Europe lacks America's technological advantage"
-                        ],
-                        "vocabulary": [
-                                    {
-                                                "term": "strategic autonomy",
-                                                "definition": "ability to act independently in security matters"
-                                    },
-                                    {
-                                                "term": "transatlantic alliance",
-                                                "definition": "partnership between North America and Europe"
-                                    },
-                                    {
-                                                "term": "burden sharing",
-                                                "definition": "distribution of defense costs among allies"
-                                    },
-                                    {
-                                                "term": "defense integration",
-                                                "definition": "combining military capabilities and planning"
-                                    },
-                                    {
-                                                "term": "force projection",
-                                                "definition": "ability to deploy and sustain forces abroad"
-                                    },
-                                    {
-                                                "term": "defense industry",
-                                                "definition": "sector producing military equipment and technology"
-                                    },
-                                    {
-                                                "term": "align with",
-                                                "definition": "to be in agreement or cooperation with"
-                                    },
-                                    {
-                                                "term": "engage",
-                                                "definition": "to participate or become involved in"
-                                    },
-                                    {
-                                                "term": "abandon",
-                                                "definition": "to give up completely; to leave behind"
-                                    },
-                                    {
-                                                "term": "pursue",
-                                                "definition": "to follow or work toward a goal"
-                                    },
-                                    {
-                                                "term": "undermine",
-                                                "definition": "to weaken or damage gradually"
-                                    },
-                                    {
-                                                "term": "diverge",
-                                                "definition": "to develop in different directions; to differ"
-                                    }
-                        ],
-                        "exampleFor": "I support developing greater European defense autonomy, though not complete NATO separation. Europe cannot indefinitely depend on American military protection, especially given growing American focus on Asia-Pacific and recurring questions about commitment. Trump administration's NATO skepticism demonstrated European security cannot rely on assumptions about permanent American engagement. Furthermore, Europe has distinct strategic interests that don't always align with American priorities. Developing independent European capabilities would give flexibility to protect our interests when America chooses not to engage. This doesn't mean abandoning NATO, but building European capability to act independently when necessary. While requiring investment, it's essential for genuine European sovereignty.",
-                        "exampleAgainst": "I believe pursuing European defense autonomy would be strategically foolish and practically impossible. The transatlantic alliance has provided unprecedented security and prosperity for 75 years—we should strengthen it, not undermine it. European nations lack resources, technology, and political unity to match what NATO provides through American partnership. Attempting autonomous European forces would duplicate capabilities inefficiently, wasting resources that could strengthen NATO instead. The idea that European and American strategic interests fundamentally diverge is exaggerated. Russia's invasion proved NATO's vital importance; Europe's response depended heavily on American support. Rather than pursuing illusory autonomy, European nations should fulfill existing NATO commitments and work within the alliance framework."
+                topic: "European nations should develop independent defense capabilities separate from NATO",
+                for: [
+                    "Europe needs strategic autonomy from America",
+                    "American political changes create uncertainty",
+                    "Europe has unique security interests"
+                ],
+                against: [
+                    "European autonomy would weaken NATO",
+                    "Parallel capabilities waste resources",
+                    "Europe lacks America's technological advantage"
+                ],
+                vocabulary: [
+                    { term: "strategic autonomy", definition: "ability to act independently in security matters" },
+                    { term: "transatlantic alliance", definition: "partnership between North America and Europe" },
+                    { term: "burden sharing", definition: "distribution of defense costs among allies" },
+                    { term: "defense integration", definition: "combining military capabilities and planning" },
+                    { term: "force projection", definition: "ability to deploy and sustain forces abroad" },
+                    { term: "defense industry", definition: "sector producing military equipment and technology" }
+                ],
+                exampleFor: "I support developing greater European defense autonomy, though not complete NATO separation. Europe cannot indefinitely depend on American military protection, especially given growing American focus on Asia-Pacific and recurring questions about commitment. Trump administration's NATO skepticism demonstrated European security cannot rely on assumptions about permanent American engagement. Furthermore, Europe has distinct strategic interests that don't always align with American priorities. Developing independent European capabilities would give flexibility to protect our interests when America chooses not to engage. This doesn't mean abandoning NATO, but building European capability to act independently when necessary. While requiring investment, it's essential for genuine European sovereignty.",
+                exampleAgainst: "I believe pursuing European defense autonomy would be strategically foolish and practically impossible. The transatlantic alliance has provided unprecedented security and prosperity for 75 years—we should strengthen it, not undermine it. European nations lack resources, technology, and political unity to match what NATO provides through American partnership. Attempting autonomous European forces would duplicate capabilities inefficiently, wasting resources that could strengthen NATO instead. The idea that European and American strategic interests fundamentally diverge is exaggerated. Russia's invasion proved NATO's vital importance; Europe's response depended heavily on American support. Rather than pursuing illusory autonomy, European nations should fulfill existing NATO commitments and work within the alliance framework."
             },
             {
-                        "topic": "UN peacekeeping missions are ineffective and should be reformed or abolished",
-                        "for": [
-                                    "UN peacekeepers lack mandate and resources to prevent violence effectively",
-                                    "Many missions become permanent with no clear exit strategy or success criteria",
-                                    "Peacekeepers sometimes commit abuses without accountability"
-                        ],
-                        "against": [
-                                    "Peacekeeping operations prevent conflicts from escalating into wider wars",
-                                    "Missions provide neutral presence that hostile parties will accept",
-                                    "Success stories like Namibia and Cambodia demonstrate peacekeeping works"
-                        ],
-                        "vocabulary": [
-                                    {
-                                                "term": "peacekeeping",
-                                                "definition": "deployment of international forces to maintain peace and security"
-                                    },
-                                    {
-                                                "term": "mandate",
-                                                "definition": "official authorization to carry out specific tasks"
-                                    },
-                                    {
-                                                "term": "neutral presence",
-                                                "definition": "impartial force not favoring any side in conflict"
-                                    },
-                                    {
-                                                "term": "escalate",
-                                                "definition": "to increase in intensity or seriousness"
-                                    },
-                                    {
-                                                "term": "accountability",
-                                                "definition": "responsibility to answer for actions and decisions"
-                                    },
-                                    {
-                                                "term": "exit strategy",
-                                                "definition": "plan for ending involvement and withdrawing forces"
-                                    }
-                        ],
-                        "exampleFor": "I believe UN peacekeeping missions have proven largely ineffective and require fundamental reform or abolition. Peacekeepers repeatedly fail to prevent violence they are deployed to stop. Rwanda in 1994 and Srebrenica in 1995 stand as terrible examples where UN forces watched genocides unfold without intervening. Peacekeepers often lack proper mandate, equipment, or rules of engagement to actually protect civilians. Furthermore, many missions become permanent fixtures without achieving peace—UN forces have been in Cyprus since 1964 with no resolution. Additionally, peacekeeping scandals involving sexual abuse and exploitation damage UN credibility. The Czech Republic contributes personnel and funding to these missions, yet evidence suggests the system fundamentally doesn't work. Rather than continuing failed approaches, the international community should develop new mechanisms for conflict resolution.",
-                        "exampleAgainst": "I disagree with dismissing UN peacekeeping as ineffective. While some missions face challenges, peacekeeping has achieved significant successes that prevent suffering and save lives. Countries like Namibia, Cambodia, and Mozambique transitioned from war to peace with UN assistance. Peacekeeping operations stop local conflicts from escalating into regional wars that could threaten global security. The neutral UN presence allows hostile parties to negotiate who would reject intervention by powerful nations with their own interests. Critics focus on failures while ignoring the many conflicts prevented from worsening. Problems with specific missions indicate need for improvement, not abolition. Strengthening peacekeeping mandates, improving training, and ensuring accountability would address weaknesses while maintaining this valuable tool for international peace and security."
+                topic: "All NATO members should be required to spend 2% of GDP on defense",
+                for: [
+                    "Equal contributions ensure fair burden sharing",
+                    "Consistent spending maintains alliance capabilities",
+                    "Mandatory requirement demonstrates commitment"
+                ],
+                against: [
+                    "Different countries have different economic situations",
+                    "Quality of spending matters more than quantity",
+                    "Geographic location affects defense needs"
+                ],
+                vocabulary: [
+                    { term: "GDP", definition: "Gross Domestic Product, total value of goods and services produced" },
+                    { term: "burden sharing", definition: "distribution of defense costs among allies" },
+                    { term: "defense budget", definition: "money allocated for military spending" },
+                    { term: "alliance commitment", definition: "dedication to mutual defense obligations" },
+                    { term: "military capability", definition: "ability to conduct military operations" },
+                    { term: "fiscal policy", definition: "government approach to spending and taxation" }
+                ],
+                exampleFor: "I believe all NATO members should be required to spend 2% of GDP on defense. This ensures fair burden sharing—currently, some countries spend much less while benefiting from NATO protection, creating unfair burden on nations meeting the requirement. When all members contribute adequately, the alliance maintains necessary military capabilities to deter threats effectively. The 2% target demonstrates serious commitment to mutual defense, strengthening trust among allies. While some nations face economic challenges, national security is fundamental government responsibility justifying this investment. Therefore, making the 2% requirement mandatory would create a stronger, more equitable alliance.",
+                exampleAgainst: "I believe not all NATO members should be required to spend 2% of GDP on defense. A strict requirement ignores that countries have different economic situations—some are recovering from difficulties or have small economies where 2% represents enormous amounts. Additionally, quality of defense spending matters more than quantity; some countries contribute valuable specialized capabilities or strategic locations benefiting NATO even with spending below 2%. Forcing all countries to meet this target could lead to wasteful spending on unnecessary equipment just to reach the percentage. Therefore, NATO should evaluate contributions based on multiple factors, not just a single spending percentage."
             },
             {
-                        "topic": "The NATO 2% defense spending target should be increased to 3%",
-                        "for": [
-                                    "Current threats from Russia and China require increased defense investment",
-                                    "European militaries are severely underfunded and need modernization",
-                                    "Higher spending demonstrates serious commitment to collective defense"
-                        ],
-                        "against": [
-                                    "Many NATO countries struggle to reach even 2% target currently",
-                                    "Increased spending diverts resources from healthcare, education, and infrastructure",
-                                    "Better coordination and efficiency more important than simply spending more"
-                        ],
-                        "vocabulary": [
-                                    {
-                                                "term": "defense spending",
-                                                "definition": "government expenditure on military forces and equipment"
-                                    },
-                                    {
-                                                "term": "GDP",
-                                                "definition": "Gross Domestic Product; total value of goods and services produced"
-                                    },
-                                    {
-                                                "term": "modernization",
-                                                "definition": "updating equipment and capabilities with newer technology"
-                                    },
-                                    {
-                                                "term": "collective defense",
-                                                "definition": "mutual protection agreement among alliance members"
-                                    },
-                                    {
-                                                "term": "capability gap",
-                                                "definition": "difference between current and required military capacity"
-                                    },
-                                    {
-                                                "term": "fiscal burden",
-                                                "definition": "financial cost or strain on government budget"
-                                    }
-                        ],
-                        "exampleFor": "I strongly believe NATO should increase its defense spending target from 2% to 3% of GDP. The security environment has deteriorated dramatically since the 2% target was established. Russia's invasion of Ukraine demonstrated that European militaries lack sufficient forces, ammunition, and capabilities to defend themselves without massive American support. China's military expansion threatens the Indo-Pacific, requiring the United States to focus resources there rather than Europe. European NATO members must take responsibility for their own defense by significantly increasing investment. Many European militaries cannot sustain operations for more than days or weeks due to inadequate funding. The 2% target proved insufficient—most countries failed to meet even that modest goal. Raising the target to 3% would signal serious commitment and provide resources necessary for credible deterrence and defense.",
-                        "exampleAgainst": "I oppose increasing NATO's defense spending target to 3% of GDP. Most NATO members still fail to reach the current 2% target, so raising it to 3% seems unrealistic and counterproductive. Many European countries face economic challenges and aging populations requiring investment in healthcare, pensions, and infrastructure. Forcing governments to spend 3% on defense would require massive cuts to social programs or huge tax increases that citizens would resist. Furthermore, the problem isn't just spending levels but how money is spent. European nations duplicate capabilities inefficiently rather than coordinating procurement. Better integration, shared resources, and eliminating waste would improve defense more effectively than simply demanding higher spending. We should focus on meeting existing commitments and spending smartly before increasing targets."
+                topic: "Military intervention should be authorized for humanitarian purposes",
+                for: [
+                    "Moral obligation to prevent atrocities",
+                    "Can save civilian lives in crisis situations",
+                    "Demonstrates international commitment to human rights"
+                ],
+                against: [
+                    "Violates national sovereignty principles",
+                    "Risk of mission creep and prolonged involvement",
+                    "Difficult to define clear intervention criteria"
+                ],
+                vocabulary: [
+                    { term: "humanitarian intervention", definition: "military action to prevent human rights violations" },
+                    { term: "sovereignty", definition: "supreme authority of a state over its territory" },
+                    { term: "mission creep", definition: "gradual expansion of objectives beyond original plan" },
+                    { term: "atrocities", definition: "extremely cruel or violent acts" },
+                    { term: "human rights", definition: "fundamental freedoms belonging to all people" },
+                    { term: "international law", definition: "rules governing relations between nations" }
+                ],
+                exampleFor: "I believe military intervention should be authorized for humanitarian purposes because the international community has moral responsibility to protect innocent people from mass atrocities. When governments commit genocide or allow systematic violence against civilians, the world cannot simply watch and do nothing. Military intervention can stop ethnic cleansing, prevent massacres, and save thousands of lives. While national sovereignty is important, no government should hide behind sovereignty while committing crimes against humanity. The United Nations recognizes that protection of human rights sometimes requires action across borders. Therefore, humanitarian military intervention is justified when it prevents large-scale human suffering.",
+                exampleAgainst: "I believe military intervention should not be authorized for humanitarian purposes because it violates national sovereignty and often creates more problems than it solves. Each country has the right to manage its own internal affairs without foreign military forces entering its territory. Humanitarian interventions frequently lead to mission creep, where forces become involved in long-term nation-building they weren't prepared for. Furthermore, it's very difficult to establish clear criteria for when intervention is justified, which means powerful countries might use humanitarian reasons as excuses for pursuing political interests. History shows many interventions intended to help people have resulted in prolonged conflicts and instability. Therefore, the international community should focus on diplomatic solutions rather than military intervention."
             },
             {
-                        "topic": "Private military contractors should be prohibited from combat operations",
-                        "for": [
-                                    "Combat operations are state responsibility that should not be outsourced to profit-seeking companies",
-                                    "Contractors operate outside military justice system and lack proper accountability",
-                                    "Using contractors allows governments to hide true costs and casualties of war"
-                        ],
-                        "against": [
-                                    "Contractors provide specialized skills and flexibility that regular militaries lack",
-                                    "Frees up regular forces for combat roles while contractors handle support functions",
-                                    "Market competition makes contractor services more cost-effective than expanding military"
-                        ],
-                        "vocabulary": [
-                                    {
-                                                "term": "military contractor",
-                                                "definition": "private company providing military-related services for profit"
-                                    },
-                                    {
-                                                "term": "outsource",
-                                                "definition": "to hire external organizations to perform functions"
-                                    },
-                                    {
-                                                "term": "accountability",
-                                                "definition": "obligation to answer for actions and accept responsibility"
-                                    },
-                                    {
-                                                "term": "rules of engagement",
-                                                "definition": "directives defining when and how force may be used"
-                                    },
-                                    {
-                                                "term": "oversight",
-                                                "definition": "supervision and monitoring of activities"
-                                    },
-                                    {
-                                                "term": "casualty",
-                                                "definition": "person killed or injured in war or accident"
-                                    }
-                        ],
-                        "exampleFor": "I firmly believe private military contractors should be prohibited from combat operations. The use of force is fundamental state responsibility that should never be outsourced to profit-seeking companies. Contractors like Blackwater in Iraq committed serious violations without facing proper accountability because they operated outside military justice systems. When contractors die, governments don't report them as military casualties, allowing politicians to hide the true human cost of conflicts from citizens. Furthermore, contractors prioritize profit over mission success and moral conduct. Unlike soldiers bound by military codes and training, contractors may take unnecessary risks or use excessive force. Democratic societies should not allow private companies to wage war on their behalf. Combat operations require the discipline, accountability, and ethical standards that only properly regulated military forces can provide.",
-                        "exampleAgainst": "I disagree with prohibiting contractors from combat operations. Modern militaries require diverse specialized skills that would be impossible to maintain in regular forces. Contractors provide expertise in areas like logistics, security, intelligence analysis, and technical support more efficiently than expanding military personnel. This flexibility allows regular forces to focus on core combat roles while contractors handle support functions. Many contractors are former military personnel bringing valuable experience. Furthermore, in operations like protecting diplomatic facilities or training foreign forces, contractors often perform better than deploying regular troops. Market competition makes contractor services cost-effective compared to maintaining large standing armies. Rather than blanket prohibition, we need better regulation, oversight, and clear rules of engagement for contractors. Used properly, contractors enhance military capabilities while reducing burden on regular forces."
+                topic: "UN peacekeeping forces should be given more robust rules of engagement",
+                for: [
+                    "Current limitations prevent protection of civilians",
+                    "Peacekeepers need authority to counter armed groups",
+                    "Enhances mission effectiveness and credibility"
+                ],
+                against: [
+                    "May escalate conflicts and increase casualties",
+                    "Compromises perceived neutrality",
+                    "Requires more resources and training"
+                ],
+                vocabulary: [
+                    { term: "rules of engagement", definition: "directives defining when force may be used" },
+                    { term: "peacekeeping", definition: "military operations maintaining peace between parties" },
+                    { term: "mandate", definition: "official authorization to carry out policy" },
+                    { term: "neutrality", definition: "impartiality in conflicts" },
+                    { term: "civilian protection", definition: "safeguarding non-combatants from violence" },
+                    { term: "escalation", definition: "increase in intensity of conflict" }
+                ],
+                exampleFor: "I believe UN peacekeeping forces should be given more robust rules of engagement because current restrictions prevent them from effectively protecting civilians. In many conflict zones, peacekeepers can only watch while armed groups attack innocent people because their limited mandate doesn't allow intervention with force. More permissive rules of engagement would enable peacekeepers to actively defend civilians and deter violence rather than simply observing it. This would make peacekeeping missions more successful and restore credibility to UN operations criticized for failing to prevent atrocities. While stronger rules might involve some risks, they would ultimately save more lives than the current passive approach.",
+                exampleAgainst: "I believe UN peacekeeping forces should not be given more robust rules of engagement because this would fundamentally change their role and likely make conflicts worse. Peacekeepers succeed when they're seen as neutral observers who don't favor any side. If UN forces start using significant military force, they become another armed party in the conflict rather than neutral peacekeepers, which destroys the trust allowing them to operate effectively. Additionally, more aggressive rules require much more training, equipment, and financial resources that many contributing countries cannot provide. Stronger military action by peacekeepers could escalate violence and lead to increased casualties. Therefore, UN peacekeeping should maintain its traditional approach and focus on creating conditions for diplomatic solutions."
             }
-];
+        ];
 
         let currentTopicIndex = null;
         let currentVocabSet = [];
@@ -954,18 +776,6 @@
             }
         }
 
-
-        function goDirectToArgumentBuilder() {
-            const topic = topics[currentTopicIndex];
-            document.getElementById('argTopicTitle').textContent = topic.topic;
-            document.getElementById('exampleFor').textContent = topic.exampleFor;
-            document.getElementById('exampleAgainst').textContent = topic.exampleAgainst;
-            
-            document.getElementById('topicDisplay').classList.remove('active');
-            document.getElementById('argumentBuilder').classList.add('active');
-            window.scrollTo(0, 0);
-        }
-
         function backToTopics() {
             document.getElementById('topicDisplay').classList.remove('active');
             document.getElementById('topicSelection').classList.add('active');
@@ -989,28 +799,6 @@
             window.scrollTo(0, 0);
         }
 
-        function speakText(text, button) {
-            // Cancel any ongoing speech
-            window.speechSynthesis.cancel();
-            
-            // Create new speech utterance
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.rate = 0.9; // Slightly slower for clarity
-            utterance.pitch = 1;
-            utterance.volume = 1;
-            
-            // Add speaking class for visual feedback
-            button.classList.add('speaking');
-            
-            // Remove speaking class when done
-            utterance.onend = () => {
-                button.classList.remove('speaking');
-            };
-            
-            // Speak the text
-            window.speechSynthesis.speak(utterance);
-        }
-
         function initVocabGame() {
             matchedPairs = [];
             selectedTerm = null;
@@ -1026,44 +814,20 @@
             
             const shuffledDefs = [...currentVocabSet].sort(() => Math.random() - 0.5);
             
-                        currentVocabSet.forEach((pair, index) => {
+            currentVocabSet.forEach((pair, index) => {
                 const termDiv = document.createElement('div');
                 termDiv.className = 'vocab-item';
                 termDiv.dataset.index = index;
-                
-                // Create speaker button
-                const speakerBtn = document.createElement('button');
-                speakerBtn.className = 'speaker-btn';
-                speakerBtn.innerHTML = '🔊';
-                speakerBtn.title = 'Listen to pronunciation';
-                speakerBtn.onclick = (e) => {
-                    e.stopPropagation(); // Prevent selecting the term
-                    speakText(pair.term, speakerBtn);
-                };
-                
                 termDiv.innerHTML = `<div class="vocab-number">${index + 1}</div><div>${pair.term}</div>`;
-                termDiv.appendChild(speakerBtn);
                 termDiv.onclick = () => selectVocabTerm(index);
                 termsContainer.appendChild(termDiv);
             });
             
-                        shuffledDefs.forEach((pair, index) => {
+            shuffledDefs.forEach((pair, index) => {
                 const defDiv = document.createElement('div');
                 defDiv.className = 'vocab-item';
                 defDiv.dataset.term = pair.term;
-                
-                // Create speaker button for definition
-                const speakerBtn = document.createElement('button');
-                speakerBtn.className = 'speaker-btn';
-                speakerBtn.innerHTML = '🔊';
-                speakerBtn.title = 'Listen to definition';
-                speakerBtn.onclick = (e) => {
-                    e.stopPropagation(); // Prevent selecting the definition
-                    speakText(pair.definition, speakerBtn);
-                };
-                
                 defDiv.innerHTML = `<div class="vocab-number">${String.fromCharCode(65 + index)}</div><div>${pair.definition}</div>`;
-                defDiv.appendChild(speakerBtn);
                 defDiv.onclick = () => selectVocabDef(pair.term, defDiv);
                 defsContainer.appendChild(defDiv);
             });
@@ -1200,17 +964,6 @@
                 btn.textContent = 'Show Examples';
             }
         }
-
-        // Auto-open topic from URL hash (for random topic generator)
-        window.addEventListener('load', function() {
-            const hash = window.location.hash;
-            if (hash && hash.startsWith('#topic-')) {
-                const topicIndex = parseInt(hash.replace('#topic-', ''));
-                if (!isNaN(topicIndex) && topicIndex >= 0 && topicIndex < topics.length) {
-                    selectTopic(topicIndex);
-                }
-            }
-        });
     </script>
 </body>
 </html>

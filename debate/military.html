@@ -315,37 +315,6 @@
             font-size: 0.9rem;
         }
         
-        .speaker-btn {
-            background: none;
-            border: none;
-            color: var(--blue-light);
-            cursor: pointer;
-            font-size: 1.2rem;
-            padding: 5px;
-            margin-left: 8px;
-            transition: all 0.2s ease;
-            border-radius: 4px;
-        }
-        
-        .speaker-btn:hover {
-            color: var(--accent);
-            background: rgba(230, 57, 70, 0.1);
-        }
-        
-        .speaker-btn:active {
-            transform: scale(0.95);
-        }
-        
-        .speaker-btn.speaking {
-            color: var(--accent);
-            animation: pulse 0.5s ease-in-out infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        
         .vocab-feedback {
             padding: 20px;
             border-radius: 8px;
@@ -468,7 +437,7 @@
 
         <div id="topicSelection" class="section active">
             <div class="card">
-                <h2>Select a Topic</h2>
+                <h2>Select a Topic (6 Topics)</h2>
                 <ul class="topic-list">
                     <li class="topic-item" onclick="selectTopic(0)">
                         <h3>Topic 1: Professional vs. Conscript Military</h3>
@@ -478,6 +447,15 @@
                     </li>
                     <li class="topic-item" onclick="selectTopic(2)">
                         <h3>Topic 3: Specialization vs. Generalist Development</h3>
+                    </li>
+                    <li class="topic-item" onclick="selectTopic(3)">
+                        <h3>Topic 10: Physical Fitness Standards</h3>
+                    </li>
+                    <li class="topic-item" onclick="selectTopic(4)">
+                        <h3>Topic 11: Civilian Education vs. Military Training</h3>
+                    </li>
+                    <li class="topic-item" onclick="selectTopic(5)">
+                        <h3>Topic 12: Language Training Priority</h3>
                     </li>
                 </ul>
             </div>
@@ -605,285 +583,147 @@
 
     <script>
         const topics = [
+            // Topics 1-3 (Original)
             {
-                        "topic": "Professional armies are more effective than conscript-based forces for modern military operations",
-                        "for": [
-                                    "Career soldiers receive extensive specialized training",
-                                    "Volunteers are more motivated than conscripts",
-                                    "Modern weapons require years of expertise to master"
-                        ],
-                        "against": [
-                                    "Conscription provides larger trained reserves",
-                                    "Professional armies disconnect society from military",
-                                    "Volunteer forces are expensive to maintain"
-                        ],
-                        "vocabulary": [
-                                    {
-                                                "term": "conscription",
-                                                "definition": "compulsory military service"
-                                    },
-                                    {
-                                                "term": "reserve capacity",
-                                                "definition": "trained military personnel available for mobilization"
-                                    },
-                                    {
-                                                "term": "interoperability",
-                                                "definition": "ability to work effectively with allied forces"
-                                    },
-                                    {
-                                                "term": "readiness",
-                                                "definition": "state of being prepared for immediate action"
-                                    },
-                                    {
-                                                "term": "mobilization",
-                                                "definition": "process of assembling and organizing troops"
-                                    },
-                                    {
-                                                "term": "all-volunteer force",
-                                                "definition": "military composed entirely of career soldiers"
-                                    },
-                                    {
-                                                "term": "outweigh",
-                                                "definition": "to be more important or significant than something else"
-                                    },
-                                    {
-                                                "term": "mandatory",
-                                                "definition": "required by law or rules; compulsory"
-                                    },
-                                    {
-                                                "term": "oversight",
-                                                "definition": "supervision and monitoring of activities"
-                                    }
-                        ],
-                        "exampleFor": "In my view, professional armies are significantly more effective for modern military operations. Today's warfare demands sophisticated technical skills that require years of training to develop properly. For instance, operating advanced weapons systems like fighter jets or missile defense requires expertise that conscripts simply cannot acquire in one or two years of service. Furthermore, professional soldiers demonstrate higher motivation because they voluntarily chose this career path, whereas conscripts often count down the days until their mandatory service ends. While I acknowledge that conscription builds larger reserves, the complexity of contemporary warfare makes professional expertise essential for operational effectiveness.",
-                        "exampleAgainst": "I believe conscript-based forces remain important despite technological advances. While professional soldiers possess superior technical skills, conscription provides crucial benefits that professional armies cannot match. Firstly, conscript systems maintain much larger trained reserves that can be mobilized during major conflicts. Additionally, when citizens serve in the military, society maintains connection to defense issues, which strengthens democratic oversight. From a cost perspective, conscripts are far less expensive than career professionals requiring competitive salaries and long-term benefits. Therefore, I would argue that the benefits of conscription outweigh the technical advantages of professional forces."
+                topic: "Professional armies are more effective than conscript-based forces for modern military operations",
+                for: [
+                    "Career soldiers receive extensive specialized training",
+                    "Volunteers are more motivated than conscripts",
+                    "Modern weapons require years of expertise to master"
+                ],
+                against: [
+                    "Conscription provides larger trained reserves",
+                    "Professional armies disconnect society from military",
+                    "Volunteer forces are expensive to maintain"
+                ],
+                vocabulary: [
+                    { term: "conscription", definition: "compulsory military service" },
+                    { term: "reserve capacity", definition: "trained military personnel available for mobilization" },
+                    { term: "interoperability", definition: "ability to work effectively with allied forces" },
+                    { term: "readiness", definition: "state of being prepared for immediate action" },
+                    { term: "mobilization", definition: "process of assembling and organizing troops" },
+                    { term: "all-volunteer force", definition: "military composed entirely of career soldiers" }
+                ],
+                exampleFor: "In my view, professional armies are significantly more effective for modern military operations. Today's warfare demands sophisticated technical skills that require years of training to develop properly. For instance, operating advanced weapons systems like fighter jets or missile defense requires expertise that conscripts simply cannot acquire in one or two years of service. Furthermore, professional soldiers demonstrate higher motivation because they voluntarily chose this career path, whereas conscripts often count down the days until their mandatory service ends. While I acknowledge that conscription builds larger reserves, the complexity of contemporary warfare makes professional expertise essential for operational effectiveness.",
+                exampleAgainst: "I believe conscript-based forces remain important despite technological advances. While professional soldiers possess superior technical skills, conscription provides crucial benefits that professional armies cannot match. Firstly, conscript systems maintain much larger trained reserves that can be mobilized during major conflicts. Additionally, when citizens serve in the military, society maintains connection to defense issues, which strengthens democratic oversight. From a cost perspective, conscripts are far less expensive than career professionals requiring competitive salaries and long-term benefits. Therefore, I would argue that the benefits of conscription outweigh the technical advantages of professional forces."
             },
             {
-                        "topic": "The military demands too much personal sacrifice from service members and their families",
-                        "for": [
-                                    "Extended deployments damage family relationships",
-                                    "Frequent moves prevent spouse career development",
-                                    "Unpredictable schedules create constant stress"
-                        ],
-                        "against": [
-                                    "Members volunteer knowing the demands",
-                                    "Compensation packages offset personal sacrifices",
-                                    "Military service provides meaningful purpose"
-                        ],
-                        "vocabulary": [
-                                    {
-                                                "term": "deployment",
-                                                "definition": "assignment to a mission or operation away from home base"
-                                    },
-                                    {
-                                                "term": "operational tempo",
-                                                "definition": "pace and frequency of military activities"
-                                    },
-                                    {
-                                                "term": "morale",
-                                                "definition": "confidence and enthusiasm of personnel"
-                                    },
-                                    {
-                                                "term": "work-life balance",
-                                                "definition": "equilibrium between professional and personal life"
-                                    },
-                                    {
-                                                "term": "rotation",
-                                                "definition": "scheduled movement between assignments"
-                                    },
-                                    {
-                                                "term": "spouse",
-                                                "definition": "husband or wife of a military service member"
-                                    },
-                                    {
-                                                "term": "relocation",
-                                                "definition": "moving to a new place to live or work"
-                                    },
-                                    {
-                                                "term": "divorce rate",
-                                                "definition": "percentage of marriages that end in divorce"
-                                    },
-                                    {
-                                                "term": "allowance",
-                                                "definition": "money provided to cover specific expenses like housing"
-                                    },
-                                    {
-                                                "term": "counseling",
-                                                "definition": "professional support for mental health and relationships"
-                                    }
-                        ],
-                        "exampleFor": "I strongly believe military service demands excessive personal sacrifices. Extended deployments mean soldiers miss critical family moments—children's births, graduations, and anniversaries—that can never be recovered. Moreover, frequent relocations make it nearly impossible for military spouses to maintain careers, forcing families to depend on single incomes. The constant uncertainty about deployment schedules prevents families from planning their lives and creates ongoing anxiety. While the military provides some support programs, these cannot replace a parent's presence. The high divorce rates and mental health issues among military families demonstrate that current demands are unsustainable.",
-                        "exampleAgainst": "While military service creates challenges, I don't believe the demands are excessive considering the profession's nature. Everyone who joins understands that military service involves sacrifices civilian careers don't require. The mission demands availability and readiness that normal work schedules cannot provide. Moreover, the military compensates through competitive benefits including housing allowances, comprehensive healthcare, and education opportunities. Modern armed forces have significantly improved family support systems with counseling and communication technologies. Most importantly, despite challenges, military personnel find deep meaning in serving their country."
+                topic: "The military demands too much personal sacrifice from service members and their families",
+                for: [
+                    "Extended deployments damage family relationships",
+                    "Frequent moves prevent spouse career development",
+                    "Unpredictable schedules create constant stress"
+                ],
+                against: [
+                    "Members volunteer knowing the demands",
+                    "Compensation packages offset personal sacrifices",
+                    "Military service provides meaningful purpose"
+                ],
+                vocabulary: [
+                    { term: "deployment", definition: "assignment to a mission or operation away from home base" },
+                    { term: "retention", definition: "ability to keep experienced personnel in service" },
+                    { term: "operational tempo", definition: "pace and frequency of military activities" },
+                    { term: "morale", definition: "confidence and enthusiasm of personnel" },
+                    { term: "work-life balance", definition: "equilibrium between professional and personal life" },
+                    { term: "rotation", definition: "scheduled movement between assignments" }
+                ],
+                exampleFor: "I strongly believe military service demands excessive personal sacrifices. Extended deployments mean soldiers miss critical family moments—children's births, graduations, and anniversaries—that can never be recovered. Moreover, frequent relocations make it nearly impossible for military spouses to maintain careers, forcing families to depend on single incomes. The constant uncertainty about deployment schedules prevents families from planning their lives and creates ongoing anxiety. While the military provides some support programs, these cannot replace a parent's presence. The high divorce rates and mental health issues among military families demonstrate that current demands are unsustainable.",
+                exampleAgainst: "While military service creates challenges, I don't believe the demands are excessive considering the profession's nature. Everyone who joins understands that military service involves sacrifices civilian careers don't require. The mission demands availability and readiness that normal work schedules cannot provide. Moreover, the military compensates through competitive benefits including housing allowances, comprehensive healthcare, and education opportunities. Modern armed forces have significantly improved family support systems with counseling and communication technologies. Most importantly, despite challenges, military personnel find deep meaning in serving their country—something many find worth the personal sacrifices involved."
             },
             {
-                        "topic": "Military personnel should specialize early in their careers rather than developing broad experience",
-                        "for": [
-                                    "Modern systems require years of focused expertise",
-                                    "Specialists provide competitive advantages",
-                                    "Early specialization improves career satisfaction"
-                        ],
-                        "against": [
-                                    "Senior leaders need broad strategic perspective",
-                                    "Diverse experience builds adaptability",
-                                    "Specialization creates career inflexibility"
-                        ],
-                        "vocabulary": [
-                                    {
-                                                "term": "specialization",
-                                                "definition": "focusing on a specific field or skill"
-                                    },
-                                    {
-                                                "term": "career track",
-                                                "definition": "planned progression path in a profession"
-                                    },
-                                    {
-                                                "term": "joint operations",
-                                                "definition": "military actions involving multiple service branches"
-                                    },
-                                    {
-                                                "term": "expertise",
-                                                "definition": "advanced skill or knowledge in a particular area"
-                                    },
-                                    {
-                                                "term": "adaptability",
-                                                "definition": "ability to adjust to new conditions"
-                                    },
-                                    {
-                                                "term": "flexibility",
-                                                "definition": "ability to change or adapt easily"
-                                    },
-                                    {
-                                                "term": "diverse",
-                                                "definition": "varied and different; covering a wide range"
-                                    }
-                        ],
-                        "exampleFor": "I believe early specialization better serves military effectiveness today. Modern warfare has become incredibly complex technically, requiring years of focused study to develop expertise in areas like cybersecurity or electronic warfare. Someone spending their career mastering cyber operations will always be more capable than someone rotating through various assignments. Technology changes so rapidly that constantly learning new roles means never achieving mastery. While senior officers need broad perspective, we can achieve this through education programs without requiring decades rotating through unrelated positions. The military should identify promising specialists early and develop deep expertise.",
-                        "exampleAgainst": "I strongly support developing broad experience before specialization. While technical expertise is valuable, effective military leadership requires understanding how different elements integrate to achieve strategic objectives. An officer who has only worked in cyber operations cannot effectively lead joint operations involving ground forces and air support. Furthermore, flexibility and adaptability essential in unpredictable environments come from diverse experience. History shows the best military leaders possessed broad understanding rather than deep expertise in single areas. Early specialization risks creating career dead-ends if particular specialties become obsolete."
+                topic: "Military personnel should specialize early in their careers rather than developing broad experience",
+                for: [
+                    "Modern systems require years of focused expertise",
+                    "Specialists provide competitive advantages",
+                    "Early specialization improves career satisfaction"
+                ],
+                against: [
+                    "Senior leaders need broad strategic perspective",
+                    "Diverse experience builds adaptability",
+                    "Specialization creates career inflexibility"
+                ],
+                vocabulary: [
+                    { term: "specialization", definition: "focusing on a specific field or skill" },
+                    { term: "generalist", definition: "person with knowledge across many areas" },
+                    { term: "career track", definition: "planned progression path in a profession" },
+                    { term: "joint operations", definition: "military actions involving multiple service branches" },
+                    { term: "expertise", definition: "advanced skill or knowledge in a particular area" },
+                    { term: "adaptability", definition: "ability to adjust to new conditions" }
+                ],
+                exampleFor: "I believe early specialization better serves military effectiveness today. Modern warfare has become incredibly complex technically, requiring years of focused study to develop expertise in areas like cybersecurity or electronic warfare. Someone spending their career mastering cyber operations will always be more capable than someone rotating through various assignments. Technology changes so rapidly that constantly learning new roles means never achieving mastery. While senior officers need broad perspective, we can achieve this through education programs without requiring decades rotating through unrelated positions. The military should identify promising specialists early and develop deep expertise.",
+                exampleAgainst: "I strongly support developing broad experience before specialization. While technical expertise is valuable, effective military leadership requires understanding how different elements integrate to achieve strategic objectives. An officer who has only worked in cyber operations cannot effectively lead joint operations involving ground forces and air support. Furthermore, flexibility and adaptability essential in unpredictable environments come from diverse experience. History shows the best military leaders possessed broad understanding rather than deep expertise in single areas. Early specialization risks creating career dead-ends if particular specialties become obsolete."
+            },
+            // NEW Topics 10-12
+            {
+                topic: "Physical fitness standards should be identical for all military personnel regardless of gender or age",
+                for: [
+                    "Equal treatment ensures fairness in military service",
+                    "Mission requirements don't change based on gender or age",
+                    "Combat effectiveness depends on meeting same standards"
+                ],
+                against: [
+                    "Biological differences in strength and endurance are real",
+                    "Age-appropriate standards prevent injuries",
+                    "Focus should be on capability, not arbitrary uniformity"
+                ],
+                vocabulary: [
+                    { term: "physical fitness", definition: "condition of health and strength" },
+                    { term: "standards", definition: "required levels of quality or achievement" },
+                    { term: "gender equality", definition: "equal treatment of all genders" },
+                    { term: "combat readiness", definition: "state of being prepared for military action" },
+                    { term: "physical requirements", definition: "bodily capabilities needed for a task" },
+                    { term: "performance criteria", definition: "measures used to assess ability" }
+                ],
+                exampleFor: "I believe physical fitness standards should be identical for all military personnel. If a job requires carrying a certain weight or running a specific distance, those requirements don't change based on who performs the task. In combat situations, the mission demands remain constant regardless of the gender or age of service members. Having different standards undermines the principle that everyone must be equally capable of performing their duties. Furthermore, maintaining lower standards for certain groups can create resentment among those held to higher standards and may compromise unit effectiveness. While I acknowledge physical differences exist, the military's primary purpose is operational effectiveness, which requires uniform capability standards.",
+                exampleAgainst: "I believe physical fitness standards should account for biological and age-related differences. Men and women have different physiological characteristics—average muscle mass, bone density, and cardiovascular capacity differ significantly between genders. Requiring identical standards ignores these scientific realities and could lead to higher injury rates. Similarly, as people age, their physical capabilities naturally change; age-appropriate standards prevent injuries while still ensuring fitness. The goal should be ensuring everyone can perform their specific job requirements, not forcing everyone to meet arbitrary uniform benchmarks. Many military roles don't require maximum physical capability, so standards should reflect actual job demands rather than one-size-fits-all requirements."
             },
             {
-                        "topic": "The primary role of armed forces should be traditional defense rather than humanitarian missions",
-                        "for": [
-                                    "Military forces should focus on core defense capabilities and readiness",
-                                    "Humanitarian missions distract from primary security threats",
-                                    "Other organizations like UN agencies are better suited for humanitarian work"
-                        ],
-                        "against": [
-                                    "Humanitarian missions build international partnerships and goodwill",
-                                    "Military has unique logistics and rapid response capabilities",
-                                    "Modern security threats require broader military engagement beyond combat"
-                        ],
-                        "vocabulary": [
-                                    {
-                                                "term": "humanitarian mission",
-                                                "definition": "military operation providing aid and relief to civilian populations"
-                                    },
-                                    {
-                                                "term": "core capability",
-                                                "definition": "fundamental military skills and readiness for combat operations"
-                                    },
-                                    {
-                                                "term": "logistics",
-                                                "definition": "organization of supplies, equipment, and personnel movement"
-                                    },
-                                    {
-                                                "term": "rapid response",
-                                                "definition": "ability to deploy quickly to emergencies or crises"
-                                    },
-                                    {
-                                                "term": "goodwill",
-                                                "definition": "friendly, cooperative feelings toward others"
-                                    },
-                                    {
-                                                "term": "civil-military cooperation",
-                                                "definition": "coordination between military forces and civilian organizations"
-                                    }
-                        ],
-                        "exampleFor": "I firmly believe that armed forces should concentrate on traditional defense rather than humanitarian operations. The primary purpose of a military is national security and deterring threats, not disaster relief or development work. When resources are diverted to humanitarian missions, combat readiness inevitably suffers. Soldiers spend time distributing supplies instead of training for actual military operations. Furthermore, other organizations such as UN humanitarian agencies and NGOs possess expertise specifically designed for relief work, while military personnel are trained for combat. The Czech Republic has limited military resources, and every deployment to humanitarian missions means fewer troops available for our NATO commitments and territorial defense. While helping people in crisis is admirable, it should not come at the expense of our core military preparedness.",
-                        "exampleAgainst": "I disagree with limiting military roles to traditional defense only. Modern security challenges require flexible military engagement across a spectrum of operations. Humanitarian missions serve important strategic purposes beyond simple charity. When Czech forces provide disaster relief or medical assistance, they build relationships with partner nations and demonstrate our values internationally. This goodwill translates into stronger alliances and enhanced security cooperation. Moreover, the military possesses unique capabilities that civilian organizations lack—heavy transport aircraft, field hospitals, and rapid deployment capacity that can save lives when disasters strike. These humanitarian operations also provide invaluable training for our personnel in logistics, civil-military cooperation, and working in challenging environments. Rather than distracting from defense, such missions enhance our overall military effectiveness and international standing."
+                topic: "Officers should complete civilian university degrees before receiving military commissions",
+                for: [
+                    "University education develops critical thinking skills",
+                    "Broader perspective improves strategic decision-making",
+                    "Civilian degrees provide career options after military service"
+                ],
+                against: [
+                    "Military academies provide superior officer training",
+                    "Practical experience matters more than academic credentials",
+                    "Civilian education delays entry into military leadership"
+                ],
+                vocabulary: [
+                    { term: "commission", definition: "official appointment as military officer" },
+                    { term: "civilian education", definition: "academic training in non-military institutions" },
+                    { term: "military academy", definition: "school specifically for training military officers" },
+                    { term: "critical thinking", definition: "objective analysis and evaluation of issues" },
+                    { term: "leadership development", definition: "process of building management abilities" },
+                    { term: "career transition", definition: "change from one profession to another" }
+                ],
+                exampleFor: "I believe officers should complete civilian university degrees before commissioning. University education exposes future officers to diverse perspectives, cultures, and ideas that military training alone cannot provide. This broader worldview is essential for strategic thinking and understanding complex international situations. Furthermore, civilian universities develop critical thinking and analytical skills through academic rigor that complements military training. A civilian degree also provides officers with valuable credentials for career transitions after military service, which benefits both individuals and society. While military academies offer excellent training, combining civilian education with military experience produces more well-rounded officers capable of navigating today's complex security environment.",
+                exampleAgainst: "I disagree that civilian degrees should be required before commissioning. Military academies like West Point provide superior officer training by integrating academic education with military discipline, leadership development, and practical experience from day one. Requiring civilian degrees delays officer entry into military leadership by several years, wasting valuable time when they could be learning actual military skills. Furthermore, military service is a distinct profession with unique requirements that civilian education doesn't address. Many exceptional officers throughout history rose through ranks based on military experience and leadership rather than academic credentials. The focus should be on identifying and developing military leadership potential, not requiring degrees that may have little relevance to actual officer duties."
             },
             {
-                        "topic": "Higher salaries and benefits are more effective than patriotic appeals for military recruitment",
-                        "for": [
-                                    "Competitive compensation attracts high-quality candidates with valuable skills",
-                                    "Young people prioritize financial security over abstract patriotic values",
-                                    "Better pay reduces recruitment challenges and personnel turnover"
-                        ],
-                        "against": [
-                                    "Patriotic motivation creates more committed, resilient service members",
-                                    "Purely financial incentives attract wrong type of candidates for military service",
-                                    "Countries with strong national identity recruit successfully despite modest pay"
-                        ],
-                        "vocabulary": [
-                                    {
-                                                "term": "compensation",
-                                                "definition": "payment and benefits received for work"
-                                    },
-                                    {
-                                                "term": "recruitment",
-                                                "definition": "process of attracting and selecting new personnel"
-                                    },
-                                    {
-                                                "term": "turnover",
-                                                "definition": "rate at which employees leave and need replacement"
-                                    },
-                                    {
-                                                "term": "retention",
-                                                "definition": "ability to keep experienced personnel in service"
-                                    },
-                                    {
-                                                "term": "patriotic appeal",
-                                                "definition": "motivation based on love of country and national duty"
-                                    },
-                                    {
-                                                "term": "intrinsic motivation",
-                                                "definition": "internal drive based on values and personal meaning"
-                                    }
-                        ],
-                        "exampleFor": "I believe higher salaries and benefits are far more effective recruitment tools than patriotic appeals. Today's young people face expensive housing, student debts, and uncertain economic futures. While patriotism matters, most cannot afford to choose low-paying careers based solely on ideals. The Czech military competes with private sector employers offering better compensation for technical skills. If we want to recruit engineers, IT specialists, and other skilled professionals, we must pay competitive salaries. Countries like the United States and United Kingdom significantly increased military pay and saw dramatic improvements in recruitment and retention. Patriotic appeals may inspire some individuals, but comprehensive benefits packages—housing allowances, healthcare, education support—provide the economic security that makes military service a viable career choice for talented young people.",
-                        "exampleAgainst": "I strongly disagree that financial incentives should replace patriotic motivation in military recruitment. While competitive pay is necessary, it should not be the primary draw for service. Soldiers motivated primarily by money lack the deeper commitment required for military life. When facing danger, discomfort, or difficult deployments, those who joined for salaries alone are more likely to become dissatisfied and leave. In contrast, service members motivated by patriotism and sense of duty demonstrate greater resilience and dedication. Many countries maintain effective militaries despite offering modest compensation because they successfully cultivate national pride and service culture. The Czech military should certainly pay fairly, but recruitment campaigns emphasizing service to country, meaningful purpose, and honor attract individuals with the character traits we actually need in uniform."
-            },
-            {
-                        "topic": "Modern warfare requires less emphasis on physical fitness than technological proficiency",
-                        "for": [
-                                    "Combat increasingly involves operating complex technology rather than physical combat",
-                                    "Cyber warfare, drone operations, and intelligence work require mental skills not physical strength",
-                                    "Strict fitness standards exclude talented technical specialists who could serve effectively"
-                        ],
-                        "against": [
-                                    "Combat situations still require physical endurance and strength under pressure",
-                                    "Physical fitness improves mental performance, discipline, and stress resilience",
-                                    "Ground forces must still carry equipment and operate in harsh conditions"
-                        ],
-                        "vocabulary": [
-                                    {
-                                                "term": "physical fitness",
-                                                "definition": "condition of being physically strong and healthy"
-                                    },
-                                    {
-                                                "term": "technological proficiency",
-                                                "definition": "high level of skill in using complex technology"
-                                    },
-                                    {
-                                                "term": "endurance",
-                                                "definition": "ability to sustain prolonged physical effort"
-                                    },
-                                    {
-                                                "term": "cyber warfare",
-                                                "definition": "military operations conducted in digital networks and systems"
-                                    },
-                                    {
-                                                "term": "drone operations",
-                                                "definition": "controlling unmanned aircraft for military purposes"
-                                    },
-                                    {
-                                                "term": "cognitive ability",
-                                                "definition": "mental capacity for learning, reasoning, and problem-solving"
-                                    }
-                        ],
-                        "exampleFor": "I believe modern military operations require much less emphasis on physical fitness than previous generations. Today's warfare centers on technology—cyber operations, satellite systems, precision-guided weapons, and intelligence analysis. A brilliant computer specialist who cannot run five kilometers can contribute far more to national defense than a physically fit soldier without technical skills. Many military roles involve sitting at computer terminals, operating drones remotely, or analyzing data. Maintaining extremely high fitness standards excludes talented individuals who could serve effectively in these technical positions. The Czech military faces personnel shortages in critical areas like cybersecurity precisely because we prioritize outdated physical requirements over actual job needs. While some roles like infantry require fitness, we should adapt standards to match the real demands of modern military positions rather than maintaining traditional but increasingly irrelevant physical tests.",
-                        "exampleAgainst": "I strongly oppose reducing physical fitness emphasis in military service. While technology is important, physical capability remains fundamental to military effectiveness. Even technical specialists may face combat situations requiring physical endurance and stress resilience. Moreover, physical fitness directly improves mental performance—research shows exercise enhances cognitive ability, decision-making under pressure, and psychological resilience. A cyber warfare officer who maintains excellent fitness will perform better mentally than one who is sedentary and unhealthy. Furthermore, military service demands discipline and commitment, qualities developed through physical training. Ground forces still carry heavy equipment, work in extreme conditions, and require physical strength that no technology can replace. Rather than lowering standards, we should maintain comprehensive fitness requirements while also developing technical skills, creating well-rounded service members prepared for the full spectrum of modern military challenges."
+                topic: "Language proficiency should be a requirement for promotion to senior ranks",
+                for: [
+                    "NATO cooperation requires communication with allies",
+                    "International operations demand language skills",
+                    "Understanding foreign cultures improves strategic planning"
+                ],
+                against: [
+                    "Military expertise should determine promotions, not language ability",
+                    "Translation services can handle communication needs",
+                    "Not all senior positions require foreign language skills"
+                ],
+                vocabulary: [
+                    { term: "language proficiency", definition: "high level of skill in speaking a language" },
+                    { term: "promotion", definition: "advancement to higher military rank" },
+                    { term: "multinational operations", definition: "military actions involving multiple countries" },
+                    { term: "cultural competence", definition: "ability to understand and work across cultures" },
+                    { term: "strategic communication", definition: "high-level coordination of messaging" },
+                    { term: "interoperability", definition: "ability to work effectively with allied forces" }
+                ],
+                exampleFor: "I strongly support requiring language proficiency for promotion to senior ranks. As Czech military increasingly participates in NATO operations and international missions, senior officers must communicate directly with allies rather than relying entirely on interpreters. Language skills demonstrate commitment to international cooperation and provide crucial understanding of allied perspectives. Furthermore, learning foreign languages develops cultural competence essential for strategic planning in international contexts. Officers who speak English, German, or other NATO languages can build relationships with allied commanders that interpreters cannot replicate. While not every position requires foreign languages, senior leadership positions almost certainly do in today's interconnected military environment. Making language proficiency a promotion requirement encourages professional development beneficial to both individuals and the military.",
+                exampleAgainst: "I oppose making language proficiency a promotion requirement for senior ranks. Promotions should be based on military competence, leadership ability, and operational effectiveness—not language skills that are secondary to core military duties. Translation and interpretation services can adequately handle communication needs in international contexts without requiring every senior officer to be multilingual. Furthermore, this requirement would disadvantage excellent military leaders who haven't had opportunities to learn foreign languages, potentially preventing the best officers from reaching senior positions. Not all senior roles involve significant international interaction; many focus on national defense, training, or logistics where foreign languages provide little benefit. Rather than mandatory requirements, the military should offer language training opportunities for those whose positions actually require it."
             }
-];
+        ];
 
         let currentTopicIndex = null;
         let currentVocabSet = [];
@@ -938,18 +778,6 @@
             }
         }
 
-
-        function goDirectToArgumentBuilder() {
-            const topic = topics[currentTopicIndex];
-            document.getElementById('argTopicTitle').textContent = topic.topic;
-            document.getElementById('exampleFor').textContent = topic.exampleFor;
-            document.getElementById('exampleAgainst').textContent = topic.exampleAgainst;
-            
-            document.getElementById('topicDisplay').classList.remove('active');
-            document.getElementById('argumentBuilder').classList.add('active');
-            window.scrollTo(0, 0);
-        }
-
         function backToTopics() {
             document.getElementById('topicDisplay').classList.remove('active');
             document.getElementById('topicSelection').classList.add('active');
@@ -973,28 +801,6 @@
             window.scrollTo(0, 0);
         }
 
-        function speakText(text, button) {
-            // Cancel any ongoing speech
-            window.speechSynthesis.cancel();
-            
-            // Create new speech utterance
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.rate = 0.9; // Slightly slower for clarity
-            utterance.pitch = 1;
-            utterance.volume = 1;
-            
-            // Add speaking class for visual feedback
-            button.classList.add('speaking');
-            
-            // Remove speaking class when done
-            utterance.onend = () => {
-                button.classList.remove('speaking');
-            };
-            
-            // Speak the text
-            window.speechSynthesis.speak(utterance);
-        }
-
         function initVocabGame() {
             matchedPairs = [];
             selectedTerm = null;
@@ -1010,44 +816,20 @@
             
             const shuffledDefs = [...currentVocabSet].sort(() => Math.random() - 0.5);
             
-                        currentVocabSet.forEach((pair, index) => {
+            currentVocabSet.forEach((pair, index) => {
                 const termDiv = document.createElement('div');
                 termDiv.className = 'vocab-item';
                 termDiv.dataset.index = index;
-                
-                // Create speaker button
-                const speakerBtn = document.createElement('button');
-                speakerBtn.className = 'speaker-btn';
-                speakerBtn.innerHTML = '🔊';
-                speakerBtn.title = 'Listen to pronunciation';
-                speakerBtn.onclick = (e) => {
-                    e.stopPropagation(); // Prevent selecting the term
-                    speakText(pair.term, speakerBtn);
-                };
-                
                 termDiv.innerHTML = `<div class="vocab-number">${index + 1}</div><div>${pair.term}</div>`;
-                termDiv.appendChild(speakerBtn);
                 termDiv.onclick = () => selectVocabTerm(index);
                 termsContainer.appendChild(termDiv);
             });
             
-                        shuffledDefs.forEach((pair, index) => {
+            shuffledDefs.forEach((pair, index) => {
                 const defDiv = document.createElement('div');
                 defDiv.className = 'vocab-item';
                 defDiv.dataset.term = pair.term;
-                
-                // Create speaker button for definition
-                const speakerBtn = document.createElement('button');
-                speakerBtn.className = 'speaker-btn';
-                speakerBtn.innerHTML = '🔊';
-                speakerBtn.title = 'Listen to definition';
-                speakerBtn.onclick = (e) => {
-                    e.stopPropagation(); // Prevent selecting the definition
-                    speakText(pair.definition, speakerBtn);
-                };
-                
                 defDiv.innerHTML = `<div class="vocab-number">${String.fromCharCode(65 + index)}</div><div>${pair.definition}</div>`;
-                defDiv.appendChild(speakerBtn);
                 defDiv.onclick = () => selectVocabDef(pair.term, defDiv);
                 defsContainer.appendChild(defDiv);
             });
@@ -1184,17 +966,6 @@
                 btn.textContent = 'Show Examples';
             }
         }
-
-        // Auto-open topic from URL hash (for random topic generator)
-        window.addEventListener('load', function() {
-            const hash = window.location.hash;
-            if (hash && hash.startsWith('#topic-')) {
-                const topicIndex = parseInt(hash.replace('#topic-', ''));
-                if (!isNaN(topicIndex) && topicIndex >= 0 && topicIndex < topics.length) {
-                    selectTopic(topicIndex);
-                }
-            }
-        });
     </script>
 </body>
 </html>
