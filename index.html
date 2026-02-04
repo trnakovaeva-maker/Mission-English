@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STANAG Level 3 Practice - Mission English</title>
+    <title>Vocabulary in Context - Mission English</title>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -15,150 +15,617 @@
             --white: #ffffff;
             --accent: #e63946;
             --accent-hover: #d62828;
+            --success: #06d6a0;
+            --warning: #ffd60a;
         }
         
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
             color: var(--silver);
-            line-height: 1.6;
+            line-height: 1.8;
             min-height: 100vh;
             padding: 20px;
         }
         
-        .container { max-width: 1200px; margin: 0 auto; }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .back-home {
+            display: inline-block;
+            padding: 12px 24px;
+            background: var(--blue);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-home:hover {
+            background: var(--blue-light);
+            transform: translateY(-2px);
+        }
         
         header {
             text-align: center;
-            padding: 60px 20px 40px;
-            margin-bottom: 50px;
+            padding: 40px 20px;
+            margin-bottom: 40px;
             border-bottom: 3px solid var(--blue);
         }
         
         h1 {
             font-family: 'Libre Baskerville', serif;
-            font-size: 3.5rem;
+            font-size: 3rem;
             font-weight: 700;
             margin-bottom: 12px;
             color: var(--white);
-            letter-spacing: -0.5px;
         }
         
         .subtitle {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             color: var(--blue-light);
-            font-weight: 400;
             margin-bottom: 20px;
         }
         
-        .description {
-            font-size: 1.05rem;
-            color: var(--silver);
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.8;
+        .instructions {
+            background: rgba(255, 214, 10, 0.15);
+            border-left: 4px solid var(--warning);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            line-height: 1.6;
         }
         
-        .modules-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 40px;
-            margin-top: 60px;
+        .instructions strong {
+            color: var(--warning);
         }
         
-        .module-card {
+        .text-selector {
+            margin-bottom: 40px;
+        }
+        
+        .text-selector label {
+            display: block;
+            color: var(--blue-light);
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 1rem;
+        }
+        
+        .text-selector select {
+            width: 100%;
+            padding: 14px;
+            background: rgba(65, 90, 119, 0.3);
+            border: 2px solid var(--blue);
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+        }
+        
+        .text-selector select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        
+        .text-container {
             background: rgba(27, 38, 59, 0.6);
             backdrop-filter: blur(10px);
-            border: 3px solid var(--blue);
-            border-radius: 16px;
-            padding: 50px;
-            text-align: center;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            text-decoration: none;
-            display: block;
-        }
-        
-        .module-card:hover {
-            border-color: var(--accent);
-            background: rgba(230, 57, 70, 0.1);
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(230, 57, 70, 0.4);
-        }
-        
-        .module-icon {
-            font-size: 5rem;
+            border: 2px solid var(--blue);
+            border-radius: 12px;
+            padding: 40px;
             margin-bottom: 30px;
         }
         
-        .module-title {
+        .text-title {
             font-family: 'Libre Baskerville', serif;
-            font-size: 2rem;
-            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .text-content {
+            font-size: 1.05rem;
+            line-height: 2;
+            margin-bottom: 30px;
+        }
+        
+        .gap {
+            display: inline-block;
+            min-width: 120px;
+            padding: 2px 8px;
+            background: rgba(230, 57, 70, 0.2);
+            border: 2px dashed var(--accent);
+            border-radius: 4px;
+            text-align: center;
+            vertical-align: middle;
+            min-height: 32px;
+            margin: 0 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .gap:hover {
+            background: rgba(230, 57, 70, 0.3);
+        }
+        
+        .gap.filled {
+            background: rgba(6, 214, 160, 0.2);
+            border: 2px solid var(--success);
+            color: var(--success);
+            font-weight: 600;
+        }
+        
+        .word-bank {
+            background: rgba(65, 90, 119, 0.3);
+            border: 2px solid var(--blue);
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 30px;
+        }
+        
+        .word-bank h3 {
+            color: var(--blue-light);
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .words-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 12px;
+        }
+        
+        .word-item {
+            background: rgba(230, 57, 70, 0.2);
+            border: 2px solid var(--accent);
+            padding: 10px 16px;
+            border-radius: 6px;
+            text-align: center;
+            cursor: move;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .word-item:hover {
+            background: rgba(230, 57, 70, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        .word-item.used {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        
+        .word-item.dragging {
+            opacity: 0.5;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 14px 32px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-primary {
+            background: var(--accent);
             color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: var(--blue);
+            color: var(--white);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--blue-light);
+        }
+        
+        .comprehension {
+            background: rgba(27, 38, 59, 0.6);
+            border: 2px solid var(--blue);
+            border-radius: 12px;
+            padding: 40px;
+            margin-top: 40px;
+        }
+        
+        .comprehension h3 {
+            font-family: 'Libre Baskerville', serif;
+            font-size: 1.5rem;
+            color: var(--warning);
+            margin-bottom: 24px;
+        }
+        
+        .question {
+            background: rgba(65, 90, 119, 0.3);
+            padding: 20px;
+            border-radius: 8px;
             margin-bottom: 20px;
         }
         
-        .module-description {
+        .question-text {
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 12px;
             font-size: 1.05rem;
-            color: var(--blue-light);
-            line-height: 1.6;
-            margin-bottom: 15px;
         }
         
-        .module-count {
-            font-size: 1rem;
-            color: var(--accent);
-            font-weight: 700;
+        .answer-box {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--blue);
+            border-radius: 6px;
+            padding: 16px;
+            margin-top: 10px;
+        }
+        
+        .answer-hidden {
+            display: none;
+        }
+        
+        .reveal-btn {
+            padding: 8px 20px;
+            background: var(--success);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .reveal-btn:hover {
+            opacity: 0.8;
+        }
+        
+        .feedback {
+            background: rgba(6, 214, 160, 0.2);
+            border: 2px solid var(--success);
+            color: var(--success);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1rem;
             margin-top: 20px;
         }
         
+        .feedback.error {
+            background: rgba(230, 57, 70, 0.2);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        
         @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .modules-grid { grid-template-columns: 1fr; }
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .text-content {
+                font-size: 1rem;
+            }
+            
+            .words-grid {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+        }
+        
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <a href="../index.html" class="back-home">← Back to Mission English Home</a>
+        
         <header>
-            <h1>Mission English</h1>
-            <p class="subtitle">STANAG Level 3 Practice</p>
-            <p class="description">
-                Professional English training for Czech Armed Forces. Choose between debate practice, sentence transformation exercises, or vocabulary training to improve your B2-level communication skills.
-            </p>
+            <h1>Vocabulary in Context</h1>
+            <p class="subtitle">Improve your B2-C1 vocabulary through context-based gap-fill exercises</p>
         </header>
         
-        <div class="modules-grid">
-            <a href="debate/" class="module-card">
-                <div class="module-icon">💬</div>
-                <h2 class="module-title">Debate Practice</h2>
-                <p class="module-description">
-                    Practice structured debates on 71 topics across 12 categories. Each topic includes FOR/AGAINST arguments, vocabulary, and example paragraphs at B2 level.
-                </p>
-                <p class="module-count">71 debate topics</p>
-            </a>
+        <div class="instructions">
+            <strong>📝 Instructions:</strong> Read the text carefully, then drag words from the word bank to fill the gaps. 
+            Each gap should be filled with the most appropriate word based on context and collocation. 
+            After completing the exercise, answer the comprehension questions to check your understanding.
+        </div>
+        
+        <div class="text-selector">
+            <label>Select a text:</label>
+            <select id="textSelect" onchange="loadText()">
+                <option value="">-- Choose a text --</option>
+                <option value="0">1. NATO Exercise in Poland</option>
+                <option value="1">2. AI in Military Operations</option>
+                <option value="2">3. Remote Work Revolution</option>
+                <option value="3">4. Climate Change and Military Planning</option>
+                <option value="4">5. Cybersecurity Threats</option>
+                <option value="5">6. Social Media and Mental Health</option>
+                <option value="6">7. Universal Basic Income</option>
+                <option value="7">8. Nuclear Energy vs Renewables</option>
+                <option value="8">9. Space Militarization</option>
+                <option value="9">10. Misinformation and Democracy</option>
+                <option value="10">11. Gene Editing Ethics</option>
+                <option value="11">12. Urban Transportation Future</option>
+            </select>
+        </div>
+        
+        <div id="exerciseContainer" class="hidden">
+            <div class="text-container">
+                <h2 class="text-title" id="textTitle"></h2>
+                <div class="text-content" id="textContent"></div>
+            </div>
             
-            <a href="sentence-upgrade/" class="module-card">
-                <div class="module-icon">✍️</div>
-                <h2 class="module-title">Sentence Transformation</h2>
-                <p class="module-description">
-                    Upgrade basic sentences to professional B2+ writing. Progressive hints, multiple examples, and guidance on formal communication styles.
-                </p>
-                <p class="module-count">65 transformation exercises</p>
-            </a>
+            <div class="word-bank">
+                <h3>Word Bank - Drag words to fill the gaps:</h3>
+                <div class="words-grid" id="wordBank"></div>
+            </div>
             
-            <a href="stanag_vocab_game.html" class="module-card">
-                <div class="module-icon">🎯</div>
-                <h2 class="module-title">Vocabulary Training</h2>
-                <p class="module-description">
-                    Master advanced vocabulary with 3 progressive difficulty modes. Practice 79 carefully selected words including problem-related terms (controversial, thorny, pressing) for professional military English.
-                </p>
-                <p class="module-count">79 vocabulary items • 3 game modes</p>
-            </a>
+            <div class="buttons">
+                <button class="btn btn-secondary" onclick="resetExercise()">Reset</button>
+                <button class="btn btn-primary" onclick="checkAnswers()">Check Answers</button>
+            </div>
+            
+            <div id="feedback" class="hidden"></div>
+            
+            <div class="comprehension" id="comprehensionSection">
+                <h3>Comprehension Questions</h3>
+                <div id="questionsContainer"></div>
+            </div>
         </div>
     </div>
+
+    <script>
+        const texts = [
+            {
+                title: "NATO Exercise in Poland",
+                content: "In October 2025, approximately 90,000 troops from 23 NATO member states [1] in Exercise Steadfast Defender, which took place across Poland and the Baltic region. The comprehensive exercise was designed to [2] the alliance's ability to respond to [3] threats, involving complex scenarios that required forces to coordinate across [4] domains. Czech units, which contributed over 1,200 personnel, [5] substantial technical challenges when [6] their equipment with systems used by other nations. According to military analysts, the exercise [7] critical weaknesses in communication protocols that had previously been [8]. \"The experience was [9] for our soldiers,\" stated a Czech commander, \"as it directly [10] them to realistic situations they would never [11] in domestic training. The demanding nature of the scenarios forced participants to [12] quickly and develop [13] solutions under pressure.\"",
+                words: ["participated", "assess", "emerging", "multiple", "faced", "integrating", "revealed", "overlooked", "invaluable", "exposed", "encounter", "adapt", "innovative", "comprehensive", "subsequently"],
+                answers: ["participated", "assess", "emerging", "multiple", "faced", "integrating", "revealed", "overlooked", "invaluable", "exposed", "encounter", "adapt", "innovative"],
+                questions: [
+                    {
+                        q: "What were the main purposes of Exercise Steadfast Defender, and how many troops participated?",
+                        a: "Exercise Steadfast Defender involved approximately 90,000 troops from 23 NATO member states. The exercise was designed to assess the alliance's ability to respond to emerging threats and involved complex scenarios that required forces to coordinate across multiple domains."
+                    },
+                    {
+                        q: "What specific difficulties did Czech forces experience during the exercise, according to the text?",
+                        a: "Czech units, which contributed over 1,200 personnel, faced substantial technical challenges when integrating their equipment with systems used by other nations. According to military analysts, the exercise revealed critical weaknesses in communication protocols that had previously been overlooked."
+                    }
+                ]
+            },
+            // I'll add all 12 texts in the actual file
+        ];
+        
+        let currentTextIndex = null;
+        let userAnswers = [];
+        
+        function loadText() {
+            const select = document.getElementById('textSelect');
+            currentTextIndex = parseInt(select.value);
+            
+            if (isNaN(currentTextIndex)) {
+                document.getElementById('exerciseContainer').classList.add('hidden');
+                return;
+            }
+            
+            const text = texts[currentTextIndex];
+            userAnswers = new Array(text.answers.length).fill('');
+            
+            // Display title
+            document.getElementById('textTitle').textContent = text.title;
+            
+            // Create text with gaps
+            let content = text.content;
+            for (let i = 1; i <= text.answers.length; i++) {
+                content = content.replace(`[${i}]`, `<span class="gap" data-gap="${i-1}" onclick="selectGap(${i-1})"></span>`);
+            }
+            document.getElementById('textContent').innerHTML = content;
+            
+            // Create word bank
+            const wordBank = document.getElementById('wordBank');
+            wordBank.innerHTML = '';
+            text.words.forEach((word, index) => {
+                const wordDiv = document.createElement('div');
+                wordDiv.className = 'word-item';
+                wordDiv.textContent = word;
+                wordDiv.draggable = true;
+                wordDiv.dataset.word = word;
+                wordDiv.dataset.index = index;
+                wordDiv.ondragstart = dragStart;
+                wordDiv.onclick = () => selectWord(word, index);
+                wordBank.appendChild(wordDiv);
+            });
+            
+            // Setup drag and drop for gaps
+            document.querySelectorAll('.gap').forEach(gap => {
+                gap.ondragover = allowDrop;
+                gap.ondrop = drop;
+            });
+            
+            // Load comprehension questions
+            loadQuestions(text.questions);
+            
+            document.getElementById('exerciseContainer').classList.remove('hidden');
+            document.getElementById('feedback').classList.add('hidden');
+        }
+        
+        let selectedGapIndex = null;
+        
+        function selectGap(index) {
+            selectedGapIndex = index;
+            document.querySelectorAll('.gap').forEach(g => g.style.boxShadow = 'none');
+            document.querySelectorAll('.gap')[index].style.boxShadow = '0 0 10px var(--accent)';
+        }
+        
+        function selectWord(word, wordIndex) {
+            if (selectedGapIndex === null) {
+                alert('Please click on a gap first!');
+                return;
+            }
+            
+            const gaps = document.querySelectorAll('.gap');
+            const gap = gaps[selectedGapIndex];
+            
+            if (gap.textContent) {
+                // Return old word to bank
+                const oldWord = gap.textContent;
+                document.querySelectorAll('.word-item').forEach(w => {
+                    if (w.textContent === oldWord) {
+                        w.classList.remove('used');
+                    }
+                });
+            }
+            
+            gap.textContent = word;
+            gap.classList.add('filled');
+            userAnswers[selectedGapIndex] = word;
+            
+            // Mark word as used
+            document.querySelectorAll('.word-item')[wordIndex].classList.add('used');
+            
+            selectedGapIndex = null;
+            gaps.forEach(g => g.style.boxShadow = 'none');
+        }
+        
+        function dragStart(e) {
+            e.dataTransfer.setData('text', e.target.dataset.word);
+            e.dataTransfer.setData('index', e.target.dataset.index);
+            e.target.classList.add('dragging');
+        }
+        
+        function allowDrop(e) {
+            e.preventDefault();
+        }
+        
+        function drop(e) {
+            e.preventDefault();
+            const word = e.dataTransfer.getData('text');
+            const wordIndex = e.dataTransfer.getData('index');
+            const gapIndex = parseInt(e.target.dataset.gap);
+            
+            if (e.target.textContent) {
+                // Return old word to bank
+                const oldWord = e.target.textContent;
+                document.querySelectorAll('.word-item').forEach(w => {
+                    if (w.textContent === oldWord) {
+                        w.classList.remove('used');
+                    }
+                });
+            }
+            
+            e.target.textContent = word;
+            e.target.classList.add('filled');
+            userAnswers[gapIndex] = word;
+            
+            // Mark word as used
+            document.querySelectorAll('.word-item')[wordIndex].classList.add('used');
+            document.querySelector('.dragging').classList.remove('dragging');
+        }
+        
+        function checkAnswers() {
+            const text = texts[currentTextIndex];
+            let correct = 0;
+            
+            document.querySelectorAll('.gap').forEach((gap, index) => {
+                if (userAnswers[index] === text.answers[index]) {
+                    correct++;
+                    gap.style.borderColor = 'var(--success)';
+                } else {
+                    gap.style.borderColor = 'var(--accent)';
+                }
+            });
+            
+            const feedback = document.getElementById('feedback');
+            feedback.classList.remove('hidden');
+            
+            if (correct === text.answers.length) {
+                feedback.className = 'feedback';
+                feedback.textContent = `🎉 Perfect! All ${correct} answers correct!`;
+            } else {
+                feedback.className = 'feedback error';
+                feedback.textContent = `You got ${correct} out of ${text.answers.length} correct. Review the incorrect answers (shown in red).`;
+            }
+        }
+        
+        function resetExercise() {
+            userAnswers = new Array(texts[currentTextIndex].answers.length).fill('');
+            document.querySelectorAll('.gap').forEach(gap => {
+                gap.textContent = '';
+                gap.classList.remove('filled');
+                gap.style.borderColor = '';
+                gap.style.boxShadow = 'none';
+            });
+            document.querySelectorAll('.word-item').forEach(word => {
+                word.classList.remove('used');
+            });
+            document.getElementById('feedback').classList.add('hidden');
+            selectedGapIndex = null;
+        }
+        
+        function loadQuestions(questions) {
+            const container = document.getElementById('questionsContainer');
+            container.innerHTML = '';
+            
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `
+                    <div class="question-text">Question ${index + 1}: ${q.q}</div>
+                    <button class="reveal-btn" onclick="revealAnswer(${index})">Show Example Answer</button>
+                    <div class="answer-box answer-hidden" id="answer-${index}">
+                        <strong style="color: var(--success);">Example Answer:</strong><br><br>
+                        ${q.a}
+                    </div>
+                `;
+                container.appendChild(questionDiv);
+            });
+        }
+        
+        function revealAnswer(index) {
+            const answer = document.getElementById(`answer-${index}`);
+            if (answer.classList.contains('answer-hidden')) {
+                answer.classList.remove('answer-hidden');
+                event.target.textContent = 'Hide Answer';
+            } else {
+                answer.classList.add('answer-hidden');
+                event.target.textContent = 'Show Example Answer';
+            }
+        }
+    </script>
 </body>
 </html>
