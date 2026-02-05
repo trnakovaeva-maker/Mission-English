@@ -178,6 +178,26 @@
             <p style="background: rgba(255, 214, 10, 0.15); border-left: 4px solid #ffd60a; padding: 12px 20px; margin-top: 20px; border-radius: 6px; font-size: 0.95rem;">
                 <strong>🔊 Audio Note:</strong> For vocabulary pronunciation, please ensure your browser language is set to English.
             </p>
+            
+            <div style="margin-top: 30px;">
+                <button onclick="selectRandomTopic()" style="
+                    background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+                    color: white;
+                    border: none;
+                    padding: 15px 40px;
+                    border-radius: 10px;
+                    font-size: 1.2em;
+                    font-weight: 600;
+                    cursor: pointer;
+                    box-shadow: 0 4px 15px rgba(255, 152, 0, 0.4);
+                    transition: all 0.3s;
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 12px;
+                " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 6px 20px rgba(255, 152, 0, 0.5)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(255, 152, 0, 0.4)'">
+                    🎲 Random Topic
+                </button>
+            </div>
         </header>
 
         <div class="categories-grid">
@@ -259,5 +279,116 @@
             <p style="margin-top: 10px;">Each topic includes arguments, vocabulary practice, and B2-level examples</p>
         </footer>
     </div>
+    
+    <script>
+        // Force English language for Web Speech API
+        window.speechSynthesis.onvoiceschanged = function() {
+            const voices = window.speechSynthesis.getVoices();
+            // Set English as default
+            window.preferredVoice = voices.find(voice => voice.lang.startsWith('en-')) || voices[0];
+        };
+        
+        function selectRandomTopic() {
+            const allTopics = [
+                // Military Life & Career (7 topics)
+                { category: 'military-life-career', topic: 'professional-vs-conscript', title: 'Professional vs. Conscript Forces' },
+                { category: 'military-life-career', topic: 'military-life-balance', title: 'Work-Life Balance in Military' },
+                { category: 'military-life-career', topic: 'specialization-vs-generalist', title: 'Military Career Paths' },
+                { category: 'military-life-career', topic: 'enlisted-vs-officer', title: 'Enlisted vs. Officer' },
+                { category: 'military-life-career', topic: 'military-family-support', title: 'Military Family Support' },
+                { category: 'military-life-career', topic: 'reserve-vs-active', title: 'Reserve vs. Active Duty' },
+                { category: 'military-life-career', topic: 'private-military-contractors', title: 'Private Military Contractors' },
+                
+                // NATO & International Operations (6 topics)
+                { category: 'nato-international', topic: 'nato-expansion', title: 'NATO Expansion' },
+                { category: 'nato-international', topic: 'defense-spending', title: 'Defense Spending Targets' },
+                { category: 'nato-international', topic: 'european-strategic-autonomy', title: 'European Strategic Autonomy' },
+                { category: 'nato-international', topic: 'multinational-operations', title: 'Multinational Military Operations' },
+                { category: 'nato-international', topic: 'host-nation-support', title: 'Host Nation Support' },
+                { category: 'nato-international', topic: 'nato-article-five', title: 'NATO Article 5' },
+                
+                // Technology & Modern Warfare (6 topics)
+                { category: 'technology-warfare', topic: 'autonomous-weapons', title: 'Autonomous Weapons Systems' },
+                { category: 'technology-warfare', topic: 'cyber-warfare', title: 'Cyber Warfare vs. Conventional' },
+                { category: 'technology-warfare', topic: 'drone-warfare', title: 'Drone Warfare Ethics' },
+                { category: 'technology-warfare', topic: 'ai-decision-making', title: 'AI in Military Decision-Making' },
+                { category: 'technology-warfare', topic: 'social-media-military', title: 'Social Media Use by Military' },
+                { category: 'technology-warfare', topic: 'space-militarization', title: 'Space Militarization' },
+                
+                // Training & Education (5 topics)
+                { category: 'training-education', topic: 'simulation-vs-live', title: 'Simulation vs. Live Training' },
+                { category: 'training-education', topic: 'joint-training', title: 'Joint Training Exercises' },
+                { category: 'training-education', topic: 'cultural-training', title: 'Cultural and Language Training' },
+                { category: 'training-education', topic: 'leadership-development', title: 'Leadership Development Programs' },
+                { category: 'training-education', topic: 'university-education', title: 'University Education for Officers' },
+                
+                // Ethics & Rules of Engagement (6 topics)
+                { category: 'ethics-roe', topic: 'collateral-damage', title: 'Collateral Damage Acceptability' },
+                { category: 'ethics-roe', topic: 'targeted-killings', title: 'Targeted Killings' },
+                { category: 'ethics-roe', topic: 'humanitarian-intervention', title: 'Humanitarian Intervention' },
+                { category: 'ethics-roe', topic: 'enhanced-interrogation', title: 'Enhanced Interrogation Techniques' },
+                { category: 'ethics-roe', topic: 'conscientious-objection', title: 'Conscientious Objection' },
+                { category: 'ethics-roe', topic: 'pre-emptive-strikes', title: 'Pre-emptive Military Strikes' },
+                
+                // Veterans & Transition (5 topics)
+                { category: 'veterans-transition', topic: 'veteran-employment', title: 'Veteran Employment Programs' },
+                { category: 'veterans-transition', topic: 'ptsd-treatment', title: 'PTSD Treatment Approaches' },
+                { category: 'veterans-transition', topic: 'disability-compensation', title: 'Military Disability Compensation' },
+                { category: 'veterans-transition', topic: 'transition-preparation', title: 'Transition Preparation Programs' },
+                { category: 'veterans-transition', topic: 'veteran-homelessness', title: 'Veteran Homelessness' },
+                
+                // Defense Policy (6 topics)
+                { category: 'defense-policy', topic: 'nuclear-deterrence', title: 'Nuclear Deterrence' },
+                { category: 'defense-policy', topic: 'defense-industrial-base', title: 'Defense Industrial Base' },
+                { category: 'defense-policy', topic: 'military-intervention', title: 'Military Intervention Criteria' },
+                { category: 'defense-policy', topic: 'arms-exports', title: 'Arms Exports to Allies' },
+                { category: 'defense-policy', topic: 'base-closures', title: 'Military Base Closures' },
+                { category: 'defense-policy', topic: 'defense-budget-priorities', title: 'Defense Budget Priorities' },
+                
+                // Gender & Diversity (6 topics)
+                { category: 'gender-diversity', topic: 'women-combat-roles', title: 'Women in Combat Roles' },
+                { category: 'gender-diversity', topic: 'lgbtq-military-service', title: 'LGBTQ+ Military Service' },
+                { category: 'gender-diversity', topic: 'gender-integrated-training', title: 'Gender-Integrated Training' },
+                { category: 'gender-diversity', topic: 'diversity-recruitment', title: 'Diversity in Recruitment' },
+                { category: 'gender-diversity', topic: 'physical-standards', title: 'Physical Fitness Standards' },
+                { category: 'gender-diversity', topic: 'sexual-harassment', title: 'Sexual Harassment Prevention' },
+                
+                // Intelligence & Security (5 topics)
+                { category: 'intelligence-security', topic: 'mass-surveillance', title: 'Mass Surveillance Programs' },
+                { category: 'intelligence-security', topic: 'intelligence-sharing', title: 'International Intelligence Sharing' },
+                { category: 'intelligence-security', topic: 'whistleblowers', title: 'Military Whistleblowers' },
+                { category: 'intelligence-security', topic: 'security-clearances', title: 'Security Clearance Process' },
+                { category: 'intelligence-security', topic: 'open-source-intelligence', title: 'Open Source Intelligence' },
+                
+                // Civil-Military Relations (6 topics)
+                { category: 'civil-military', topic: 'civilian-control', title: 'Civilian Control of Military' },
+                { category: 'civil-military', topic: 'military-domestic-operations', title: 'Military in Domestic Operations' },
+                { category: 'civil-military', topic: 'political-neutrality', title: 'Political Neutrality' },
+                { category: 'civil-military', topic: 'media-access', title: 'Media Access to Military' },
+                { category: 'civil-military', topic: 'military-recruiting', title: 'Military Recruiting in Schools' },
+                { category: 'civil-military', topic: 'public-support', title: 'Public Support for Military' },
+                
+                // Environmental & Health (5 topics)
+                { category: 'environmental-health', topic: 'military-environmental-impact', title: 'Military Environmental Impact' },
+                { category: 'environmental-health', topic: 'renewable-energy', title: 'Renewable Energy in Military' },
+                { category: 'environmental-health', topic: 'burn-pits', title: 'Burn Pit Exposure' },
+                { category: 'environmental-health', topic: 'mental-health-screening', title: 'Mental Health Screening' },
+                { category: 'environmental-health', topic: 'mandatory-vaccines', title: 'Mandatory Military Vaccines' },
+                
+                // Czech & Regional (5 topics)
+                { category: 'czech-regional', topic: 'czech-nato-contribution', title: 'Czech NATO Contribution' },
+                { category: 'czech-regional', topic: 'czech-defense-spending', title: 'Czech Defense Spending' },
+                { category: 'czech-regional', topic: 'czech-military-modernization', title: 'Czech Military Modernization' },
+                { category: 'czech-regional', topic: 'v4-cooperation', title: 'Visegrád Four Military Cooperation' },
+                { category: 'czech-regional', topic: 'czech-eu-army', title: 'Czech Position on EU Army' }
+            ];
+            
+            const randomIndex = Math.floor(Math.random() * allTopics.length);
+            const selectedTopic = allTopics[randomIndex];
+            
+            // Navigate to the selected topic
+            window.location.href = `${selectedTopic.category}/${selectedTopic.topic}.html`;
+        }
+    </script>
 </body>
 </html>
