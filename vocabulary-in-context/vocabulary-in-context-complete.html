@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vocabulary in Context - Mission English</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        header {
+            background: linear-gradient(135deg, #2c5f8d 0%, #1e3c72 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        header p { font-size: 1.1em; opacity: 0.95; }
+        .content { padding: 40px; }
+        .text-selector {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .text-selector label {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #1e3c72;
+            margin-right: 15px;
+        }
+        .text-selector select {
+            padding: 12px 20px;
+            font-size: 1em;
+            border: 2px solid #2c5f8d;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-width: 350px;
+        }
+        .text-selector select:hover {
+            border-color: #1e3c72;
+            box-shadow: 0 2px 8px rgba(30, 60, 114, 0.2);
+        }
+        .exercise-section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        .exercise-section.active { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .section-title {
+            background: linear-gradient(135deg, #2c5f8d 0%, #1e3c72 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 30px 0 20px 0;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+        .instructions {
+            background: #e3f2fd;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #1976d2;
+            font-size: 0.95em;
+        }
+        .instructions strong { color: #1565c0; }
+        .text-display {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #2c5f8d;
+            margin-bottom: 30px;
+            font-size: 1.05em;
+            line-height: 1.9;
+        }
+        .gap {
+            display: inline-block;
+            min-width: 110px;
+            padding: 3px 10px;
+            margin: 0 4px;
+            border-bottom: 2px dashed #2c5f8d;
+            font-weight: 600;
+            color: #666;
+            background: white;
+            border-radius: 3px;
+            transition: all 0.3s;
+            position: relative;
+        }
+        .gap.drag-over {
+            background: #fff3cd;
+            border-bottom-color: #ffc107;
+            transform: scale(1.05);
+        }
+        .gap.filled {
+            background: #e8f5e9;
+            border-bottom-color: #4caf50;
+            border-bottom-style: solid;
+            color: #1e3c72;
+        }
+        .gap.incorrect {
+            background: #ffebee;
+            border-bottom-color: #f44336;
+            animation: shake 0.3s;
+        }
+        .gap.correct {
+            background: #c8e6c9;
+            border-bottom-color: #2e7d32;
+            border-bottom-style: solid;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        .word-bank {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 25px;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e3f2fd 100%);
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 2px dashed #2c5f8d;
+            min-height: 100px;
+        }
+        .word-option {
+            background: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: 2px solid #2c5f8d;
+            cursor: move;
+            transition: all 0.3s;
+            font-weight: 600;
+            user-select: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .word-option:hover {
+            background: #2c5f8d;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        .word-option.dragging {
+            opacity: 0.5;
+            transform: rotate(5deg);
+        }
+        .word-option.used {
+            opacity: 0.3;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+        .comprehension-section { margin-top: 40px; }
+        .question {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2c5f8d;
+        }
+        .question h4 {
+            color: #1e3c72;
+            margin-bottom: 12px;
+            font-size: 1.1em;
+        }
+        .question textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 1em;
+            resize: vertical;
+            min-height: 90px;
+            transition: border-color 0.3s;
+        }
+        .question textarea:focus {
+            outline: none;
+            border-color: #2c5f8d;
+        }
+        .example-answer {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: #e3f2fd;
+            border-radius: 6px;
+            border-left: 3px solid #1976d2;
+        }
+        .example-answer.visible {
+            display: block;
+            animation: slideDown 0.3s;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; max-height: 0; }
+            to { opacity: 1; max-height: 800px; }
+        }
+        .example-answer strong {
+            color: #1565c0;
+            display: block;
+            margin-bottom: 8px;
+        }
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        button {
+            background: linear-gradient(135deg, #2c5f8d 0%, #1e3c72 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        button:active { transform: translateY(0); }
+        .show-example-btn {
+            background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+        }
+        .feedback {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+            font-size: 1.1em;
+            display: none;
+        }
+        .feedback.show {
+            display: block;
+            animation: slideDown 0.4s;
+        }
+        .feedback.success {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 2px solid #4caf50;
+        }
+        .feedback.partial {
+            background: #fff3e0;
+            color: #e65100;
+            border: 2px solid #ff9800;
+        }
+        .score {
+            font-size: 1.3em;
+            margin-top: 10px;
+        }
+        footer {
+            background: #1e3c72;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+        footer a {
+            color: #90caf9;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        footer a:hover { text-decoration: underline; }
+        @media (max-width: 768px) {
+            .container { border-radius: 0; }
+            header h1 { font-size: 1.6em; }
+            .content { padding: 20px; }
+            .text-selector select {
+                min-width: 100%;
+                margin-top: 10px;
+            }
+            .button-group { flex-direction: column; }
+            button { width: 100%; }
+            .word-bank {
+                gap: 8px;
+                padding: 15px;
+            }
+            .word-option { padding: 8px 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Vocabulary in Context</h1>
+            <p>STANAG Level 3 Practice - Drag & Drop Exercise</p>
+        </header>
+
+        <div class="content">
+            <div class="text-selector">
+                <label for="textChoice">Choose a text:</label>
+                <select id="textChoice">
+                    <option value="">-- Select a text --</option>
+                    <option value="text1">1. NATO Exercise in Poland</option>
+                    <option value="text2">2. AI in Military Operations</option>
+                    <option value="text3">3. Remote Work Revolution</option>
+                    <option value="text4">4. Climate Change and Military Planning</option>
+                    <option value="text5">5. Cybersecurity Threats</option>
+                    <option value="text6">6. Social Media and Mental Health</option>
+                    <option value="text7">7. Universal Basic Income</option>
+                    <option value="text8">8. Nuclear Energy vs Renewables</option>
+                    <option value="text9">9. Space Militarization</option>
+                    <option value="text10">10. Misinformation and Democracy</option>
+                    <option value="text11">11. Gene Editing Ethics</option>
+                    <option value="text12">12. Urban Transportation Future</option>
+                </select>
+            </div>
+
+            <div id="exercise-container"></div>
+        </div>
+
+        <footer>
+            <p>Mission English - STANAG Level 3 Practice Materials</p>
+            <p><a href="../index.html">← Back to Mission English Home</a></p>
+        </footer>
+    </div>
+
+    <script>
+        const textsData = {
+            text1: {
+                title: "NATO Exercise in Poland",
+                text: `In October 2025, approximately 90,000 troops from 23 NATO member states [1] in Exercise Steadfast Defender, which took place across Poland and the Baltic region. The comprehensive exercise was designed to [2] the alliance's ability to respond to [3] threats, involving complex scenarios that required forces to coordinate across [4] domains. Czech units, which contributed over 1,200 personnel, [5] substantial technical challenges when [6] their equipment with systems used by other nations. According to military analysts, the exercise [7] critical weaknesses in communication protocols that had previously been [8]. "The experience was [9] for our soldiers," stated a Czech commander, "as it directly [10] them to realistic situations they would never [11] in domestic training. The demanding nature of the scenarios forced participants to [12] quickly and develop [13] solutions under pressure."`,
+                answers: ['participated', 'assess', 'emerging', 'multiple', 'faced', 'integrating', 'revealed', 'overlooked', 'invaluable', 'exposed', 'encounter', 'adapt', 'innovative'],
+                shuffled: ['innovative', 'assess', 'overlooked', 'faced', 'emerging', 'adapt', 'integrating', 'invaluable', 'multiple', 'participated', 'revealed', 'encounter', 'exposed'],
+                questions: [
+                    {
+                        q: "What were the main purposes of Exercise Steadfast Defender, and how many troops participated?",
+                        a: "Exercise Steadfast Defender involved approximately 90,000 troops from 23 NATO member states. The exercise was designed to assess the alliance's ability to respond to emerging threats and involved complex scenarios that required forces to coordinate across multiple domains."
+                    },
+                    {
+                        q: "What specific difficulties did Czech forces experience during the exercise, according to the text?",
+                        a: "Czech units, which contributed over 1,200 personnel, faced substantial technical challenges when integrating their equipment with systems used by other nations. According to military analysts, the exercise revealed critical weaknesses in communication protocols that had previously been overlooked."
+                    }
+                ]
+            },
+            text2: {
+                title: "AI in Military Operations",
+                text: `Artificial intelligence is [1] transforming modern warfare, with military forces around the world investing billions in AI systems that can process [2] amounts of data in real time. The Czech Ministry of Defence recently announced plans to [3] AI-powered surveillance drones into its operations, arguing that these technologies will significantly [4] situational awareness on the battlefield. However, critics raise serious ethical [5] about autonomous weapons systems, warning that machines [6] the moral judgment necessary to make life-or-death decisions. Military experts [7] these concerns but emphasize that human operators will always retain final authority over [8] actions. The debate highlights the tension between maintaining technological superiority and [9] to international humanitarian law. As AI capabilities continue to advance at an [10] pace, defence planners must carefully [11] the potential military advantages against the profound ethical implications of [12] combat [13] to algorithms.`,
+                answers: ['rapidly', 'vast', 'incorporate', 'enhance', 'concerns', 'lack', 'acknowledge', 'lethal', 'adhering', 'unprecedented', 'balance', 'delegating', 'decisions'],
+                shuffled: ['decisions', 'enhance', 'lack', 'vast', 'balance', 'rapidly', 'acknowledge', 'concerns', 'adhering', 'delegating', 'incorporate', 'unprecedented', 'lethal'],
+                questions: [
+                    {
+                        q: "What are the main benefits of AI in military operations according to the text?",
+                        a: "AI systems can process vast amounts of data in real time, which significantly enhances situational awareness on the battlefield. Military forces around the world are investing billions in these technologies to maintain technological superiority."
+                    },
+                    {
+                        q: "What ethical concerns do critics raise about autonomous weapons systems?",
+                        a: "Critics raise serious ethical concerns that machines lack the moral judgment necessary to make life-or-death decisions. The debate highlights the tension between maintaining technological superiority and adhering to international humanitarian law, with profound ethical implications of delegating combat decisions to algorithms."
+                    }
+                ]
+            },
+            text3: {
+                title: "Remote Work Revolution",
+                text: `The COVID-19 pandemic fundamentally [1] workplace dynamics, forcing millions of employees to transition from traditional office [2] to remote work arrangements almost overnight. Initially, many companies [3] skepticism about whether productivity could be maintained outside conventional office settings, but data collected over the past three years has largely [4] these doubts. Studies indicate that remote workers often [5] higher efficiency levels compared to their office-based counterparts, primarily because they save [6] time on commuting and experience fewer workplace distractions. However, the shift has also revealed significant [7], particularly regarding work-life boundaries and employee mental health. Many workers [8] difficulty disconnecting from professional responsibilities when their home [9] as their workplace. Organizations are now [10] with how to establish policies that [11] the flexibility employees have grown to value while ensuring adequate support for their [12] and maintaining team [13] in increasingly distributed work environments.`,
+                answers: ['altered', 'environments', 'expressed', 'dispelled', 'demonstrate', 'considerable', 'challenges', 'report', 'doubles', 'grappling', 'preserve', 'wellbeing', 'cohesion'],
+                shuffled: ['demonstrate', 'cohesion', 'expressed', 'challenges', 'environments', 'preserve', 'dispelled', 'grappling', 'considerable', 'altered', 'wellbeing', 'report', 'doubles'],
+                questions: [
+                    {
+                        q: "How has remote work affected employee productivity according to the text?",
+                        a: "Studies indicate that remote workers often demonstrate higher efficiency levels compared to their office-based counterparts. This is primarily because they save considerable time on commuting and experience fewer workplace distractions."
+                    },
+                    {
+                        q: "What challenges has the shift to remote work revealed?",
+                        a: "The shift has revealed significant challenges regarding work-life boundaries and employee mental health. Many workers report difficulty disconnecting from professional responsibilities when their home doubles as their workplace, making it hard to maintain a healthy work-life balance."
+                    }
+                ]
+            },
+            text4: {
+                title: "Climate Change and Military Planning",
+                text: `Military strategists increasingly recognize climate change as a critical security threat that will [1] reshape defense planning in the [2] decades. Rising sea levels [3] immediate dangers to coastal military installations, while extreme weather events [4] training schedules and operational readiness. Beyond infrastructure concerns, climate change [5] as a threat multiplier, [6] existing tensions over scarce resources such as water and arable land. Defense analysts predict that competition for [7] resources will trigger regional conflicts, particularly in areas already experiencing political instability. The melting Arctic ice cap has opened new maritime routes and access to [8] inaccessible natural resources, prompting nations to expand their military [9] in polar regions. Meanwhile, climate-induced migration patterns are creating humanitarian crises that frequently [10] military intervention. Armed forces worldwide must [11] their strategies to address these emerging challenges while simultaneously reducing their own [12] carbon footprint, which currently [13] for a significant portion of government emissions in many countries.`,
+                answers: ['profoundly', 'coming', 'pose', 'disrupt', 'acts', 'exacerbating', 'dwindling', 'previously', 'presence', 'require', 'address', 'substantial', 'accounts'],
+                shuffled: ['accounts', 'dwindling', 'disrupt', 'pose', 'previously', 'coming', 'exacerbating', 'address', 'profoundly', 'require', 'acts', 'presence', 'substantial'],
+                questions: [
+                    {
+                        q: "How does climate change act as a \"threat multiplier\" according to the text?",
+                        a: "Climate change exacerbates existing tensions over scarce resources such as water and arable land. Defense analysts predict that competition for dwindling resources will trigger regional conflicts, particularly in areas already experiencing political instability."
+                    },
+                    {
+                        q: "What new strategic concerns has Arctic ice melting created?",
+                        a: "The melting Arctic ice cap has opened new maritime routes and access to previously inaccessible natural resources. This has prompted nations to expand their military presence in polar regions as they compete for strategic advantages in these newly accessible areas."
+                    }
+                ]
+            },
+            text5: {
+                title: "Cybersecurity Threats",
+                text: `Cybersecurity has emerged as one of the most [1] challenges facing governments and private organizations in the digital age. Sophisticated hacking groups, often sponsored by [2] states, routinely penetrate networks to steal [3] information, disrupt critical infrastructure, or [4] public opinion through disinformation campaigns. The 2023 cyberattack on a major European energy provider demonstrated how [5] essential services remain despite substantial investments in digital defense systems. Experts warn that future conflicts will likely [6] simultaneously in both physical and digital domains, with adversaries [7] weaknesses in computer systems to gain strategic advantages before conventional military operations even [8]. The challenge for defenders lies in the asymmetric [9] of cyber warfare, where relatively small groups with modest resources can [10] devastating damage on much larger and wealthier targets. Governments are now urgently [11] specialists with advanced technical skills to bolster their cyber defense capabilities, but the private sector continues to attract top talent with [12] higher salaries, creating a persistent [13] of qualified personnel in public service.`,
+                answers: ['pressing', 'hostile', 'sensitive', 'manipulate', 'vulnerable', 'unfold', 'exploiting', 'commence', 'nature', 'inflict', 'recruiting', 'significantly', 'shortage'],
+                shuffled: ['shortage', 'manipulate', 'pressing', 'unfold', 'hostile', 'nature', 'exploiting', 'vulnerable', 'sensitive', 'commence', 'significantly', 'recruiting', 'inflict'],
+                questions: [
+                    {
+                        q: "Why is cyber warfare described as \"asymmetric\" in the text?",
+                        a: "The challenge for defenders lies in the asymmetric nature of cyber warfare, where relatively small groups with modest resources can inflict devastating damage on much larger and wealthier targets. This makes it difficult for governments to defend against attacks."
+                    },
+                    {
+                        q: "What staffing challenge do governments face in cybersecurity?",
+                        a: "Governments are urgently recruiting specialists with advanced technical skills to bolster their cyber defense capabilities. However, the private sector continues to attract top talent with significantly higher salaries, creating a persistent shortage of qualified personnel in public service."
+                    }
+                ]
+            },
+            text6: {
+                title: "Social Media and Mental Health",
+                text: `Mental health professionals have grown increasingly [1] by the correlation between social media usage and rising [2] of anxiety and depression, particularly among adolescents and young adults. Research [3] across multiple countries reveals that individuals who spend [4] time on platforms like Instagram and TikTok frequently exhibit symptoms of poor [5] and social isolation, despite being constantly connected to hundreds or thousands of online contacts. The algorithms that govern these platforms [6] prioritize content that [7] emotional responses, keeping users engaged for extended periods regardless of the psychological consequences. Clinical psychologists note that the curated nature of social media feeds creates unrealistic [8] about success, appearance, and lifestyle, leading vulnerable users to [9] harmful comparison habits. Some European countries have begun implementing regulations that [10] how platforms collect data from minors and limit the addictive design features that [11] psychological vulnerabilities. However, critics argue that individual responsibility and digital literacy education would [12] more effective than government [13] in addressing these complex societal issues.`,
+                answers: ['alarmed', 'rates', 'conducted', 'excessive', 'self-esteem', 'deliberately', 'triggers', 'expectations', 'develop', 'restrict', 'exploit', 'prove', 'intervention'],
+                shuffled: ['prove', 'triggers', 'conducted', 'exploit', 'alarmed', 'deliberately', 'excessive', 'intervention', 'rates', 'expectations', 'restrict', 'develop', 'self-esteem'],
+                questions: [
+                    {
+                        q: "How do social media algorithms affect users according to the text?",
+                        a: "The algorithms that govern social media platforms deliberately prioritize content that triggers emotional responses, keeping users engaged for extended periods regardless of the psychological consequences. This can lead to poor self-esteem and social isolation."
+                    },
+                    {
+                        q: "What regulatory approaches have some European countries taken?",
+                        a: "Some European countries have begun implementing regulations that restrict how platforms collect data from minors and limit the addictive design features that exploit psychological vulnerabilities. However, critics argue that individual responsibility and digital literacy education would prove more effective than government intervention."
+                    }
+                ]
+            },
+            text7: {
+                title: "Universal Basic Income",
+                text: `The concept of universal basic income has [1] considerable support among policymakers and economists in recent years. This system would [2] all citizens with regular cash payments from the government, [3] of whether they have a job or not. Supporters argue that UBI could [4] reduce poverty and inequality while giving workers more power when they negotiate with employers. This is [5] important in an economy where automation and artificial intelligence are replacing many traditional jobs. Pilot programs that were [6] in Finland and Kenya have produced mixed results. Recipients reported better mental health and felt more financially [7], but their employment rates did not change significantly. Critics say that if governments [8] UBI on a national scale, they would need to [9] taxes dramatically, which could harm economic growth and make people less [10] to work. The debate has become more intense because recent [11] in AI technology threaten to eliminate millions of jobs across different industries within the next decade. Economists remain [12] on whether UBI is a practical solution to technological unemployment or an unrealistic idea that [13] basic facts about human motivation and government budgets.`,
+                answers: ['gained', 'provide', 'regardless', 'effectively', 'particularly', 'conducted', 'secure', 'implemented', 'raise', 'willing', 'advances', 'divided', 'ignores'],
+                shuffled: ['ignores', 'particularly', 'provide', 'willing', 'conducted', 'effectively', 'divided', 'secure', 'gained', 'implemented', 'advances', 'regardless', 'raise'],
+                questions: [
+                    {
+                        q: "What are the main arguments in favor of universal basic income?",
+                        a: "Supporters argue that UBI could effectively reduce poverty and inequality while giving workers more power when they negotiate with employers. This is particularly important in an economy where automation and artificial intelligence are replacing many traditional jobs."
+                    },
+                    {
+                        q: "What were the results of UBI pilot programs in Finland and Kenya?",
+                        a: "The pilot programs produced mixed results. Recipients reported better mental health and felt more financially secure, but their employment rates did not change significantly. This has led to ongoing debate about whether UBI actually encourages or discourages work."
+                    }
+                ]
+            },
+            text8: {
+                title: "Nuclear Energy vs Renewables",
+                text: `The debate over nuclear energy [1] renewable sources like wind and solar power has become increasingly urgent as countries [2] to reduce carbon emissions while meeting growing electricity [3]. Nuclear power plants can generate [4] amounts of energy without producing greenhouse gases, which makes them attractive to governments that are [5] to fighting climate change. France successfully [6] over 70 percent of its electricity from nuclear reactors, demonstrating that this technology can reliably [7] modern economies. However, opponents [8] the serious risks that are associated with nuclear accidents, pointing to the disasters at Chernobyl and Fukushima as evidence that even advanced safety systems can fail with [9] consequences. The problem of radioactive waste, which remains dangerous for thousands of years, also presents a major challenge that no country has fully [10]. Meanwhile, renewable energy technologies have improved dramatically in recent decades, with costs declining so rapidly that solar and wind power are now cheaper than nuclear in many regions. Critics of renewables argue that these sources are too [11] because they depend on weather conditions, while nuclear advocates [12] that modern reactor designs incorporate multiple safety features that make meltdowns [13] impossible.`,
+                answers: ['versus', 'attempt', 'demands', 'massive', 'committed', 'obtains', 'power', 'highlight', 'catastrophic', 'resolved', 'unreliable', 'counter', 'virtually'],
+                shuffled: ['virtually', 'highlight', 'versus', 'committed', 'demands', 'unreliable', 'massive', 'counter', 'attempt', 'obtains', 'catastrophic', 'power', 'resolved'],
+                questions: [
+                    {
+                        q: "What advantages does nuclear energy offer according to supporters?",
+                        a: "Nuclear power plants can generate massive amounts of energy without producing greenhouse gases, which makes them attractive to governments committed to fighting climate change. France successfully obtains over 70 percent of its electricity from nuclear reactors, demonstrating that this technology can reliably power modern economies."
+                    },
+                    {
+                        q: "What concerns do opponents of nuclear energy raise?",
+                        a: "Opponents highlight the serious risks associated with nuclear accidents, pointing to disasters at Chernobyl and Fukushima as evidence that even advanced safety systems can fail with catastrophic consequences. The problem of radioactive waste, which remains dangerous for thousands of years, also presents a major challenge that no country has fully resolved."
+                    }
+                ]
+            },
+            text9: {
+                title: "Space Militarization",
+                text: `The militarization of space has become a growing concern for international security experts as more nations develop [1] to operate military systems in orbit. Satellites that provide GPS navigation, secure communications, and intelligence [2] have become essential [3] of modern military operations, which makes them attractive [4] during conflicts. The United States, Russia, and China have all demonstrated technologies that could destroy or [5] enemy satellites, raising [6] that future wars might begin with attacks on space-based infrastructure. In 2019, India successfully conducted an anti-satellite missile test, joining the small group of nations that [7] this controversial capability. International law regarding space warfare remains [8] and outdated, as the main treaty governing space activities was signed in 1967 when satellite technology was still primitive. Military strategists warn that conflict in space could create massive amounts of [9] that would make certain orbital zones unusable for decades, potentially [10] global communications and navigation systems that billions of people depend on daily. Despite these risks, no nation appears willing to negotiate binding agreements that would [11] the deployment of weapons in space, as each country fears falling behind potential adversaries in this [12] domain of warfare.`,
+                answers: ['capabilities', 'gathering', 'components', 'targets', 'disable', 'fears', 'possess', 'vague', 'debris', 'crippling', 'restrict', 'emerging'],
+                shuffled: ['emerging', 'debris', 'gathering', 'possess', 'components', 'vague', 'restrict', 'targets', 'capabilities', 'crippling', 'fears', 'disable'],
+                questions: [
+                    {
+                        q: "Why are satellites considered attractive targets during military conflicts?",
+                        a: "Satellites that provide GPS navigation, secure communications, and intelligence gathering have become essential components of modern military operations. This makes them attractive targets because destroying them could severely disrupt an enemy's military capabilities."
+                    },
+                    {
+                        q: "What risks does conflict in space pose according to military strategists?",
+                        a: "Military strategists warn that conflict in space could create massive amounts of debris that would make certain orbital zones unusable for decades. This could potentially cripple global communications and navigation systems that billions of people depend on daily."
+                    }
+                ]
+            },
+            text10: {
+                title: "Misinformation and Democracy",
+                text: `The spread of misinformation through social media platforms poses a serious [1] to democratic institutions and informed public debate. False or misleading content can reach millions of users [2] hours, often spreading faster than factual corrections can be distributed. During [3] campaigns, coordinated disinformation efforts have successfully [4] public opinion by exploiting emotional reactions and existing political [5]. Studies show that people are more likely to believe and share information that [6] their existing beliefs, regardless of whether that information is accurate or completely [7]. Tech companies have struggled to develop effective methods for identifying and removing false content without [8] on free speech rights or appearing politically biased. Some experts advocate for stronger government [9] of social media platforms, arguing that private companies cannot be [10] to police themselves adequately. However, critics warn that giving governments authority to determine what constitutes misinformation could enable authoritarian censorship and [11] legitimate political discourse. The challenge has intensified with advances in artificial intelligence that can generate convincing fake images, videos, and audio recordings, making it increasingly difficult for ordinary citizens to [12] authentic content from sophisticated fabrications.`,
+                answers: ['threat', 'within', 'election', 'manipulated', 'divisions', 'confirms', 'fabricated', 'infringing', 'regulation', 'trusted', 'suppress', 'distinguish'],
+                shuffled: ['distinguish', 'confirms', 'election', 'infringing', 'threat', 'suppress', 'manipulated', 'trusted', 'within', 'divisions', 'fabricated', 'regulation'],
+                questions: [
+                    {
+                        q: "How does misinformation spread on social media according to the text?",
+                        a: "False or misleading content can reach millions of users within hours, often spreading faster than factual corrections can be distributed. Studies show that people are more likely to believe and share information that confirms their existing beliefs, regardless of whether it is accurate or completely fabricated."
+                    },
+                    {
+                        q: "What dilemma do governments face regarding misinformation regulation?",
+                        a: "Some experts advocate for stronger government regulation of social media platforms, arguing that private companies cannot be trusted to police themselves adequately. However, critics warn that giving governments authority to determine what constitutes misinformation could enable authoritarian censorship and suppress legitimate political discourse."
+                    }
+                ]
+            },
+            text11: {
+                title: "Gene Editing Ethics",
+                text: `Recent breakthroughs in gene editing technology, particularly a technique called CRISPR, have opened up revolutionary possibilities for [1] genetic diseases and improving human health. Scientists can now modify specific genes with remarkable [2], potentially eliminating hereditary conditions that have caused suffering for [3] generations. Medical researchers have already achieved promising results in treating diseases like sickle cell anemia and certain types of cancer by editing patients' genes. However, the technology also [4] profound ethical questions about how far humanity should go in [5] human biology. In 2018, a Chinese scientist shocked the global scientific community by [6] that he had created the world's first gene-edited babies, claiming he had made them resistant to HIV infection. The international response was overwhelmingly negative, with researchers and ethicists [7] the experiment as irresponsible and dangerous. Many experts worry that gene editing could [8] to designer babies, where wealthy parents pay to enhance their children's intelligence, physical abilities, or appearance, creating a genetic [9] between rich and poor. Religious groups and conservative thinkers argue that humans should not [10] God by fundamentally changing the nature of our [11]. Despite these concerns, the technology continues to [12] rapidly, forcing societies to confront difficult questions about the [13] of medical intervention.`,
+                answers: ['treating', 'precision', 'countless', 'raises', 'altering', 'announcing', 'condemning', 'lead', 'divide', 'play', 'species', 'advance', 'boundaries'],
+                shuffled: ['boundaries', 'precision', 'lead', 'countless', 'advance', 'treating', 'condemning', 'play', 'raises', 'divide', 'species', 'announcing', 'altering'],
+                questions: [
+                    {
+                        q: "What medical benefits does CRISPR gene editing technology offer?",
+                        a: "Scientists can now modify specific genes with remarkable precision, potentially eliminating hereditary conditions that have caused suffering for countless generations. Medical researchers have already achieved promising results in treating diseases like sickle cell anemia and certain types of cancer by editing patients' genes."
+                    },
+                    {
+                        q: "What ethical concerns do experts have about gene editing?",
+                        a: "Many experts worry that gene editing could lead to designer babies, where wealthy parents pay to enhance their children's intelligence, physical abilities, or appearance, creating a genetic divide between rich and poor. The technology raises profound ethical questions about how far humanity should go in altering human biology."
+                    }
+                ]
+            },
+            text12: {
+                title: "Urban Transportation Future",
+                text: `Cities around the world are reimagining their transportation systems as they [1] to address traffic congestion, air [2], and climate change while accommodating growing urban populations. Many European cities have [3] their bicycle infrastructure dramatically, creating protected bike lanes and bike-sharing programs that encourage residents to [4] their cars for shorter journeys. Copenhagen has become a model for sustainable urban [5], with over 60 percent of residents commuting to work by bicycle daily. Electric vehicles represent another [6] solution, as governments offer subsidies and tax incentives to accelerate their [7] and reduce emissions from private transport. However, critics argue that simply replacing gasoline cars with electric ones fails to address the fundamental problem of automobile dependence and urban [8]. Public transportation advocates emphasize that efficient metro systems, trams, and buses can move far more people than private vehicles while consuming significantly less energy and requiring less space. Autonomous vehicle technology, which several companies are actively developing, could potentially revolutionize urban transport by [9] shared self-driving cars that reduce the need for private [10]. Yet implementing these changes faces substantial political resistance from citizens who value the [11] and independence that personal cars provide, making the transition to sustainable urban mobility a complex [12] that requires both technological innovation and cultural [13].`,
+                answers: ['struggle', 'pollution', 'expanded', 'abandon', 'mobility', 'promising', 'adoption', 'sprawl', 'enabling', 'ownership', 'convenience', 'challenge', 'shifts'],
+                shuffled: ['shifts', 'abandon', 'promising', 'struggle', 'sprawl', 'mobility', 'pollution', 'challenge', 'ownership', 'enabling', 'expanded', 'convenience', 'adoption'],
+                questions: [
+                    {
+                        q: "What approaches are European cities taking to improve urban transportation?",
+                        a: "Many European cities have expanded their bicycle infrastructure dramatically, creating protected bike lanes and bike-sharing programs that encourage residents to abandon their cars for shorter journeys. Copenhagen has become a model for sustainable urban mobility, with over 60 percent of residents commuting to work by bicycle daily."
+                    },
+                    {
+                        q: "What obstacles exist for implementing sustainable urban transportation?",
+                        a: "Implementing these changes faces substantial political resistance from citizens who value the convenience and independence that personal cars provide. This makes the transition to sustainable urban mobility a complex challenge that requires both technological innovation and cultural shifts."
+                    }
+                ]
+            }
+        };
+
+        let currentTextId = null;
+        let draggedWord = null;
+
+        document.getElementById('textChoice').addEventListener('change', function() {
+            const textId = this.value;
+            if (textId) {
+                currentTextId = textId;
+                loadExercise(textId);
+            }
+        });
+
+        function loadExercise(textId) {
+            const data = textsData[textId];
+            const container = document.getElementById('exercise-container');
+            
+            // Process text with gaps
+            let processedText = data.text;
+            for (let i = 1; i <= data.answers.length; i++) {
+                processedText = processedText.replace(`[${i}]`, 
+                    `<span class="gap" data-index="${i-1}" data-answer="${data.answers[i-1]}"></span>`);
+            }
+
+            container.innerHTML = `
+                <div class="section-title">${data.title}</div>
+                
+                <div class="instructions">
+                    <strong>Instructions:</strong> Drag words from the word bank below and drop them into the gaps in the text. When you're done, click "Check Answers" to see your results.
+                </div>
+                
+                <div class="text-display" id="textDisplay">
+                    ${processedText}
+                </div>
+
+                <div class="section-title">Word Bank</div>
+                <div class="word-bank" id="wordBank"></div>
+
+                <div class="button-group">
+                    <button onclick="checkAnswers()">Check Answers</button>
+                    <button onclick="resetExercise()">Reset Exercise</button>
+                </div>
+
+                <div id="feedback" class="feedback"></div>
+
+                <div class="comprehension-section">
+                    <div class="section-title">Comprehension Questions</div>
+                    
+                    <div class="question">
+                        <h4>1. ${data.questions[0].q}</h4>
+                        <textarea id="q1" rows="4" placeholder="Write your answer here..."></textarea>
+                        <button class="show-example-btn" onclick="toggleExample('ex1')">Show Example Answer</button>
+                        <div id="ex1" class="example-answer">
+                            <strong>Example B2 Answer:</strong>
+                            ${data.questions[0].a}
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <h4>2. ${data.questions[1].q}</h4>
+                        <textarea id="q2" rows="4" placeholder="Write your answer here..."></textarea>
+                        <button class="show-example-btn" onclick="toggleExample('ex2')">Show Example Answer</button>
+                        <div id="ex2" class="example-answer">
+                            <strong>Example B2 Answer:</strong>
+                            ${data.questions[1].a}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Initialize word bank with shuffled words
+            const wordBank = document.getElementById('wordBank');
+            data.shuffled.forEach(word => {
+                const wordDiv = document.createElement('div');
+                wordDiv.className = 'word-option';
+                wordDiv.textContent = word;
+                wordDiv.draggable = true;
+                wordDiv.addEventListener('dragstart', handleDragStart);
+                wordDiv.addEventListener('dragend', handleDragEnd);
+                wordBank.appendChild(wordDiv);
+            });
+
+            // Add drag event listeners to gaps
+            const gaps = document.querySelectorAll('.gap');
+            gaps.forEach(gap => {
+                gap.addEventListener('dragover', handleDragOver);
+                gap.addEventListener('drop', handleDrop);
+                gap.addEventListener('dragleave', handleDragLeave);
+            });
+
+            // Scroll to exercise
+            container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function handleDragStart(e) {
+            draggedWord = e.target;
+            e.target.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', e.target.innerHTML);
+        }
+
+        function handleDragEnd(e) {
+            e.target.classList.remove('dragging');
+        }
+
+        function handleDragOver(e) {
+            if (e.preventDefault) {
+                e.preventDefault();
+            }
+            e.dataTransfer.dropEffect = 'move';
+            e.target.classList.add('drag-over');
+            return false;
+        }
+
+        function handleDragLeave(e) {
+            e.target.classList.remove('drag-over');
+        }
+
+        function handleDrop(e) {
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }
+            e.preventDefault();
+
+            e.target.classList.remove('drag-over');
+            
+            if (draggedWord && e.target.classList.contains('gap')) {
+                e.target.textContent = draggedWord.textContent;
+                e.target.classList.add('filled');
+                draggedWord.classList.add('used');
+            }
+
+            return false;
+        }
+
+        function checkAnswers() {
+            const gaps = document.querySelectorAll('.gap');
+            let correct = 0;
+            let total = gaps.length;
+
+            gaps.forEach(gap => {
+                const userAnswer = gap.textContent.trim().toLowerCase();
+                const correctAnswer = gap.dataset.answer.toLowerCase();
+                
+                gap.classList.remove('correct', 'incorrect');
+                
+                if (userAnswer === correctAnswer) {
+                    gap.classList.add('correct');
+                    correct++;
+                } else if (userAnswer !== '') {
+                    gap.classList.add('incorrect');
+                }
+            });
+
+            const feedback = document.getElementById('feedback');
+            feedback.classList.add('show');
+            
+            if (correct === total) {
+                feedback.className = 'feedback show success';
+                feedback.innerHTML = `<div>🎉 Perfect! All answers are correct!</div><div class="score">${correct}/${total}</div>`;
+            } else {
+                feedback.className = 'feedback show partial';
+                feedback.innerHTML = `<div>Good effort! Review the incorrect answers and try again.</div><div class="score">${correct}/${total} correct</div>`;
+            }
+
+            // Scroll to feedback
+            feedback.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function resetExercise() {
+            if (!currentTextId) return;
+            
+            // Clear all gaps
+            const gaps = document.querySelectorAll('.gap');
+            gaps.forEach(gap => {
+                gap.textContent = '';
+                gap.classList.remove('filled', 'correct', 'incorrect');
+            });
+
+            // Reset word bank
+            const wordBank = document.getElementById('wordBank');
+            wordBank.innerHTML = '';
+            
+            const data = textsData[currentTextId];
+            data.shuffled.forEach(word => {
+                const wordDiv = document.createElement('div');
+                wordDiv.className = 'word-option';
+                wordDiv.textContent = word;
+                wordDiv.draggable = true;
+                wordDiv.addEventListener('dragstart', handleDragStart);
+                wordDiv.addEventListener('dragend', handleDragEnd);
+                wordBank.appendChild(wordDiv);
+            });
+
+            // Hide feedback
+            const feedback = document.getElementById('feedback');
+            feedback.classList.remove('show');
+        }
+
+        function toggleExample(exampleId) {
+            const example = document.getElementById(exampleId);
+            example.classList.toggle('visible');
+        }
+    </script>
+</body>
+</html>
