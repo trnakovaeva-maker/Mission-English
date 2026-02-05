@@ -597,6 +597,12 @@
     </div>
 
     <script>
+        // Force English language for Web Speech API
+        window.speechSynthesis.onvoiceschanged = function() {
+            const voices = window.speechSynthesis.getVoices();
+            window.preferredVoice = voices.find(voice => voice.lang.startsWith('en-')) || voices[0];
+        };
+
         const topics = [
             {
                         "topic": "Remote work improves productivity and work-life balance.",
@@ -1204,6 +1210,19 @@
             const hash = window.location.hash;
             if (hash && hash.startsWith('#topic-')) {
                 const topicIndex = parseInt(hash.replace('#topic-', ''));
+                if (!isNaN(topicIndex) && topicIndex >= 0 && topicIndex < topics.length) {
+                    selectTopic(topicIndex);
+                }
+            }
+        });
+    
+        // Auto-select topic from URL parameter (for random picker)
+        window.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const topicParam = urlParams.get('topic');
+            
+            if (topicParam !== null) {
+                const topicIndex = parseInt(topicParam);
                 if (!isNaN(topicIndex) && topicIndex >= 0 && topicIndex < topics.length) {
                     selectTopic(topicIndex);
                 }
