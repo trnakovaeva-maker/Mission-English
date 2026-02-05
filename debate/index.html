@@ -289,26 +289,95 @@
         };
         
         function selectRandomTopic() {
-            const categories = [
-                'military.html',
-                'nato.html',
-                'technology.html',
-                'education.html',
-                'work.html',
-                'health.html',
-                'environment.html',
-                'family.html',
-                'urban.html',
-                'media.html',
-                'consumer.html',
-                'travel.html'
+            // All topics across all 12 categories with their indices
+            const allTopics = [
+                // Military (6 topics)
+                { file: 'military.html', index: 0 },
+                { file: 'military.html', index: 1 },
+                { file: 'military.html', index: 2 },
+                { file: 'military.html', index: 3 },
+                { file: 'military.html', index: 4 },
+                { file: 'military.html', index: 5 },
+                // NATO (6 topics)
+                { file: 'nato.html', index: 0 },
+                { file: 'nato.html', index: 1 },
+                { file: 'nato.html', index: 2 },
+                { file: 'nato.html', index: 3 },
+                { file: 'nato.html', index: 4 },
+                { file: 'nato.html', index: 5 },
+                // Technology (6 topics)
+                { file: 'technology.html', index: 0 },
+                { file: 'technology.html', index: 1 },
+                { file: 'technology.html', index: 2 },
+                { file: 'technology.html', index: 3 },
+                { file: 'technology.html', index: 4 },
+                { file: 'technology.html', index: 5 },
+                // Education (5 topics)
+                { file: 'education.html', index: 0 },
+                { file: 'education.html', index: 1 },
+                { file: 'education.html', index: 2 },
+                { file: 'education.html', index: 3 },
+                { file: 'education.html', index: 4 },
+                // Work (5 topics)
+                { file: 'work.html', index: 0 },
+                { file: 'work.html', index: 1 },
+                { file: 'work.html', index: 2 },
+                { file: 'work.html', index: 3 },
+                { file: 'work.html', index: 4 },
+                // Health (6 topics)
+                { file: 'health.html', index: 0 },
+                { file: 'health.html', index: 1 },
+                { file: 'health.html', index: 2 },
+                { file: 'health.html', index: 3 },
+                { file: 'health.html', index: 4 },
+                { file: 'health.html', index: 5 },
+                // Environment (6 topics)
+                { file: 'environment.html', index: 0 },
+                { file: 'environment.html', index: 1 },
+                { file: 'environment.html', index: 2 },
+                { file: 'environment.html', index: 3 },
+                { file: 'environment.html', index: 4 },
+                { file: 'environment.html', index: 5 },
+                // Family (6 topics)
+                { file: 'family.html', index: 0 },
+                { file: 'family.html', index: 1 },
+                { file: 'family.html', index: 2 },
+                { file: 'family.html', index: 3 },
+                { file: 'family.html', index: 4 },
+                { file: 'family.html', index: 5 },
+                // Urban (5 topics)
+                { file: 'urban.html', index: 0 },
+                { file: 'urban.html', index: 1 },
+                { file: 'urban.html', index: 2 },
+                { file: 'urban.html', index: 3 },
+                { file: 'urban.html', index: 4 },
+                // Media (6 topics)
+                { file: 'media.html', index: 0 },
+                { file: 'media.html', index: 1 },
+                { file: 'media.html', index: 2 },
+                { file: 'media.html', index: 3 },
+                { file: 'media.html', index: 4 },
+                { file: 'media.html', index: 5 },
+                // Consumer (5 topics)
+                { file: 'consumer.html', index: 0 },
+                { file: 'consumer.html', index: 1 },
+                { file: 'consumer.html', index: 2 },
+                { file: 'consumer.html', index: 3 },
+                { file: 'consumer.html', index: 4 },
+                // Travel (5 topics)
+                { file: 'travel.html', index: 0 },
+                { file: 'travel.html', index: 1 },
+                { file: 'travel.html', index: 2 },
+                { file: 'travel.html', index: 3 },
+                { file: 'travel.html', index: 4 }
             ];
             
-            const randomIndex = Math.floor(Math.random() * categories.length);
-            const selectedCategory = categories[randomIndex];
+            // Select random topic
+            const randomIndex = Math.floor(Math.random() * allTopics.length);
+            const selectedTopic = allTopics[randomIndex];
             
-            // Navigate to the selected category
-            window.location.href = selectedCategory;
+            // Navigate to the page with the topic index as URL parameter
+            window.location.href = `${selectedTopic.file}?topic=${selectedTopic.index}`;
         }
     </script>
 </body>
