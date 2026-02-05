@@ -105,12 +105,16 @@
             background: white;
             border-radius: 3px;
             transition: all 0.3s;
-            position: relative;
+            cursor: pointer;
         }
-        .gap.drag-over {
+        .gap:hover {
+            background: #fff3cd;
+            transform: scale(1.02);
+        }
+        .gap.selected {
             background: #fff3cd;
             border-bottom-color: #ffc107;
-            transform: scale(1.05);
+            border-bottom-style: solid;
         }
         .gap.filled {
             background: #e8f5e9;
@@ -149,7 +153,7 @@
             padding: 10px 20px;
             border-radius: 6px;
             border: 2px solid #2c5f8d;
-            cursor: move;
+            cursor: pointer;
             transition: all 0.3s;
             font-weight: 600;
             user-select: none;
@@ -160,10 +164,6 @@
             color: white;
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-        }
-        .word-option.dragging {
-            opacity: 0.5;
-            transform: rotate(5deg);
         }
         .word-option.used {
             opacity: 0.3;
@@ -291,7 +291,6 @@
             .content { padding: 20px; }
             .text-selector select {
                 min-width: 100%;
-                margin-top: 10px;
             }
             .button-group { flex-direction: column; }
             button { width: 100%; }
@@ -307,7 +306,7 @@
     <div class="container">
         <header>
             <h1>📚 Vocabulary in Context</h1>
-            <p>STANAG Level 3 Practice - Drag & Drop Exercise</p>
+            <p>STANAG Level 3 Practice - Click to Fill Exercise</p>
         </header>
 
         <div class="content">
@@ -318,15 +317,6 @@
                     <option value="text1">1. NATO Exercise in Poland</option>
                     <option value="text2">2. AI in Military Operations</option>
                     <option value="text3">3. Remote Work Revolution</option>
-                    <option value="text4">4. Climate Change and Military Planning</option>
-                    <option value="text5">5. Cybersecurity Threats</option>
-                    <option value="text6">6. Social Media and Mental Health</option>
-                    <option value="text7">7. Universal Basic Income</option>
-                    <option value="text8">8. Nuclear Energy vs Renewables</option>
-                    <option value="text9">9. Space Militarization</option>
-                    <option value="text10">10. Misinformation and Democracy</option>
-                    <option value="text11">11. Gene Editing Ethics</option>
-                    <option value="text12">12. Urban Transportation Future</option>
                 </select>
             </div>
 
@@ -388,8 +378,7 @@
                         a: "The shift has revealed significant challenges regarding work-life boundaries and employee mental health. Many workers report difficulty disconnecting from professional responsibilities when their home doubles as their workplace, making it hard to maintain a healthy work-life balance."
                     }
                 ]
-            },
-            text4: {
+            },            text4: {
                 title: "Climate Change and Military Planning",
                 text: `Military strategists increasingly recognize climate change as a critical security threat that will [1] reshape defense planning in the [2] decades. Rising sea levels [3] immediate dangers to coastal military installations, while extreme weather events [4] training schedules and operational readiness. Beyond infrastructure concerns, climate change [5] as a threat multiplier, [6] existing tensions over scarce resources such as water and arable land. Defense analysts predict that competition for [7] resources will trigger regional conflicts, particularly in areas already experiencing political instability. The melting Arctic ice cap has opened new maritime routes and access to [8] inaccessible natural resources, prompting nations to expand their military [9] in polar regions. Meanwhile, climate-induced migration patterns are creating humanitarian crises that frequently [10] military intervention. Armed forces worldwide must [11] their strategies to address these emerging challenges while simultaneously reducing their own [12] carbon footprint, which currently [13] for a significant portion of government emissions in many countries.`,
                 answers: ['profoundly', 'coming', 'pose', 'disrupt', 'acts', 'exacerbating', 'dwindling', 'previously', 'presence', 'require', 'address', 'substantial', 'accounts'],
@@ -536,7 +525,7 @@
         };
 
         let currentTextId = null;
-        let draggedWord = null;
+        let selectedGap = null;
 
         document.getElementById('textChoice').addEventListener('change', function() {
             const textId = this.value;
@@ -561,7 +550,7 @@
                 <div class="section-title">${data.title}</div>
                 
                 <div class="instructions">
-                    <strong>Instructions:</strong> Drag words from the word bank below and drop them into the gaps in the text. When you're done, click "Check Answers" to see your results.
+                    <strong>Instructions:</strong> First, click on a gap in the text (it will turn yellow). Then, click on a word from the word bank to fill it in. Much easier than drag-and-drop!
                 </div>
                 
                 <div class="text-display" id="textDisplay">
@@ -609,63 +598,39 @@
                 const wordDiv = document.createElement('div');
                 wordDiv.className = 'word-option';
                 wordDiv.textContent = word;
-                wordDiv.draggable = true;
-                wordDiv.addEventListener('dragstart', handleDragStart);
-                wordDiv.addEventListener('dragend', handleDragEnd);
+                wordDiv.onclick = () => fillGapWithWord(wordDiv, word);
                 wordBank.appendChild(wordDiv);
             });
 
-            // Add drag event listeners to gaps
+            // Add click handlers to gaps
             const gaps = document.querySelectorAll('.gap');
             gaps.forEach(gap => {
-                gap.addEventListener('dragover', handleDragOver);
-                gap.addEventListener('drop', handleDrop);
-                gap.addEventListener('dragleave', handleDragLeave);
+                gap.onclick = () => selectGap(gap);
             });
 
             // Scroll to exercise
             container.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
-        function handleDragStart(e) {
-            draggedWord = e.target;
-            e.target.classList.add('dragging');
-            e.dataTransfer.effectAllowed = 'move';
-            e.dataTransfer.setData('text/html', e.target.innerHTML);
-        }
-
-        function handleDragEnd(e) {
-            e.target.classList.remove('dragging');
-        }
-
-        function handleDragOver(e) {
-            if (e.preventDefault) {
-                e.preventDefault();
-            }
-            e.dataTransfer.dropEffect = 'move';
-            e.target.classList.add('drag-over');
-            return false;
-        }
-
-        function handleDragLeave(e) {
-            e.target.classList.remove('drag-over');
-        }
-
-        function handleDrop(e) {
-            if (e.stopPropagation) {
-                e.stopPropagation();
-            }
-            e.preventDefault();
-
-            e.target.classList.remove('drag-over');
+        function selectGap(gap) {
+            // Remove previous selection
+            document.querySelectorAll('.gap').forEach(g => {
+                g.classList.remove('selected');
+            });
             
-            if (draggedWord && e.target.classList.contains('gap')) {
-                e.target.textContent = draggedWord.textContent;
-                e.target.classList.add('filled');
-                draggedWord.classList.add('used');
-            }
+            selectedGap = gap;
+            gap.classList.add('selected');
+        }
 
-            return false;
+        function fillGapWithWord(wordDiv, word) {
+            if (!selectedGap || wordDiv.classList.contains('used')) return;
+            
+            selectedGap.textContent = word;
+            selectedGap.classList.remove('selected');
+            selectedGap.classList.add('filled');
+            wordDiv.classList.add('used');
+            
+            selectedGap = null;
         }
 
         function checkAnswers() {
@@ -709,7 +674,7 @@
             const gaps = document.querySelectorAll('.gap');
             gaps.forEach(gap => {
                 gap.textContent = '';
-                gap.classList.remove('filled', 'correct', 'incorrect');
+                gap.classList.remove('filled', 'correct', 'incorrect', 'selected');
             });
 
             // Reset word bank
@@ -721,15 +686,15 @@
                 const wordDiv = document.createElement('div');
                 wordDiv.className = 'word-option';
                 wordDiv.textContent = word;
-                wordDiv.draggable = true;
-                wordDiv.addEventListener('dragstart', handleDragStart);
-                wordDiv.addEventListener('dragend', handleDragEnd);
+                wordDiv.onclick = () => fillGapWithWord(wordDiv, word);
                 wordBank.appendChild(wordDiv);
             });
 
             // Hide feedback
             const feedback = document.getElementById('feedback');
             feedback.classList.remove('show');
+            
+            selectedGap = null;
         }
 
         function toggleExample(exampleId) {
