@@ -559,7 +559,7 @@
                 <div class="section-title">${data.title}</div>
                 
                 <div class="instructions">
-                    <strong>Instructions:</strong> First, click on a gap in the text (it will turn yellow). Then, click on a word from the word bank to fill it in. Much easier than drag-and-drop!
+                    <strong>Instructions:</strong> Click a gap (turns yellow), then click a word to fill it. Click a filled gap to remove the word.
                 </div>
                 
                 <div class="text-display" id="textDisplay">
@@ -622,6 +622,24 @@
         }
 
         function selectGap(gap) {
+            // If gap is already filled, remove the word and return it to word bank
+            if (gap.classList.contains('filled')) {
+                const word = gap.textContent;
+                gap.textContent = '';
+                gap.classList.remove('filled', 'correct', 'incorrect');
+                
+                // Find and re-enable the word in the word bank
+                const wordOptions = document.querySelectorAll('.word-option');
+                wordOptions.forEach(option => {
+                    if (option.textContent === word) {
+                        option.classList.remove('used');
+                    }
+                });
+                
+                selectedGap = null;
+                return;
+            }
+            
             // Remove previous selection
             document.querySelectorAll('.gap').forEach(g => {
                 g.classList.remove('selected');
