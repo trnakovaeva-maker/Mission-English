@@ -50,169 +50,189 @@
         
         header {
             text-align: center;
-            padding: 40px 20px 30px;
-            margin-bottom: 40px;
-            border-bottom: 3px solid var(--blue);
+            padding: 30px 20px;
+            margin-bottom: 30px;
         }
         
         h1 {
             font-family: 'Libre Baskerville', serif;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             color: var(--white);
         }
         
         .subtitle {
             font-size: 1rem;
             color: var(--blue-light);
-            margin-bottom: 20px;
         }
         
-        .progress {
+        .progress-bar {
             background: rgba(65, 90, 119, 0.3);
-            padding: 15px 25px;
-            border-radius: 8px;
-            display: inline-block;
-            font-weight: 600;
+            height: 8px;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
         }
         
-        .exercise-card {
-            background: rgba(27, 38, 59, 0.6);
-            backdrop-filter: blur(10px);
-            border: 2px solid var(--blue);
-            border-radius: 12px;
-            padding: 40px;
+        .progress-fill {
+            background: linear-gradient(90deg, var(--success), var(--accent));
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-text {
+            text-align: center;
+            color: var(--blue-light);
+            font-size: 0.9rem;
             margin-bottom: 30px;
         }
         
-        .section-label {
-            color: var(--blue-light);
-            font-weight: 600;
-            font-size: 0.9rem;
+        .sentence-card {
+            background: rgba(27, 38, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border: 3px solid var(--blue);
+            border-radius: 16px;
+            padding: 50px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .label {
+            color: var(--warning);
+            font-weight: 700;
+            font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 12px;
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
         }
         
         .basic-sentence {
-            background: rgba(65, 90, 119, 0.2);
-            border-left: 4px solid var(--blue);
-            padding: 20px;
-            border-radius: 8px;
+            background: linear-gradient(135deg, rgba(230, 57, 70, 0.2), rgba(230, 57, 70, 0.1));
+            border-left: 5px solid var(--accent);
+            padding: 30px;
+            border-radius: 12px;
             margin-bottom: 30px;
-            font-size: 1.1rem;
+        }
+        
+        .basic-sentence-text {
+            font-size: 1.5rem;
             line-height: 1.8;
+            color: var(--white);
+            font-weight: 500;
         }
         
-        .hints-box {
-            background: rgba(255, 214, 10, 0.1);
-            border: 2px solid var(--warning);
-            border-radius: 8px;
-            padding: 25px;
-            margin: 25px 0;
-        }
-        
-        .hints-box h3 {
+        .upgrade-arrow {
+            text-align: center;
+            font-size: 2.5rem;
             color: var(--warning);
-            margin-bottom: 15px;
-            font-size: 1.1rem;
+            margin: 20px 0;
+            animation: bounce 2s infinite;
         }
         
-        .hint-progress {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .upgrade-text {
+            text-align: center;
+            color: var(--warning);
+            font-weight: 600;
+            font-size: 1.1rem;
             margin-bottom: 20px;
+        }
+        
+        .your-answer {
+            margin-bottom: 30px;
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 20px;
+            background: rgba(65, 90, 119, 0.3);
+            border: 3px solid var(--blue);
+            border-radius: 12px;
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: var(--success);
+            background: rgba(6, 214, 160, 0.1);
+        }
+        
+        textarea::placeholder {
+            color: var(--blue-light);
+        }
+        
+        .hints-section {
+            margin: 30px 0;
+        }
+        
+        .hints-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .hints-status {
+            color: var(--blue-light);
             font-size: 0.9rem;
         }
         
-        .progress-dots {
-            display: flex;
-            gap: 5px;
-        }
-        
-        .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-        }
-        
-        .dot.revealed {
-            background: var(--warning);
-        }
-        
         .hint-item {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
+            background: rgba(255, 214, 10, 0.15);
+            border-left: 4px solid var(--warning);
+            padding: 20px;
             border-radius: 8px;
             margin-bottom: 15px;
-            display: none;
-            animation: slideIn 0.3s ease-out;
-        }
-        
-        .hint-item.visible {
-            display: block;
+            animation: slideIn 0.3s ease;
         }
         
         @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
         
         .hint-label {
             color: var(--warning);
             font-weight: 700;
-            font-size: 0.85rem;
-            text-transform: uppercase;
+            font-size: 0.9rem;
             margin-bottom: 8px;
         }
         
         .hint-text {
-            color: var(--white);
-            font-size: 1rem;
-            line-height: 1.6;
+            color: var(--silver);
+            margin-bottom: 8px;
         }
         
         .hint-suggestion {
-            color: var(--success);
+            color: var(--blue-light);
             font-style: italic;
-            margin-top: 5px;
+            font-size: 0.95rem;
+        }
+        
+        .hint-item.hidden {
+            display: none;
         }
         
         .btn {
-            padding: 12px 24px;
+            padding: 14px 28px;
             border: none;
             border-radius: 8px;
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: 'Inter', sans-serif;
-            margin: 5px;
-        }
-        
-        .btn-hint {
-            background: var(--warning);
-            color: var(--navy-dark);
-        }
-        
-        .btn-hint:hover {
-            background: #ffed4e;
-            transform: translateY(-2px);
-        }
-        
-        .btn-hint:disabled {
-            background: rgba(255, 214, 10, 0.3);
-            cursor: not-allowed;
-            transform: none;
         }
         
         .btn-primary {
@@ -220,9 +240,10 @@
             color: var(--white);
         }
         
-        .btn-primary:hover {
+        .btn-primary:hover:not(:disabled) {
             background: #d62828;
             transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(230, 57, 70, 0.4);
         }
         
         .btn-secondary {
@@ -230,125 +251,92 @@
             color: var(--white);
         }
         
-        .btn-secondary:hover {
+        .btn-secondary:hover:not(:disabled) {
             background: var(--blue-light);
+            transform: translateY(-2px);
         }
         
-        .writing-area {
-            margin: 30px 0;
+        .btn-success {
+            background: var(--success);
+            color: var(--navy-dark);
         }
         
-        .writing-area label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: var(--white);
-            font-size: 1.1rem;
+        .btn-success:hover:not(:disabled) {
+            background: #05c090;
+            transform: translateY(-2px);
         }
         
-        .writing-area textarea {
-            width: 100%;
-            min-height: 120px;
-            padding: 15px;
-            border: 2px solid var(--blue);
-            border-radius: 8px;
-            background: rgba(13, 27, 42, 0.6);
-            color: var(--white);
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            line-height: 1.8;
-            resize: vertical;
-        }
-        
-        .writing-area textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
-        
-        .examples-section {
-            margin-top: 30px;
-        }
-        
-        .example-box {
-            background: rgba(6, 214, 160, 0.1);
-            border: 2px solid var(--success);
-            border-radius: 8px;
-            padding: 25px;
-            margin: 15px 0;
-            display: none;
-        }
-        
-        .example-box.visible {
-            display: block;
-            animation: slideIn 0.3s ease-out;
-        }
-        
-        .example-header {
-            color: var(--success);
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-        }
-        
-        .example-text {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
-            border-radius: 8px;
-            color: var(--white);
-            font-size: 1.05rem;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-        
-        .example-explanation {
-            color: var(--blue-light);
-            font-size: 0.95rem;
-            margin: 8px 0;
-        }
-        
-        .example-explanation strong {
-            color: var(--success);
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
         
         .button-group {
-            text-align: center;
-            margin: 20px 0;
-        }
-        
-        .comparison-grid {
-            display: none;
-            grid-template-columns: 1fr;
+            display: flex;
             gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
             margin-top: 20px;
         }
         
-        .comparison-grid.visible {
-            display: grid;
+        .examples-section {
+            background: rgba(6, 214, 160, 0.1);
+            border: 2px solid var(--success);
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 30px;
         }
         
-        .comparison-item {
-            background: rgba(6, 214, 160, 0.05);
-            border-left: 4px solid var(--success);
-            padding: 15px;
-            border-radius: 8px;
+        .examples-section.hidden {
+            display: none;
         }
         
-        .comparison-item h4 {
+        .examples-header {
             color: var(--success);
-            margin-bottom: 8px;
-            font-size: 0.95rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
         }
         
-        .comparison-item p {
+        .example-box {
+            background: rgba(27, 38, 59, 0.6);
+            border-left: 4px solid var(--success);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .example-version {
+            color: var(--success);
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .example-text {
+            font-size: 1.2rem;
             color: var(--white);
-            font-size: 0.95rem;
-            line-height: 1.6;
+            margin-bottom: 0;
+            line-height: 1.7;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        
+        .nav-btn-group {
+            display: flex;
+            gap: 10px;
         }
         
         @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            .exercise-card { padding: 25px; }
-            .btn { padding: 10px 20px; font-size: 0.9rem; }
+            h1 { font-size: 1.8rem; }
+            .sentence-card { padding: 30px 20px; }
+            .basic-sentence-text { font-size: 1.2rem; }
+            .nav-buttons { flex-direction: column; gap: 15px; }
+            .nav-btn-group { justify-content: center; }
         }
     </style>
 </head>
@@ -357,255 +345,194 @@
         <a href="index.html" class="back-home">← Back to Topics</a>
         
         <header>
-            <h1>Military Operations</h1>
-            <p class="subtitle">Sentence Transformation Practice - STANAG Level 3</p>
-            <div class="progress">
-                Exercise <span id="currentEx">1</span> of <span id="totalEx">10</span>
-            </div>
+            <h1>🎖️ Military Operations</h1>
+            <p class="subtitle">Sentence Transformation Practice</p>
         </header>
         
-        <div class="exercise-card">
-            <div class="section-label">Basic Sentence (A2-B1 Level)</div>
-            <div class="basic-sentence" id="basicSentence"></div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 10%"></div>
+        </div>
+        <div class="progress-text">
+            Exercise <span id="currentEx">1</span> of <span id="totalEx">10</span>
+        </div>
+        
+        <div class="sentence-card">
+            <div class="label">📝 Basic Sentence (A2-B1 Level)</div>
+            <div class="basic-sentence">
+                <div class="basic-sentence-text" id="basicSentence"></div>
+            </div>
             
-            <div class="hints-box">
-                <h3>Hints & Guidance</h3>
-                <p style="margin-bottom: 15px; color: var(--blue-light);">
-                    Click to reveal hints one at a time. Try with fewer hints first to challenge yourself!
-                </p>
-                
-                <div class="hint-progress">
-                    <span>Hints Revealed: <strong><span id="hintCount">0</span> of 4</strong></span>
-                    <div class="progress-dots" id="progressDots">
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                    </div>
+            <div class="upgrade-arrow">⬇️</div>
+            <div class="upgrade-text">Upgrade this to B2+ professional level</div>
+            
+            <div class="your-answer">
+                <div class="label" style="color: var(--success);">✍️ Your B2+ Version:</div>
+                <textarea id="userAnswer" placeholder="Type your upgraded sentence here..."></textarea>
+            </div>
+            
+            <div class="hints-section">
+                <div class="hints-header">
+                    <div class="label" style="margin: 0;">💡 Need Help?</div>
+                    <div class="hints-status" id="hintsStatus">0 of 4 hints used</div>
                 </div>
                 
                 <div id="hintsContainer"></div>
                 
                 <div class="button-group">
-                    <button class="btn btn-hint" onclick="showNextHint()" id="nextHintBtn">Show Next Hint</button>
-                    <button class="btn btn-secondary" onclick="showAllHints()" id="showAllBtn">Show All Hints</button>
+                    <button class="btn btn-secondary" id="hintBtn" onclick="revealNextHint()">
+                        Show Next Hint 💡
+                    </button>
                     <button class="btn btn-secondary" onclick="resetHints()">Reset Hints</button>
                 </div>
             </div>
             
-            <div class="writing-area">
-                <label for="userAnswer">Your B2+ Version:</label>
-                <textarea id="userAnswer" placeholder="Write your upgraded sentence here..."></textarea>
+            <div class="button-group" style="margin-top: 30px;">
+                <button class="btn btn-success" onclick="toggleExamples()">
+                    <span id="exampleBtnText">Show Example Answers ✓</span>
+                </button>
             </div>
-            
-            <div class="examples-section">
-                <h3 style="color: var(--success); margin-bottom: 20px;">Example B2+ Versions</h3>
-                <p style="color: var(--blue-light); margin-bottom: 20px;">
-                    Click to see different approaches. All are correct - choose the style that suits your context!
-                </p>
-                
-                <div class="button-group" id="exampleButtons"></div>
-                
-                <div id="examplesContainer"></div>
-                
-                <div class="comparison-grid" id="comparisonGrid"></div>
-            </div>
-            
-            <div class="button-group" style="margin-top: 40px;">
-                <button class="btn btn-secondary" onclick="previousExercise()" id="prevBtn">← Previous</button>
-                <button class="btn btn-primary" onclick="nextExercise()" id="nextBtn">Next →</button>
-                <button class="btn btn-secondary" onclick="backToTopics()">Back to Topics</button>
+        </div>
+        
+        <div class="examples-section hidden" id="examplesSection">
+            <div class="examples-header">✨ Professional B2+ Examples</div>
+            <p style="color: var(--blue-light); margin-bottom: 25px;">
+                All versions below are correct! Choose the style that fits your context best.
+            </p>
+            <div id="examplesContainer"></div>
+        </div>
+        
+        <div class="nav-buttons">
+            <button class="btn btn-secondary" onclick="previousExercise()" id="prevBtn">← Previous</button>
+            <div class="nav-btn-group">
+                <button class="btn btn-secondary" onclick="location.href='index.html'">Back to Topics</button>
+                <button class="btn btn-primary" onclick="nextExercise()" id="nextBtn">Next Exercise →</button>
             </div>
         </div>
     </div>
 
     <script>
         const exercises = [{"id": 1, "basic": "The soldiers trained hard. They wanted to be ready for the mission.", "hints": [{"type": "structure", "label": "General Structure", "text": "Combine these two sentences into one sentence using a purpose clause", "suggestion": "Consider conjunctions: \"in order to\", \"so as to\", or simply \"to\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"trained hard\" with more formal military vocabulary", "suggestion": "Consider: \"underwent intensive training\" or \"participated in rigorous training\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"be ready for\" with more professional terminology", "suggestion": "Consider: \"ensure operational readiness\" or \"prepare for\""}, {"type": "formality", "label": "Additional Formality", "text": "Add context about the mission", "suggestion": "Consider: \"upcoming mission\" instead of just \"the mission\""}], "examples": [{"version": 1, "title": "Using \"in order to\"", "text": "The soldiers underwent intensive training in order to ensure operational readiness for the upcoming mission.", "why": "Most formal option, \"in order to\" is very clear for expressing purpose", "bestFor": "Official reports, formal military documents, written directives"}, {"version": 2, "title": "Using infinitive \"to\"", "text": "The soldiers underwent intensive training to ensure operational readiness for the upcoming mission.", "why": "Slightly more concise while staying formal, infinitive is natural", "bestFor": "General professional writing, briefings, emails to superiors"}, {"version": 3, "title": "Using \"so as to\"", "text": "The soldiers underwent intensive training so as to prepare adequately for the upcoming mission.", "why": "Alternative formal conjunction, different vocabulary choice (\"prepare adequately\")", "bestFor": "Variety in writing, academic contexts, avoiding repetition"}]}, {"id": 2, "basic": "The commander gave orders. The soldiers followed them quickly.", "hints": [{"type": "structure", "label": "General Structure", "text": "Combine sentences showing sequence of actions using a temporal clause", "suggestion": "Consider: \"Upon receiving\", \"After\", or perfect participle \"Having received\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"gave orders\" with more formal military terminology", "suggestion": "Consider: \"issued directives\", \"issued orders\", or \"communicated instructions\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"followed them\" with more precise action verbs", "suggestion": "Consider: \"executed\", \"carried out\", or \"implemented\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"quickly\" with more sophisticated adverbs", "suggestion": "Consider: \"promptly\", \"immediately\", or \"promptly and efficiently\""}], "examples": [{"version": 1, "title": "Using \"Upon receiving\"", "text": "Upon receiving directives from the commander, the soldiers executed them promptly and efficiently.", "why": "Formal temporal structure with \"Upon + gerund\" shows immediate sequence", "bestFor": "Formal reports, official documentation, incident reports"}, {"version": 2, "title": "Using \"After\"", "text": "After the commander issued orders, the soldiers immediately carried them out.", "why": "Clear and direct temporal connection, slightly less formal", "bestFor": "Briefings, situation reports, operational updates"}]}, {"id": 3, "basic": "The unit moved to the border. They wanted to stop illegal crossings.", "hints": [{"type": "structure", "label": "General Structure", "text": "Combine using an infinitive of purpose", "suggestion": "Simply use \"to + verb\" after the main clause"}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"moved to\" with formal military deployment language", "suggestion": "Consider: \"was deployed to\", \"was positioned at\", or \"relocated to\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"stop illegal crossings\" with professional security terminology", "suggestion": "Consider: \"prevent unauthorized incursions\", \"prevent illegal border crossings\", or \"secure the border\""}, {"type": "formality", "label": "Additional Formality", "text": "Add geographical specificity", "suggestion": "Consider: \"border region\", \"border area\", or specific location"}], "examples": [{"version": 1, "title": "Formal deployment language", "text": "The unit was deployed to the border region to prevent unauthorized incursions.", "why": "Most formal and specific military terminology", "bestFor": "Official deployment orders, strategic reports"}, {"version": 2, "title": "Action-focused", "text": "The unit relocated to the border area to secure against illegal crossings.", "why": "Clear action and purpose, slightly more accessible", "bestFor": "Operational briefings, status updates"}]}, {"id": 4, "basic": "We need better equipment. Our old equipment is not good enough.", "hints": [{"type": "structure", "label": "General Structure", "text": "Combine using a causal conjunction showing reason", "suggestion": "Consider: \"as\", \"since\", or \"because\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"need better equipment\" with formal requirement language", "suggestion": "Consider: \"require enhanced equipment capabilities\", \"need upgraded systems\", or \"require improved assets\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"old equipment\" with professional terminology", "suggestion": "Consider: \"current assets\", \"existing equipment\", or \"current capabilities\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"is not good enough\" with formal assessment language", "suggestion": "Consider: \"is inadequate for\", \"falls short of\", or \"does not meet operational requirements\""}], "examples": [{"version": 1, "title": "Formal capability assessment", "text": "We require enhanced equipment capabilities, as our current assets are inadequate for modern operational requirements.", "why": "Professional language emphasizing capability gaps and requirements", "bestFor": "Budget requests, procurement proposals, strategic planning"}, {"version": 2, "title": "Direct needs statement", "text": "We need upgraded systems since our existing equipment does not meet current operational standards.", "why": "Clear and direct while remaining professional", "bestFor": "Internal memos, department communications"}]}, {"id": 5, "basic": "The mission was dangerous. The team completed it successfully.", "hints": [{"type": "structure", "label": "General Structure", "text": "Show contrast using a concessive clause", "suggestion": "Consider: \"Despite\", \"Although\", \"Even though\", or \"In spite of\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"dangerous\" with professional risk assessment terminology", "suggestion": "Consider: \"high-risk\", \"hazardous\", or \"challenging\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"completed it successfully\" with achievement language", "suggestion": "Consider: \"accomplished all objectives\", \"successfully executed\", or \"achieved mission success\""}, {"type": "formality", "label": "Additional Formality", "text": "Add specificity about what was accomplished", "suggestion": "Consider: \"all designated objectives\", \"all mission parameters\", or \"mission goals\""}], "examples": [{"version": 1, "title": "Using \"Despite\" with noun phrase", "text": "Despite the high-risk nature of the mission, the team successfully accomplished all designated objectives.", "why": "Formal structure with \"Despite + noun phrase\" emphasizing contrast", "bestFor": "After-action reports, commendations, official mission summaries"}, {"version": 2, "title": "Using \"Although\" with clause", "text": "Although the mission was highly dangerous, the team achieved complete mission success.", "why": "Clear contrast while highlighting achievement", "bestFor": "Briefings, status reports, team evaluations"}]}, {"id": 6, "basic": "Officers must make decisions fast. Delays can cause problems.", "hints": [{"type": "structure", "label": "General Structure", "text": "Use nominalization - turn \"make decisions fast\" into a noun phrase", "suggestion": "Transform to \"rapid decision-making\" or \"quick decision-making\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"must\" with more formal necessity language", "suggestion": "Consider: \"is critical for\", \"is essential for\", or \"requires\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"cause problems\" with professional consequence terminology", "suggestion": "Consider: \"result in complications\", \"lead to operational issues\", or \"create difficulties\""}, {"type": "structure", "label": "General Structure", "text": "Connect with a causal structure showing consequence", "suggestion": "Use \"as\" or \"since\" to show why rapid decisions matter"}], "examples": [{"version": 1, "title": "Nominalized structure", "text": "Rapid decision-making is critical for officers, as delays can result in serious operational complications.", "why": "Professional nominalization creates formal, authoritative tone", "bestFor": "Leadership doctrine, training materials, policy documents"}, {"version": 2, "title": "Imperative structure", "text": "Officers must make rapid decisions since delays may lead to significant operational problems.", "why": "Direct and clear while maintaining professionalism", "bestFor": "Training guidance, standard operating procedures"}]}, {"id": 7, "basic": "The patrol found enemy positions. They told headquarters about it.", "hints": [{"type": "structure", "label": "General Structure", "text": "Combine showing sequence using perfect participle", "suggestion": "Use \"Having + past participle\": \"Having found/identified\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"found\" with precise military intelligence terminology", "suggestion": "Consider: \"identified\", \"located\", or \"discovered\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"enemy positions\" with formal military terminology", "suggestion": "Consider: \"hostile positions\", \"enemy installations\", or \"adversary locations\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"told headquarters about it\" with formal reporting language", "suggestion": "Consider: \"reported their findings to\", \"relayed the intelligence to\", or \"communicated the information to\""}], "examples": [{"version": 1, "title": "Perfect participle structure", "text": "Having identified hostile positions, the patrol immediately reported their findings to headquarters.", "why": "Sophisticated grammatical structure showing completed action before reporting", "bestFor": "Intelligence reports, mission debriefs, formal documentation"}, {"version": 2, "title": "After + gerund structure", "text": "After locating enemy installations, the patrol promptly relayed the intelligence to headquarters.", "why": "Clear temporal sequence with professional military vocabulary", "bestFor": "Situation reports, operational updates"}]}, {"id": 8, "basic": "Soldiers need to work together. Teamwork helps them do their job.", "hints": [{"type": "structure", "label": "General Structure", "text": "Use nominalization throughout - convert actions to abstract nouns", "suggestion": "Transform \"work together\" → \"team cohesion\", \"do their job\" → \"operational effectiveness\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"need to work together\" with formal concept", "suggestion": "Consider: \"team cohesion\", \"unit cohesion\", or \"collaborative effort\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"helps them do their job\" with professional outcome language", "suggestion": "Consider: \"is essential for mission success\", \"enables operational effectiveness\", or \"ensures mission accomplishment\""}, {"type": "structure", "label": "General Structure", "text": "Create a formal statement of importance", "suggestion": "Use structure: \"[Noun] is essential for [outcome]\""}], "examples": [{"version": 1, "title": "Highly nominalized", "text": "Team cohesion is essential for operational effectiveness and mission success.", "why": "Maximum formality through complete nominalization", "bestFor": "Doctrine documents, leadership principles, training philosophy"}, {"version": 2, "title": "Balanced formality", "text": "Effective teamwork is critical to accomplishing military objectives and ensuring unit success.", "why": "Professional yet accessible, maintains active concepts", "bestFor": "Training materials, team briefings, leadership guidance"}]}, {"id": 9, "basic": "We checked our weapons before the operation. We wanted to make sure everything worked.", "hints": [{"type": "structure", "label": "General Structure", "text": "Combine using purpose (infinitive or purpose clause)", "suggestion": "Use \"to verify\", \"to ensure\", or \"in order to confirm\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"checked our weapons\" with formal inspection terminology", "suggestion": "Consider: \"conducted inspections of all equipment\", \"performed pre-operation checks\", or \"inspected all systems\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"make sure everything worked\" with technical verification language", "suggestion": "Consider: \"verify functionality\", \"ensure operational readiness\", or \"confirm serviceability\""}, {"type": "formality", "label": "Additional Formality", "text": "Add temporal precision", "suggestion": "Consider: \"Prior to the operation\", \"Before commencing operations\", instead of just \"before\""}], "examples": [{"version": 1, "title": "Formal inspection protocol", "text": "Prior to the operation, we conducted thorough inspections of all equipment to verify its functionality.", "why": "Professional military procedure language with clear purpose", "bestFor": "Standard operating procedures, pre-mission checklists, formal reports"}, {"version": 2, "title": "Readiness-focused", "text": "We performed comprehensive pre-operation checks to ensure complete operational readiness.", "why": "Emphasizes readiness and preparedness", "bestFor": "Mission briefs, readiness reports"}]}, {"id": 10, "basic": "New soldiers learn a lot in training. They learn skills and also learn discipline.", "hints": [{"type": "structure", "label": "General Structure", "text": "Eliminate repetition of \"learn\" - use it only once or restructure completely", "suggestion": "Consider: \"During training, soldiers acquire...\" or \"Training provides soldiers with...\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"new soldiers\" with formal military terminology", "suggestion": "Consider: \"recruits\", \"new personnel\", or \"trainees\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"learn skills\" with professional development language", "suggestion": "Consider: \"acquire technical competencies\", \"develop professional capabilities\", or \"gain essential skills\""}, {"type": "structure", "label": "General Structure", "text": "Use parallel structure for multiple items", "suggestion": "Connect with \"both...and\" or list structure: \"X and Y\""}], "examples": [{"version": 1, "title": "Parallel structure with \"both...and\"", "text": "During training, recruits acquire both essential technical competencies and military discipline.", "why": "Clean parallel structure emphasizes equal importance of both elements", "bestFor": "Training program descriptions, recruitment materials"}, {"version": 2, "title": "Progressive structure", "text": "Training provides recruits with professional skills while instilling fundamental military discipline.", "why": "Shows simultaneous development of different capabilities", "bestFor": "Training philosophy statements, program overviews"}]}];
+        
         let currentExerciseIndex = 0;
         let currentHintIndex = 0;
-
+        
         function loadExercise(index) {
             const exercise = exercises[index];
             currentExerciseIndex = index;
             currentHintIndex = 0;
             
-            // Update exercise number
+            const progress = ((index + 1) / exercises.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
             document.getElementById('currentEx').textContent = index + 1;
             document.getElementById('totalEx').textContent = exercises.length;
             
-            // Load basic sentence
             document.getElementById('basicSentence').textContent = exercise.basic;
+            document.getElementById('userAnswer').value = '';
             
-            // Clear and load hints
             const hintsContainer = document.getElementById('hintsContainer');
             hintsContainer.innerHTML = '';
             exercise.hints.forEach((hint, i) => {
                 const hintDiv = document.createElement('div');
-                hintDiv.className = 'hint-item';
+                hintDiv.className = 'hint-item hidden';
                 hintDiv.id = `hint${i}`;
                 hintDiv.innerHTML = `
-                    <div class="hint-label">🔵 Hint ${i + 1} - ${hint.label}:</div>
-                    <div class="hint-text">
-                        ${hint.text}
-                        <div class="hint-suggestion">${hint.suggestion}</div>
-                    </div>
+                    <div class="hint-label">💡 Hint ${i + 1} - ${hint.label}</div>
+                    <div class="hint-text">${hint.text}</div>
+                    <div class="hint-suggestion">${hint.suggestion}</div>
                 `;
                 hintsContainer.appendChild(hintDiv);
             });
             
-            // Reset hint progress
-            resetHints();
+            updateHintButton();
+            updateHintsStatus();
             
-            // Clear and load examples
-            const exampleButtons = document.getElementById('exampleButtons');
             const examplesContainer = document.getElementById('examplesContainer');
-            const comparisonGrid = document.getElementById('comparisonGrid');
-            
-            exampleButtons.innerHTML = '';
             examplesContainer.innerHTML = '';
-            comparisonGrid.innerHTML = '';
-            
-            exercise.examples.forEach((example, i) => {
-                // Create button
-                const btn = document.createElement('button');
-                btn.className = 'btn btn-primary';
-                btn.textContent = `Show Example ${example.version}`;
-                btn.onclick = () => showExample(i);
-                exampleButtons.appendChild(btn);
-                
-                // Create example box
-                const exampleBox = document.createElement('div');
-                exampleBox.className = 'example-box';
-                exampleBox.id = `example${i}`;
-                exampleBox.innerHTML = `
-                    <div class="example-header">Version ${example.version} - ${example.title}</div>
+            exercise.examples.forEach((example) => {
+                const exampleDiv = document.createElement('div');
+                exampleDiv.className = 'example-box';
+                exampleDiv.innerHTML = `
+                    <div class="example-version">Version ${example.version}: ${example.title}</div>
                     <div class="example-text">${example.text}</div>
-                    <div class="example-explanation">
-                        <strong>Why this works:</strong> ${example.why}
-                    </div>
-                    <div class="example-explanation">
-                        <strong>Best for:</strong> ${example.bestFor}
-                    </div>
                 `;
-                examplesContainer.appendChild(exampleBox);
-                
-                // Create comparison item
-                const compItem = document.createElement('div');
-                compItem.className = 'comparison-item';
-                compItem.innerHTML = `
-                    <h4>Example ${example.version}: ${example.title}</h4>
-                    <p>${example.text}</p>
-                `;
-                comparisonGrid.appendChild(compItem);
+                examplesContainer.appendChild(exampleDiv);
             });
             
-            // Add compare button if more than 1 example
-            if (exercise.examples.length > 1) {
-                const compareBtn = document.createElement('button');
-                compareBtn.className = 'btn btn-secondary';
-                compareBtn.textContent = 'Compare All Examples';
-                compareBtn.onclick = compareAll;
-                exampleButtons.appendChild(compareBtn);
-            }
+            document.getElementById('examplesSection').classList.add('hidden');
+            document.getElementById('exampleBtnText').textContent = 'Show Example Answers ✓';
             
-            // Clear user answer
-            document.getElementById('userAnswer').value = '';
+            document.getElementById('prevBtn').disabled = (index === 0);
+            document.getElementById('nextBtn').disabled = (index === exercises.length - 1);
             
-            // Update navigation buttons
-            document.getElementById('prevBtn').disabled = index === 0;
-            document.getElementById('nextBtn').disabled = index === exercises.length - 1;
-            
-            window.scrollTo(0, 0);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-
-        function showNextHint() {
+        
+        function revealNextHint() {
             const exercise = exercises[currentExerciseIndex];
             if (currentHintIndex < exercise.hints.length) {
-                document.getElementById(`hint${currentHintIndex}`).classList.add('visible');
-                const dots = document.getElementById('progressDots').children;
-                dots[currentHintIndex].classList.add('revealed');
+                document.getElementById(`hint${currentHintIndex}`).classList.remove('hidden');
                 currentHintIndex++;
-                document.getElementById('hintCount').textContent = currentHintIndex;
-                
-                if (currentHintIndex === exercise.hints.length) {
-                    document.getElementById('nextHintBtn').disabled = true;
-                    document.getElementById('nextHintBtn').textContent = 'All Hints Revealed';
-                }
+                updateHintButton();
+                updateHintsStatus();
             }
         }
-
-        function showAllHints() {
+        
+        function updateHintButton() {
             const exercise = exercises[currentExerciseIndex];
-            for (let i = 0; i < exercise.hints.length; i++) {
-                document.getElementById(`hint${i}`).classList.add('visible');
-                const dots = document.getElementById('progressDots').children;
-                dots[i].classList.add('revealed');
+            const hintBtn = document.getElementById('hintBtn');
+            if (currentHintIndex >= exercise.hints.length) {
+                hintBtn.disabled = true;
+                hintBtn.textContent = 'All Hints Revealed';
+            } else {
+                hintBtn.disabled = false;
+                hintBtn.textContent = 'Show Next Hint 💡';
             }
-            currentHintIndex = exercise.hints.length;
-            document.getElementById('hintCount').textContent = currentHintIndex;
-            document.getElementById('nextHintBtn').disabled = true;
-            document.getElementById('nextHintBtn').textContent = 'All Hints Revealed';
         }
-
+        
+        function updateHintsStatus() {
+            const exercise = exercises[currentExerciseIndex];
+            document.getElementById('hintsStatus').textContent = 
+                `${currentHintIndex} of ${exercise.hints.length} hints used`;
+        }
+        
         function resetHints() {
             const exercise = exercises[currentExerciseIndex];
-            for (let i = 0; i < exercise.hints.length; i++) {
-                const hintElement = document.getElementById(`hint${i}`);
-                if (hintElement) {
-                    hintElement.classList.remove('visible');
-                }
-            }
-            const dots = document.getElementById('progressDots').children;
-            for (let i = 0; i < dots.length; i++) {
-                dots[i].classList.remove('revealed');
-            }
             currentHintIndex = 0;
-            document.getElementById('hintCount').textContent = '0';
-            document.getElementById('nextHintBtn').disabled = false;
-            document.getElementById('nextHintBtn').textContent = 'Show Next Hint';
-        }
-
-        function showExample(index) {
-            // Hide all examples and comparison
-            const examples = document.querySelectorAll('.example-box');
-            examples.forEach(ex => ex.classList.remove('visible'));
-            document.getElementById('comparisonGrid').classList.remove('visible');
             
-            // Show selected example
-            document.getElementById(`example${index}`).classList.add('visible');
-            document.getElementById(`example${index}`).scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            for (let i = 0; i < exercise.hints.length; i++) {
+                document.getElementById(`hint${i}`).classList.add('hidden');
+            }
+            updateHintButton();
+            updateHintsStatus();
         }
-
-        function compareAll() {
-            // Hide individual examples
-            const examples = document.querySelectorAll('.example-box');
-            examples.forEach(ex => ex.classList.remove('visible'));
+        
+        function toggleExamples() {
+            const examplesSection = document.getElementById('examplesSection');
+            const btnText = document.getElementById('exampleBtnText');
             
-            // Show comparison
-            document.getElementById('comparisonGrid').classList.add('visible');
-            document.getElementById('comparisonGrid').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            if (examplesSection.classList.contains('hidden')) {
+                examplesSection.classList.remove('hidden');
+                btnText.textContent = 'Hide Example Answers';
+                examplesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                examplesSection.classList.add('hidden');
+                btnText.textContent = 'Show Example Answers ✓';
+            }
         }
-
+        
         function nextExercise() {
             if (currentExerciseIndex < exercises.length - 1) {
                 loadExercise(currentExerciseIndex + 1);
             }
         }
-
+        
         function previousExercise() {
             if (currentExerciseIndex > 0) {
                 loadExercise(currentExerciseIndex - 1);
             }
         }
-
-        function backToTopics() {
-            window.location.href = 'index.html';
-        }
-
-        // Load first exercise on page load
-        window.onload = function() {
-            loadExercise(0);
-        };
+        
+        loadExercise(0);
     </script>
 </body>
 </html>

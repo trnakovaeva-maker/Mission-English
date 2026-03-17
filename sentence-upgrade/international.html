@@ -50,169 +50,189 @@
         
         header {
             text-align: center;
-            padding: 40px 20px 30px;
-            margin-bottom: 40px;
-            border-bottom: 3px solid var(--blue);
+            padding: 30px 20px;
+            margin-bottom: 30px;
         }
         
         h1 {
             font-family: 'Libre Baskerville', serif;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             color: var(--white);
         }
         
         .subtitle {
             font-size: 1rem;
             color: var(--blue-light);
-            margin-bottom: 20px;
         }
         
-        .progress {
+        .progress-bar {
             background: rgba(65, 90, 119, 0.3);
-            padding: 15px 25px;
-            border-radius: 8px;
-            display: inline-block;
-            font-weight: 600;
+            height: 8px;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
         }
         
-        .exercise-card {
-            background: rgba(27, 38, 59, 0.6);
-            backdrop-filter: blur(10px);
-            border: 2px solid var(--blue);
-            border-radius: 12px;
-            padding: 40px;
+        .progress-fill {
+            background: linear-gradient(90deg, var(--success), var(--accent));
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-text {
+            text-align: center;
+            color: var(--blue-light);
+            font-size: 0.9rem;
             margin-bottom: 30px;
         }
         
-        .section-label {
-            color: var(--blue-light);
-            font-weight: 600;
-            font-size: 0.9rem;
+        .sentence-card {
+            background: rgba(27, 38, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border: 3px solid var(--blue);
+            border-radius: 16px;
+            padding: 50px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .label {
+            color: var(--warning);
+            font-weight: 700;
+            font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 12px;
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
         }
         
         .basic-sentence {
-            background: rgba(65, 90, 119, 0.2);
-            border-left: 4px solid var(--blue);
-            padding: 20px;
-            border-radius: 8px;
+            background: linear-gradient(135deg, rgba(230, 57, 70, 0.2), rgba(230, 57, 70, 0.1));
+            border-left: 5px solid var(--accent);
+            padding: 30px;
+            border-radius: 12px;
             margin-bottom: 30px;
-            font-size: 1.1rem;
+        }
+        
+        .basic-sentence-text {
+            font-size: 1.5rem;
             line-height: 1.8;
+            color: var(--white);
+            font-weight: 500;
         }
         
-        .hints-box {
-            background: rgba(255, 214, 10, 0.1);
-            border: 2px solid var(--warning);
-            border-radius: 8px;
-            padding: 25px;
-            margin: 25px 0;
-        }
-        
-        .hints-box h3 {
+        .upgrade-arrow {
+            text-align: center;
+            font-size: 2.5rem;
             color: var(--warning);
-            margin-bottom: 15px;
-            font-size: 1.1rem;
+            margin: 20px 0;
+            animation: bounce 2s infinite;
         }
         
-        .hint-progress {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .upgrade-text {
+            text-align: center;
+            color: var(--warning);
+            font-weight: 600;
+            font-size: 1.1rem;
             margin-bottom: 20px;
+        }
+        
+        .your-answer {
+            margin-bottom: 30px;
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 20px;
+            background: rgba(65, 90, 119, 0.3);
+            border: 3px solid var(--blue);
+            border-radius: 12px;
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: var(--success);
+            background: rgba(6, 214, 160, 0.1);
+        }
+        
+        textarea::placeholder {
+            color: var(--blue-light);
+        }
+        
+        .hints-section {
+            margin: 30px 0;
+        }
+        
+        .hints-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .hints-status {
+            color: var(--blue-light);
             font-size: 0.9rem;
         }
         
-        .progress-dots {
-            display: flex;
-            gap: 5px;
-        }
-        
-        .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-        }
-        
-        .dot.revealed {
-            background: var(--warning);
-        }
-        
         .hint-item {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
+            background: rgba(255, 214, 10, 0.15);
+            border-left: 4px solid var(--warning);
+            padding: 20px;
             border-radius: 8px;
             margin-bottom: 15px;
-            display: none;
-            animation: slideIn 0.3s ease-out;
-        }
-        
-        .hint-item.visible {
-            display: block;
+            animation: slideIn 0.3s ease;
         }
         
         @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
         
         .hint-label {
             color: var(--warning);
             font-weight: 700;
-            font-size: 0.85rem;
-            text-transform: uppercase;
+            font-size: 0.9rem;
             margin-bottom: 8px;
         }
         
         .hint-text {
-            color: var(--white);
-            font-size: 1rem;
-            line-height: 1.6;
+            color: var(--silver);
+            margin-bottom: 8px;
         }
         
         .hint-suggestion {
-            color: var(--success);
+            color: var(--blue-light);
             font-style: italic;
-            margin-top: 5px;
+            font-size: 0.95rem;
+        }
+        
+        .hint-item.hidden {
+            display: none;
         }
         
         .btn {
-            padding: 12px 24px;
+            padding: 14px 28px;
             border: none;
             border-radius: 8px;
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: 'Inter', sans-serif;
-            margin: 5px;
-        }
-        
-        .btn-hint {
-            background: var(--warning);
-            color: var(--navy-dark);
-        }
-        
-        .btn-hint:hover {
-            background: #ffed4e;
-            transform: translateY(-2px);
-        }
-        
-        .btn-hint:disabled {
-            background: rgba(255, 214, 10, 0.3);
-            cursor: not-allowed;
-            transform: none;
         }
         
         .btn-primary {
@@ -220,9 +240,10 @@
             color: var(--white);
         }
         
-        .btn-primary:hover {
+        .btn-primary:hover:not(:disabled) {
             background: #d62828;
             transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(230, 57, 70, 0.4);
         }
         
         .btn-secondary {
@@ -230,125 +251,92 @@
             color: var(--white);
         }
         
-        .btn-secondary:hover {
+        .btn-secondary:hover:not(:disabled) {
             background: var(--blue-light);
+            transform: translateY(-2px);
         }
         
-        .writing-area {
-            margin: 30px 0;
+        .btn-success {
+            background: var(--success);
+            color: var(--navy-dark);
         }
         
-        .writing-area label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: var(--white);
-            font-size: 1.1rem;
+        .btn-success:hover:not(:disabled) {
+            background: #05c090;
+            transform: translateY(-2px);
         }
         
-        .writing-area textarea {
-            width: 100%;
-            min-height: 120px;
-            padding: 15px;
-            border: 2px solid var(--blue);
-            border-radius: 8px;
-            background: rgba(13, 27, 42, 0.6);
-            color: var(--white);
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            line-height: 1.8;
-            resize: vertical;
-        }
-        
-        .writing-area textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
-        
-        .examples-section {
-            margin-top: 30px;
-        }
-        
-        .example-box {
-            background: rgba(6, 214, 160, 0.1);
-            border: 2px solid var(--success);
-            border-radius: 8px;
-            padding: 25px;
-            margin: 15px 0;
-            display: none;
-        }
-        
-        .example-box.visible {
-            display: block;
-            animation: slideIn 0.3s ease-out;
-        }
-        
-        .example-header {
-            color: var(--success);
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-        }
-        
-        .example-text {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
-            border-radius: 8px;
-            color: var(--white);
-            font-size: 1.05rem;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-        
-        .example-explanation {
-            color: var(--blue-light);
-            font-size: 0.95rem;
-            margin: 8px 0;
-        }
-        
-        .example-explanation strong {
-            color: var(--success);
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
         
         .button-group {
-            text-align: center;
-            margin: 20px 0;
-        }
-        
-        .comparison-grid {
-            display: none;
-            grid-template-columns: 1fr;
+            display: flex;
             gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
             margin-top: 20px;
         }
         
-        .comparison-grid.visible {
-            display: grid;
+        .examples-section {
+            background: rgba(6, 214, 160, 0.1);
+            border: 2px solid var(--success);
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 30px;
         }
         
-        .comparison-item {
-            background: rgba(6, 214, 160, 0.05);
-            border-left: 4px solid var(--success);
-            padding: 15px;
-            border-radius: 8px;
+        .examples-section.hidden {
+            display: none;
         }
         
-        .comparison-item h4 {
+        .examples-header {
             color: var(--success);
-            margin-bottom: 8px;
-            font-size: 0.95rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
         }
         
-        .comparison-item p {
+        .example-box {
+            background: rgba(27, 38, 59, 0.6);
+            border-left: 4px solid var(--success);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .example-version {
+            color: var(--success);
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .example-text {
+            font-size: 1.2rem;
             color: var(--white);
-            font-size: 0.95rem;
-            line-height: 1.6;
+            margin-bottom: 0;
+            line-height: 1.7;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        
+        .nav-btn-group {
+            display: flex;
+            gap: 10px;
         }
         
         @media (max-width: 768px) {
-            h1 { font-size: 2rem; }
-            .exercise-card { padding: 25px; }
-            .btn { padding: 10px 20px; font-size: 0.9rem; }
+            h1 { font-size: 1.8rem; }
+            .sentence-card { padding: 30px 20px; }
+            .basic-sentence-text { font-size: 1.2rem; }
+            .nav-buttons { flex-direction: column; gap: 15px; }
+            .nav-btn-group { justify-content: center; }
         }
     </style>
 </head>
@@ -357,255 +345,194 @@
         <a href="index.html" class="back-home">← Back to Topics</a>
         
         <header>
-            <h1>International Relations</h1>
-            <p class="subtitle">Sentence Transformation Practice - STANAG Level 3</p>
-            <div class="progress">
-                Exercise <span id="currentEx">1</span> of <span id="totalEx">10</span>
-            </div>
+            <h1>🌍 International Relations</h1>
+            <p class="subtitle">Sentence Transformation Practice</p>
         </header>
         
-        <div class="exercise-card">
-            <div class="section-label">Basic Sentence (A2-B1 Level)</div>
-            <div class="basic-sentence" id="basicSentence"></div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 10%"></div>
+        </div>
+        <div class="progress-text">
+            Exercise <span id="currentEx">1</span> of <span id="totalEx">10</span>
+        </div>
+        
+        <div class="sentence-card">
+            <div class="label">📝 Basic Sentence (A2-B1 Level)</div>
+            <div class="basic-sentence">
+                <div class="basic-sentence-text" id="basicSentence"></div>
+            </div>
             
-            <div class="hints-box">
-                <h3>Hints & Guidance</h3>
-                <p style="margin-bottom: 15px; color: var(--blue-light);">
-                    Click to reveal hints one at a time. Try with fewer hints first to challenge yourself!
-                </p>
-                
-                <div class="hint-progress">
-                    <span>Hints Revealed: <strong><span id="hintCount">0</span> of 4</strong></span>
-                    <div class="progress-dots" id="progressDots">
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                        <div class="dot"></div>
-                    </div>
+            <div class="upgrade-arrow">⬇️</div>
+            <div class="upgrade-text">Upgrade this to B2+ professional level</div>
+            
+            <div class="your-answer">
+                <div class="label" style="color: var(--success);">✍️ Your B2+ Version:</div>
+                <textarea id="userAnswer" placeholder="Type your upgraded sentence here..."></textarea>
+            </div>
+            
+            <div class="hints-section">
+                <div class="hints-header">
+                    <div class="label" style="margin: 0;">💡 Need Help?</div>
+                    <div class="hints-status" id="hintsStatus">0 of 4 hints used</div>
                 </div>
                 
                 <div id="hintsContainer"></div>
                 
                 <div class="button-group">
-                    <button class="btn btn-hint" onclick="showNextHint()" id="nextHintBtn">Show Next Hint</button>
-                    <button class="btn btn-secondary" onclick="showAllHints()" id="showAllBtn">Show All Hints</button>
+                    <button class="btn btn-secondary" id="hintBtn" onclick="revealNextHint()">
+                        Show Next Hint 💡
+                    </button>
                     <button class="btn btn-secondary" onclick="resetHints()">Reset Hints</button>
                 </div>
             </div>
             
-            <div class="writing-area">
-                <label for="userAnswer">Your B2+ Version:</label>
-                <textarea id="userAnswer" placeholder="Write your upgraded sentence here..."></textarea>
+            <div class="button-group" style="margin-top: 30px;">
+                <button class="btn btn-success" onclick="toggleExamples()">
+                    <span id="exampleBtnText">Show Example Answers ✓</span>
+                </button>
             </div>
-            
-            <div class="examples-section">
-                <h3 style="color: var(--success); margin-bottom: 20px;">Example B2+ Versions</h3>
-                <p style="color: var(--blue-light); margin-bottom: 20px;">
-                    Click to see different approaches. All are correct - choose the style that suits your context!
-                </p>
-                
-                <div class="button-group" id="exampleButtons"></div>
-                
-                <div id="examplesContainer"></div>
-                
-                <div class="comparison-grid" id="comparisonGrid"></div>
-            </div>
-            
-            <div class="button-group" style="margin-top: 40px;">
-                <button class="btn btn-secondary" onclick="previousExercise()" id="prevBtn">← Previous</button>
-                <button class="btn btn-primary" onclick="nextExercise()" id="nextBtn">Next →</button>
-                <button class="btn btn-secondary" onclick="backToTopics()">Back to Topics</button>
+        </div>
+        
+        <div class="examples-section hidden" id="examplesSection">
+            <div class="examples-header">✨ Professional B2+ Examples</div>
+            <p style="color: var(--blue-light); margin-bottom: 25px;">
+                All versions below are correct! Choose the style that fits your context best.
+            </p>
+            <div id="examplesContainer"></div>
+        </div>
+        
+        <div class="nav-buttons">
+            <button class="btn btn-secondary" onclick="previousExercise()" id="prevBtn">← Previous</button>
+            <div class="nav-btn-group">
+                <button class="btn btn-secondary" onclick="location.href='index.html'">Back to Topics</button>
+                <button class="btn btn-primary" onclick="nextExercise()" id="nextBtn">Next Exercise →</button>
             </div>
         </div>
     </div>
 
     <script>
         const exercises = [{"id": 1, "basic": "NATO countries work together. They share resources and information.", "hints": [{"type": "structure", "label": "General Structure", "text": "Combine showing method of cooperation", "suggestion": "Use \"through\" or \"by\" to show how cooperation occurs"}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"work together\" with formal cooperation terminology", "suggestion": "Consider: \"cooperate extensively\", \"collaborate closely\", \"maintain strategic partnerships\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"share resources and information\" with formal alliance terminology", "suggestion": "Consider: \"resource pooling and intelligence sharing\", \"mutual support mechanisms\", \"integrated capabilities\""}, {"type": "formality", "label": "Additional Formality", "text": "Add purpose or outcome", "suggestion": "Consider: \"to enhance collective security\", \"ensuring mutual defense\", \"strengthening Alliance capabilities\""}], "examples": [{"version": 1, "title": "Formal cooperation structure", "text": "NATO member nations cooperate extensively through resource pooling and intelligence sharing to enhance collective security.", "why": "Professional alliance language with clear purpose", "bestFor": "Strategic documents, alliance briefings, international relations papers"}, {"version": 2, "title": "Integration emphasis", "text": "NATO Allies collaborate closely by maintaining integrated capabilities and mutual support mechanisms that strengthen overall Alliance effectiveness.", "why": "Emphasizes integration and alliance-wide benefit", "bestFor": "NATO documentation, coalition planning, partnership frameworks"}]}, {"id": 2, "basic": "International cooperation helps solve global problems. No country can do everything alone.", "hints": [{"type": "structure", "label": "General Structure", "text": "Show necessity using causal structure", "suggestion": "Structure: \"X is essential because/as no single nation can...\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"helps solve global problems\" with formal international relations language", "suggestion": "Consider: \"is essential for addressing transnational challenges\", \"enables resolution of complex issues\", \"facilitates tackling multinational threats\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"No country can do everything alone\" with formal limitation language", "suggestion": "Consider: \"no single nation possesses sufficient resources\", \"unilateral action is insufficient\", \"individual nations lack comprehensive capabilities\""}, {"type": "formality", "label": "Additional Formality", "text": "Specify types of challenges", "suggestion": "Consider: \"security threats\", \"humanitarian crises\", \"transnational challenges\""}], "examples": [{"version": 1, "title": "Necessity structure", "text": "International cooperation is essential for addressing transnational security challenges, as no single nation possesses sufficient resources or capabilities to act unilaterally.", "why": "Clear necessity argument with professional diplomatic language", "bestFor": "Policy papers, international relations documents, strategic analyses"}, {"version": 2, "title": "Capability focus", "text": "Multilateral collaboration enables effective resolution of complex global issues that exceed any individual nation's capacity to address independently.", "why": "Emphasizes collaborative capability advantage", "bestFor": "Coalition justifications, partnership proposals"}]}, {"id": 3, "basic": "Peacekeeping missions are difficult. Soldiers must work with people from different countries and cultures.", "hints": [{"type": "structure", "label": "General Structure", "text": "Use causal structure showing why missions are difficult", "suggestion": "Structure: \"X are challenging because/as they require Y\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"are difficult\" with formal challenge assessment", "suggestion": "Consider: \"present significant challenges\", \"are complex undertakings\", \"require sophisticated capabilities\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"work with people from different countries\" with formal multinational terminology", "suggestion": "Consider: \"operate in multinational environments\", \"collaborate with diverse coalition partners\", \"navigate cross-cultural contexts\""}, {"type": "formality", "label": "Additional Formality", "text": "Specify required skills or competencies", "suggestion": "Consider: \"cultural awareness\", \"linguistic capabilities\", \"diplomatic sensitivity\", \"intercultural competence\""}], "examples": [{"version": 1, "title": "Challenge analysis", "text": "Peacekeeping missions present significant challenges, as soldiers must operate effectively in multinational environments and navigate complex cross-cultural contexts.", "why": "Professional assessment with specific operational requirements", "bestFor": "Mission planning, training requirements, capability analyses"}, {"version": 2, "title": "Competency requirement", "text": "Peacekeeping operations are complex undertakings that require personnel to demonstrate intercultural competence and collaborate effectively with diverse coalition partners.", "why": "Emphasizes required competencies for success", "bestFor": "Training doctrine, pre-deployment preparation, selection criteria"}]}, {"id": 4, "basic": "Diplomacy solves problems without fighting. It is better to talk than to use force.", "hints": [{"type": "structure", "label": "General Structure", "text": "Show preference using formal comparative structure", "suggestion": "Use \"represents a preferable alternative to\" or \"should precede\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"solves problems without fighting\" with formal conflict resolution terminology", "suggestion": "Consider: \"resolves disputes through negotiation\", \"addresses conflicts peacefully\", \"achieves resolution without military action\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"better to talk than use force\" with formal diplomatic preference language", "suggestion": "Consider: \"dialogue should precede military options\", \"negotiation represents a preferable approach\", \"peaceful resolution is preferred\""}, {"type": "formality", "label": "Additional Formality", "text": "Add reasoning or international norms", "suggestion": "Consider: \"minimizing casualties\", \"preserving relationships\", \"consistent with international law\""}], "examples": [{"version": 1, "title": "Diplomatic preference", "text": "Diplomatic engagement resolves disputes through negotiation and represents a preferable alternative to military force, minimizing casualties and preserving international relationships.", "why": "Clear preference with multiple justifications", "bestFor": "Foreign policy documents, strategic guidance, conflict resolution frameworks"}, {"version": 2, "title": "Sequencing emphasis", "text": "Peaceful dialogue should precede military options in conflict resolution, as diplomatic approaches address disputes more sustainably and in accordance with international norms.", "why": "Shows proper sequence and legal/sustainability considerations", "bestFor": "Operational planning, rules of engagement, escalation procedures"}]}, {"id": 5, "basic": "Joint exercises with other countries make our military stronger. We learn new tactics and methods.", "hints": [{"type": "structure", "label": "General Structure", "text": "Show benefit using causal or result structure", "suggestion": "Use \"by\" to show method: \"strengthen capabilities by...\" or show result with \"enabling\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"make our military stronger\" with formal capability enhancement", "suggestion": "Consider: \"enhance military capabilities\", \"strengthen operational readiness\", \"improve interoperability\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"We learn new tactics and methods\" with formal knowledge exchange terminology", "suggestion": "Consider: \"facilitate tactical knowledge exchange\", \"enable best practice sharing\", \"promote doctrinal understanding\""}, {"type": "formality", "label": "Additional Formality", "text": "Add specific benefit or capability gained", "suggestion": "Consider: \"coalition operations\", \"combined arms proficiency\", \"standardized procedures\""}], "examples": [{"version": 1, "title": "Capability enhancement", "text": "Joint exercises with partner nations enhance military capabilities and improve interoperability by facilitating tactical knowledge exchange and promoting shared doctrinal understanding.", "why": "Professional language with multiple specific benefits", "bestFor": "Exercise proposals, partnership justifications, capability development plans"}, {"version": 2, "title": "Learning emphasis", "text": "Multinational training exercises strengthen operational readiness by enabling best practice sharing and developing standardized procedures for coalition operations.", "why": "Emphasizes learning outcomes and practical application", "bestFor": "Training plans, partnership agreements, exercise after-action reports"}]}, {"id": 6, "basic": "Understanding different cultures is necessary for soldiers. They work in many different places.", "hints": [{"type": "structure", "label": "General Structure", "text": "Use causal structure showing operational necessity", "suggestion": "Structure: \"X is essential because/as Y deploy to...\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"Understanding different cultures is necessary\" with formal competency language", "suggestion": "Consider: \"Cultural awareness is essential\", \"Intercultural competence is critical\", \"Cross-cultural understanding is fundamental\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"work in many different places\" with formal deployment terminology", "suggestion": "Consider: \"deploy to diverse operational environments\", \"operate in varied cultural contexts\", \"serve in multinational missions\""}, {"type": "formality", "label": "Additional Formality", "text": "Add outcome or mission effectiveness benefit", "suggestion": "Consider: \"ensuring mission success\", \"building host nation relationships\", \"maintaining operational effectiveness\""}], "examples": [{"version": 1, "title": "Competency requirement", "text": "Cultural awareness is essential for military personnel, as they routinely deploy to diverse operational environments and must build effective relationships with host nations.", "why": "Clear competency need with specific operational justification", "bestFor": "Training requirements, pre-deployment preparation, competency frameworks"}, {"version": 2, "title": "Operational effectiveness", "text": "Intercultural competence is critical for soldiers who operate in varied cultural contexts, ensuring mission effectiveness and appropriate engagement with local populations.", "why": "Emphasizes direct link to mission success", "bestFor": "Doctrine development, operational guidance, cultural training programs"}]}, {"id": 7, "basic": "The UN helps keep peace in dangerous areas. It sends soldiers from many countries.", "hints": [{"type": "structure", "label": "General Structure", "text": "Combine showing method using \"through\" or \"by\"", "suggestion": "Structure: \"The UN maintains peace by/through deploying...\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"helps keep peace\" with formal peacekeeping terminology", "suggestion": "Consider: \"facilitates conflict stabilization\", \"maintains peace and security\", \"conducts peacekeeping operations\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"sends soldiers from many countries\" with formal multinational force language", "suggestion": "Consider: \"deploys multinational peacekeeping forces\", \"fields international contingents\", \"coordinates coalition forces\""}, {"type": "formality", "label": "Additional Formality", "text": "Add mandate or authorization", "suggestion": "Consider: \"under Security Council mandates\", \"authorized by international community\", \"pursuant to UN resolutions\""}], "examples": [{"version": 1, "title": "Formal UN operations", "text": "The United Nations maintains peace and security in conflict zones through deploying multinational peacekeeping forces under Security Council mandates.", "why": "Professional UN terminology with proper authorization reference", "bestFor": "International relations papers, UN documentation, policy analyses"}, {"version": 2, "title": "Operational structure", "text": "The UN conducts peacekeeping operations in volatile regions by coordinating international contingents authorized by the Security Council.", "why": "Emphasizes coordination role and proper authority", "bestFor": "Mission planning, institutional analyses, peacekeeping studies"}]}, {"id": 8, "basic": "Trade between countries is good for everyone. It creates jobs and prosperity.", "hints": [{"type": "structure", "label": "General Structure", "text": "Show mutual benefit and outcomes", "suggestion": "Structure: \"X benefits all parties by/through generating Y\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"Trade between countries is good\" with formal economic terminology", "suggestion": "Consider: \"International commerce benefits all parties\", \"Cross-border trade proves mutually advantageous\", \"Global trade relationships\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"creates jobs and prosperity\" with formal economic outcome language", "suggestion": "Consider: \"generates employment and economic growth\", \"stimulates economic development\", \"fosters prosperity and opportunity\""}, {"type": "formality", "label": "Additional Formality", "text": "Add scope or mechanism", "suggestion": "Consider: \"through market access\", \"via economic integration\", \"across participating nations\""}], "examples": [{"version": 1, "title": "Mutual benefit structure", "text": "International commerce proves mutually advantageous for all participating nations by generating employment opportunities and stimulating sustainable economic growth.", "why": "Formal economic language emphasizing shared benefits", "bestFor": "Economic policy papers, trade analyses, international relations documents"}, {"version": 2, "title": "Development focus", "text": "Cross-border trade relationships foster economic development and prosperity across nations through enhanced market access and commercial integration.", "why": "Emphasizes development outcomes and integration mechanisms", "bestFor": "Trade policy, economic development strategies, partnership frameworks"}]}, {"id": 9, "basic": "Sharing intelligence with allies helps fight terrorism. Bad people operate across borders.", "hints": [{"type": "structure", "label": "General Structure", "text": "Show necessity using causal structure", "suggestion": "Structure: \"X is essential because/as threats are transnational\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"helps fight terrorism\" with formal counterterrorism terminology", "suggestion": "Consider: \"is essential for counterterrorism efforts\", \"enhances security cooperation\", \"strengthens collective security\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"Bad people operate across borders\" with formal threat assessment language", "suggestion": "Consider: \"terrorist networks operate transnationally\", \"threats transcend national boundaries\", \"adversaries exploit international borders\""}, {"type": "formality", "label": "Additional Formality", "text": "Add specific intelligence benefit", "suggestion": "Consider: \"early warning\", \"threat identification\", \"operational coordination\""}], "examples": [{"version": 1, "title": "Security cooperation", "text": "Intelligence sharing with allied nations is essential for effective counterterrorism efforts, as terrorist networks operate transnationally and require coordinated international response.", "why": "Professional security language with clear operational necessity", "bestFor": "Security cooperation documents, intelligence policy, counterterrorism strategies"}, {"version": 2, "title": "Transnational threat response", "text": "Collaborative intelligence exchange strengthens collective security against threats that transcend national boundaries, enabling early warning and coordinated operations.", "why": "Emphasizes coordination and early detection benefits", "bestFor": "Intelligence agreements, partnership frameworks, security assessments"}]}, {"id": 10, "basic": "Humanitarian aid shows our values. We help people in need during disasters.", "hints": [{"type": "structure", "label": "General Structure", "text": "Combine showing values and actions", "suggestion": "Use \"by\" to show method: \"demonstrates values by providing...\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"shows our values\" with formal values demonstration language", "suggestion": "Consider: \"demonstrates national commitment to\", \"reflects shared humanitarian principles\", \"exemplifies democratic values\""}, {"type": "vocabulary", "label": "Specific Vocabulary", "text": "Replace \"help people in need during disasters\" with formal humanitarian assistance terminology", "suggestion": "Consider: \"provide critical assistance to affected populations\", \"deliver humanitarian relief\", \"support disaster-affected communities\""}, {"type": "formality", "label": "Additional Formality", "text": "Add types of assistance or international cooperation", "suggestion": "Consider: \"medical care\", \"emergency supplies\", \"in coordination with international partners\""}], "examples": [{"version": 1, "title": "Values demonstration", "text": "Humanitarian assistance demonstrates our national commitment to shared humanitarian principles by providing critical aid to disaster-affected populations worldwide.", "why": "Links action to values with global scope", "bestFor": "Policy statements, humanitarian doctrine, foreign assistance frameworks"}, {"version": 2, "title": "International cooperation", "text": "Delivering humanitarian relief during crises reflects democratic values and strengthens international partnerships through coordinated assistance to vulnerable communities.", "why": "Emphasizes both values and partnership benefits", "bestFor": "Foreign policy documents, international relations papers, assistance strategies"}]}];
+        
         let currentExerciseIndex = 0;
         let currentHintIndex = 0;
-
+        
         function loadExercise(index) {
             const exercise = exercises[index];
             currentExerciseIndex = index;
             currentHintIndex = 0;
             
-            // Update exercise number
+            const progress = ((index + 1) / exercises.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
             document.getElementById('currentEx').textContent = index + 1;
             document.getElementById('totalEx').textContent = exercises.length;
             
-            // Load basic sentence
             document.getElementById('basicSentence').textContent = exercise.basic;
+            document.getElementById('userAnswer').value = '';
             
-            // Clear and load hints
             const hintsContainer = document.getElementById('hintsContainer');
             hintsContainer.innerHTML = '';
             exercise.hints.forEach((hint, i) => {
                 const hintDiv = document.createElement('div');
-                hintDiv.className = 'hint-item';
+                hintDiv.className = 'hint-item hidden';
                 hintDiv.id = `hint${i}`;
                 hintDiv.innerHTML = `
-                    <div class="hint-label">🔵 Hint ${i + 1} - ${hint.label}:</div>
-                    <div class="hint-text">
-                        ${hint.text}
-                        <div class="hint-suggestion">${hint.suggestion}</div>
-                    </div>
+                    <div class="hint-label">💡 Hint ${i + 1} - ${hint.label}</div>
+                    <div class="hint-text">${hint.text}</div>
+                    <div class="hint-suggestion">${hint.suggestion}</div>
                 `;
                 hintsContainer.appendChild(hintDiv);
             });
             
-            // Reset hint progress
-            resetHints();
+            updateHintButton();
+            updateHintsStatus();
             
-            // Clear and load examples
-            const exampleButtons = document.getElementById('exampleButtons');
             const examplesContainer = document.getElementById('examplesContainer');
-            const comparisonGrid = document.getElementById('comparisonGrid');
-            
-            exampleButtons.innerHTML = '';
             examplesContainer.innerHTML = '';
-            comparisonGrid.innerHTML = '';
-            
-            exercise.examples.forEach((example, i) => {
-                // Create button
-                const btn = document.createElement('button');
-                btn.className = 'btn btn-primary';
-                btn.textContent = `Show Example ${example.version}`;
-                btn.onclick = () => showExample(i);
-                exampleButtons.appendChild(btn);
-                
-                // Create example box
-                const exampleBox = document.createElement('div');
-                exampleBox.className = 'example-box';
-                exampleBox.id = `example${i}`;
-                exampleBox.innerHTML = `
-                    <div class="example-header">Version ${example.version} - ${example.title}</div>
+            exercise.examples.forEach((example) => {
+                const exampleDiv = document.createElement('div');
+                exampleDiv.className = 'example-box';
+                exampleDiv.innerHTML = `
+                    <div class="example-version">Version ${example.version}: ${example.title}</div>
                     <div class="example-text">${example.text}</div>
-                    <div class="example-explanation">
-                        <strong>Why this works:</strong> ${example.why}
-                    </div>
-                    <div class="example-explanation">
-                        <strong>Best for:</strong> ${example.bestFor}
-                    </div>
                 `;
-                examplesContainer.appendChild(exampleBox);
-                
-                // Create comparison item
-                const compItem = document.createElement('div');
-                compItem.className = 'comparison-item';
-                compItem.innerHTML = `
-                    <h4>Example ${example.version}: ${example.title}</h4>
-                    <p>${example.text}</p>
-                `;
-                comparisonGrid.appendChild(compItem);
+                examplesContainer.appendChild(exampleDiv);
             });
             
-            // Add compare button if more than 1 example
-            if (exercise.examples.length > 1) {
-                const compareBtn = document.createElement('button');
-                compareBtn.className = 'btn btn-secondary';
-                compareBtn.textContent = 'Compare All Examples';
-                compareBtn.onclick = compareAll;
-                exampleButtons.appendChild(compareBtn);
-            }
+            document.getElementById('examplesSection').classList.add('hidden');
+            document.getElementById('exampleBtnText').textContent = 'Show Example Answers ✓';
             
-            // Clear user answer
-            document.getElementById('userAnswer').value = '';
+            document.getElementById('prevBtn').disabled = (index === 0);
+            document.getElementById('nextBtn').disabled = (index === exercises.length - 1);
             
-            // Update navigation buttons
-            document.getElementById('prevBtn').disabled = index === 0;
-            document.getElementById('nextBtn').disabled = index === exercises.length - 1;
-            
-            window.scrollTo(0, 0);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-
-        function showNextHint() {
+        
+        function revealNextHint() {
             const exercise = exercises[currentExerciseIndex];
             if (currentHintIndex < exercise.hints.length) {
-                document.getElementById(`hint${currentHintIndex}`).classList.add('visible');
-                const dots = document.getElementById('progressDots').children;
-                dots[currentHintIndex].classList.add('revealed');
+                document.getElementById(`hint${currentHintIndex}`).classList.remove('hidden');
                 currentHintIndex++;
-                document.getElementById('hintCount').textContent = currentHintIndex;
-                
-                if (currentHintIndex === exercise.hints.length) {
-                    document.getElementById('nextHintBtn').disabled = true;
-                    document.getElementById('nextHintBtn').textContent = 'All Hints Revealed';
-                }
+                updateHintButton();
+                updateHintsStatus();
             }
         }
-
-        function showAllHints() {
+        
+        function updateHintButton() {
             const exercise = exercises[currentExerciseIndex];
-            for (let i = 0; i < exercise.hints.length; i++) {
-                document.getElementById(`hint${i}`).classList.add('visible');
-                const dots = document.getElementById('progressDots').children;
-                dots[i].classList.add('revealed');
+            const hintBtn = document.getElementById('hintBtn');
+            if (currentHintIndex >= exercise.hints.length) {
+                hintBtn.disabled = true;
+                hintBtn.textContent = 'All Hints Revealed';
+            } else {
+                hintBtn.disabled = false;
+                hintBtn.textContent = 'Show Next Hint 💡';
             }
-            currentHintIndex = exercise.hints.length;
-            document.getElementById('hintCount').textContent = currentHintIndex;
-            document.getElementById('nextHintBtn').disabled = true;
-            document.getElementById('nextHintBtn').textContent = 'All Hints Revealed';
         }
-
+        
+        function updateHintsStatus() {
+            const exercise = exercises[currentExerciseIndex];
+            document.getElementById('hintsStatus').textContent = 
+                `${currentHintIndex} of ${exercise.hints.length} hints used`;
+        }
+        
         function resetHints() {
             const exercise = exercises[currentExerciseIndex];
-            for (let i = 0; i < exercise.hints.length; i++) {
-                const hintElement = document.getElementById(`hint${i}`);
-                if (hintElement) {
-                    hintElement.classList.remove('visible');
-                }
-            }
-            const dots = document.getElementById('progressDots').children;
-            for (let i = 0; i < dots.length; i++) {
-                dots[i].classList.remove('revealed');
-            }
             currentHintIndex = 0;
-            document.getElementById('hintCount').textContent = '0';
-            document.getElementById('nextHintBtn').disabled = false;
-            document.getElementById('nextHintBtn').textContent = 'Show Next Hint';
-        }
-
-        function showExample(index) {
-            // Hide all examples and comparison
-            const examples = document.querySelectorAll('.example-box');
-            examples.forEach(ex => ex.classList.remove('visible'));
-            document.getElementById('comparisonGrid').classList.remove('visible');
             
-            // Show selected example
-            document.getElementById(`example${index}`).classList.add('visible');
-            document.getElementById(`example${index}`).scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            for (let i = 0; i < exercise.hints.length; i++) {
+                document.getElementById(`hint${i}`).classList.add('hidden');
+            }
+            updateHintButton();
+            updateHintsStatus();
         }
-
-        function compareAll() {
-            // Hide individual examples
-            const examples = document.querySelectorAll('.example-box');
-            examples.forEach(ex => ex.classList.remove('visible'));
+        
+        function toggleExamples() {
+            const examplesSection = document.getElementById('examplesSection');
+            const btnText = document.getElementById('exampleBtnText');
             
-            // Show comparison
-            document.getElementById('comparisonGrid').classList.add('visible');
-            document.getElementById('comparisonGrid').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            if (examplesSection.classList.contains('hidden')) {
+                examplesSection.classList.remove('hidden');
+                btnText.textContent = 'Hide Example Answers';
+                examplesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                examplesSection.classList.add('hidden');
+                btnText.textContent = 'Show Example Answers ✓';
+            }
         }
-
+        
         function nextExercise() {
             if (currentExerciseIndex < exercises.length - 1) {
                 loadExercise(currentExerciseIndex + 1);
             }
         }
-
+        
         function previousExercise() {
             if (currentExerciseIndex > 0) {
                 loadExercise(currentExerciseIndex - 1);
             }
         }
-
-        function backToTopics() {
-            window.location.href = 'index.html';
-        }
-
-        // Load first exercise on page load
-        window.onload = function() {
-            loadExercise(0);
-        };
+        
+        loadExercise(0);
     </script>
 </body>
 </html>
