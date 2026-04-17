@@ -882,6 +882,8 @@ function moveIntro(d){ const n=introIdx+d; if(n>=0&&n<=3) showIntro(n); }
 let b1Idx = 0;
 const peelPhrases = {
   point:["One of the main advantages of… is…","A key argument in favour of… is…","One of the strongest arguments for… is…"],
+  point2:["A further advantage worth considering is…","A second significant benefit of… is…","A second key argument in favour of… is…","Beyond this…","Not only… but also…"],
+  point2_med:["Traditional medicine, on the other hand…","While modern medicine excels in [X], traditional approaches offer…","By contrast, traditional medicine…","A different but equally important consideration is…"],
   example:["For example…","For instance…","Consider the case of…","Countries such as [X] demonstrate this clearly.","The experience of [X] illustrates this point.","Practices such as [X] have been used successfully…"],
   explain:["This is significant because…","This matters because…","This suggests that…","The implication is that…","In practice, this means that…"],
   link:["It is clear, therefore, that…","This supports the argument that…","This lends weight to the argument that…","This reinforces the view that…","Ultimately, this suggests that…"]
@@ -959,7 +961,7 @@ function renderB2(idx) {
     <div class="part-title"><span style="background:var(--info-bg);color:var(--info);font-size:11px;padding:2px 8px;border-radius:10px;margin-right:8px;font-weight:500;">${s.ltr}</span>${s.title}</div>
     <div class="part-purpose">${s.purpose}</div>
     ${dosDonts(s.dos,s.donts)}
-    ${pills(peelPhrases[s.phraseKey])}
+    ${pills(s.phraseKey==="point" ? (document.getElementById("global-topic").value==="med" ? peelPhrases.point2_med : peelPhrases.point2) : peelPhrases[s.phraseKey])}
     ${exBlock(s.getGood(t),s.getBad(t))}
     ${s.tip?`<div class="tip-box">💡 ${s.tip}</div>`:''}
     ${s.warn?`<div class="warn-box">⚠ ${s.warn}</div>`:''}`;
