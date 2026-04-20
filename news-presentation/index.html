@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Present a News Item — STANAG 6001</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f8f6f1;
+    --surface: #ffffff;
+    --surface2: #f2efe8;
+    --border: rgba(0,0,0,0.08);
+    --border-strong: rgba(0,0,0,0.15);
+    --text: #1a1814;
+    --text-muted: #6b6760;
+    --text-hint: #a09d97;
+    --blue-bg: #e8f0fa;
+    --blue-text: #1a4a8a;
+    --blue-accent: #2e6dd4;
+    --amber-bg: #fdf0d8;
+    --amber-text: #7a4a0a;
+    --amber-accent: #c97d1e;
+    --pink-bg: #faeaf0;
+    --pink-text: #7a2048;
+    --pink-accent: #c4406e;
+    --teal-bg: #dff4ec;
+    --teal-text: #0d5c3a;
+    --teal-accent: #1a9e68;
+    --purple-bg: #eeebfc;
+    --purple-text: #3a2e8c;
+    --purple-accent: #6355d4;
+    --green-bg: #e8f5da;
+    --green-text: #2a5e10;
+    --red-bg: #fde8e8;
+    --red-text: #7a1e1e;
+    --radius: 10px;
+    --radius-lg: 14px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  .page-wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 40px 24px 60px;
+  }
+
+  .page-header {
+    margin-bottom: 36px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border-strong);
+  }
+
+  .page-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-hint);
+    margin-bottom: 10px;
+  }
+
+  .page-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    line-height: 1.2;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .page-sub {
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+
+  /* Overview cards */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .ov-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 16px 14px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+  }
+
+  .ov-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    border-color: var(--border-strong);
+  }
+
+  .ov-num {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .ov-title { font-size: 13px; font-weight: 500; margin-bottom: 3px; }
+  .ov-desc { font-size: 11.5px; color: var(--text-muted); line-height: 1.4; }
+
+  /* Level comparison */
+  .level-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 16px 20px;
+    margin-bottom: 14px;
+  }
+
+  .level-box-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 12px;
+  }
+
+  .level-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .level-label {
+    font-size: 11px;
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+
+  .level-items {
+    font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* Mistakes */
+  .mistakes-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 16px 20px;
+    margin-bottom: 14px;
+  }
+
+  .mistake-item {
+    display: flex;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .mistake-item:last-child { border-bottom: none; }
+
+  .x-icon {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--red-bg);
+    color: var(--red-text);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* Step section */
+  .step-section { display: none; }
+
+  .back-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .back-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--text-muted);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .back-btn:hover { background: var(--surface2); }
+
+  .progress-dots {
+    display: flex;
+    gap: 5px;
+    flex: 1;
+  }
+
+  .prog-dot {
+    height: 4px;
+    flex: 1;
+    border-radius: 2px;
+    background: var(--border-strong);
+    transition: background 0.25s;
+  }
+
+  .prog-dot.done { background: var(--teal-accent); }
+  .prog-dot.active { background: var(--blue-accent); }
+
+  /* Step nav */
+  .step-nav {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+
+  .step-nav-btn {
+    flex: 1;
+    min-width: 90px;
+    padding: 8px 10px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    background: var(--surface);
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-align: center;
+    transition: all 0.15s;
+  }
+
+  .step-nav-btn:hover { background: var(--surface2); }
+  .step-nav-btn.active { border-width: 2px; }
+
+  /* Panel */
+  .step-panel { display: none; }
+  .step-panel.visible { display: block; }
+
+  .panel-hd {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 18px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .panel-num {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 500;
+    flex-shrink: 0;
+  }
+
+  .panel-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .panel-sub { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+
+  .chip-row { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
+
+  .chip {
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  /* Tip box */
+  .tip-box {
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin-bottom: 18px;
+    border-left: 3px solid;
+  }
+
+  .tip-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+  .tip-text { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border-strong);
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  .tab {
+    padding: 7px 16px;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.15s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--text); border-bottom-color: var(--text); }
+
+  .tab-content { display: none; }
+  .tab-content.visible { display: block; }
+
+  /* Phrases */
+  .phrase-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px; }
+
+  .phrase-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 11px 16px;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.55;
+    border-left-width: 3px;
+  }
+
+  .phrase-item em { font-style: italic; color: var(--text); }
+
+  /* Example box */
+  .ex-box {
+    background: var(--surface2);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+    margin-bottom: 18px;
+  }
+
+  .ex-label {
+    font-size: 10.5px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-hint);
+    margin-bottom: 10px;
+  }
+
+  .ex-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.75;
+  }
+
+  /* Nav row */
+  .nav-row { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+
+  .nav-btn {
+    padding: 10px 20px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    background: var(--surface);
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    transition: background 0.15s;
+  }
+
+  .nav-btn:hover { background: var(--surface2); }
+
+  .nav-btn.primary {
+    background: var(--blue-bg);
+    border-color: var(--blue-accent);
+    color: var(--blue-text);
+  }
+
+  .nav-btn.primary:hover { opacity: 0.85; }
+
+  /* Ladder */
+  .ladder { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+
+  .ladder-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+  }
+
+  .ladder-rung {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 500;
+    flex-shrink: 0; margin-top: 1px;
+  }
+
+  .ladder-label { font-size: 12px; font-weight: 500; margin-bottom: 3px; }
+  .ladder-phrase { font-size: 12px; color: var(--text-muted); font-style: italic; line-height: 1.5; }
+
+  /* Q type blocks */
+  .q-block { margin-bottom: 10px; }
+
+  .q-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 16px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    background: var(--surface);
+    transition: background 0.15s;
+  }
+
+  .q-header:hover { background: var(--surface2); }
+
+  .q-chevron {
+    font-size: 12px;
+    color: var(--text-hint);
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+
+  .q-chevron.open { transform: rotate(90deg); }
+
+  .q-title { font-size: 13.5px; font-weight: 500; color: var(--text); }
+  .q-sub { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+  .q-badge {
+    margin-left: auto;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 10.5px;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+
+  .q-body { display: none; padding: 14px 4px 6px; }
+  .q-body.open { display: block; }
+
+  .info-box {
+    background: var(--surface2);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* Do / don't */
+  .dos-donts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .do-col { background: var(--green-bg); border-radius: var(--radius); padding: 12px 14px; }
+  .dont-col { background: var(--red-bg); border-radius: var(--radius); padding: 12px 14px; }
+
+  .dd-label { font-size: 11px; font-weight: 500; margin-bottom: 8px; }
+  .dd-label.do { color: var(--green-text); }
+  .dd-label.dont { color: var(--red-text); }
+
+  .dd-item {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 5px;
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .dd-item::before { position: absolute; left: 0; }
+  .dd-item.do::before { content: "✓"; color: var(--green-text); }
+  .dd-item.dont::before { content: "✗"; color: var(--red-text); }
+
+  .section-label {
+    font-size: 10.5px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-hint);
+    margin-bottom: 10px;
+  }
+
+  @media (max-width: 500px) {
+    .page-title { font-size: 24px; }
+    .level-cols { grid-template-columns: 1fr; }
+    .dos-donts { grid-template-columns: 1fr; }
+    .overview-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <div class="page-header">
+    <div class="page-tag">STANAG 6001 &nbsp;·&nbsp; Level 3 Speaking</div>
+    <h1 class="page-title">How to present a news item</h1>
+    <p class="page-sub">A complete guide for the Interview part of the speaking exam. Click any section to explore it.</p>
+  </div>
+
+  <!-- OVERVIEW -->
+  <div id="overview-section">
+
+    <div class="overview-grid">
+      <div class="ov-card" onclick="openStep(0)">
+        <div class="ov-num" style="background:var(--blue-bg);color:var(--blue-text)">1</div>
+        <div class="ov-title">Introduce the story</div>
+        <div class="ov-desc">What happened, who is involved, and when</div>
+      </div>
+      <div class="ov-card" onclick="openStep(1)">
+        <div class="ov-num" style="background:var(--amber-bg);color:var(--amber-text)">2</div>
+        <div class="ov-title">Explain why you chose it</div>
+        <div class="ov-desc">Your personal connection and why it matters</div>
+      </div>
+      <div class="ov-card" onclick="openStep(2)">
+        <div class="ov-num" style="background:var(--pink-bg);color:var(--pink-text)">3</div>
+        <div class="ov-title">Give the key facts</div>
+        <div class="ov-desc">A few sentences covering the essentials</div>
+      </div>
+      <div class="ov-card" onclick="openStep(3)">
+        <div class="ov-num" style="background:var(--teal-bg);color:var(--teal-text)">4</div>
+        <div class="ov-title">Predict or analyse</div>
+        <div class="ov-desc">What might happen next — Level 3 territory</div>
+      </div>
+      <div class="ov-card" onclick="openStep(4)">
+        <div class="ov-num" style="background:var(--purple-bg);color:var(--purple-text)">Q</div>
+        <div class="ov-title">Answering questions</div>
+        <div class="ov-desc">Question types and how to respond well</div>
+      </div>
+    </div>
+
+    <div class="level-box">
+      <div class="level-box-title">The key difference between Level 2 and Level 3</div>
+      <div class="level-cols">
+        <div>
+          <div class="level-label" style="color:var(--blue-text)">Level 2</div>
+          <div class="level-items">Reports facts · basic opinions · describes the situation · answers questions about the story</div>
+        </div>
+        <div>
+          <div class="level-label" style="color:var(--teal-text)">Level 3</div>
+          <div class="level-items">Analyses causes · defends opinions under pressure · hypothesises · connects to broader context</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mistakes-box">
+      <div class="level-box-title">Common mistakes to avoid</div>
+      <div class="mistake-item"><div class="x-icon">✕</div>Staying on the personal/concrete level — describing only your own experience instead of the broader issue</div>
+      <div class="mistake-item"><div class="x-icon">✕</div>Avoiding complex grammar out of fear — this keeps you at Level 2</div>
+      <div class="mistake-item"><div class="x-icon">✕</div>Not committing to an opinion — saying "it's complicated" without taking a position</div>
+      <div class="mistake-item"><div class="x-icon">✕</div>One-sentence responses — develop every answer; the examiner needs more to work with</div>
+    </div>
+
+  </div>
+
+  <!-- STEP SECTION -->
+  <div class="step-section" id="step-section">
+
+    <div class="back-row">
+      <button class="back-btn" onclick="backToOverview()">&#8592; All steps</button>
+      <div class="progress-dots" id="prog"></div>
+    </div>
+
+    <div class="step-nav" id="step-nav"></div>
+
+    <!-- STEP 1 -->
+    <div class="step-panel" id="step0">
+      <div class="panel-hd">
+        <div class="panel-num" style="background:var(--blue-bg);color:var(--blue-text)">1</div>
+        <div>
+          <div class="panel-title">Introduce the story</div>
+          <div class="panel-sub">One or two sentences. You are not reading the article aloud — just give the examiner enough to follow you.</div>
+        </div>
+      </div>
+      <div class="chip-row">
+        <span class="chip" style="background:var(--blue-bg);color:var(--blue-text)">Required at Level 2</span>
+        <span class="chip" style="background:var(--teal-bg);color:var(--teal-text)">Required at Level 3</span>
+      </div>
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'t0a')">Starter phrases</div>
+        <div class="tab" onclick="switchTab(this,'t0b')">Example</div>
+      </div>
+      <div id="t0a" class="tab-content visible">
+        <div class="phrase-list">
+          <div class="phrase-item" style="border-left-color:var(--blue-accent)"><em>I'd like to talk about a story that caught my attention this week.</em> It concerns...</div>
+          <div class="phrase-item" style="border-left-color:var(--blue-accent)"><em>Something that's been in the news recently</em> is the question of...</div>
+          <div class="phrase-item" style="border-left-color:var(--blue-accent)"><em>The story I've chosen</em> is about... It involves...</div>
+          <div class="phrase-item" style="border-left-color:var(--blue-accent)"><em>I came across an interesting report about...</em> The main issue is...</div>
+        </div>
+      </div>
+      <div id="t0b" class="tab-content">
+        <div class="ex-box">
+          <div class="ex-label">Example opening</div>
+          <div class="ex-text">"I'd like to talk about a story that caught my attention this week. It's about the ceasefire agreed between Israel and Lebanon on 16 April, brokered by the United States."</div>
+        </div>
+      </div>
+      <div class="nav-row">
+        <button class="nav-btn primary" onclick="nextStep()">Step 2: why you chose it &rarr;</button>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step-panel" id="step1">
+      <div class="panel-hd">
+        <div class="panel-num" style="background:var(--amber-bg);color:var(--amber-text)">2</div>
+        <div>
+          <div class="panel-title">Explain why you chose it</div>
+          <div class="panel-sub">Explicitly required by the Czech exam. Your first opportunity to show Level 3 thinking — connect the story to something broader.</div>
+        </div>
+      </div>
+      <div class="chip-row">
+        <span class="chip" style="background:var(--amber-bg);color:var(--amber-text)">Level 3 opportunity</span>
+      </div>
+      <div class="tip-box" style="background:var(--amber-bg);border-left-color:var(--amber-accent)">
+        <div class="tip-label" style="color:var(--amber-text)">Level 2 vs Level 3</div>
+        <div class="tip-text"><strong style="color:var(--text)">Level 2:</strong> "I chose it because it's important."<br><strong style="color:var(--text)">Level 3:</strong> Connect to a broader issue, a principle, or your professional context as a soldier.</div>
+      </div>
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'t1a')">Useful phrases</div>
+        <div class="tab" onclick="switchTab(this,'t1b')">Example</div>
+        <div class="tab" onclick="switchTab(this,'t1c')">Military angle</div>
+      </div>
+      <div id="t1a" class="tab-content visible">
+        <div class="phrase-list">
+          <div class="phrase-item" style="border-left-color:var(--amber-accent)"><em>I found this particularly interesting because</em> it connects directly to...</div>
+          <div class="phrase-item" style="border-left-color:var(--amber-accent)"><em>What struck me about this story</em> is that it raises a question about...</div>
+          <div class="phrase-item" style="border-left-color:var(--amber-accent)"><em>This caught my attention because</em> it seems to reflect a broader trend in...</div>
+          <div class="phrase-item" style="border-left-color:var(--amber-accent)"><em>I think this is significant because</em> it has direct implications for...</div>
+          <div class="phrase-item" style="border-left-color:var(--amber-accent)"><em>From a military perspective,</em> this matters because...</div>
+        </div>
+      </div>
+      <div id="t1b" class="tab-content">
+        <div class="ex-box">
+          <div class="ex-label">Example — Level 3 response</div>
+          <div class="ex-text">"I chose this because it raises a question that goes beyond this specific conflict — whether ceasefires brokered under external pressure can produce genuine, lasting peace. As a soldier, I'm also interested in what this means for peacekeeping operations like UNIFIL, which has forces on the ground in Lebanon."</div>
+        </div>
+      </div>
+      <div id="t1c" class="tab-content">
+        <div class="phrase-list">
+          <div class="phrase-item" style="border-left-color:var(--amber-accent)"><em>As a soldier who has served on international missions,</em> I find this relevant because...</div>
+          <div class="phrase-item" style="border-left-color:var(--amber-accent)"><em>From a NATO perspective,</em> this is significant because...</div>
+          <div class="phrase-item" style="border-left-color:var(--amber-accent)"><em>In the context of Czech defence policy,</em> this raises the question of...</div>
+          <div class="phrase-item" style="border-left-color:var(--amber-accent)"><em>This connects to something we deal with professionally —</em> namely the question of...</div>
+        </div>
+      </div>
+      <div class="nav-row">
+        <button class="nav-btn" onclick="prevStep()">&larr; Step 1</button>
+        <button class="nav-btn primary" onclick="nextStep()">Step 3: key facts &rarr;</button>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step-panel" id="step2">
+      <div class="panel-hd">
+        <div class="panel-num" style="background:var(--pink-bg);color:var(--pink-text)">3</div>
+        <div>
+          <div class="panel-title">Give the key facts</div>
+          <div class="panel-sub">A few sentences covering what happened, who is involved, and what is at stake. Keep it natural — you are retelling the story, not reciting it.</div>
+        </div>
+      </div>
+      <div class="chip-row">
+        <span class="chip" style="background:var(--blue-bg);color:var(--blue-text)">Required at Level 2</span>
+        <span class="chip" style="background:var(--teal-bg);color:var(--teal-text)">Required at Level 3</span>
+      </div>
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'t2a')">Structuring phrases</div>
+        <div class="tab" onclick="switchTab(this,'t2b')">Contrast &amp; nuance</div>
+        <div class="tab" onclick="switchTab(this,'t2c')">Example</div>
+      </div>
+      <div id="t2a" class="tab-content visible">
+        <div class="phrase-list">
+          <div class="phrase-item" style="border-left-color:var(--pink-accent)"><em>The background to this is...</em> / <em>To give some context...</em></div>
+          <div class="phrase-item" style="border-left-color:var(--pink-accent)"><em>The key development is that...</em> / <em>According to reports...</em></div>
+          <div class="phrase-item" style="border-left-color:var(--pink-accent)"><em>What makes this significant is...</em> / <em>What is unusual here is...</em></div>
+          <div class="phrase-item" style="border-left-color:var(--pink-accent)"><em>This comes at a time when...</em> / <em>In the broader context of...</em></div>
+        </div>
+      </div>
+      <div id="t2b" class="tab-content">
+        <div class="phrase-list">
+          <div class="phrase-item" style="border-left-color:var(--pink-accent)"><em>On one hand... on the other hand...</em></div>
+          <div class="phrase-item" style="border-left-color:var(--pink-accent)"><em>While X is true, it is also the case that...</em></div>
+          <div class="phrase-item" style="border-left-color:var(--pink-accent)"><em>Despite..., the reality is that...</em></div>
+          <div class="phrase-item" style="border-left-color:var(--pink-accent)"><em>This is complicated by the fact that...</em></div>
+        </div>
+      </div>
+      <div id="t2c" class="tab-content">
+        <div class="ex-box">
+          <div class="ex-label">Example</div>
+          <div class="ex-text">"The ceasefire was announced on 16 April and took effect the same evening, establishing a 10-day pause in fighting. It includes the first direct Israel-Lebanon peace talks since 1983. However, Hezbollah was not a formal signatory, and Israel retained the right to carry out self-defence strikes at any time."</div>
+        </div>
+      </div>
+      <div class="nav-row">
+        <button class="nav-btn" onclick="prevStep()">&larr; Step 2</button>
+        <button class="nav-btn primary" onclick="nextStep()">Step 4: predict &amp; analyse &rarr;</button>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="step-panel" id="step3">
+      <div class="panel-hd">
+        <div class="panel-num" style="background:var(--teal-bg);color:var(--teal-text)">4</div>
+        <div>
+          <div class="panel-title">Predict or analyse</div>
+          <div class="panel-sub">The Czech exam explicitly requires this. Move beyond the facts — show you can reason about what might happen next and why.</div>
+        </div>
+      </div>
+      <div class="chip-row">
+        <span class="chip" style="background:var(--teal-bg);color:var(--teal-text)">This is where Level 3 is won or lost</span>
+      </div>
+      <div class="tip-box" style="background:var(--teal-bg);border-left-color:var(--teal-accent)">
+        <div class="tip-label" style="color:var(--teal-text)">Remember</div>
+        <div class="tip-text">The examiner is not listening for the right answer. They are listening for your ability to reason, hypothesise, and defend a view. A confident wrong prediction is better than a vague correct one.</div>
+      </div>
+      <div class="tabs">
+        <div class="tab active" onclick="switchTab(this,'t3a')">Predicting</div>
+        <div class="tab" onclick="switchTab(this,'t3b')">Hypothesising</div>
+        <div class="tab" onclick="switchTab(this,'t3c')">Going abstract</div>
+        <div class="tab" onclick="switchTab(this,'t3d')">Example</div>
+      </div>
+      <div id="t3a" class="tab-content visible">
+        <div class="phrase-list">
+          <div class="phrase-item" style="border-left-color:var(--teal-accent)"><em>I think the most likely outcome is...</em></div>
+          <div class="phrase-item" style="border-left-color:var(--teal-accent)"><em>If nothing changes, I believe...</em></div>
+          <div class="phrase-item" style="border-left-color:var(--teal-accent)"><em>There is a real risk / possibility that...</em></div>
+          <div class="phrase-item" style="border-left-color:var(--teal-accent)"><em>It remains to be seen whether...</em></div>
+          <div class="phrase-item" style="border-left-color:var(--teal-accent)"><em>The next few weeks will be critical in determining whether...</em></div>
+        </div>
+      </div>
+      <div id="t3b" class="tab-content">
+        <div class="phrase-list">
+          <div class="phrase-item" style="border-left-color:var(--teal-accent)"><em>If X were to happen, the consequences could be...</em></div>
+          <div class="phrase-item" style="border-left-color:var(--teal-accent)"><em>Had the situation been handled differently, we might now be seeing...</em></div>
+          <div class="phrase-item" style="border-left-color:var(--teal-accent)"><em>Were this to collapse, I think...</em></div>
+          <div class="phrase-item" style="border-left-color:var(--teal-accent)"><em>Even if X succeeds, the underlying question of... remains unresolved.</em></div>
+          <div class="phrase-item" style="border-left-color:var(--teal-accent)"><em>In the worst-case / best-case scenario...</em></div>
+        </div>
+      </div>
+      <div id="t3c" class="tab-content">
+        <div class="phrase-list">
+          <div class="phrase-item" style="border-left-color:var(--teal-accent)"><em>This raises a broader question about...</em></div>
+          <div class="phrase-item" style="border-left-color:var(--teal-accent)"><em>What this ultimately comes down to is...</em></div>
+          <div class="phrase-item" style="border-left-color:var(--teal-accent)"><em>The deeper issue here is...</em></div>
+          <div class="phrase-item" style="border-left-color:var(--teal-accent)"><em>In my view, the key question now is...</em></div>
+          <div class="phrase-item" style="border-left-color:var(--teal-accent)"><em>This is really about more than just X — it's about...</em></div>
+        </div>
+      </div>
+      <div id="t3d" class="tab-content">
+        <div class="ex-box">
+          <div class="ex-label">Full Level 3 prediction</div>
+          <div class="ex-text">"I'm sceptical this ceasefire will lead to a lasting settlement. The fundamental problem is that it doesn't resolve the core issue — Hezbollah's weapons and its relationship to Iran. This raises a broader question about whether external pressure alone can ever produce genuine political will. The real test won't be whether the shooting stops for ten days, but whether both sides are willing to make the compromises that a permanent agreement requires."</div>
+        </div>
+      </div>
+      <div class="nav-row">
+        <button class="nav-btn" onclick="prevStep()">&larr; Step 3</button>
+        <button class="nav-btn primary" onclick="nextStep()">Answering questions &rarr;</button>
+      </div>
+    </div>
+
+    <!-- STEP 5: Q&A -->
+    <div class="step-panel" id="step4">
+
+      <div style="margin-bottom:20px">
+        <div class="section-label">The opinion ladder — use it on every answer</div>
+        <div class="ladder">
+          <div class="ladder-step" style="background:var(--blue-bg);border-color:rgba(46,109,212,0.2)">
+            <div class="ladder-rung" style="background:rgba(46,109,212,0.2);color:var(--blue-text)">1</div>
+            <div><div class="ladder-label" style="color:var(--blue-text)">State your opinion</div><div class="ladder-phrase">"In my view... / I think... / I believe..."</div></div>
+          </div>
+          <div class="ladder-step" style="background:var(--amber-bg);border-color:rgba(201,125,30,0.2)">
+            <div class="ladder-rung" style="background:rgba(201,125,30,0.2);color:var(--amber-text)">2</div>
+            <div><div class="ladder-label" style="color:var(--amber-text)">Give a reason or evidence</div><div class="ladder-phrase">"...because... / This is supported by the fact that... / We can see this in..."</div></div>
+          </div>
+          <div class="ladder-step" style="background:var(--teal-bg);border-color:rgba(26,158,104,0.2)">
+            <div class="ladder-rung" style="background:rgba(26,158,104,0.2);color:var(--teal-text)">3</div>
+            <div><div class="ladder-label" style="color:var(--teal-text)">Go abstract or hypothetical</div><div class="ladder-phrase">"More broadly... / The deeper issue here is... / If this continues... / What this ultimately comes down to is..."</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-label">Question types — click to open</div>
+
+      <div class="q-block">
+        <div class="q-header" onclick="toggleQ(this)">
+          <span class="q-chevron">&#8250;</span>
+          <div><div class="q-title">Opinion questions</div><div class="q-sub">"What do you think about...?" / "Do you agree with...?"</div></div>
+          <span class="q-badge" style="background:var(--teal-bg);color:var(--teal-text)">most common</span>
+        </div>
+        <div class="q-body">
+          <div class="info-box">These are invitations to climb the ladder. Don't just say yes or no — commit to a position and develop it.</div>
+          <div class="dos-donts">
+            <div class="do-col"><div class="dd-label do">Do</div><div class="dd-item do">State a clear position immediately</div><div class="dd-item do">Give at least one reason</div><div class="dd-item do">Connect to a broader point</div><div class="dd-item do">Use "I would argue that..."</div></div>
+            <div class="dont-col"><div class="dd-label dont">Don't</div><div class="dd-item dont">Say "it depends" without more</div><div class="dd-item dont">Describe the situation again</div><div class="dd-item dont">Give a one-sentence answer</div><div class="dd-item dont">Agree immediately to avoid conflict</div></div>
+          </div>
+          <div class="phrase-list">
+            <div class="phrase-item" style="border-left-color:var(--purple-accent)"><em>In my view,... and I think this matters because...</em></div>
+            <div class="phrase-item" style="border-left-color:var(--purple-accent)"><em>I would argue that... The evidence for this is...</em></div>
+            <div class="phrase-item" style="border-left-color:var(--purple-accent)"><em>Personally, I think... though I recognise that others would say...</em></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-block">
+        <div class="q-header" onclick="toggleQ(this)">
+          <span class="q-chevron">&#8250;</span>
+          <div><div class="q-title">Devil's advocate questions</div><div class="q-sub">"Some people would argue the opposite..." / "I'm not sure I agree..."</div></div>
+          <span class="q-badge" style="background:var(--amber-bg);color:var(--amber-text)">Level 3 test</span>
+        </div>
+        <div class="q-body">
+          <div class="info-box">The examiner is not attacking you — they are testing whether you can defend a position under pressure. Don't collapse. Acknowledge the challenge and hold your ground.</div>
+          <div class="dos-donts">
+            <div class="do-col"><div class="dd-label do">Do</div><div class="dd-item do">Acknowledge the counterargument briefly</div><div class="dd-item do">Defend your position with new reasoning</div><div class="dd-item do">Concede a specific point if it's fair</div><div class="dd-item do">Stay confident and calm</div></div>
+            <div class="dont-col"><div class="dd-label dont">Don't</div><div class="dd-item dont">Immediately say "yes, you're right"</div><div class="dd-item dont">Abandon your position entirely</div><div class="dd-item dont">Get flustered or go silent</div><div class="dd-item dont">Repeat your original answer unchanged</div></div>
+          </div>
+          <div class="phrase-list">
+            <div class="phrase-item" style="border-left-color:var(--purple-accent)"><em>That's a fair point, although I would argue that...</em></div>
+            <div class="phrase-item" style="border-left-color:var(--purple-accent)"><em>I can see why some people think that, but in my view...</em></div>
+            <div class="phrase-item" style="border-left-color:var(--purple-accent)"><em>You're right that X, but I think the more important issue is...</em></div>
+            <div class="phrase-item" style="border-left-color:var(--purple-accent)"><em>I accept that point, though it doesn't change my overall view that...</em></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-block">
+        <div class="q-header" onclick="toggleQ(this)">
+          <span class="q-chevron">&#8250;</span>
+          <div><div class="q-title">Hypothetical questions</div><div class="q-sub">"What would you do if...?" / "What if the opposite had happened...?"</div></div>
+          <span class="q-badge" style="background:var(--pink-bg);color:var(--pink-text)">Level 3 marker</span>
+        </div>
+        <div class="q-body">
+          <div class="info-box">These questions move you away from facts into reasoning. Use conditional structures — this is where your grammar signals Level 3.</div>
+          <div class="dos-donts">
+            <div class="do-col"><div class="dd-label do">Do</div><div class="dd-item do">Use "If I were... I would..."</div><div class="dd-item do">Use "Were this to happen..."</div><div class="dd-item do">Think aloud — reason through it</div><div class="dd-item do">Give a concrete answer then broaden</div></div>
+            <div class="dont-col"><div class="dd-label dont">Don't</div><div class="dd-item dont">Say "I don't know" and stop</div><div class="dd-item dont">Answer in the present tense only</div><div class="dd-item dont">Give only one sentence</div><div class="dd-item dont">Refuse to speculate</div></div>
+          </div>
+          <div class="phrase-list">
+            <div class="phrase-item" style="border-left-color:var(--purple-accent)"><em>If I were in that position, I would probably... because...</em></div>
+            <div class="phrase-item" style="border-left-color:var(--purple-accent)"><em>Were that to happen, I think the most likely consequence would be...</em></div>
+            <div class="phrase-item" style="border-left-color:var(--purple-accent)"><em>It's difficult to say with certainty, but my sense is that...</em></div>
+            <div class="phrase-item" style="border-left-color:var(--purple-accent)"><em>In the worst-case scenario... / In the best-case scenario...</em></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-block">
+        <div class="q-header" onclick="toggleQ(this)">
+          <span class="q-chevron">&#8250;</span>
+          <div><div class="q-title">Abstraction questions</div><div class="q-sub">"What does this tell us more generally...?" / "Is this a wider trend...?"</div></div>
+          <span class="q-badge" style="background:var(--teal-bg);color:var(--teal-text)">Level 3 marker</span>
+        </div>
+        <div class="q-body">
+          <div class="info-box">The examiner is pulling you away from the specific story toward the principle behind it. Don't return to the facts — go higher.</div>
+          <div class="dos-donts">
+            <div class="do-col"><div class="dd-label do">Do</div><div class="dd-item do">Connect to a general principle</div><div class="dd-item do">Reference NATO, EU, Czech context</div><div class="dd-item do">Compare to similar situations</div><div class="dd-item do">Name the underlying tension</div></div>
+            <div class="dont-col"><div class="dd-label dont">Don't</div><div class="dd-item dont">Repeat the specific facts again</div><div class="dd-item dont">Stay at the level of one country</div><div class="dd-item dont">Give a short answer and wait</div><div class="dd-item dont">Say "I'm not sure about that"</div></div>
+          </div>
+          <div class="phrase-list">
+            <div class="phrase-item" style="border-left-color:var(--purple-accent)"><em>I think this reflects a broader pattern where...</em></div>
+            <div class="phrase-item" style="border-left-color:var(--purple-accent)"><em>What this story really illustrates is the tension between... and...</em></div>
+            <div class="phrase-item" style="border-left-color:var(--purple-accent)"><em>We've seen similar situations in... and the outcome was...</em></div>
+            <div class="phrase-item" style="border-left-color:var(--purple-accent)"><em>From a NATO / Czech / European perspective, this raises the question of...</em></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="q-block">
+        <div class="q-header" onclick="toggleQ(this)">
+          <span class="q-chevron">&#8250;</span>
+          <div><div class="q-title">Buying time &amp; clarifying</div><div class="q-sub">When you need a moment, or when the question is unclear</div></div>
+          <span class="q-badge" style="background:var(--surface2);color:var(--text-muted)">practical toolkit</span>
+        </div>
+        <div class="q-body">
+          <div class="info-box">Pausing to think is not a weakness — using these phrases shows communicative competence. Never go silent. Never say "I don't understand" and wait.</div>
+          <div class="phrase-list">
+            <div class="phrase-item" style="border-left-color:var(--text-hint)"><em>That's an interesting question. Let me think about that for a moment...</em></div>
+            <div class="phrase-item" style="border-left-color:var(--text-hint)"><em>Could you clarify what you mean by...?</em></div>
+            <div class="phrase-item" style="border-left-color:var(--text-hint)"><em>If I understand you correctly, you're asking whether...</em></div>
+            <div class="phrase-item" style="border-left-color:var(--text-hint)"><em>I'm not entirely sure, but I would say that...</em></div>
+            <div class="phrase-item" style="border-left-color:var(--text-hint)"><em>That's a difficult question, but I think the key point is...</em></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-row">
+        <button class="nav-btn" onclick="prevStep()">&larr; Step 4</button>
+        <button class="nav-btn primary" onclick="backToOverview()">Back to overview</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+var current = 0;
+var steps = ["Introduce","Why chosen","Key facts","Predict","Q&A"];
+var colors = [
+  {bg:"var(--blue-bg)",fg:"var(--blue-text)",border:"var(--blue-accent)"},
+  {bg:"var(--amber-bg)",fg:"var(--amber-text)",border:"var(--amber-accent)"},
+  {bg:"var(--pink-bg)",fg:"var(--pink-text)",border:"var(--pink-accent)"},
+  {bg:"var(--teal-bg)",fg:"var(--teal-text)",border:"var(--teal-accent)"},
+  {bg:"var(--purple-bg)",fg:"var(--purple-text)",border:"var(--purple-accent)"}
+];
+
+function buildNav() {
+  var nav = document.getElementById("step-nav");
+  nav.innerHTML = "";
+  var prog = document.getElementById("prog");
+  prog.innerHTML = "";
+  steps.forEach(function(s, i) {
+    var btn = document.createElement("button");
+    btn.className = "step-nav-btn" + (i === current ? " active" : "");
+    btn.textContent = (i < 4 ? (i+1) + ". " : "") + s;
+    if (i === current) {
+      btn.style.background = colors[i].bg;
+      btn.style.color = colors[i].fg;
+      btn.style.borderColor = colors[i].border;
+    }
+    btn.onclick = (function(idx){ return function(){ goStep(idx); }; })(i);
+    nav.appendChild(btn);
+    var dot = document.createElement("div");
+    dot.className = "prog-dot" + (i < current ? " done" : i === current ? " active" : "");
+    prog.appendChild(dot);
+  });
+}
+
+function showPanel() {
+  document.querySelectorAll(".step-panel").forEach(function(p){ p.classList.remove("visible"); });
+  document.getElementById("step" + current).classList.add("visible");
+}
+
+function openStep(idx) {
+  current = idx;
+  document.getElementById("overview-section").style.display = "none";
+  document.getElementById("step-section").style.display = "block";
+  buildNav();
+  showPanel();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goStep(idx) { current = idx; buildNav(); showPanel(); window.scrollTo({top:0,behavior:'smooth'}); }
+function nextStep() { if (current < 4) goStep(current + 1); }
+function prevStep() { if (current > 0) goStep(current - 1); }
+
+function backToOverview() {
+  document.getElementById("overview-section").style.display = "block";
+  document.getElementById("step-section").style.display = "none";
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function switchTab(el, targetId) {
+  var panel = el.closest(".step-panel");
+  panel.querySelectorAll(".tab").forEach(function(t){ t.classList.remove("active"); });
+  panel.querySelectorAll(".tab-content").forEach(function(t){ t.classList.remove("visible"); });
+  el.classList.add("active");
+  document.getElementById(targetId).classList.add("visible");
+}
+
+function toggleQ(header) {
+  var body = header.nextElementSibling;
+  var chev = header.querySelector(".q-chevron");
+  var isOpen = body.classList.contains("open");
+  body.classList.toggle("open", !isOpen);
+  chev.classList.toggle("open", !isOpen);
+}
+</script>
+</body>
+</html>
