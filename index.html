@@ -118,8 +118,18 @@ h1 {
 }
 
 .module-icon {
-  font-size: 5rem;
-  margin-bottom: 30px;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+}
+
+.module-icon svg {
+  width: 48px;
+  height: 48px;
 }
 
 .module-title {
@@ -137,13 +147,8 @@ h1 {
   margin-bottom: 15px;
 }
 
-.writing-card .module-description {
-  color: #a8c8b4;
-}
-
-.news-card .module-description {
-  color: #c8bea0;
-}
+.writing-card .module-description { color: #a8c8b4; }
+.news-card .module-description { color: #c8bea0; }
 
 .module-count {
   font-size: 1rem;
@@ -152,13 +157,8 @@ h1 {
   margin-top: 20px;
 }
 
-.writing-card .module-count {
-  color: #7abf8e;
-}
-
-.news-card .module-count {
-  color: #d4a843;
-}
+.writing-card .module-count { color: #7abf8e; }
+.news-card .module-count { color: #d4a843; }
 
 .module-tags {
   display: flex;
@@ -204,55 +204,73 @@ h1 {
       Professional English training for Czech Armed Forces. Choose between debate practice, sentence transformation exercises, vocabulary training, news presentation practice, or the writing composition guide to improve your B2-level communication skills.
     </p>
     <p style="background: rgba(255, 214, 10, 0.15); border-left: 4px solid #ffd60a; padding: 12px 20px; margin-top: 20px; border-radius: 6px; font-size: 0.95rem; max-width: 800px; margin-left: auto; margin-right: auto;">
-      <strong>🔊 Audio Note:</strong> For vocabulary pronunciation, please ensure your browser language is set to English.
+      <strong>&#128266; Audio Note:</strong> For vocabulary pronunciation, please ensure your browser language is set to English.
     </p>
   </header>
 
   <div class="modules-grid">
 
     <a href="debate/" class="module-card">
-      <div class="module-icon">💬</div>
+      <div class="module-icon" style="background:rgba(65,90,119,0.4)">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 12C8 9.8 9.8 8 12 8H36C38.2 8 40 9.8 40 12V28C40 30.2 38.2 32 36 32H28L20 42V32H12C9.8 32 8 30.2 8 28V12Z" stroke="#778da9" stroke-width="2.5" fill="rgba(65,90,119,0.3)"/>
+          <path d="M16 18H32M16 24H26" stroke="#778da9" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
       <h2 class="module-title">Debate Practice</h2>
-      <p class="module-description">
-        Practice structured debates on 71 topics across 12 categories. Each topic includes FOR/AGAINST arguments, vocabulary, and example paragraphs at B2 level.
-      </p>
+      <p class="module-description">Practice structured debates on 71 topics across 12 categories. Each topic includes FOR/AGAINST arguments, vocabulary, and example paragraphs at B2 level.</p>
       <p class="module-count">71 debate topics</p>
     </a>
 
     <a href="sentence-upgrade/" class="module-card">
-      <div class="module-icon">✍️</div>
+      <div class="module-icon" style="background:rgba(65,90,119,0.4)">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 36L16 30L34 12C35.1 10.9 36.9 10.9 38 12L36 14C37.1 15.1 37.1 16.9 36 18L18 36H10Z" stroke="#778da9" stroke-width="2.5" fill="rgba(65,90,119,0.3)" stroke-linejoin="round"/>
+          <path d="M10 36L10 40H14L10 36Z" stroke="#778da9" stroke-width="2" fill="rgba(65,90,119,0.3)"/>
+          <path d="M14 20L28 34" stroke="#778da9" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
       <h2 class="module-title">Sentence Transformation</h2>
-      <p class="module-description">
-        Upgrade basic sentences to professional B2+ writing. Progressive hints, multiple examples, and guidance on formal communication styles.
-      </p>
+      <p class="module-description">Upgrade basic sentences to professional B2+ writing. Progressive hints, multiple examples, and guidance on formal communication styles.</p>
       <p class="module-count">65 transformation exercises</p>
     </a>
 
     <a href="vocabulary-in-context/" class="module-card">
-      <div class="module-icon">🎯</div>
+      <div class="module-icon" style="background:rgba(65,90,119,0.4)">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="14" stroke="#778da9" stroke-width="2.5" fill="rgba(65,90,119,0.3)"/>
+          <circle cx="24" cy="24" r="5" stroke="#778da9" stroke-width="2.5" fill="rgba(65,90,119,0.5)"/>
+          <path d="M24 10V14M24 34V38M10 24H14M34 24H38" stroke="#778da9" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
       <h2 class="module-title">Vocabulary in Context</h2>
-      <p class="module-description">
-        Master advanced vocabulary with 3 progressive difficulty modes. Practice 79 carefully selected words including problem-related terms (controversial, thorny, pressing) for professional military English.
-      </p>
-      <p class="module-count">79 vocabulary items • 3 game modes</p>
+      <p class="module-description">Master advanced vocabulary with 3 progressive difficulty modes. Practice 79 carefully selected words including problem-related terms for professional military English.</p>
+      <p class="module-count">79 vocabulary items &bull; 3 game modes</p>
     </a>
 
     <a href="https://knoword.com/packs/common-spelling-mistakes-b2-c1-GMfwU" class="module-card" target="_blank" rel="noopener noreferrer">
-      <div class="module-icon">🔤</div>
+      <div class="module-icon" style="background:rgba(65,90,119,0.4)">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="10" width="32" height="28" rx="4" stroke="#778da9" stroke-width="2.5" fill="rgba(65,90,119,0.3)"/>
+          <path d="M14 20H34M14 26H28M14 32H22" stroke="#778da9" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+      </div>
       <h2 class="module-title">Spelling Practice</h2>
-      <p class="module-description">
-        Master common B2-C1 spelling mistakes with interactive timed challenges. Fast-paced game format helps you recognize and correct frequent errors.
-      </p>
-      <p class="module-count">Common spelling mistakes • Timed practice</p>
+      <p class="module-description">Master common B2-C1 spelling mistakes with interactive timed challenges. Fast-paced game format helps you recognize and correct frequent errors.</p>
+      <p class="module-count">Common spelling mistakes &bull; Timed practice</p>
     </a>
 
     <a href="news-presentation/" class="module-card news-card">
-      <div class="module-icon">📰</div>
+      <div class="module-icon" style="background:rgba(122,106,42,0.3)">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="8" width="36" height="32" rx="3" stroke="#d4a843" stroke-width="2.5" fill="rgba(122,106,42,0.3)"/>
+          <path d="M12 16H36M12 22H36M12 28H28" stroke="#d4a843" stroke-width="2.5" stroke-linecap="round"/>
+          <rect x="28" y="26" width="10" height="8" rx="1" stroke="#d4a843" stroke-width="2" fill="rgba(122,106,42,0.4)"/>
+        </svg>
+      </div>
       <h2 class="module-title">News Presentation</h2>
-      <p class="module-description">
-        A step-by-step guide to presenting a news item in the Interview part of the speaking exam. Covers the four-part structure, useful language for every stage, and strategies for answering examiner questions at Level 3.
-      </p>
-      <div class="module-tags" style="margin-top:18px">
+      <p class="module-description">A step-by-step guide to presenting a news item in the Interview part of the speaking exam. Covers the four-part structure, useful language for every stage, and strategies for answering examiner questions at Level 3.</p>
+      <div class="module-tags">
         <span class="news-tag">4-step structure</span>
         <span class="news-tag">Useful phrases</span>
         <span class="news-tag">Opinion ladder</span>
@@ -262,11 +280,16 @@ h1 {
     </a>
 
     <a href="writing/" class="module-card writing-card featured">
-      <div class="module-icon">📝</div>
-      <h2 class="module-title">Writing — Composition</h2>
-      <p class="module-description">
-        Step-by-step guide to writing Level 3 argumentative essays. Covers every paragraph type with Level 3 vs Level 2+ examples, useful phrases, and practice topics.
-      </p>
+      <div class="module-icon" style="background:rgba(27,80,56,0.4)">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14 6H30L42 18V42H14V6Z" stroke="#7abf8e" stroke-width="2.5" fill="rgba(27,80,56,0.4)" stroke-linejoin="round"/>
+          <path d="M30 6V18H42" stroke="#7abf8e" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M20 26H34M20 32H30" stroke="#7abf8e" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M8 14V42H38" stroke="#7abf8e" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+        </svg>
+      </div>
+      <h2 class="module-title">Writing &mdash; Composition</h2>
+      <p class="module-description">Step-by-step guide to writing Level 3 argumentative essays. Covers every paragraph type with Level 3 vs Level 2+ examples, useful phrases, and practice topics.</p>
       <div class="module-tags">
         <span class="module-tag">Introduction</span>
         <span class="module-tag">Supporting arguments</span>
